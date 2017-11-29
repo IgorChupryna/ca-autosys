@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+    <div>
+        <div class="">
+            <p>This article documents the system requirements for CA Workload Automation AE.</p>
+            <p></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline"
+                 data-headerelements="H1,H2,H3,H4,H5,H6,H7" data-hasbody="false" data-macro-name="toc">
+                <ul style="">
+                    <li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a
+                            href="#AESystemRequirements-SystemRequirementsforUNIXandLinux" class="toc-link">System Requirements for UNIX and Linux</a></span>
+                    </li>
+                    <li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a
+                            href="#AESystemRequirements-SystemRequirementsforWindows" class="toc-link">System Requirements for Windows</a></span>
+                    </li>
+                    <li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a
+                            href="#AESystemRequirements-JavaRuntimeEnvironment(JRE)SupportedVersions" class="toc-link">Java Runtime Environment (JRE) Supported Versions</a></span>
+                    </li>
+                    <li><span class="toc-item-body" data-outline="4"><span class="toc-outline">4</span><a
+                            href="#AESystemRequirements-TCP/IPPortUsage" class="toc-link">TCP/IP Port Usage</a></span>
+                    </li>
+                    <li><span class="toc-item-body" data-outline="5"><span class="toc-outline">5</span><a
+                            href="#AESystemRequirements-suCommandonUNIX" class="toc-link">su Command on UNIX</a></span>
+                    </li>
+                    <li><span class="toc-item-body" data-outline="6"><span class="toc-outline">6</span><a
+                            href="#AESystemRequirements-GraphicalModeRequirementsforUNIXandLinux" class="toc-link">Graphical Mode Requirements for UNIX and Linux</a></span>
+                    </li>
+                    <li><span class="toc-item-body" data-outline="7"><span class="toc-outline">7</span><a
+                            href="#AESystemRequirements-BaseApplicationDevelopmentMathLibraryPackageforAIX"
+                            class="toc-link">Base Application Development Math Library Package for AIX</a></span></li>
+                    <li><span class="toc-item-body" data-outline="8"><span class="toc-outline">8</span><a
+                            href="#AESystemRequirements-UserResourceLimitsforAIX64-bit" class="toc-link">User Resource Limits for AIX 64-bit</a></span>
+                    </li>
+                    <li><span class="toc-item-body" data-outline="9"><span class="toc-outline">9</span><a
+                            href="#AESystemRequirements-HP-UXItaniumProcessor"
+                            class="toc-link">HP-UX Itanium Processor</a></span></li>
+                    <li><span class="toc-item-body" data-outline="10"><span class="toc-outline">10</span><a
+                            href="#AESystemRequirements-Perl" class="toc-link">Perl</a></span></li>
+                </ul>
+            </div>
+            <p></p>
+            <h2 class="heading2" id="AESystemRequirements-SystemRequirementsforUNIXandLinux">System Requirements for
+                UNIX and Linux</h2>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note: </strong>As the number of users and the workload increases, you may see a performance
+                    benefit from adding additional memory and/or additional processing power. Additional processing
+                    power can be added either by using a faster CPU or by adding additional CPUs.</p>
+            </div>
+            <p>To install and run the CA Workload Automation AE server in a UNIX or Linux environment, the minimum
+                recommended requirements are as follows:</p>
+            <ul>
+                <li>Processor: 1 GHz, 2CPU</li>
+                <li>Physical memory: 4 GB RAM</li>
+                <li>Swap space: 2 GB</li>
+                <li>Hard disk free space: 5 GB</li>
+                <li><p>fsize: The file size ulimit must be set to unlimited. To determine the current setting, issue the
+                    following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>ulimit&nbsp;-f</p></pre>
+                    </div>
+                    <p>If the value is not unlimited, change this ulimit value by issuing the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>ulimit&nbsp;-f&nbsp;unlimited</p></pre>
+                    </div>
+                </li>
+                <li>Disk space requirements for CA Workload Automation AE:
+                    <ul>
+                        <li>Full product: 700 MB</li>
+                        <li>Application Server, Client, Command Sponsor: 520 MB</li>
+                        <li>Scheduler, Client, Agent: 430 MB</li>
+                        <li>Application Server, Web Server: 360 MB</li>
+                        <li>Application Server only: 300 MB</li>
+                        <li>Agent only: 420 MB</li>
+                        <li>Client only: 300 MB</li>
+                        <li>SDK only: 250 MB</li>
+                        <li>Documentation only: 250 MB</li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong><strong>Notes:</strong></strong>
+                        <ul>
+                            <li>The system temporary directory (/tmp or $TMPDIR) requires a minimum of 400 MB disk space
+                                for the installation.
+                            </li>
+                            <li>The installer creates a directory to store control files. By default, the
+                                /opt/CA/installer directory is created. The file system that the installer directory
+                                belongs to requires a minimum of 10 MB disk space. For more information about the
+                                /opt/CA/installer directory, see <a data-macro-name="sp-plaintextbody-link"
+                                                                    href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation/installation-preparation"
+                                                                    class="conf-macro output-inline"
+                                                                    data-hasbody="true">(UNIX) Changes to System Files
+                                    and Directories</a>.
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>SDK runtime environment: 250 MB</li>
+                <li>Disk space for the database (to support default installation values):
+                    <ul>
+                        <li>Oracle: Data—800 MB, Index—80 MB</li>
+                        <li>Sybase: Data—800 MB, Log—100 MB, tempdb—500 MB, tempdb log—50 MB</li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note: </strong>For more information about the database requirements, see the
+                            appropriate database documentation or consult your database administrator. For information
+                            about tuning the database, see <a data-macro-name="sp-nobody-link"
+                                                              href="/ca-workload-automation-ae/11-4-2/en/administrating/ae-configuration/maintain-the-event-server"
+                                                              class="conf-macro output-inline" data-hasbody="false">Maintain
+                                the Event Server</a>.</p>
+                    </div>
+                </li>
+            </ul>
+            <h2 class="heading2" id="AESystemRequirements-SystemRequirementsforWindows">System Requirements for
+                Windows</h2>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note: </strong>As the number of users and the workload increases, you may see a performance
+                    benefit from adding additional memory and/or additional processing power. Additional processing
+                    power can be added either by using a faster CPU or by adding additional CPUs.</p>
+            </div>
+            <p>To install and run the CA Workload Automation AE server in a Windows environment, the minimum recommended
+                requirements are as follows:</p>
+            <ul>
+                <li>Processor: 2 GHz, 2CPU</li>
+                <li>Physical memory: 4GB RAM</li>
+                <li>Swap file: 2GB</li>
+                <li>Hard disk free space: 5 GB</li>
+                <li>Disk space requirements for CA Workload Automation AE:
+                    <ul>
+                        <li>Full product: 630 MB</li>
+                        <li>Application Server, Client, Command Sponsor: 430 MB</li>
+                        <li>Scheduler, Client, Agent: 310 MB</li>
+                        <li>Application Server, Web Server: 350 MB</li>
+                        <li>Application Server only: 180 MB</li>
+                        <li>Agent only: 290 MB</li>
+                        <li>Client only: 180 MB</li>
+                        <li>SDK only: 40 MB</li>
+                        <li>Documentation only: 40 MB</li>
+                    </ul>
+                </li>
+                <li>SDK runtime environment: 50 MB</li>
+                <li>Disk space requirements for the database (to support default installation values):
+                    <ul>
+                        <li><p>Microsoft SQL Server: 40 MB plus 1 MB for log file</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong>Note:</strong> SQL Server adjusts the sizes incrementally over time based on
+                                usage.
+                            </div>
+                        </li>
+                        <li>Oracle: Data—800 MB, Index—80 MB</li>
+                        <li>Sybase: Data—800 MB, Log—100 MB, tempdb—500 MB, tempdb log—50 MB</li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note: </strong>For more information about the database requirements, see the
+                            appropriate database documentation or consult your database administrator. For information
+                            about tuning the database, see <a data-macro-name="sp-nobody-link"
+                                                              href="/ca-workload-automation-ae/11-4-2/en/administrating/ae-configuration/maintain-the-event-server"
+                                                              class="conf-macro output-inline" data-hasbody="false">Maintain
+                                the Event Server</a><span>.</span></p>
+                    </div>
+                </li>
+            </ul>
+            <h2 class="heading2" id="AESystemRequirements-JavaRuntimeEnvironment(JRE)SupportedVersions">Java Runtime
+                Environment (JRE) Supported Versions</h2>
+            <p>The JRE is automatically installed with CA Workload Automation AE. The supported JRE versions are as
+                follows:</p>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Operating Environment</strong></th>
+                        <th class="confluenceTh"><strong>Supported JRE Version</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><p>AIX</p></td>
+                        <td class="confluenceTd"><p><span style="color: rgb(51,51,51);">8.0.0.400</span></p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><p>HP-UX</p></td>
+                        <td class="confluenceTd"><p><span style="color: rgb(51,51,51);">1.6.0_32</span></p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><p>Linux</p></td>
+                        <td class="confluenceTd"><p><span style="color: rgb(51,51,51);">1.8.0_121</span></p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><p>Solaris</p></td>
+                        <td class="confluenceTd"><p><span style="color: rgb(51,51,51);">1.7.0_131 (32-bit)</span></p>
+                            <p><span style="color: rgb(51,51,51);">1.8.0_121 (64-bit)</span></p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><p>Windows</p></td>
+                        <td class="confluenceTd"><p><span style="color: rgb(51,51,51);">1.8.0_121</span></p></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>The supported JRE for all CA Workload Automation AE components is 32-bit. The only exception is
+                        the web server component, which supports only the 64-bit JRE.
+                    </li>
+                    <li>On a 64-bit computer, if you select to install the web server component during the CA Workload
+                        Automation AE installation, the 64-bit JRE is installed along with the web server.
+                    </li>
+                    <li>On HP-UX, when you run Java programs that use the CA Workload Automation AE Java SDK, run with
+                        the -V2 parameter. On HP-UX Itanium (IA-64), use the -pa20 argument with the -V2 parameter.
+                    </li>
+                    <li><p>Java 8 does not support X.509 certificates signed with MD5withRSA algorithm and are no longer
+                        acceptable by default. If you are using MD5withRSA algorithm to create the certificates, you
+                        cannot use the CA Workload Automation AE web services and Compliance Application with Oracle PKI
+                        certificates. For information about how to resolve this problem, see the Java documentation.</p>
+                    </li>
+                </ul>
+            </div>
+            <h2 class="heading2" id="AESystemRequirements-TCP/IPPortUsage">TCP/IP Port Usage</h2>
+            <p>CA Workload Automation AE uses SSA for communication, which uses IANA assigned port 7163. SSA is
+                automatically installed with CA Workload Automation AE.</p>
+            <p>By default, the CA Workload Automation AE communication with the agent is set up to use plain socket
+                communication. The agent’s default port number is 7520.</p>
+            <h2 class="heading2" id="AESystemRequirements-suCommandonUNIX">su Command on UNIX</h2>
+            <p>On UNIX, the CA Workload Automation AE installer must be allowed to run the following command with no
+                user response or interaction:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>su&nbsp;&nbsp;-&nbsp;&nbsp;root&nbsp;&nbsp;-&nbsp;c&nbsp;"<em>command</em>"</p></pre>
+            </div>
+            <p>The installer embeds other installation packages that are executed by running the su command.</p>
+            <h2 class="heading2" id="AESystemRequirements-GraphicalModeRequirementsforUNIXandLinux">Graphical Mode
+                Requirements for UNIX and Linux</h2>
+            <p>Before you install CA Workload Automation AE on UNIX or Linux, verify the following requirements are met
+                so that installation dialogs can appear in graphical mode:</p>
+            <ul>
+                <li>Java 1.3 or higher is installed, the PATH environment variable is set to include the Java
+                    executable, and the JAVA_HOME environment variable is set.
+                </li>
+                <li>The monitor is graphics-enabled.</li>
+            </ul>
+            <h2 class="heading2" id="AESystemRequirements-BaseApplicationDevelopmentMathLibraryPackageforAIX">Base
+                Application Development Math Library Package for AIX</h2>
+            <p>Before you install CA Workload Automation AE on AIX, verify the system has the Base Application
+                Development Math Library package (bos.adt.libm). The CA Workload Automation AE application server and
+                the scheduler installations require this package.</p>
+            <h2 class="heading2" id="AESystemRequirements-UserResourceLimitsforAIX64-bit">User Resource Limits for AIX
+                64-bit</h2>
+            <p>To install and run CA Workload Automation AE on AIX, verify the following variable=value pairs exist in
+                /etc/security/limits for a 64-bit installation:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>default:</p><p>fsize&nbsp;=&nbsp;-1</p><p>core&nbsp;=&nbsp;2097151</p><p>cpu&nbsp;=&nbsp;-1</p><p>data&nbsp;=&nbsp;-1</p><p>rss&nbsp;=&nbsp;-1</p><p>stack&nbsp;=&nbsp;262144</p><p>nofiles&nbsp;=&nbsp;4096</p></pre>
+            </div>
+            <p>You must restart the computer for the changes to take effect and before starting the installation.</p>
+            <h2 class="heading2" id="AESystemRequirements-HP-UXItaniumProcessor">HP-UX Itanium Processor</h2>
+            <p>To install CA Workload Automation AE in an HP-UX Itanium environment, the kernel tunable parameter
+                pa_maxssiz_32bit must be set to 268435456 or greater.</p>
+            <p>To view the current value of the pa_maxssiz_32bit parameter, enter the following command at the operating
+                system prompt:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>/usr/sbin/kctune&nbsp;|&nbsp;grep&nbsp;pa_maxssiz_32bit</p></pre>
+            </div>
+            <p>To change the value of the pa_maxssiz_32bit parameter, do the following:</p>
+            <ol>
+                <li><p>Enter the following command at the operating system prompt:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>/usr/sbin/kctune&nbsp;pa_maxssiz_32bit=268435456</p></pre>
+                    </div>
+                </li>
+                <li>Restart the computer.<br>The pa_maxssiz_32bit parameter is set to the minimum required value.</li>
+            </ol>
+            <h2 class="heading2" id="AESystemRequirements-Perl">Perl</h2>
+            <p>On UNIX or Linux installations, Perl, version 5.8 or greater must be installed. Perl must also be
+                included in the PATH environment variable to run the CA Workload Automation AE installation.</p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>
