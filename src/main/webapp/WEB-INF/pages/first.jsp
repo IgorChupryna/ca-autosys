@@ -12,65 +12,73 @@
 
 <body style="background-size: auto; background:  #d1ecf1">
 
-<jsp:include page="../static/tech/menu.jsp" flush="true"/>
+<jsp:include page="menu.jsp" flush="true"/>
+
+
+<br><br>
 
 <div class="container">
-    <div class="row">
-        <div class="col-sm-4" style="background: #b1dfbb">
-            <h2>Administrating CA AutoSys</h2>
-            <p align="left">This section describes how to install and configure CA Workload Automation AE components,
-                dual event servers, and high availability options,
-                and set up database connections. </p>
-            <p>It also contains information about advanced configurations and
-                upgrading an existing installation.</p>
-            <p>To see CA Workload Automation AE provides various options to meet your security needs, which depend on
-                your interface.</p>
-            <p>
-                <a class="btn btn-lg btn-primary" href="/admin" role="button">View WAAE &raquo;</a>
-            </p>
+    <div class="pricing-table  row">
+        <div class="col-sm-4 plan plan-name-main" style="background: #b1dfbb" onclick="location.href='/second';">
+            <h2>Administration AE</h2>
+            <p><strong>ConfigureAE, AEDB, WCC, EEM, Agent, Commands</strong></p>
+            <br>
+            <img width="370" height="250" class="animated-gif" src="/static/adm.png">
+
         </div>
-        <div class="col-sm-4" style="background: #ffe8a1">
+        <div class="col-sm-4 plan plan-name-main" style="background: #ffe8a1">
             <h2>Demo video WCC</h2>
-            <p>Administrating CA AutoSys in web interface is very easy</p>
-            <video width="320" height="270" controls>
-                <source src="/static/demo.wmv" type="video/mp4">
+            <strong>Administrating CA AutoSys in web interface is easy</strong>
+            <video width="350" height="280" controls>
+                <source src="/static/demo.mp4" type="video/mp4">
             </video>
         </div>
-        <div class="col-sm-4" style="background: #f5c6cb">
+        <div class="col-sm-4 plan plan-name-main" style="background: #f5c6cb">
             <h2>Manage simply</h2>
-            <p>CA WCC is the GUI for CA AutoSys AE.</p>
+            <p><strong>CA WCC is the GUI for CA AutoSys AE</strong></p>
             <img width="320" height="270" class="animated-gif" src="/static/n1.gif">
         </div>
     </div>
 </div>
-<br>
-<div class="container" style="background: #d39e00">
-    <div class="row">
+</br>
+<div class="container">
+    <div class="pricing-table  row">
 
-        <div class="col-sm-4">
-            <h3>Description</h3>
-            <p>CA WA ,CA WCC,CA CSS</p>
-            <p>Requariments, Features/Fixed, Known Issue, OS & DB</p>
-            <a href="/table?name=Description" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">View
-                Desc</a>
+        <div class="col-sm-4 plan plan-name-main" onclick="location.href='/table?name=Description&view=unchecked';">
+            <div class="plan-name-aedb">
+                <h2>Description</h2>
+                <p>CA WA ,CA WCC,CA CSS</p>
+            </div>
+            <ul>
+                <li class="plan-feature">Requariments, Features/Fixed, Known Issue, OS & DB</li>
+            </ul>
+            <br><br>
+
+        </div>
+        <div class="col-sm-4 plan plan-name-main" onclick="location.href='/table?name=Installation&view=unchecked';">
+            <div class="plan-name-waae">
+                <h2>Installation</h2>
+                <p>WAAE ,WCC,CSS, agent, plugin SAP</p>
+            </div>
+            <ul>
+                <li class="plan-feature"> Requirements, algorithm, example video and screens</li>
+            </ul>
             <br><br>
         </div>
-        <div class="col-sm-4" style="background: #f8d7da">
-            <h3>Column 2</h3>
-            <p>Lorem ipsum dolor..</p>
-            <p>Ut enim ad..</p>
-            <a href="/first" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>
-            <br><br>
-        </div>
-        <div class="col-sm-4">
-            <h3>Column 3</h3>
-            <p>Lorem ipsum dolor..</p>
-            <p>Ut enim ad..</p>
-            <a href="/first" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>
+        <div class="col-sm-4 plan plan-name-main" onclick="location.href='/first';">
+            <div class="plan-name-command">
+                <h2>Troubleshooting</h2>
+                <p>Troubles / bugs / reason-action</p>
+            </div>
+            <ul>
+                <li class="plan-feature"> This section includes troubleshooting procedures for CA WAAE and CA WCC.</li>
+            </ul>
             <br><br>
         </div>
 
     </div>
 </div>
+
+
 </body>
 </html>

@@ -3,9 +3,11 @@ package ua.chup.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.chup.model.Administration;
 import ua.chup.model.Description;
 import ua.chup.repository.DescriptionRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -41,5 +43,15 @@ public class DescriptionService {
     @Transactional
     public List<Description> findAll() {
         return descriptionRepository.findAll();
+    }
+
+    @Transactional
+    public List<String> findAllName() {
+        List<Description> aedb = findAll();
+        List<String> strings=new ArrayList<>();
+        for (Description a:aedb) {
+            strings.add(a.getName());
+        }
+        return strings;
     }
 }

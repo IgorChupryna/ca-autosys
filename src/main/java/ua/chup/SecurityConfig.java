@@ -22,6 +22,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(getShaPasswordEncoder());
     }
 
+
+
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -29,9 +33,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/content").hasRole("ADMIN")
+                .antMatchers("/sendmail").hasRole("ADMIN")
+                .antMatchers("/users").hasRole("ADMIN")
                 .antMatchers("/register").permitAll()
                 .and()
         .exceptionHandling().accessDeniedPage("/unauthorized")
+                .and()
+        .headers().frameOptions().disable()
                 .and()
         .formLogin()
                 .loginPage("/login")

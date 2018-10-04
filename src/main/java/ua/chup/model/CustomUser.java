@@ -1,52 +1,60 @@
 package ua.chup.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Table(name = "CustomUser")
+@NoArgsConstructor
+@Getter
+@Setter
 public class CustomUser {
     @Id
     @GeneratedValue
+    @Column
     private long id;
-
+    @Column
     private String login;
+    @Column
     private String password;
-
     @Enumerated(EnumType.STRING)
     private UserRole role;
-
+    @Column
     private String email;
+    @Column
     private String phone;
+    @Column(name = "path_avatar")
+    private String pathAvatar;
+
 
     public CustomUser(String login, String password, UserRole role) {
-        this.login = login;
+        this.setLogin(login);
+        this.setRole(role);
+    }
+
+    public CustomUser(String login, String password, UserRole role, String email, String phone, String pathAvatar) {
+        this.setPathAvatar(pathAvatar);
+        this.setLogin(login);
         this.password = password;
-        this.role = role;
+        this.setRole(role);
+        this.setEmail(email);
+        this.setPhone(phone);
     }
 
     public CustomUser(String login, String password, UserRole role, String email, String phone) {
-        this.login = login;
+
+        this.setLogin(login);
         this.password = password;
-        this.role = role;
-        this.email = email;
-        this.phone = phone;
-    }
-
-    public CustomUser() {}
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
+        this.setRole(role);
+        this.setEmail(email);
+        this.setPhone(phone);
     }
 
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public long getId() {
@@ -56,6 +64,15 @@ public class CustomUser {
     public void setId(long id) {
         this.id = id;
     }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
 
     public UserRole getRole() {
         return role;
@@ -79,5 +96,13 @@ public class CustomUser {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getPathAvatar() {
+        return pathAvatar;
+    }
+
+    public void setPathAvatar(String pathAvatar) {
+        this.pathAvatar = pathAvatar;
     }
 }
