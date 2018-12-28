@@ -28,7 +28,8 @@ public class WCCService {
 
     @Transactional
     public void addWCC(WCC wcc) {
-        wccRepository.save(wcc);
+        wccRepository
+                .save(wcc);
     }
 
     @Transactional

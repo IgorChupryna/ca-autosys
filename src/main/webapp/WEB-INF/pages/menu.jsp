@@ -6,13 +6,11 @@
 <body style="background-size: auto; background:  #d1ecf1">
 
 
-<div class="jumbotron text-center "
-     style=" background-size: 100%; background-image:  url(/static/3.jpg); ">
+<div class="jumbotron text-center " style=" background-size: 100%; background-image:  url(/static/3.jpg); ">
 
     <div>
         <div style='float: left;border-radius: 25px; background: #99dbf1; margin-right: 5px; '>
-            <a href="https://www.ca.com/us/products/ca-workload-automation-ae.html"><img height="50" width="55"
-                                                                                         src="/static/auto.png"/></a>
+            <a href="https://www.ca.com/us/products/ca-workload-automation-ae.html"><img height="50" width="55" src="/static/auto.png"/></a>
         </div>
         <nav class="navbar navbar-default navbar-inverse" role="navigation">
             <div class="container-fluid">
