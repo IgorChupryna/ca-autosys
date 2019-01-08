@@ -1,10 +1,7 @@
 package ua.chup.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ua.chup.Application;
 import ua.chup.model.*;
 import ua.chup.service.*;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static ua.chup.controller.MainController.getLoginName;
 
 @Controller
 public class AdministrationController {
@@ -39,9 +35,6 @@ public class AdministrationController {
     private InstallationService installationService;
     @Autowired
     private AdministrationService administrationService;
-
-
-
 
 
 
@@ -108,16 +101,7 @@ public class AdministrationController {
         return "eem";
     }
 
-    private String getLoginName() {
-        String login = null;
-        Object sc = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = null;
-        if (sc instanceof User) {
-            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            login = user.getUsername();
-        }
-        return login;
-    }
+
 
     @RequestMapping("/users")
     public String userPage(Model model) {
@@ -176,23 +160,5 @@ public class AdministrationController {
 
         return "redirect:/";
     }
-
-    /*
-    @RequestMapping(value="/contact/add", method = RequestMethod.POST)
-    public String contactAdd(@RequestParam(value = "group") long groupId,
-                             @RequestParam String name,
-                             @RequestParam String surname,
-                             @RequestParam String phone,
-                             @RequestParam String email)
-    {
-
-
-        Contact contact = new Contact(group, name, surname, phone, email);
-        contactService.addContact(contact);
-
-        return "redirect:/";
-    }
-    */
-
 
 }

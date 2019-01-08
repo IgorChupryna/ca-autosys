@@ -22,7 +22,6 @@ public class Application {
     }
 
     /*
-
     @Bean
     public CommandLineRunner demo(final UserService userService) {
         return new CommandLineRunner() {
@@ -44,7 +43,6 @@ public class Application {
             @Override
             public void run(String... strings) throws Exception {
 
-
                 menu.put("desc_m", getListName("Description"));
                 menu.put("inst", getListName("Installation"));
                 menu.put("adm", getListName("Administration"));
@@ -57,7 +55,6 @@ public class Application {
                 menu.put("eem_m", getListName("EEM"));
                 menu.put("wcc_m", getListName("WCC"));
                 menu.put("aedb_m", getListName("AEDB"));
-
 
             }
 

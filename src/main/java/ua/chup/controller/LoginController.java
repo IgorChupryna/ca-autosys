@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ua.chup.Application;
-import ua.chup.model.CustomUser;
 import ua.chup.service.UserService;
 
 import java.util.List;
@@ -33,7 +32,7 @@ public class LoginController {
         for (Map.Entry<String, List<String>> table : Application.menu.entrySet()) {
             model.addAttribute(table.getKey(),table.getValue());
         }
-       // model.addAttribute("agt", Application.menu.get("agt"));
+
         model.addAttribute("login", login);
 
         return "first";

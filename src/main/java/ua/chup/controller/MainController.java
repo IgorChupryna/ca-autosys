@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ua.chup.Application;
 import ua.chup.model.*;
 import ua.chup.service.*;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -22,8 +21,6 @@ import java.util.Map;
 
 @Controller
 public class MainController {
-    static final int DEFAULT_GROUP_ID = -1;
-    static final int ITEMS_PER_PAGE = 6;
     @Autowired
     private UserService userService;
     @Autowired
@@ -35,88 +32,58 @@ public class MainController {
     @Autowired
     private CommentService commentService;
     @Autowired
-    CommandService commandService;
+    private CommandService commandService;
     @Autowired
-    AgentService agentService;
+    private AgentService agentService;
     @Autowired
     private CommentDescService commentDescService;
     @Autowired
     private AdministrationService administrationService;
     @Autowired
     private CommentAdminService commentAdminService;
-
     @Autowired
     private CommentCommService commentCommService;
-
     @Autowired
     private CommentAgentService commentAgentService;
-
     @Autowired
     private CommentAEDBService commentAEDBService;
     @Autowired
     private CommentEEMService commentEEMService;
     @Autowired
     private CommentWCCService commentWCCService;
-
     @Autowired
-    WCCService wccService;
+    private WCCService wccService;
     @Autowired
-    AEDBService aedbService;
+    private AEDBService aedbService;
     @Autowired
-    EEMService eemService;
+    private EEMService eemService;
 
 
     @RequestMapping("/first")
     public String loginPage(Model model) {
-        String login = null;
-        Object sc = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (sc instanceof User) {
-            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            login = user.getUsername();
-        }
-        model.addAttribute("login", login);
+        model.addAttribute("login", getLoginName());
         List<Util> utils = utilService.findAll();
         model.addAttribute("utils", utils);
-
         return "login";
     }
 
 
     @RequestMapping("/commands")
-    public String commPage(Model model) {
+    public String commPage() {
         return "commands";
     }
 
 
     @RequestMapping("/")
     public String index(Model model) {
-        String login = null;
-        Object sc = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = null;
-        if (sc instanceof User) {
-            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            login = user.getUsername();
-        }
-        model.addAttribute("login", login);
-
-
+        model.addAttribute("login", getLoginName());
         return "first";
     }
 
 
     @RequestMapping("/second")
     public String second(Model model) {
-        String login = null;
-        Object sc = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = null;
-        if (sc instanceof User) {
-            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            login = user.getUsername();
-        }
-        model.addAttribute("login", login);
-
-
+        model.addAttribute("login", getLoginName());
         return "second";
     }
 
@@ -150,8 +117,6 @@ public class MainController {
                              @RequestParam String description,
                              @RequestParam String example,
                              @RequestParam String path_v) {
-
-
         Util contact = new Util(name, description, example, path_v);
         utilService.addUtil(contact);
 
@@ -195,7 +160,6 @@ public class MainController {
         return "redirect:/";
     }
 
-
     @RequestMapping("/register")
     public String register() {
         return "register";
@@ -228,7 +192,7 @@ public class MainController {
     public String adddComment(@RequestParam("name") String name, @RequestParam("id") Integer id, @RequestParam(required = false) String body, @RequestParam String table) {
         String login = null;
         Object sc = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = null;
+        User user;
         if (sc instanceof User) {
             user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             login = user.getUsername();
@@ -246,7 +210,7 @@ public class MainController {
     public String addComment(@RequestParam("name") String name, @RequestParam("id") Integer id, @RequestParam String body, @RequestParam String table) {
         String login = null;
         Object sc = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = null;
+        User user;
         if (sc instanceof User) {
             user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             login = user.getUsername();
@@ -296,7 +260,7 @@ public class MainController {
     public String delComment(@RequestParam("name") String name, @RequestParam("id") Long id, @RequestParam String table) {
         String login = null;
         Object sc = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = null;
+        User user;
         if (sc instanceof User) {
             user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             login = user.getUsername();
@@ -428,7 +392,7 @@ public class MainController {
         return "administration";
     }
 
-    private String getLoginName(){
+    public static String getLoginName(){
         String login = null;
         Object sc = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = null;
