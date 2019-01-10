@@ -10,16 +10,433 @@
   <component name="ChangeListManager">
     <list id="eb9b41b0-3b01-451c-a8f9-497d230cbaf9" name="New changelist" comment="" />
     <list default="true" id="61c1bce5-a4eb-4262-85f8-f3326a2ec2d5" name="Default" comment="clear iml files commit">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/ua/chup/model/Download.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/ua/chup/repository/DownloadRepository.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/ua/chup/service/DownloadService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/AppConfig.java" afterPath="$PROJECT_DIR$/src/main/java/ua/chup/AppConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/controller/AdministrationController.java" afterPath="$PROJECT_DIR$/src/main/java/ua/chup/controller/AdministrationController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/controller/CommentController.java" afterPath="$PROJECT_DIR$/src/main/java/ua/chup/controller/CommentController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/controller/MainController.java" afterPath="$PROJECT_DIR$/src/main/java/ua/chup/controller/MainController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/EEM.java" afterPath="$PROJECT_DIR$/src/main/java/ua/chup/model/EEM.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/first.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/first.jsp" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/autosys_war.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/autosys_war_exploded.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/ca_autosys.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dataSources/0243b532-e87b-436f-b43b-2c77cecacd1d.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_1_7.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_1_7.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_3_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_8_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_8_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_8_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_jstl_1_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_transaction_javax_transaction_api_1_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_1_1_0_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_39.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_geronimo_specs_geronimo_jta_1_1_spec_1_1_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_8_5_4.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_8_5_4.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_jasper_8_5_4.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_8_5_4.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_tomcat_jdbc_8_5_4.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_tomcat_juli_8_5_4.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_8_9.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jdt_core_compiler_ecj_4_5_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_0_1_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_5_1_0_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_entitymanager_5_1_0_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_validator_5_2_4_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_1_api_1_0_0_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_20_0_GA.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_2_0_0_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_0_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_16_12.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_21.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_21.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_log4j_over_slf4j_1_7_21.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_21.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_1_4_0_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_1_4_0_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_devtools_1_4_0_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_1_4_0_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_aop_1_4_0_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_jpa_1_4_0_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_1_4_0_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_1_4_0_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_1_4_0_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_1_4_0_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_1_12_2_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_jpa_1_10_2_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_config_4_1_0_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_core_4_1_1_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_web_4_1_0_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_4_3_2_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aspects_4_3_2_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_4_3_2_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_4_3_2_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_4_3_2_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_4_3_2_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_4_3_2_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_4_3_2_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_4_3_2_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_4_3_2_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_4_3_2_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_17.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_4_01.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/webContexts.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/autosys.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/ca_autosys/ca_autosys.war" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/AppConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/Application.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/SecurityConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/controller/AdministrationController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/controller/CommentController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/controller/LoginController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/controller/MainController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/controller/ShutdownController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/AEDB.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/Administration.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/Agent.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/Command.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/Comment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/CommentAEDB.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/CommentAdmin.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/CommentAgent.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/CommentCommand.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/CommentDesc.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/CommentEEM.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/CommentWCC.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/CustomUser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/Description.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/Download.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/EEM.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/Image.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/ImageAEDB.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/ImageAdmin.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/ImageAgent.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/ImageCommand.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/ImageEEM.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/ImageWCC.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/Installation.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/UserDetailsServiceImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/UserRole.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/Util.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/model/WCC.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/AEDBRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/AdministrationRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/AgentRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/CommandRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/CommentAEDBRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/CommentAdminRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/CommentAgentRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/CommentCommRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/CommentDescRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/CommentEEMRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/CommentRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/CommentWCCRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/DescriptionRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/DownloadRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/EEMRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/InstallationRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/UserRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/UtilRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/repository/WCCRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/AEDBService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/AdministrationService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/AgentService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/CommandService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/CommentAEDBService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/CommentAdminService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/CommentAgentService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/CommentCommService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/CommentDescService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/CommentEEMService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/CommentService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/CommentWCCService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/DescriptionService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/DownloadService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/EEMService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/InstallationService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/UserService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/UtilService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/chup/service/WCCService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/application.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/config.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/META-INF/MANIFEST.MF" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/admin.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/administration.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/aedb.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/agent.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/command.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/contact_add_page.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/description.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/eem.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/first.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/index.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/installation.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/login.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/menu.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/menu2.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/register.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/second.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/sendmail.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/snippet.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/table.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/troubleshooting.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/unauthorized.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/users.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/wcc.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/application.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/config.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/AppConfig.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/Application$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/Application.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/SecurityConfig.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/controller/AdministrationController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/controller/CommentController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/controller/LoginController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/controller/MainController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/controller/ShutdownController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/AEDB.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/Administration.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/Agent.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/Command.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/Comment.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/CommentAEDB.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/CommentAdmin.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/CommentAgent.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/CommentCommand.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/CommentDesc.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/CommentEEM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/CommentWCC.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/CustomUser.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/Description.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/Download.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/EEM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/Image.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/ImageAEDB.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/ImageAdmin.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/ImageAgent.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/ImageCommand.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/ImageEEM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/ImageWCC.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/Installation.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/UserDetailsServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/UserRole.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/Util.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/model/WCC.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/AEDBRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/AdministrationRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/AgentRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/CommandRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/CommentAEDBRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/CommentAdminRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/CommentAgentRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/CommentCommRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/CommentDescRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/CommentEEMRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/CommentRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/CommentWCCRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/DescriptionRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/DownloadRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/EEMRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/InstallationRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/UserRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/UtilRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/repository/WCCRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/AEDBService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/AdministrationService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/AgentService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/CommandService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/CommentAEDBService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/CommentAdminService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/CommentAgentService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/CommentCommService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/CommentDescService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/CommentEEMService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/CommentService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/CommentWCCService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/DescriptionService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/DownloadService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/EEMService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/InstallationService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/UserService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/UtilService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/ua/chup/service/WCCService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT.war" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT.war.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/application.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/config.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/AppConfig.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/Application$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/Application.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/SecurityConfig.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/controller/AdministrationController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/controller/CommentController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/controller/LoginController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/controller/MainController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/controller/ShutdownController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/AEDB.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/Administration.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/Agent.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/Command.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/Comment.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/CommentAEDB.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/CommentAdmin.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/CommentAgent.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/CommentCommand.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/CommentDesc.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/CommentEEM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/CommentWCC.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/CustomUser.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/Description.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/Download.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/EEM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/Image.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/ImageAEDB.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/ImageAdmin.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/ImageAgent.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/ImageCommand.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/ImageEEM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/ImageWCC.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/Installation.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/UserDetailsServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/UserRole.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/Util.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/model/WCC.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/AEDBRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/AdministrationRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/AgentRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/CommandRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/CommentAEDBRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/CommentAdminRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/CommentAgentRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/CommentCommRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/CommentDescRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/CommentEEMRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/CommentRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/CommentWCCRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/DescriptionRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/DownloadRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/EEMRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/InstallationRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/UserRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/UtilRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/repository/WCCRepository.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/AEDBService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/AdministrationService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/AgentService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/CommandService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/CommentAEDBService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/CommentAdminService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/CommentAgentService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/CommentCommService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/CommentDescService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/CommentEEMService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/CommentService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/CommentWCCService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/DescriptionService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/DownloadService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/EEMService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/InstallationService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/UserService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/UtilService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/classes/ua/chup/service/WCCService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/antlr-2.7.7.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/aopalliance-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/aspectjweaver-1.8.9.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/classmate-1.3.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/dom4j-1.6.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/ecj-4.5.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/geronimo-jta_1.1_spec-1.1.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/hibernate-commons-annotations-5.0.1.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/hibernate-core-5.1.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/hibernate-entitymanager-5.1.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/hibernate-jpa-2.1-api-1.0.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/hibernate-validator-5.2.4.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/jackson-annotations-2.8.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/jackson-core-2.8.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/jackson-databind-2.8.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/jandex-2.0.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/javassist-3.20.0-GA.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/javax.transaction-api-1.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/jboss-logging-3.3.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/jcl-over-slf4j-1.7.21.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/jstl-1.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/jul-to-slf4j-1.7.21.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/log4j-over-slf4j-1.7.21.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/logback-classic-1.1.7.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/logback-core-1.1.7.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/mysql-connector-java-5.1.39.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/slf4j-api-1.7.21.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/snakeyaml-1.17.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-aop-4.3.2.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-aspects-4.3.2.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-beans-4.3.2.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-boot-1.4.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-boot-autoconfigure-1.4.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-boot-devtools-1.4.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-boot-starter-1.4.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-boot-starter-aop-1.4.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-boot-starter-data-jpa-1.4.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-boot-starter-jdbc-1.4.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-boot-starter-logging-1.4.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-boot-starter-tomcat-1.4.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-boot-starter-web-1.4.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-context-4.3.2.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-core-4.3.2.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-data-commons-1.12.2.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-data-jpa-1.10.2.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-expression-4.3.2.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-jdbc-4.3.2.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-orm-4.3.2.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-security-config-4.1.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-security-core-4.1.1.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-security-web-4.1.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-tx-4.3.2.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-web-4.3.2.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/spring-webmvc-4.3.2.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/tomcat-embed-core-8.5.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/tomcat-embed-el-8.5.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/tomcat-embed-jasper-8.5.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/tomcat-embed-websocket-8.5.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/tomcat-jdbc-8.5.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/tomcat-juli-8.5.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/validation-api-1.1.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/lib/xml-apis-1.4.01.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/admin.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/administration.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/aedb.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/agent.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/command.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/contact_add_page.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/description.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/eem.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/first.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/index.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/installation.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/login.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/menu.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/menu2.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/register.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/second.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/sendmail.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/snippet.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/table.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/troubleshooting.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/unauthorized.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/users.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/spring2-1.0-SNAPSHOT/WEB-INF/pages/wcc.jsp" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -64,7 +481,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DownloadService.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DownloadService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ua/chup/service/DownloadService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="449">
@@ -88,7 +505,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="administration.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="administration.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/administration.jsp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
@@ -427,28 +844,6 @@
               <item name="autosys" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ua" type="462c0819:PsiDirectoryNode" />
-              <item name="chup" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="autosys" type="b2602c69:ProjectViewProjectNode" />
-              <item name="autosys" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="autosys" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ua" type="462c0819:PsiDirectoryNode" />
-              <item name="chup" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="autosys" type="b2602c69:ProjectViewProjectNode" />
-              <item name="autosys" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="autosys" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -477,16 +872,6 @@
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="autosys" type="b2602c69:ProjectViewProjectNode" />
-              <item name="autosys" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="autosys" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -495,7 +880,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Ignored.Files" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="project.structure.last.edited" value="Global Libraries" />
@@ -789,7 +1174,7 @@
       <workItem from="1546011073253" duration="855000" />
       <workItem from="1546786059777" duration="10972000" />
       <workItem from="1547033105555" duration="3566000" />
-      <workItem from="1547040844395" duration="7051000" />
+      <workItem from="1547040844395" duration="8283000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <created>1509466813529</created>
@@ -823,7 +1208,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="788138000" />
+    <option name="totallyTimeSpent" value="789370000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -855,8 +1240,8 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32799247" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1872549" sideWeight="0.48987207" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32647058" sideWeight="0.48614073" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32058823" sideWeight="0.48987207" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21372549" sideWeight="0.48614073" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.327451" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6392157" sideWeight="0.49307036" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19669509" sideWeight="0.8633235" order="0" side_tool="false" content_ui="combo" />
@@ -1168,20 +1553,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ua/chup/controller/AdministrationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="56" column="48" lean-forward="false" selection-start-line="56" selection-start-column="48" selection-end-line="56" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="method#userPage#0;class#AdministrationController#0" expanded="false" />
-            <element signature="method#mailPage#0;class#AdministrationController#0" expanded="false" />
-            <element signature="method#contactAddPage#0;class#AdministrationController#0" expanded="false" />
-            <element signature="method#update#0;class#AdministrationController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ua/chup/repository/AdministrationRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1287,28 +1658,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ua/chup/service/DownloadService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="39" column="18" lean-forward="false" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#524#525#0" expanded="true" />
-            <element signature="e#586#587#0" expanded="true" />
-            <element signature="e#670#671#0" expanded="true" />
-            <element signature="e#730#731#0" expanded="true" />
-            <element signature="e#799#800#0" expanded="true" />
-            <element signature="e#848#849#0" expanded="true" />
-            <element signature="e#917#918#0" expanded="true" />
-            <element signature="e#966#967#0" expanded="true" />
-            <element signature="e#1033#1034#0" expanded="true" />
-            <element signature="e#1079#1080#0" expanded="true" />
-            <element signature="e#1136#1137#0" expanded="true" />
-            <element signature="e#1187#1188#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/table.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-75">
@@ -1354,6 +1703,41 @@
         <state relative-caret-position="34">
           <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ua/chup/controller/AdministrationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="534">
+          <caret line="56" column="48" lean-forward="false" selection-start-line="56" selection-start-column="48" selection-end-line="56" selection-end-column="48" />
+          <folding>
+            <element signature="method#userPage#0;class#AdministrationController#0" expanded="false" />
+            <element signature="method#mailPage#0;class#AdministrationController#0" expanded="false" />
+            <element signature="method#contactAddPage#0;class#AdministrationController#0" expanded="false" />
+            <element signature="method#update#0;class#AdministrationController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ua/chup/service/DownloadService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="449">
+          <caret line="39" column="18" lean-forward="false" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#524#525#0" expanded="true" />
+            <element signature="e#586#587#0" expanded="true" />
+            <element signature="e#670#671#0" expanded="true" />
+            <element signature="e#730#731#0" expanded="true" />
+            <element signature="e#799#800#0" expanded="true" />
+            <element signature="e#848#849#0" expanded="true" />
+            <element signature="e#917#918#0" expanded="true" />
+            <element signature="e#966#967#0" expanded="true" />
+            <element signature="e#1033#1034#0" expanded="true" />
+            <element signature="e#1079#1080#0" expanded="true" />
+            <element signature="e#1136#1137#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
