@@ -68,6 +68,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
+
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry

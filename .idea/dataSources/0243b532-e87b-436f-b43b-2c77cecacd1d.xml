@@ -1,0 +1,949 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="cadb@10.91.63.108">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="cadb">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="bank"/>
+    <schema id="4" parent="1" name="Forum"/>
+    <schema id="5" parent="1" name="information_schema"/>
+    <schema id="6" parent="1" name="mysql"/>
+    <schema id="7" parent="1" name="performance_schema"/>
+    <schema id="8" parent="1" name="rstdb"/>
+    <schema id="9" parent="1" name="test"/>
+    <schema id="10" parent="1" name="zakazdb"/>
+    <schema id="11" parent="1" name="arc"/>
+    <schema id="12" parent="1" name="hiberdb"/>
+    <schema id="13" parent="1" name="jpadb"/>
+    <schema id="14" parent="1" name="springdata_home"/>
+    <schema id="15" parent="1" name="springjdbc_home"/>
+    <schema id="16" parent="1" name="userdb"/>
+    <table id="17" parent="2" name="AEDB"/>
+    <table id="18" parent="2" name="Administration"/>
+    <table id="19" parent="2" name="Agent"/>
+    <table id="20" parent="2" name="Command"/>
+    <table id="21" parent="2" name="Comment"/>
+    <table id="22" parent="2" name="CommentAEDB"/>
+    <table id="23" parent="2" name="CommentAdmin"/>
+    <table id="24" parent="2" name="CommentAgent"/>
+    <table id="25" parent="2" name="CommentCommand"/>
+    <table id="26" parent="2" name="CommentDesc"/>
+    <table id="27" parent="2" name="CommentEEM"/>
+    <table id="28" parent="2" name="CommentInst"/>
+    <table id="29" parent="2" name="CommentWCC"/>
+    <table id="30" parent="2" name="Contacts"/>
+    <table id="31" parent="2" name="CustomUser"/>
+    <table id="32" parent="2" name="Description"/>
+    <table id="33" parent="2" name="Download"/>
+    <table id="34" parent="2" name="EEM"/>
+    <table id="35" parent="2" name="Groups"/>
+    <table id="36" parent="2" name="Image"/>
+    <table id="37" parent="2" name="ImageAEDB"/>
+    <table id="38" parent="2" name="ImageAdmin"/>
+    <table id="39" parent="2" name="ImageAgent"/>
+    <table id="40" parent="2" name="ImageCommand"/>
+    <table id="41" parent="2" name="ImageEEM"/>
+    <table id="42" parent="2" name="ImageWCC"/>
+    <table id="43" parent="2" name="Installation"/>
+    <table id="44" parent="2" name="Utils"/>
+    <table id="45" parent="2" name="WCC"/>
+    <table id="46" parent="2" name="hibernate_sequence"/>
+    <column id="47" parent="17" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="48" parent="17" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="49" parent="17" name="short_desc">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="50" parent="17" name="full_desc">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="51" parent="17" name="path_video">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="52" parent="17" name="path_icon">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="53" parent="17" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="54" parent="18" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="55" parent="18" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="56" parent="18" name="short_desc">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="57" parent="18" name="full_desc">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="58" parent="18" name="path_video">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="59" parent="18" name="path_icon">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="60" parent="18" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="61" parent="19" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="62" parent="19" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="63" parent="19" name="short_desc">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="64" parent="19" name="full_desc">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="65" parent="19" name="path_video">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="66" parent="19" name="path_icon">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="67" parent="19" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="68" parent="20" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="69" parent="20" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="70" parent="20" name="short_desc">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="71" parent="20" name="full_desc">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="72" parent="20" name="path_video">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="73" parent="20" name="path_icon">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="74" parent="20" name="type">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="75" parent="20" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="76" parent="21" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="77" parent="21" name="time">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="78" parent="21" name="desc">
+      <Position>3</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="79" parent="21" name="other_id">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="80" parent="21" name="step">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="81" parent="21" name="user">
+      <Position>6</Position>
+      <DataType>tinytext|0</DataType>
+    </column>
+    <column id="82" parent="21" name="path_avatar">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="83" parent="21" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="84" parent="22" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="85" parent="22" name="user">
+      <Position>2</Position>
+      <DataType>tinytext|0</DataType>
+    </column>
+    <column id="86" parent="22" name="time">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="87" parent="22" name="body">
+      <Position>4</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="88" parent="22" name="other_id">
+      <Position>5</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="89" parent="22" name="path_avatar">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="90" parent="22" name="step">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <key id="91" parent="22" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="92" parent="23" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="93" parent="23" name="user">
+      <Position>2</Position>
+      <DataType>tinytext|0</DataType>
+    </column>
+    <column id="94" parent="23" name="time">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="95" parent="23" name="body">
+      <Position>4</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="96" parent="23" name="other_id">
+      <Position>5</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="97" parent="23" name="path_avatar">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="98" parent="23" name="step">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <key id="99" parent="23" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="100" parent="24" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="101" parent="24" name="user">
+      <Position>2</Position>
+      <DataType>tinytext|0</DataType>
+    </column>
+    <column id="102" parent="24" name="time">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="103" parent="24" name="body">
+      <Position>4</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="104" parent="24" name="other_id">
+      <Position>5</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="105" parent="24" name="path_avatar">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="106" parent="24" name="step">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <key id="107" parent="24" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="108" parent="25" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="109" parent="25" name="user">
+      <Position>2</Position>
+      <DataType>tinytext|0</DataType>
+    </column>
+    <column id="110" parent="25" name="time">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="111" parent="25" name="body">
+      <Position>4</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="112" parent="25" name="other_id">
+      <Position>5</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="113" parent="25" name="path_avatar">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="114" parent="25" name="step">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <key id="115" parent="25" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="116" parent="26" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="117" parent="26" name="user">
+      <Position>2</Position>
+      <DataType>tinytext|0</DataType>
+    </column>
+    <column id="118" parent="26" name="time">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="119" parent="26" name="body">
+      <Position>4</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="120" parent="26" name="other_id">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="121" parent="26" name="path_avatar">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="122" parent="26" name="step">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <key id="123" parent="26" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="124" parent="27" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="125" parent="27" name="user">
+      <Position>2</Position>
+      <DataType>tinytext|0</DataType>
+    </column>
+    <column id="126" parent="27" name="time">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="127" parent="27" name="body">
+      <Position>4</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="128" parent="27" name="other_id">
+      <Position>5</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="129" parent="27" name="path_avatar">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="130" parent="27" name="step">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <key id="131" parent="27" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="132" parent="28" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="133" parent="28" name="user">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="134" parent="28" name="other_id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="135" parent="28" name="step">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="136" parent="28" name="time">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="137" parent="28" name="body">
+      <Position>6</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="138" parent="28" name="path_avatar">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="139" parent="28" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="140" parent="29" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="141" parent="29" name="user">
+      <Position>2</Position>
+      <DataType>tinytext|0</DataType>
+    </column>
+    <column id="142" parent="29" name="time">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="143" parent="29" name="body">
+      <Position>4</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="144" parent="29" name="other_id">
+      <Position>5</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="145" parent="29" name="path_avatar">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="146" parent="29" name="step">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <key id="147" parent="29" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="148" parent="30" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="149" parent="30" name="email">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="150" parent="30" name="name">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="151" parent="30" name="phone">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="152" parent="30" name="surname">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="153" parent="30" name="group_id">
+      <Position>6</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="154" parent="30" name="FKt6tbf1av26ds8aimnru7lrf3r">
+      <ColNames>group_id</ColNames>
+    </index>
+    <key id="155" parent="30" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="156" parent="30" name="FKt6tbf1av26ds8aimnru7lrf3r">
+      <ColNames>group_id</ColNames>
+      <RefSchemaName>cadb</RefSchemaName>
+      <RefTableName>Groups</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="157" parent="31" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="158" parent="31" name="email">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="159" parent="31" name="login">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="160" parent="31" name="password">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="161" parent="31" name="phone">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="162" parent="31" name="role">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="163" parent="31" name="path_avatar">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="164" parent="31" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="165" parent="32" name="id">
+      <Position>1</Position>
+      <DataType>int(10) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="166" parent="32" name="name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="167" parent="32" name="path">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="168" parent="32" name="short_desc">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="169" parent="32" name="path_icon">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="170" parent="32" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="171" parent="33" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="172" parent="33" name="path">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="173" parent="33" name="name">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="174" parent="33" name="description">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="175" parent="33" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="176" parent="34" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="177" parent="34" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="178" parent="34" name="short_desc">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="179" parent="34" name="full_desc">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="180" parent="34" name="path_video">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="181" parent="34" name="path_icon">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="182" parent="34" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="183" parent="35" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="184" parent="35" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="185" parent="35" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="186" parent="36" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="187" parent="36" name="other_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="188" parent="36" name="desc">
+      <Position>3</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="189" parent="36" name="path">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="190" parent="36" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="191" parent="37" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="192" parent="37" name="other_id">
+      <Position>2</Position>
+      <DataType>bigint(64)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="193" parent="37" name="desc">
+      <Position>3</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="194" parent="37" name="path">
+      <Position>4</Position>
+      <DataType>varchar(64)|0</DataType>
+    </column>
+    <key id="195" parent="37" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="196" parent="38" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="197" parent="38" name="other_id">
+      <Position>2</Position>
+      <DataType>bigint(64)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="198" parent="38" name="desc">
+      <Position>3</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="199" parent="38" name="path">
+      <Position>4</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <key id="200" parent="38" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="201" parent="39" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="202" parent="39" name="other_id">
+      <Position>2</Position>
+      <DataType>bigint(64)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="203" parent="39" name="desc">
+      <Position>3</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="204" parent="39" name="path">
+      <Position>4</Position>
+      <DataType>varchar(64)|0</DataType>
+    </column>
+    <key id="205" parent="39" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="206" parent="40" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="207" parent="40" name="other_id">
+      <Position>2</Position>
+      <DataType>bigint(64)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="208" parent="40" name="desc">
+      <Position>3</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="209" parent="40" name="path">
+      <Position>4</Position>
+      <DataType>varchar(64)|0</DataType>
+    </column>
+    <key id="210" parent="40" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="211" parent="41" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="212" parent="41" name="other_id">
+      <Position>2</Position>
+      <DataType>bigint(64)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="213" parent="41" name="desc">
+      <Position>3</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="214" parent="41" name="path">
+      <Position>4</Position>
+      <DataType>varchar(64)|0</DataType>
+    </column>
+    <key id="215" parent="41" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="216" parent="42" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="217" parent="42" name="other_id">
+      <Position>2</Position>
+      <DataType>bigint(64)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="218" parent="42" name="desc">
+      <Position>3</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="219" parent="42" name="path">
+      <Position>4</Position>
+      <DataType>varchar(64)|0</DataType>
+    </column>
+    <key id="220" parent="42" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="221" parent="43" name="id">
+      <Position>1</Position>
+      <DataType>int(5)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="222" parent="43" name="name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="223" parent="43" name="requirements">
+      <Position>3</Position>
+      <DataType>varchar(105)|0</DataType>
+    </column>
+    <column id="224" parent="43" name="algoritm">
+      <Position>4</Position>
+      <DataType>varchar(105)|0</DataType>
+    </column>
+    <column id="225" parent="43" name="path_video">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="226" parent="43" name="short_desc">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="227" parent="43" name="path_icon">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="228" parent="43" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="229" parent="44" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="230" parent="44" name="description">
+      <Position>2</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="231" parent="44" name="example">
+      <Position>3</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="232" parent="44" name="name_u">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="233" parent="44" name="path_v">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="234" parent="44" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="235" parent="45" name="id">
+      <Position>1</Position>
+      <DataType>bigint(64)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="236" parent="45" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="237" parent="45" name="short_desc">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="238" parent="45" name="full_desc">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="239" parent="45" name="path_video">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="240" parent="45" name="path_icon">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="241" parent="45" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="242" parent="46" name="next_val">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+  </database-model>
+</dataSource>

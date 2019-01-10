@@ -30,27 +30,11 @@ public class MainController {
     @Autowired
     private InstallationService installationService;
     @Autowired
-    private CommentService commentService;
-    @Autowired
     private CommandService commandService;
     @Autowired
     private AgentService agentService;
     @Autowired
-    private CommentDescService commentDescService;
-    @Autowired
     private AdministrationService administrationService;
-    @Autowired
-    private CommentAdminService commentAdminService;
-    @Autowired
-    private CommentCommService commentCommService;
-    @Autowired
-    private CommentAgentService commentAgentService;
-    @Autowired
-    private CommentAEDBService commentAEDBService;
-    @Autowired
-    private CommentEEMService commentEEMService;
-    @Autowired
-    private CommentWCCService commentWCCService;
     @Autowired
     private WCCService wccService;
     @Autowired
@@ -77,6 +61,9 @@ public class MainController {
     @RequestMapping("/")
     public String index(Model model) {
         model.addAttribute("login", getLoginName());
+        for (Map.Entry<String, List<String>> table : Application.menu.entrySet()) {
+            model.addAttribute(table.getKey(),table.getValue());
+        }
         return "first";
     }
 
@@ -84,6 +71,9 @@ public class MainController {
     @RequestMapping("/second")
     public String second(Model model) {
         model.addAttribute("login", getLoginName());
+        for (Map.Entry<String, List<String>> table : Application.menu.entrySet()) {
+            model.addAttribute(table.getKey(),table.getValue());
+        }
         return "second";
     }
 
@@ -99,6 +89,9 @@ public class MainController {
         model.addAttribute("roles", user.getAuthorities());
         model.addAttribute("email", dbUser.getEmail());
         model.addAttribute("phone", dbUser.getPhone());
+        for (Map.Entry<String, List<String>> table : Application.menu.entrySet()) {
+            model.addAttribute(table.getKey(),table.getValue());
+        }
 
         return "index";
     }
@@ -125,7 +118,7 @@ public class MainController {
 
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@RequestParam(required = false) String email, @RequestParam(required = false) String phone) {
+    public String update(@RequestParam(required = false) String email, @RequestParam(required = false) String phone,Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String login = user.getUsername();
 
@@ -134,7 +127,9 @@ public class MainController {
         dbUser.setPhone(phone);
 
         userService.updateUser(dbUser);
-
+        for (Map.Entry<String, List<String>> table : Application.menu.entrySet()) {
+            model.addAttribute(table.getKey(),table.getValue());
+        }
         return "redirect:/";
     }
 
@@ -150,6 +145,8 @@ public class MainController {
             return "register";
         }
 
+
+
         ShaPasswordEncoder encoder = new ShaPasswordEncoder();
         String passHash = encoder.encodePassword(password, null);
 
@@ -161,7 +158,11 @@ public class MainController {
     }
 
     @RequestMapping("/register")
-    public String register() {
+    public String register(Model model) {
+        model.addAttribute("login", getLoginName());
+        for (Map.Entry<String, List<String>> table : Application.menu.entrySet()) {
+            model.addAttribute(table.getKey(),table.getValue());
+        }
         return "register";
     }
 
@@ -171,7 +172,6 @@ public class MainController {
         for (Map.Entry<String, List<String>> table : Application.menu.entrySet()) {
             model.addAttribute(table.getKey(),table.getValue());
         }
-
         return "admin";
     }
 
@@ -187,137 +187,6 @@ public class MainController {
         return "installation";
     }
 
-
-    @RequestMapping(value = "/adddComment")
-    public String adddComment(@RequestParam("name") String name, @RequestParam("id") Integer id, @RequestParam(required = false) String body, @RequestParam String table) {
-        String login = null;
-        Object sc = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user;
-        if (sc instanceof User) {
-            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            login = user.getUsername();
-        }
-        CustomUser user1 = userService.getUserByLogin(login);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy HH:mm:ss");
-        Comment c = new Comment((body == null) ? "" : body, user1.getPathAvatar(), 1, sdf.format(new Date()), user1.getLogin(), id);
-        commentService.addComm(c);
-        return "redirect:/" + table + "?name=" + name;
-
-    }
-
-
-    @RequestMapping(value = "/addComment", method = RequestMethod.POST)
-    public String addComment(@RequestParam("name") String name, @RequestParam("id") Integer id, @RequestParam String body, @RequestParam String table) {
-        String login = null;
-        Object sc = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user;
-        if (sc instanceof User) {
-            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            login = user.getUsername();
-        }
-        if (login == null) return "register";
-
-
-
-
-
-        CustomUser user1 = userService.getUserByLogin(login);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy HH:mm:ss");
-
-        if (table.equals("Installation")) {
-            Comment c = new Comment(body.replaceAll("(\r\n|\n)", "<br />"), user1.getPathAvatar(), 1, sdf.format(new Date()), user1.getLogin(), id);
-            commentService.addComm(c);
-        } else if (table.equals("Description")) {
-            CommentDesc cd = new CommentDesc(body.replaceAll("(\r\n|\n)", "<br />"), user1.getPathAvatar(), 1, sdf.format(new Date()), user1.getLogin(), id);
-            commentDescService.addComm(cd);
-        } else if (table.equals("Administration")) {
-            CommentAdmin cd = new CommentAdmin(body.replaceAll("(\r\n|\n)", "<br />"), user1.getPathAvatar(), 1, sdf.format(new Date()), user1.getLogin(), id);
-            commentAdminService.addComm(cd);
-        } else if (table.equals("Command")) {
-            CommentCommand cd = new CommentCommand(body.replaceAll("(\r\n|\n)", "<br />"), user1.getPathAvatar(), 1, sdf.format(new Date()), user1.getLogin(), id);
-            commentCommService.addComm(cd);
-        } else if (table.equals("Agent")) {
-            CommentAgent cd = new CommentAgent(body.replaceAll("(\r\n|\n)", "<br />"), user1.getPathAvatar(), 1, sdf.format(new Date()), user1.getLogin(), id);
-            commentAgentService.addComm(cd);
-        } else if (table.equals("AEDB")) {
-            CommentAEDB cd = new CommentAEDB(body.replaceAll("(\r\n|\n)", "<br />"), user1.getPathAvatar(), 1, sdf.format(new Date()), user1.getLogin(), id);
-            commentAEDBService.addComm(cd);
-        } else if (table.equals("WCC")) {
-            CommentWCC cd = new CommentWCC(body.replaceAll("(\r\n|\n)", "<br />"), user1.getPathAvatar(), 1, sdf.format(new Date()), user1.getLogin(), id);
-            commentWCCService.addComm(cd);
-        } else if (table.equals("EEM")) {
-            CommentEEM cd = new CommentEEM(body.replaceAll("(\r\n|\n)", "<br />"), user1.getPathAvatar(), 1, sdf.format(new Date()), user1.getLogin(), id);
-            commentEEMService.addComm(cd);
-        }
-
-
-        return "redirect:/" + table + "?name=" + name;
-
-    }
-
-
-    @RequestMapping(value = "/delComment", method = RequestMethod.POST)
-    public String delComment(@RequestParam("name") String name, @RequestParam("id") Long id, @RequestParam String table) {
-        String login = null;
-        Object sc = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user;
-        if (sc instanceof User) {
-            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            login = user.getUsername();
-        }
-        if (login == null) return "register";
-
-        if (table.equals("Installation")) {
-            if (commentService.getCommById(id).getUser().equals(login))
-                commentService.deleteOne(id);
-            else
-                return "redirect:/";
-        } else if (table.equals("Description")) {
-            if (commentDescService.getCommById(id).getUser().equals(login))
-                commentDescService.deleteOne(id);
-            else
-                return "redirect:/";
-        } else if (table.equals("Administration")) {
-            if (commentAdminService.getCommById(id).getUser().equals(login))
-                commentAdminService.deleteOne(id);
-            else
-                return "redirect:/";
-        } else if (table.equals("Command")) {
-            if (commentCommService.getCommById(id).getUser().equals(login))
-                commentCommService.deleteOne(id);
-            else
-                return "redirect:/";
-        } else if (table.equals("Agent")) {
-            if (commentAgentService.getCommById(id).getUser().equals(login))
-                commentAgentService.deleteOne(id);
-            else
-                return "redirect:/";
-        }
-        else if (table.equals("AEDB")) {
-            if (commentAEDBService.getCommById(id).getUser().equals(login))
-                commentAEDBService.deleteOne(id);
-            else
-                return "redirect:/";
-        }
-        else if (table.equals("EEM")) {
-            if (commentEEMService.getCommById(id).getUser().equals(login))
-                commentEEMService.deleteOne(id);
-            else
-                return "redirect:/";
-        }
-        else if (table.equals("WCC")) {
-            if (commentWCCService.getCommById(id).getUser().equals(login))
-                commentWCCService.deleteOne(id);
-            else
-                return "redirect:/";
-        }
-
-
-        return "redirect:/" + table + "?name=" + name;
-
-    }
-
-
     @RequestMapping("/Description")
     public String description(@RequestParam("name") String name, Model model) {
 
@@ -329,7 +198,6 @@ public class MainController {
         model.addAttribute("desc", desc);
         return "description";
     }
-
 
     @RequestMapping("/table")
     public String list(@RequestParam("name") String name, @RequestParam("view") String view, Model model) {
@@ -373,11 +241,13 @@ public class MainController {
         return "table";
     }
 
-
     @RequestMapping("/unauthorized")
     public String unauthorized(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("login", user.getUsername());
+        for (Map.Entry<String, List<String>> table : Application.menu.entrySet()) {
+            model.addAttribute(table.getKey(),table.getValue());
+        }
         return "unauthorized";
     }
 

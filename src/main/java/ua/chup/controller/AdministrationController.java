@@ -37,8 +37,6 @@ public class AdministrationController {
     private AdministrationService administrationService;
 
 
-
-
     @RequestMapping("/Command")
     public String command(@RequestParam("name") String name, Model model) {
         model.addAttribute("login", getLoginName());
@@ -100,8 +98,6 @@ public class AdministrationController {
         model.addAttribute("eem", eem);
         return "eem";
     }
-
-
 
     @RequestMapping("/users")
     public String userPage(Model model) {
