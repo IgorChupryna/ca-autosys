@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 class="article-name" tabindex="0">Install CA WA Agent for Remote Execution</h1>
+<div id="wiki-content">
+
+
+    <div>
+        <div class="col-xs-12 col-md-8 col-lg-8">
+            <p>Use this information to install CA WA Agent for Remote Execution. This agent plug-in installs into the CA
+                Workload Automation Agent installation directory.</p>
+            <div class="bs-callout bs-callout-info conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <h4>Important</h4> Before you can install CA Workload Automation Agent for Remote Execution, CA Workload
+                Automation System Agent must be installed. See
+                <a data-macro-name="sp-plaintextbody-link"
+                   href="/display/SYSAG/.Install+CA+Workload+Automation+Agent+v11.3" class="conf-macro output-inline"
+                   data-hasbody="true">Install CA Workload Automation System Agent.</a>
+            </div>
+            <p>To install the agent plug-in, follow these steps:</p>
+            <ol>
+                <li>If you have not already installed CA Workload Automation System Agent, install it. For more
+                    information, see&nbsp;<a data-macro-name="sp-plaintextbody-link"
+                                             href="/display/SYSAG/.Install+CA+Workload+Automation+Agent+v11.3"
+                                             class="conf-macro output-inline" data-hasbody="true">Install CA Workload
+                        Automation System Agent</a>.
+                </li>
+                <li>Apply the latest CA Workload Automation System Agent agent patch on the platform where you are
+                    installing the agent plug-in. See the&nbsp;<a data-macro-name="sp-plaintextbody-link"
+                                                                  href="/display/CWAAS/.Install+CA+Workload+Automation+Agent+v11.3"
+                                                                  class="conf-macro output-inline" data-hasbody="true">CA
+                        Workload Automation Agent documentation</a>&nbsp;for more information.<br>For example, if you
+                    are installing on Windows, install the latest patch for CA Workload Automation Agent for Windows.
+                </li>
+                <li>Install the agent plug-in using one of these methods:
+                    <ul>
+                        <li><a data-macro-name="sp-plaintextbody-link"
+                               href="#InstallCAWAAgentforRemoteExecution-InstalltheAgentPlug-inUsinganInteractiveProgram"
+                               class="conf-macro output-inline" data-hasbody="true">Install using an interactive
+                            program</a>.
+                        </li>
+                        <li><a data-macro-name="sp-plaintextbody-link"
+                               href="#InstallCAWAAgentforRemoteExecution-InstalltheAgentPlug-inUsingaSilentInstaller"
+                               class="conf-macro output-inline" data-hasbody="true">Install using a silent installer</a>.
+                        </li>
+                    </ul>
+                </li>
+                <li><a data-macro-name="sp-plaintextbody-link"
+                       href="#InstallCAWAAgentforRemoteExecution-CreateaCustomPropertiesFileforaRemoteSystem"
+                       class="conf-macro output-inline" data-hasbody="true">Create a custom properties file for the
+                    remote system</a>.
+                </li>
+                <li>(HP-UX remote systems only)&nbsp;<a data-macro-name="sp-plaintextbody-link"
+                                                        href="#InstallCAWAAgentforRemoteExecution-EnableUNIX95BehaviorforRemoteHP-UXSystems"
+                                                        class="conf-macro output-inline" data-hasbody="true">Enable
+                    UNIX95 behavior</a>.
+                </li>
+                <li><a data-macro-name="sp-plaintextbody-link"
+                       href="#InstallCAWAAgentforRemoteExecution-SystemProperties" class="conf-macro output-inline"
+                       data-hasbody="true">Configure the system properties for the remote system</a>, if necessary.
+                </li>
+            </ol>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> After installing the agent plug-in, configure the scheduling manager to work
+                    with the agent plug-in. For more information, see the documentation for your scheduling manager.</p>
+            </div>
+            <h2 id="InstallCAWAAgentforRemoteExecution-InstalltheAgentPlug-inUsinganInteractiveProgram">Install the
+                Agent Plug-in Using an Interactive Program</h2>
+            <p>You can install CA WA Agent for Remote Execution using an interactive program that prompts you for the
+                required information.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Copy the proxy.pak file into the agent installation directory. You can copy this file from the
+                    product DVD or can download a zip file that contains the file from the CA Support Online website (<a
+                            rel="nofollow" class="external-link"
+                            href="http://www.ca.com/support">http://ca.com/support</a>).
+                </li>
+                <li>Change to the agent installation directory. For example, type the following command:
+                    <ul>
+                        <li><p>On UNIX:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>cd opt/CA/WA_Agent_R11_3
+</code></pre>
+                            </div>
+                        </li>
+                        <li><p>On Windows:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>cd C:\Program Files\CA\WA Agent R11.3
+</code></pre>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>Stop the agent using one of the following commands:
+                    <ul>
+                        <li><p>On UNIX:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>./cybAgent -s
+</code></pre>
+                            </div>
+                        </li>
+                        <li><p>On Windows:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>cybAgent -s
+</code></pre>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>Start the installation program using one of the following commands:<br>
+                    <ul>
+                        <li><p>On UNIX:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>./PluginInstaller proxy.pak .
+</code></pre>
+                            </div>
+                        </li>
+                        <li><p>On Windows:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>PluginInstaller.exe proxy.pak .
+</code></pre>
+                            </div>
+                        </li>
+                    </ul>
+                    <p>You are prompted to enable the default alias.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> The default alias for CA WA Agent for Remote Execution is
+                        <em>agentname</em>_PROXY.
+                    </div>
+                </li>
+                <li>Enter&nbsp;<strong>Y</strong>&nbsp;to enable the default alias or&nbsp;<strong>N</strong>&nbsp;to
+                    disable it.<br>The installation program displays a message and closes automatically upon a
+                    successful installation.
+                </li>
+                <li>Start the agent using one of the following commands:<br>
+                    <ul>
+                        <li><p>On UNIX:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>./cybAgent &amp;
+</code></pre>
+                            </div>
+                        </li>
+                        <li><p>On Windows:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>cybAgent -a
+</code></pre>
+                            </div>
+                        </li>
+                    </ul>
+                    The agent starts.
+                </li>
+            </ol>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> The installation program backs up all modified and replaced files. The backup
+                files are compressed into a file that is named backup_timestamp.zip, located in the backups subdirectory
+                of the agent installation directory. You can use Winzip or other similar utilities to open the backup
+                file. A backup copy of the agentparm.txt file is stored in the zip file.
+            </div>
+            <h2 id="InstallCAWAAgentforRemoteExecution-InstalltheAgentPlug-inUsingaSilentInstaller">Install the Agent
+                Plug-in Using a Silent Installer</h2>
+            <p>You can install CA WA Agent for Remote Execution using a silent installer to automate the installation.
+                The silent installer requires an input file named silent.txt.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> This procedure assumes that you are not adding an alias. If you require an alias,
+                we recommend that you
+                <a data-macro-name="sp-plaintextbody-link"
+                   href="#InstallCAWAAgentforRemoteExecution-InstalltheAgentPlug-inUsinganInteractiveProgram"
+                   class="conf-macro output-inline" data-hasbody="true">install using an interactive program</a>.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Change to the agent installation directory. For example, type the following command:
+                    <ul>
+                        <li><p>On UNIX:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>cd opt/CA/WA_Agent_R11_3
+</code></pre>
+                            </div>
+                        </li>
+                        <li><p>On Windows:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>cd C:\Program Files\CA\WA Agent R11.3
+</code></pre>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>Stop the agent using one of the following commands:
+                    <ul>
+                        <li><p>On UNIX:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>./cybAgent -s
+</code></pre>
+                            </div>
+                        </li>
+                        <li><p>On Windows:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>cybAgent -s
+</code></pre>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li><p>Run the silent installer using the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><pre>PluginInstaller proxy.pak . <em>path</em>/silent.txt true</pre></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>path</em></strong><br>Specifies the path to the input file, silent.txt. If you
+                            do not specify a path, the silent.txt file must exist in the agent installation directory.
+                        </li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> If you installed the agent plug-in using the interactive program, a
+                        silent.txt file is saved in the
+                        <em>install_dir</em>/config/proxy directory, where
+                        <em>install_dir</em> is the agent installation directory.
+                    </div>
+                    <p>The silent installer overwrites all files that are distributed during installation.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong> If you want to select which files to overwrite during installation,
+                            type the following command:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true"
+                             data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><pre>PluginInstaller proxy.pak . <em>path</em>/silent.txt false</pre></pre>
+                        </div>
+                        <p>Using false in the preceding command runs the silent installer as an interactive program. <a
+                                data-macro-name="sp-plaintextbody-link"
+                                href="#InstallCAWAAgentforRemoteExecution-ModifytheSilentInstallInputFile"
+                                class="conf-macro output-inline" data-hasbody="true">Modify the silent install input
+                            file</a> when you use false; otherwise, the installation aborts.</p>
+                    </div>
+                </li>
+                <li>Start the agent using one of the following commands:
+                    <ul>
+                        <li><p>On UNIX:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>./cybAgent &amp;
+</code></pre>
+                            </div>
+                        </li>
+                        <li><p>On Windows:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>cybAgent -a
+</code></pre>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+            <h3 id="InstallCAWAAgentforRemoteExecution-ModifytheSilentInstallInputFile">Modify the Silent Install Input
+                File</h3>
+            <p>You can modify the silent install input file that is used to automate the installation or create a new
+                file manually.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> Modify the silent install input file when you run the silent installer using
+                    the following command:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true"
+                     data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><pre>PluginInstaller proxy.pak . <em>path</em>/silent.txt false</pre></pre>
+                </div>
+            </div>
+            <p></p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li><p>Open the silent.txt file using a text editor.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> The letter Y on the first line of the file corresponds to the prompt
+                        asking whether CA Workload Automation Agent R11.3, Service Pack 4, Incremental 2 or higher is
+                        installed. The letter N on the second line of the file corresponds to the prompt asking whether
+                        to set up the alias. To simplify the silent installation, we recommend that you leave N.
+                    </div>
+                </li>
+                <li>Add one of the following letters on the third line of the file to indicate how you want to override
+                    files during the installation:
+                    <ul>
+                        <li><strong>Y</strong><br>Overwrites one file.</li>
+                        <li><strong>N</strong><br>Does not overwrite one file.</li>
+                        <li><strong>A</strong><br>Overwrites all files.</li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> For a simple installation, we recommend specifying A which overwrites all
+                        existing files.
+                    </div>
+                </li>
+                <li>Repeat the previous step for each of the remaining files if you specified Y or N in the previous
+                    step. Otherwise, you specified A and all of the remaining files will be overwritten.
+                </li>
+                <li>Save the file.</li>
+            </ol>
+            <p><strong>Example: Modify the Silent Install Input File</strong></p>
+            <p>In this example, the silent.txt file contains the following entries:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>Y
+N
+A
+</code></pre>
+            </div>
+            <p>The following output appears when the silent installer runs using the preceding silent.txt file:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>This version of CA Workload Automation Agent for Remote Execution requires
+CA Workload Automation Agent R11.3, Service Pack 4, Incremental 2 or later.
+To verify the current version of CA Workload Automation Agent, run the following command: cybAgent -v
+Is CA Workload Automation Agent R11.3, Service Pack 4, Incremental 2 or higher installed? (Y/N): Y
+D:\Test\Agent\R11.3&gt;PluginInstaller proxy.pak . silent.txt false
+Do you want to set up the alias? (Y/N): N
+Updating agent configuration file D:\Test\Agent\R11.3\agentparm.txt ...
+Agent configuration file has been updated
+D:\Test\Agent\R11.3\jars\proxy.jar exists. Override(Y/N/A)? A
+Extracting D:\Test\Agent\R11.3\jars\proxy.jar ...
+Extracting D:\Test\Agent\R11.3\jars\proxyjs.jar ...
+Extracting D:\Test\Agent\R11.3\config\proxy\unixssh2.properties ...
+Extracting D:\Test\Agent\R11.3\config\proxy\unixtelnet.properties ...
+Extracting D:\Test\Agent\R11.3\config\proxy\tandemssh2.properties ...
+Extracting D:\Test\Agent\R11.3\config\proxy\tandemtelnet.properties ...
+Extracting D:\Test\Agent\R11.3\config\proxy\openvmsssh2.properties ...
+Extracting D:\Test\Agent\R11.3\config\proxy\openvmstelnet.properties ...
+Extracting D:\Test\Agent\R11.3\config\proxy\CAWA-proxyAgent.license ...
+Extracting D:\Test\Agent\R11.3\jars\ext\sinetfactory.jar ...
+Extracting D:\Test\Agent\R11.3\config\proxy\silent.txt ...
+Extracting D:\Test\Agent\R11.3\config\proxy\sampleUnix.properties ...
+Extracting D:\Test\Agent\R11.3\config\proxy\sampleTandem.properties ...
+Extracting D:\Test\Agent\R11.3\config\proxy\sampleOpenvms.properties ...
+Installer successful. Agent can now be restarted
+</code></pre>
+            </div>
+            <h2 id="InstallCAWAAgentforRemoteExecution-CreateaCustomPropertiesFileforaRemoteSystem">Create a Custom
+                Properties File for a Remote System</h2>
+            <p>Create a unique custom properties file for each remote system you want the agent to connect to. You can
+                use the agent to connect with up to six remote systems.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> The name that you give this file is required in a Remote Execution job definition
+                to identify the remote system where the job runs.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a text file using a text editor.</li>
+                <li>Define the following properties in the text file:
+                    <ul>
+                        <li><strong>host</strong><br>Specifies the IP address or host name of the remote system.</li>
+                        <li><strong>port</strong><br>Specifies the connection port of the remote system.<br><strong>Default:</strong>&nbsp;22
+                            (SSH2 protocol) and 23 (Telnet protocol)
+                        </li>
+                        <li><strong>protocol</strong><br>Specifies the type of protocol that is used for communication
+                            with the remote system. The following protocols are valid:
+                            <ul>
+                                <li>ssh2</li>
+                                <li>telnet</li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong>Note:</strong> This value must be lowercase.
+                            </div>
+                        </li>
+                        <li><strong>type</strong><br>Specifies the name of the platform of the remote system. The
+                            following platforms are valid:
+                            <ul>
+                                <li>tandem</li>
+                                <li>unix</li>
+                                <li>openvms</li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong>Notes:<br></strong>
+                                <ul>
+                                    <li>For Linux systems, specify unix as the type.</li>
+                                    <li>This value must be lowercase.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><p><strong>spoolHome</strong><br>Specifies the default location on the remote system where
+                            the agent stores job spool files.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong>Notes:<br></strong>
+                                <ul>
+                                    <li>The spoolHome directory must be readable and writeable.</li>
+                                    <li>The user who executes the job must have read and write access to the spoolHome
+                                        directory.
+                                    </li>
+                                    <li>The job log resides in the spool directory on the agent computer.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><p><strong>default.user</strong><br>Specifies the default user name to connect to the remote
+                            system. The agent requires the default user name to verify the running job status. The
+                            default user requires the appropriate rights to read and remove files that other users
+                            create such as spool files.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong>Notes:<br></strong>
+                                <ul>
+                                    <li>Verify whether the default user can log in to the remote system without having
+                                        to respond to any messages. If the default user requires responses to messages
+                                        to configure the environment, configure the login task that is specified in the
+                                        <a data-macro-name="sp-plaintextbody-link"
+                                           href="#InstallCAWAAgentforRemoteExecution-SystemProperties"
+                                           class="conf-macro output-inline" data-hasbody="true">system properties
+                                            file</a>. Otherwise, the job will fail.
+                                    </li>
+                                    <li>The agent does not support public key authentication for SSH. Specify a password
+                                        (encrypted) for the default user in the default.password property.
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><p><strong>default.password</strong><br>Specifies the password corresponding to the default
+                            user.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong>Note:</strong> The password must be encrypted. To encrypt a password, use the
+                                Password utility that is provided with the agent.
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>Save the file as<em>&nbsp;target</em>.properties in the config/proxy subdirectory of the agent
+                    installation directory.
+                    <ul>
+                        <li><p><strong><em>target</em></strong><br>Specifies a name for the remote
+                            system.&nbsp;<br><strong>Limits:</strong>&nbsp;Up to 128 characters. You can use
+                            alphanumeric characters plus underscore (_). The first character must be alphabetic.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong>Note:</strong> Users must specify this name in a job definition to run a job on
+                                the remote system.
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+            <p><strong>Example: Creating a Custom Properties File for a Remote UNIX System</strong></p>
+            <p>In this example, the following properties are defined in the custom properties file for a remote system.
+                The agent connects to a UNIX computer, named myunixhost, using Telnet. The agent uses the
+                unixtelnet.properties system properties file for additional information that is required to log in to
+                the remote system.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>host=myunixhost
+port=23
+protocol=telnet
+type=unix
+spoolHome=/export/home/unixuser/spool
+default.user=amusz
+default.password=*****
+</code></pre>
+            </div>
+            <p><strong>Example: Creating a Custom Properties File for a Remote HP Integrity NonStop System</strong></p>
+            <p>In this example, the following properties are defined in the custom properties file for a remote system.
+                The agent connects to an HP Integrity NonStop computer, named tandemhost, using SSH2. The agent uses the
+                tandemssh2.properties system properties file for additional information that is required to log in to
+                the remote system.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>host=tandemhost
+port=22
+protocol=ssh2
+type=tandem
+spoolHome=$DATA1.SPOOL
+default.user=jlin
+default.password=*****
+</code></pre>
+            </div>
+            <p><strong>Example: Creating a Custom Properties File for a Remote OpenVMS System</strong></p>
+            <p>In this example, the following properties are defined in the custom properties file for a remote system.
+                The agent connects to an OpenVMS computer, named openvmshost, using SSH2. The agent uses the
+                openvmsssh2.properties system properties file for additional information that is required to log in to
+                the remote system.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>host=openvmshost
+port=22
+protocol=ssh2
+type=openvms
+default.user=pevbart1
+default.password=B1B85DC9685809B7
+spoolHome=dev$user:[pevbart1.spool]
+</code></pre>
+            </div>
+            <h3 id="InstallCAWAAgentforRemoteExecution-EnableUNIX95BehaviorforRemoteHP-UXSystems">Enable UNIX95 Behavior
+                for Remote HP-UX Systems</h3>
+            <p>To run a Remote Execution job on a remote HP-UX system, the agent requires that the following environment
+                variables are set to enable UNIX95 behavior:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>UNIX95=1
+PS_PERSONALITY=unix95
+</code></pre>
+            </div>
+            <p>To enable UNIX95 behavior, add a login task in the custom properties file for the remote HP-UX
+                system.</p>
+            <p><strong>Example: Enable UNIX95 Behavior Using SSH2</strong></p>
+            <p>The following example enables UNIX95 behavior using SSH2:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>loginTask.1.startPrompt=.*
+loginTask.1.startPromptRegex=true
+loginTask.1.endPrompt=.*
+loginTask.1.endPromptRegex=true
+loginTask.1.command=export UNIX95=1;PS_PERSONALITY=unix95
+</code></pre>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> If you add a login task to set the shell, it must precede this login task. In
+                this example, you would use step number 1 to set the shell and step number 2 to enable UNIX95 behavior.
+            </div>
+            <h2 id="InstallCAWAAgentforRemoteExecution-SystemProperties">System Properties</h2>
+            <p>The agent uses the following properties to communicate with a remote system. You can change these values
+                in the system properties file if most of your remote systems use the same values. If a remote system has
+                unique values for these properties, add the properties to the custom properties file that you created
+                for that remote system to override the default values.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note: </strong>Do
+                <em>not</em> add spaces at the end of the parameters. Verify that each line in your system properties
+                file does not end with whitespace.
+            </div>
+            <ul>
+                <li><strong>completionCode</strong><br>Specifies the code that the agent uses to determine how a process
+                    ended. This property takes one of the following values:<br>
+                    <ul>
+                        <li>completion^procdeath:z^completion^code (specify to capture completion codes using
+                            PROCDEATH)
+                        </li>
+                        <li>COMPLETION:COMPLETIONCODE</li>
+                    </ul>
+                    <p>You can define different completion codes for different users by defining
+                        a&nbsp;<em>username</em>.completionCode in the custom properties file.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note: </strong>This property applies to HP Integrity NonStop systems only. This property
+                        is equivalent to the CompletionCode parameter on the legacy Telnet agent.
+                    </div>
+                </li>
+                <li><strong>endPromptTimeout</strong><br>Specifies the maximum time that is needed, in milliseconds
+                    (ms), to execute a command after a user successfully logs in.<br><strong>Defaults:</strong>
+                    <ul>
+                        <li>UNIX: 20000</li>
+                        <li>HP Integrity NonStop: 200000</li>
+                        <li>OpenVMS: 5000</li>
+                    </ul>
+                </li>
+                <li><p><strong>fileTransfer.template&nbsp;</strong><br>Specifies the format of the response that is
+                    returned by the job command that retrieves the location of the spool file. The spool file resides on
+                    the remote system.<br>The response format must include $PATH, which represents the path to the spool
+                    file. If the fileTransfer.template parameter is not set, the command returns the path to the spool
+                    file without formatting.<br><strong>Example:</strong></p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-plaintextbody-block">
+     <pre class="code-block prettyprint"><code>fileTransfer.template=ftp://ftp.funet.fi:1111$PATH
+</code></pre>
+                    </div>
+                    <p>If the path to the spool file ($PATH) is /tmp/CAWA_spool/STRESS/MAIN/PROXY.1/GAR1.TXT, the
+                        command returns the following format:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-plaintextbody-block">
+     <pre class="code-block prettyprint"><code>ftp://ftp.funet.fi:1111/tmp/CAWA_spool/STRESS/MAIN/PROXY.1/GAR1.TXT
+</code></pre>
+                    </div>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Notes:<br></strong>
+                        <ul>
+                            <li>Before you use FTP or HTTP formatting, set up and verify the FTP or HTTP setup on the
+                                remote system.
+                            </li>
+                            <li>For more information about retrieving the path to the spool file for a Remote Execution
+                                job, see your scheduling manager documentation.
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li><strong>lineTerminator</strong><br>Specifies the line terminator that the system uses to send
+                    commands.<br><strong>Defaults:</strong>
+                    <ul>
+                        <li>UNIX: \n</li>
+                        <li>HP Integrity NonStop: \r\n</li>
+                        <li>OpenVMS: \r\n</li>
+                    </ul>
+                </li>
+                <li><strong>login.endPromptTimeout</strong><br>Specifies the maximum time that is needed, in
+                    milliseconds (ms), to execute every step of the login task before the system issues a timeout
+                    exception.<br><strong>Defaults:</strong>
+                    <ul>
+                        <li>UNIX: 40000</li>
+                        <li>HP Integrity NonStop: 50000</li>
+                        <li>OpenVMS: 5000</li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> This property is equivalent to the WaitFirstSysPrompt parameter on the
+                        legacy Telnet agent.
+                    </div>
+                </li>
+                <li><p><strong>loginTask.<em>n</em>.command</strong><br>Specifies the command that the agent inputs
+                    after it receives a specific prompt, where&nbsp;<em>n</em>&nbsp;is an integer that corresponds to
+                    the login step number. For example, when the agent receives the username prompt, the agent inputs
+                    the user name as the command.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note: </strong>For HP Integrity NonStop, the agent only supports Tandem Advanced Command
+                        Language (TACL) commands.
+                    </div>
+                </li>
+                <li><strong>loginTask.<em>n</em>.endPrompt</strong><br>Specifies the end shell prompt this task should
+                    wait for to indicate that this task is finished, where&nbsp;<em>n</em>&nbsp;is an integer that
+                    corresponds to the login step number.
+                </li>
+                <li><strong>loginTask.<em>n</em>.endPromptRegex</strong><br>Specifies the endPrompt as a regular
+                    expression, where&nbsp;<em>n</em>&nbsp;is an integer that corresponds to the login step number.
+                </li>
+                <li><strong>loginTask.<em>n</em>.lineTerminator</strong><br>Specifies the line terminator that the
+                    system uses to send commands, where&nbsp;<em>n</em>&nbsp;is an integer that corresponds to the login
+                    step number.
+                </li>
+                <li><strong>loginTask.<em>n</em>.startPrompt</strong><br>Specifies the shell prompt that this task
+                    should wait for before executing the command, where&nbsp;<em>n</em>&nbsp;is an integer that
+                    corresponds to the login step number.
+                </li>
+                <li><strong>loginTask.<em>n</em>.startPromptRegex</strong><br>Specifies the startPrompt as a regular
+                    expression, where&nbsp;<em>n</em>&nbsp;is an integer that corresponds to the login step number.
+                </li>
+                <li><strong>pathSeperator</strong><br>Specifies the platform dependant path separator.</li>
+                <li><strong>promptTask.<em>n</em>.command</strong><br>Specifies the command that the agent inputs after
+                    it receives a specific prompt, where&nbsp;<em>n</em>&nbsp;is an integer that corresponds to the
+                    login step number. For example, when the agent receives the username prompt, the agent inputs the
+                    user name as the command.<br><strong>Defaults:</strong>
+                    <ul>
+                        <li>UNIX (for login shell of sh, ksh or bash): PS1='CA_PROMPT '</li>
+                        <li>HP Integrity NonStop: SETPROMPT NONE</li>
+                        <li>OpenVMS: SET PROMPT="CA_PROMPT "</li>
+                    </ul>
+                </li>
+                <li><strong>promptTask.<em>n</em>.endPrompt</strong><br>Specifies the end prompt this task should wait
+                    for to indicate that this task is finished, where&nbsp;<em>n</em>&nbsp;is an integer that
+                    corresponds to the login step number.<br><strong>Defaults:</strong>
+                    <ul>
+                        <li>UNIX: (([^'])CA_PROMPT )|((?m)^CA_PROMPT )</li>
+                        <li>HP Integrity NonStop: &gt;</li>
+                        <li>OpenVMS: CA_PROMPT</li>
+                    </ul>
+                </li>
+                <li><strong>promptTask.<em>n</em>.endPromptRegex</strong><br>Specifies the endPrompt as a regular
+                    expression, where&nbsp;<em>n</em>&nbsp;is an integer that corresponds to the login step
+                    number.<br><strong>Defaults:</strong>
+                    <ul>
+                        <li>UNIX: true</li>
+                        <li>HP Integrity NonStop: false</li>
+                        <li>OpenVMS: false</li>
+                    </ul>
+                </li>
+                <li><strong>promptTask.<em>n</em>.lineTerminator</strong><br>Specifies the line terminator that the
+                    system uses to send commands, where&nbsp;<em>n</em>&nbsp;is an integer that corresponds to the login
+                    step number.<br><strong>Default:</strong>&nbsp;\r\n (HP Integrity NonStop)
+                </li>
+                <li><strong>promptTask.<em>n</em>.startPrompt</strong><br>Specifies the prompt that this task should
+                    wait for before executing the command, where&nbsp;<em>n</em>&nbsp;is an integer that corresponds to
+                    the login step number.<br><strong>Defaults:</strong>
+                    <ul>
+                        <li>UNIX: .*</li>
+                        <li>HP Integrity NonStop: &gt;</li>
+                        <li>OpenVMS: .*</li>
+                    </ul>
+                </li>
+                <li><strong>promptTask.<em>n</em>.startPromptRegex</strong><br>Specifies the startPrompt as a regular
+                    expression, where&nbsp;<em>n</em>&nbsp;is an integer that corresponds to the login step
+                    number.<br><strong>Defaults:</strong>
+                    <ul>
+                        <li>UNIX: true</li>
+                        <li>HP Integrity NonStop: false</li>
+                        <li>OpenVMS: true</li>
+                    </ul>
+                </li>
+            </ul>
+            <p><strong>Example: System Properties for Connecting to a UNIX System Using Telnet</strong></p>
+            <p>This example shows the system properties that are defined in the unixtelnet.properties file for a UNIX
+                system that the agent connects to using Telnet.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> Telnet requires a three-step login.
+            </div>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>lineTerminator=\n
+loginTask.1.startPrompt=ogin:
+loginTask.1.startPromptRegex=false
+loginTask.1.endPrompt=sword:
+loginTask.1.endPromptRegex=false
+loginTask.1.command={user.id}
+loginTask.2.startPrompt=sword:
+loginTask.2.startPromptRegex=false
+loginTask.2.endPrompt=.*
+loginTask.2.endPromptRegex=true
+loginTask.2.command={user.password}
+promptTask.1.startPrompt=.*
+promptTask.1.startPromptRegex=true
+promptTask.1.endPrompt=(([^'])CA_PROMPT )|((?m)^CA_PROMPT )
+promptTask.1.endPromptRegex=true
+promptTask.1.command=PS1='CA_PROMPT '
+login.endPromptTimeout=40000
+endPromptTimeout=20000
+...
+</code></pre>
+            </div>
+            <p><strong>Example: System Properties for Connecting to a UNIX System Using SSH2</strong></p>
+            <p>This example shows the system properties that are defined in the unixssh2.properties file for a UNIX
+                system that the agent connects to using SSH2.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> SSH2 requires a one-step login.
+            </div>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>lineTerminator=\n
+promptTask.1.startPrompt=.*
+promptTask.1.startPromptRegex=true
+promptTask.1.endPrompt=(([^'])CA_PROMPT )|((?m)^CA_PROMPT )
+promptTask.1.endPromptRegex=true
+promptTask.1.command=PS1='CA_PROMPT '
+login.endPromptTimeout=40000
+endPromptTimeout=20000
+...
+</code></pre>
+            </div>
+            <p><strong>Example: System Properties for Connecting to an HP Integrity NonStop System Using Telnet</strong>
+            </p>
+            <p>This example shows the system properties that are defined in the tandemtelnet.properties file for an HP
+                Integrity NonStop system that the agent connects to using Telnet:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>lineTerminator=\r\n
+pathSeperator=.
+loginTask.1.startPrompt=Enter Choice&gt;
+loginTask.1.startPromptRegex=false
+loginTask.1.endPrompt=TACL 1&gt;
+loginTask.1.endPromptRegex=false
+loginTask.1.lineTerminator=\n
+loginTask.1.command=TACL
+loginTask.2.startPrompt=TACL 1&gt;
+loginTask.2.startPromptRegex=false
+loginTask.2.endPrompt=Password:
+loginTask.2.endPromptRegex=false
+loginTask.2.command=logon {user.id}
+loginTask.2.lineTerminator=\r\n
+loginTask.3.startPrompt=Password:
+loginTask.3.startPromptRegex=false
+loginTask.3.endPrompt=&gt;
+loginTask.3.endPromptRegex=false
+loginTask.3.command={user.password}
+loginTask.3.lineTerminator=\r\n
+promptTask.1.startPrompt=&gt;
+promptTask.1.startPromptRegex=false
+promptTask.1.endPrompt=&gt;
+promptTask.1.endPromptRegex=false
+promptTask.1.command=SETPROMPT NONE
+promptTask.1.lineTerminator=\r\n
+login.endPromptTimeout=50000
+endPromptTimeout=200000
+completionCode=_COMPLETION:COMPLETIONCODE
+...
+</code></pre>
+            </div>
+            <p><strong>Example: System Properties for Connecting to an HP Integrity NonStop System Using SSH2</strong>
+            </p>
+            <p>This example shows the system properties that are defined in the tandemssh2.properties file for an HP
+                Integrity NonStop system that the agent connects to using SSH2:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>lineTerminator=\r\n
+pathSeperator=.
+promptTask.1.startPrompt=&gt;
+promptTask.1.startPromptRegex=false
+promptTask.1.endPrompt=&gt;
+promptTask.1.endPromptRegex=false
+promptTask.1.command=SETPROMPT NONE
+promptTask.1.lineTerminator=\r\n
+login.endPromptTimeout=50000
+endPromptTimeout=200000
+completionCode=_COMPLETION:COMPLETIONCODE
+...
+</code></pre>
+            </div>
+            <p><strong>Example: System Properties for Connecting to an OpenVMS System Using Telnet</strong></p>
+            <p>This example shows the system properties that are defined in the openvmstelnet.properties file for an
+                OpenVMS system that the agent connects to using Telnet.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>lineTerminator=\r\n
+pathSeperator=.
+loginTask.1.startPrompt=Username:
+loginTask.1.startPromptRegex=false
+loginTask.1.endPrompt=Password:
+loginTask.1.endPromptRegex=false
+loginTask.1.lineTerminator=\r\n
+loginTask.1.command={user.id}
+loginTask.2.startPrompt=Password:
+loginTask.2.startPromptRegex=false
+loginTask.2.endPrompt=.*
+loginTask.2.endPromptRegex=true
+loginTask.2.command={user.password}
+loginTask.2.lineTerminator=\r\n
+promptTask.1.startPrompt=.*
+promptTask.1.startPromptRegex=true
+promptTask.1.endPrompt=CA_PROMPT
+promptTask.1.endPromptRegex=false
+promptTask.1.command=SET PROMPT="CA_PROMPT "
+login.endPromptTimeout=5000
+endPromptTimeout=5000
+...
+</code></pre>
+            </div>
+            <p><strong>Example: System Properties for Connecting to an OpenVMS System Using SSH2</strong></p>
+            <p>This example shows the system properties that are defined in the openvmsssh2.properties file for an
+                OpenVMS system that the agent connects to using SSH2.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>lineTerminator=\r\n
+pathSeperator=.
+promptTask.1.startPrompt=.*
+promptTask.1.startPromptRegex=true
+promptTask.1.endPrompt=CA_PROMPT
+promptTask.1.endPromptRegex=false
+promptTask.1.command=SET PROMPT="CA_PROMPT "
+login.endPromptTimeout=5000
+endPromptTimeout=5000
+...
+</code></pre>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4 col-lg-4">
+            <p></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

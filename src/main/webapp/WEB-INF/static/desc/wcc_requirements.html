@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p><strong>Contents</strong></p>
+            <p></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H1,H2,H3,H4,H5,H6,H7" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#CAWCCSystemRequirements-CAWCCServer" class="toc-link">CA WCC Server</a></span><ul style=""><li><span class="toc-item-body" data-outline="1.1"><span class="toc-outline">1.1</span><a href="#CAWCCSystemRequirements-HardwareRequirements" class="toc-link">Hardware Requirements</a></span></li><li><span class="toc-item-body" data-outline="1.2"><span class="toc-outline">1.2</span><a href="#CAWCCSystemRequirements-SoftwareRequirements" class="toc-link">Software Requirements</a></span></li><li><span class="toc-item-body" data-outline="1.3"><span class="toc-outline">1.3</span><a href="#CAWCCSystemRequirements-DatabaseRequirements" class="toc-link">Database Requirements</a></span></li></ul></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#CAWCCSystemRequirements-CAWCCClient" class="toc-link">CA WCC Client</a></span><ul style=""><li><span class="toc-item-body" data-outline="2.1"><span class="toc-outline">2.1</span><a href="#CAWCCSystemRequirements-HardwareRequirements.1" class="toc-link">Hardware Requirements</a></span></li><li><span class="toc-item-body" data-outline="2.2"><span class="toc-outline">2.2</span><a href="#CAWCCSystemRequirements-SoftwareRequirements.1" class="toc-link">Software Requirements</a></span></li></ul></li><li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a href="#CAWCCSystemRequirements-CAWorkloadAutomationAEServers" class="toc-link">CA Workload Automation AE Servers</a></span><ul style=""><li><span class="toc-item-body" data-outline="3.1"><span class="toc-outline">3.1</span><a href="#CAWCCSystemRequirements-HardwareRequirements.2" class="toc-link">Hardware Requirements</a></span></li><li><span class="toc-item-body" data-outline="3.2"><span class="toc-outline">3.2</span><a href="#CAWCCSystemRequirements-SoftwareRequirements.2" class="toc-link">Software Requirements</a></span></li></ul></li></ul></div>
+            <p></p>
+            <p>System requirements are provided for the servers in the CA WCC environment.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes: </strong></p>
+                <ul>
+                    <li>For CA Common Components system requirements, see <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/release-notes/ca-common-components-release-notes/ca-common-components-system-requirements" class="conf-macro output-inline" data-hasbody="true">CA Common Components System Requirements</a>. For CA Workload Automation AE system requirements, see <a data-macro-name="sp-plaintextbody-link" href="#" class="unresolved conf-macro output-inline" data-hasbody="true">AE System Requirements</a>.</li>
+                    <li>To check the version of the components and other environmental information after CA WCC is installed, click About, System Information.</li>
+                </ul>
+            </div>
+            <h2 class="heading2" id="CAWCCSystemRequirements-CAWCCServer">CA WCC Server</h2>
+            <p><span>The main CA WCC product is installed on the CA WCC server.</span></p>
+            <p>As the number of users and the number of jobs monitored by CA WCC increases, you may see a performance benefit from adding additional memory and/or additional processing power. Additional processing power can be added either by using a faster CPU or by adding additional CPUs.</p>
+            <h3 class="heading3" id="CAWCCSystemRequirements-HardwareRequirements">Hardware Requirements</h3>
+            <p>Depending on the operating system, specific CA WCC server hardware requirements must be met or exceeded for CA WCC to install and run correctly.</p>
+            <div class="bs-callout bs-callout-warning conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Important!</strong> The following requirements apply to installing CA WCC on the CA WCC server only. Installing CA EEM on the CA WCC server is not recommended; however, if you plan to install other components such as CA EEM or CA Workload Automation AE on the CA WCC server, the RAM and hard disk space requirements for those components must be added to the RAM and hard disk space requirements listed for CA WCC. Additionally, the fastest processor recommended for any single component should be used.
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> The requirements that follow are for a typical enterprise with up to two CA Workload Automation AE instances and up to 15,000 jobs in the database of each CA Workload Automation AE instance.
+            </div>
+            <p>The requirements for a Windows or Linux x86 computer are as follows:</p>
+            <ul>
+                <li>2 GHz or higher processor recommended.</li>
+                <li>Two CPUs minimum, four CPUs recommended for large enterprises.</li>
+                <li>At least 6 GB of RAM; 8 GB recommended.</li>
+                <li>2 GB of hard disk space for the installation, including CA WCC and the required common components.</li>
+            </ul>
+            <p>The requirements for a Solaris computer are as follows:</p>
+            <ul>
+                <li>2 GHz or higher processor recommended.</li>
+                <li>Two CPUs minimum, four CPUs recommended for large enterprises.</li>
+                <li>At least 6 GB of RAM; 8 GB recommended.</li>
+                <li>2 GB of hard disk space for the installation, including CA WCC and the required common components.</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> On UNIX and Linux, the /tmp directory should have a minimum of 500 MB of space available. On Windows, %TEMP% and %TMP% must point to a directory with a minimum of 500 MB of space available.
+            </div>
+            <h3 class="heading3" id="CAWCCSystemRequirements-SoftwareRequirements">Software Requirements</h3>
+            <p>The following software requirements must be met for CA WCC to run correctly:</p>
+            <ul>
+                <li>Common component CA EEM must be installed and running before you install CA WCC. CA EEM is typically installed on a dedicated server. Common components are installed using the CA Common Components DVD.</li>
+                <li>Adobe Flash Player version 8 or higher must be installed to display graphics in the Monitoring view summary and reports.</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>CA WCC can communicate with CA EEM running in FIPS or non-FIPS mode.</li>
+                    <li>CA WCC 11.4 SP5 supports all common components that are installed using the CA Common Components DVD that is distributed with the CA Workload Automation AE Release 11.3.6 SP6 media. For information about the common components, see <a data-macro-name="sp-plaintextbody-link" href="#" class="unresolved conf-macro output-inline" data-hasbody="true">CA Common Components Release Information</a><em>.</em></li>
+                    <li>On Linux with kernel version 2.4, CA EEM and other common components cannot be upgraded, In this case, CA EEM and other common components must be installed on a clean computer with Linux kernel version 2.6. CA EEM policies can then be migrated to the new CA EEM installation.</li>
+                </ul>
+            </div>
+            <p>The following required software is automatically installed with CA WCC:</p>
+            <ul>
+                <li>Apache™ Tomcat 8.5.11</li>
+                <li>(Solaris) Java Runtime Environment (JRE):<br>
+                    <ul>
+                        <li>64-bit --&nbsp;1.8.0_121</li>
+                        <li><p>32-bit -- 1.7.0_131</p></li>
+                    </ul></li>
+                <li><p>(Windows and Linux) Java Runtime Environment (JRE):</p>
+                    <ul>
+                        <li>64-bit -- 1.8.0_121</li>
+                        <li><p>32-bit -- 1.8.0_121</p></li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong><strong>Note: </strong></strong>
+                        <span style="line-height: 1.4285715;">This is installed as a private JRE and is used by the CA WCC Servlet engines.</span>
+                    </div> </li>
+            </ul>
+            <h3 class="heading3" id="CAWCCSystemRequirements-DatabaseRequirements">Database Requirements</h3>
+            <p><span>The Configuration, Forecast, and Monitoring applications require a database, known as the CA WCC database. The Reporting application also requires a database, known as the Reporting database. An internal Derby database is provided that can be used by all CA WCC applications. Otherwise, you can use a supported database to which CA WCC has access.&nbsp;</span></p>
+            <h2 class="heading2" id="CAWCCSystemRequirements-CAWCCClient">CA WCC Client</h2>
+            <p>You can access CA WCC remotely.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> Access to CA WCC is available only to users created in or referenced by CA EEM.
+            </div>
+            <h3 class="heading3" id="CAWCCSystemRequirements-HardwareRequirements.1">Hardware Requirements</h3>
+            <p>The following client hardware requirements must be met or exceeded for CA WCC to run correctly on a Windows x86 computer:</p>
+            <ul>
+                <li>1 GB or more recommended.</li>
+                <li>1 GHz processor; 2 GHz or more recommended.</li>
+                <li>Minimum screen resolution of 1024 x 768.</li>
+            </ul>
+            <h3 class="heading3" id="CAWCCSystemRequirements-SoftwareRequirements.1">Software Requirements</h3>
+            <p>The following software requirement must be met for CA WCC to run correctly:</p>
+            <ul>
+                <li>Adobe Flash Player version 8 or above must be installed to display graphics in the Monitoring view summary and reports.</li>
+            </ul>
+            <p>CA WCC is certified on the following web browsers and versions:</p>
+            <ul>
+                <li>Google Chrome&nbsp;53 and 57</li>
+                <li>Mozilla Firefox 49 and 53</li>
+                <li>Safari 10.0 and 10.1</li>
+                <li>Microsoft Edge 38.14393.1066.0</li>
+                <li><p>Microsoft Internet Explorer 11.0</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong></p>
+                        <p>We recommend Google Chrome, Mozilla Firefox, and Safari browsers for better results.<br>In Safari, y<span style="line-height: 1.4285715;">ou must turn off the&nbsp;pop-up blocking function in Safari &gt; Preferences &gt; Security &gt; Web content - uncheck "Block pop-up window"<br></span>For more information on Browser Issues, see <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/release-notes/wcc-release-notes/ca-wcc-known-issues" class="conf-macro output-inline" data-hasbody="true">Known Issues</a>.</p>
+                    </div> </li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> TLS 1.2 secure connection protocol needs to be enabled in the web browser.
+            </div>
+            <h2 class="heading2" id="CAWCCSystemRequirements-CAWorkloadAutomationAEServers">CA Workload Automation AE Servers</h2>
+            <p>CA WCC Release 11.4 SP5 supports CA Workload Automation AE Release 11.3 SP1, Release 11.3.5, Release 11.3.6, Release 11.3.6 SP1, Release 11.3.6 SP2, Release 11.3.6 SP3, Release 11.3.6 SP4, Release 11.3.6 SP5, and Release 11.3.6 SP6 servers.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> Certain job types are supported only by CA Workload Automation AE Release 11.3.5, Release 11.3.6, Release 11.3.6 SP2, Release 11.3.6 SP3, Release 11.3.6 SP4, Release 11.3.6 SP5, and Release 11.3.6 SP6.
+            </div>
+            <h3 class="heading3" id="CAWCCSystemRequirements-HardwareRequirements.2">Hardware Requirements</h3>
+            <p>For CA Workload Automation AE hardware requirements, see the <em><a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/release-notes/ae-release-notes" class="conf-macro output-inline" data-hasbody="true">CA Workload Automation AE Release Notes</a></em>.</p>
+            <h3 class="heading3" id="CAWCCSystemRequirements-SoftwareRequirements.2">Software Requirements</h3>
+            <p>The following are CA WCC requirements for CA Workload Automation AE servers:</p>
+            <ul>
+                <li><p>If CA EEM without failover is implemented with CA Workload Automation AE, the CA Workload Automation AE servers and the CA WCC servers must reference the same instance of CA EEM. If CA EEM with failover is implemented with CA Workload Automation AE, the CA Workload Automation AE servers and the CA WCC servers do not need to reference the same instance of CA EEM; however, the CA EEM instances referenced must be in the same failover setup.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> For information about configuring CA EEM for failover, see the
+                        <em>CA Embedded Entitlements Manager Getting Started</em>, available from CA Support Online.
+                    </div> </li>
+                <li>If cross-platform scheduling is enabled on the CA Workload Automation AE server, CAICCI must be installed on the CA Workload Automation AE server. CAICCI is a common component, installed using the CA Common Components DVD.</li>
+                <li>To enable CA WCC Enterprise Command Line and Forecast functionality with CA Workload Automation AE, you must install the Command Sponsor (also referred to as WCC Command Sponsor) using the CA Workload Automation AE DVD. On Linux, the Command Sponsor supports kernel version 2.6 only.</li>
+                <li>On Linux with kernel version 2.4, CA EEM, other common components, and the Command Sponsor cannot be upgraded, In this case, CA EEM, other common components, and the Command Sponsor must be installed on a clean computer with Linux kernel version 2.6. CA EEM policies can then be migrated to the new CA EEM installation. For information about migrating CA EEM policies, see the <a data-macro-name="sp-richtextbody-link" href="/ca-workload-automation-ae/11-4-2/en/securing" class="conf-macro output-inline" data-hasbody="true"><em>CA Workload Automation Security</em></a>.</li>
+            </ul>
+            <p class="heading2">For information on compatibility with CA EEM, see <a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/release-notes/ae-release-notes/ae-support-for-other-ca-technologies-products/ca-workload-automation-ae-ca-wcc-and-ca-eem-compatibility" class="conf-macro output-inline" data-hasbody="false">CA Workload Automation AE, CA WCC, and CA EEM Compatibility</a>.</p>
+            <p></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

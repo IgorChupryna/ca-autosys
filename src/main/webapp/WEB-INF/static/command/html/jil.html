@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The jil command is a client component utility that runs the Job Information Language (JIL) processor.</p>
+                <p>One advantage of using jil is that you can use available UNIX tools for file manipulation to create and control CA Workload Automation AE job definitions. For example, when you run the same command on every workstation, you can create a “generic” JIL template (text file), and copy it for each machine, changing only the machine attribute of the job. You can also iteratively copy the template to a temporary file, replace the machine name, and redirect the temporary file into the jil definition.</p>
+                <p>You can use the jil command in two ways:</p>
+                <ul>
+                    <li>Redirect a JIL script file to the jil command. This method lets you automate the maintenance of object definitions in the database. A JIL script file contains one or more subcommands (such as insert_job).</li>
+                    <li>Issue the jil command only and enter JIL subcommands at the prompts. This method lets you interactively maintain object definitions in the database. To exit interactive mode, enter “exit” at the prompt, or press Ctrl+D (UNIX only).</li>
+                </ul>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>jil&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-q]&nbsp;[-S&nbsp;<em>autoserv_instance</em>]&nbsp;[-V&nbsp;{none&nbsp;|&nbsp;job&nbsp;|&nbsp;<u>session</u>|&nbsp;batch|&nbsp;syntax}][{-usr&nbsp;<em>username&nbsp;</em>{-pw|pwx}&nbsp;<em>password</em>|-saml&nbsp;<em>auth_artifact</em>}]</p><p>&nbsp;&nbsp;&nbsp;[-x]&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><strong>-q</strong><br>(Optional) Runs the command in “quiet” mode so that it only outputs error messages. This is useful when entering many&nbsp;jobs, so that you can easily see errors.<br><strong>Default:</strong>&nbsp;Output error messages and status messages that indicate the success or failure of the JIL subcommands. This information is useful and should typically be allowed to print.</li>
+                    <li><strong>-S&nbsp;<em>autoserv_instance</em></strong><br>(Optional) Defines the three-character identifier of the CA Workload Automation AE instance on which the job or global variable resides (for example, ACE).<br><strong>Default:</strong>&nbsp;If you do not specify the instance name, the command uses the value of the AUTOSERV environment variable.</li>
+                    <li><strong>-V {none | job |&nbsp;<u>session</u>| batch| syntax}</strong><br>(Optional) Specifies which job dependency information that the JIL processor verifies.<br><strong>none</strong><br>Specifies that the JIL processor performs no job dependency verification.<br><strong>job</strong><br>Specifies that the JIL processor verifies job dependencies on a job-by-job basis when the jobs are submitted to the database.<br><strong>batch</strong><br>Specifies that the JIL processor verifies job dependencies in the database after the JIL file is entirely processed.<br><strong><u>session</u></strong><br>Specifies that the JIL processor verifies job dependencies for the jobs created in this session. This is the default.<br><strong>syntax</strong><br>Verifies the validity of the job definition without verifying job dependencies or writing the job definitions to the database.</li>
+                </ul>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <p><strong><strong>Notes:</strong>&nbsp;</strong></p>
+                    <ul>
+                        <li><p>When you set -V to job or batch, unsatisfied job dependencies (that is, jobs that are specified in the conditions that do not exist in the CA Workload Automation AE database) are reported to standard output. The output resembles the following:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <pre class="ca-code"><p>________________________________________________________</p><p>Insert/Updating&nbsp;Job:&nbsp;JobA</p><p>***&nbsp;WARNING:&nbsp;The&nbsp;Following&nbsp;Jobs&nbsp;are&nbsp;referenced&nbsp;in&nbsp;the&nbsp;***</p><p>Conditions&nbsp;for&nbsp;this&nbsp;Job,&nbsp;YET&nbsp;are&nbsp;not&nbsp;defined!</p><p>1)&nbsp;JobC</p><p>Database&nbsp;Change&nbsp;WAS&nbsp;Successful!</p><p>________________________________________________________</p></pre>
+                            </div></li>
+                    </ul>
+                    <ul>
+                        <li>The portion of a condition statement that includes job dependencies on undefined jobs evaluates to FALSE for all conditions except not running. For example, if JobA has the condition "<strong>success(JobB) and success(JobC)</strong>", and JobC is not defined in the database, the condition evaluates to FALSE. If JobA depends on "<strong>not running(jobC)</strong>", the condition evaluates to TRUE.<br><strong>Default:</strong> If you do not define the -V option, the JIL processor verifies job dependencies on a session basis when the jobs are submitted to the database</li>
+                    </ul>
+                </div>
+                <ul>
+                    <li>
+                        <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                            <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                            <p>(Optional) Specifies external security credentials as follows:</p>
+                            <ul>
+                                <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                                <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                    </div> </li>
+                                <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Notes: </strong></p>
+                                <ul>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                        <ul>
+                                            <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                            <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                            <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                        </ul></li>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                    <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                        <ul>
+                                            <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                            <li>CA Workload Automation AE is operating in native security mode.</li>
+                                        </ul></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                    <li><p>-x<br>(Optional) Returns the command version information to standard output.</p></li>
+                    <li><p>-?<br>(Optional) Displays help for the command.</p></li>
+                </ul>
+                <p><strong>Example: Redirect a File to jil</strong></p>
+                <p>This example redirects a text file that is named job1 containing JIL statements into the jil definition:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>jil&nbsp;&lt;&nbsp;job1</p></pre>
+                </div>
+                <p><strong>Example: Redirect a File to jil Without Verifying Job Dependencies</strong></p>
+                <p>This example redirects a text file that is named job1 containing JIL statements into jil and prohibits the JIL processor from verifying the existence of jobs specified in its job dependencies:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>jil&nbsp;&lt;&nbsp;job1&nbsp;-V&nbsp;none</p></pre>
+                </div>
+                <h2 class="heading2" id="jilCommand--RuntheJobInformationLanguageProcessor-JILSyntaxRules">JIL Syntax Rules</h2>
+                <p>You must follow these rules when using JIL subcommands in a script file or at the command line:</p>
+                <ul>
+                    <li><p>Subcommands have the following format:<br><strong><em>sub_command</em>:<em>object_name</em></strong><br><em>sub_command</em><br>Specifies one of the following JIL subcommands:</p>
+                        <ul>
+                            <li><p>delete_blob</p></li>
+                            <li><p>delete_box</p></li>
+                            <li><p>delete_glob</p></li>
+                            <li><p>delete_job</p></li>
+                            <li><p>delete_job_type</p></li>
+                            <li><p>delete_machine</p></li>
+                            <li><p>delete_monbro</p></li>
+                            <li><p>delete_resource</p></li>
+                            <li><p>delete_xinst</p></li>
+                            <li><p>insert_blob</p></li>
+                            <li><p>insert_glob</p></li>
+                            <li><p>insert_job</p></li>
+                            <li><p>insert_job_type</p></li>
+                            <li><p>insert_machine</p></li>
+                            <li><p>insert_monbro</p></li>
+                            <li><p>insert_resource</p></li>
+                            <li><p>insert_xinst</p></li>
+                            <li><p>override_job</p></li>
+                            <li><p>update_job</p></li>
+                            <li><p>update_job_type</p></li>
+                            <li><p>update_monbro</p></li>
+                            <li><p>update_resource</p></li>
+                            <li><p>update_xinst</p></li>
+                        </ul><p><em>object_name</em><br><span>Indicates the user-specified name of the object to create, update, delete, or override.</span></p></li>
+                    <li><p>Follow each subcommand with its corresponding attribute statements, if applicable. Attribute statements can occur in any order, and are applied to the job specified in the preceding subcommand. A subsequent subcommand begins a new set of attributes for a different job.</p><p>Attribute statements have the following format:<br><em><strong>attribute_keyword</strong></em><strong>:</strong><em><strong>value<br></strong></em><em>attribute_keyword<br></em><span>Specifies a valid JIL attribute.<br></span><em>value<br></em><span>Defines the setting to apply to the attribute.</span></p></li>
+                    <li><p>You can enter multiple attribute statements on the same line.</p></li>
+                    <li><p>You must separate each attribute statement with at least one space.</p></li>
+                    <li><p>You must define a box job before you can put jobs in it.</p></li>
+                    <li><p>You must define a machine to the database before you can define a job to run on it.</p></li>
+                    <li><p>When defining a virtual machine or pool, you must first define all machines that it contains.</p></li>
+                    <li><p>Legal value settings can include uppercase and lowercase letters, numbers, colons (if the colon is escaped as explained in the next rule), underscores (_), and @.</p></li>
+                    <li><p>Because JIL parses subcommands based on the keyword/colon combination, you must properly escape colons that are used in an attribute statement’s value with quotation marks (") or a backslash (\). For example, to specify the time to start a job, specify “10:00” or 10\:00.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Windows Note:</strong> When specifying drive letters in job definitions, you must escape the colon with quotation marks or backslashes. For example, C\:\tmp or "C:\tmp" is valid; C:\tmp is not.
+                        </div> </li>
+                    <li><p>Characters within quoted strings are not interpreted. All characters within quotes are considered as part of the string. The string will not be scanned to interpret characters that might represent something else, such as a comment.</p><p>For example:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>description: "This description /* includes special characters */"</p><p>command: grep “/* begin */” $HOME/*.log</p></pre>
+                        </div></li>
+                    <li><p>Comments in a JIL script file are interpreted using the following rules:</p>
+                        <ul>
+                            <li><p>To comment an entire line, insert a pound sign (#) as the first non-blank character on a line.</p></li>
+                            <li><p>A forward slash immediately followed by an asterisk (/*) can be used to mark the start of a comment. This must be preceded by a blank or must be the first non-blank character on the line. The end of the comment is identified by an asterisk immediately followed by a forward slash (*/). This must be immediately followed by a blank, except when it ends a line. There must be a corresponding end of the comment (*/) delimiter for each start of the comment (/*) delimiter.<br>This comment format syntax might&nbsp;span multiple lines. Following are a few examples:&nbsp;</p>
+                                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <pre class="ca-code"><p>/* this is a comment */<br>insert_job: job1<br>command: ls “/*” /* argument must be delimited in quotes so not to be interpreted as a comment */<br>machine: localhost</p><p><br>insert_job: job2<br>command: sleep 5 /* sleep a while */<br>machine: localhost</p><p><br>insert_job: job3<br>/* application: accounting<br>box_name: master<br>*/<br>command: echo “application and box are commented out”<br>machine: localhost</p><p><br>insert_job: job4<br>command: rm $HOME/test/* /* delete files in my test directory */<br>machine: localhost</p></pre>
+                                </div></li>
+                        </ul></li>
+                </ul>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

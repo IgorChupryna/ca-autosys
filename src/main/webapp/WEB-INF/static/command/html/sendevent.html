@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wikitext">
+
+        <vspace><h3>Autosys Commands - <span style="color: blue;"> sendevent</span></h3>
+            <vspace><p>Sendevents to AutoSys for a variety of purposes, including starting or stopping AutoSys jobs, stopping the Event processor, and putting a job on hold. This command is also used to set AutoSys global variables or cancel a scheduled event.
+            </p>
+                <vspace><p></p><pre class="escaped">
+Unicenter AutoSys JM Sendevent Utility
+&lt;:vspace&gt;
+USAGE: sendevent -E EVENT [-S AUTOSERV] [-A Alarm] [-J JobName]
+                 [-B GroupName] [-I ApplicationName]
+                 [-s Status] [-P Event Priority] [-M Max Send Trys ]
+                 [-q Job Queue Priority] [-G Global=Value] [-C Comment]
+                 [-U (Un-SENDEVENT)] [-T Time of Event] [-K Signal(s)]
+                 [-N Machine] [-x] [-?]
+&lt;:vspace&gt;
+WHERE: -E Event
+       -A Alarm
+       -J JobName
+       -B GroupName
+       -I ApplicationName
+       -s Status
+       -S AUTOSERV           AutoSys instance name
+       -P Event Priority     Assigns a priority to the event
+       -M Max Send Trys      Number of attempts to be made to send event
+                             in case of failure
+       -q Job Queue Priority Assigns new queue priority to the job
+       -G Global=Value       Sets value to the global variable
+       -C Comment            Sends a comment ( Can be alphanumeric and
+                             should not exceed 255 characters)
+       -U (Un-SENDEVENT)     Cancels the last event specified by -E event
+       -T Time of Event      Processes the event on specified date and time
+                             in "MM/dd/[yy]yy hh:mm" format
+       -K Signal(s)          Sends a signal to a running Job
+       -N Machine            Real Machine name to send MACH_OFFLINE and
+                             MACH_ONLINE events
+       -x                    Returns version information
+       -?                    Help
+&lt;:vspace&gt;
+NOTE: 1. Event [-E] is required.
+      2. [-s status] should be used with -E CHANGE_STATUS
+      3. [-G Global=value] should be used with -E SET_GLOBAL
+      4. If both [-B GroupName] and [-I ApplicationName]
+         attributes are specified  this is treated as an AND condition
+      5. [-J JobName] and [-B GroupName or -I ApplicationName] are
+         mutually exclusive.
+</pre>
+                    ----
+                    Event
+                    <p></p>
+                    <vspace><p>The following list contains all available event names in alphabetical order: </p><pre class="escaped">
+    ALARM                  CHANGE_PRIORITY        CHANGE_STATUS
+    CHECK_HEARTBEAT        CHK_BOX_TERM           CHK_MAX_ALARM
+    CHK_N_START            CHK_RUN_WINDOW         COMMENT
+    DELETEJOB              EXTERNAL_DEPENDENCY    FORCE_STARTJOB
+    HEARTBEAT              JOB_OFF_HOLD           JOB_OFF_ICE
+    JOB_ON_HOLD            JOB_ON_ICE             KILLJOB
+    QUE_RECOVERY           REFRESH_BROKER         RESEND_EXTERNAL_STATUS
+    SEND_SIGNAL            SET_GLOBAL             STARTJOB
+</pre>
+                        <p></p>
+                        <vspace><p>Status
+                        </p>
+                            <vspace><p>The job status when the event is CHANGE_STATUS. The following list contains all possible states for the CHANGE_STATUS event in alphabetical order: </p><pre class="escaped">
+    ACTIVATED              FAILURE                INACTIVE
+    ON_HOLD                ON_ICE                 QUE_WAIT
+    REFRESH_DEPENDENCIES   REFRESH_FILEWATCHER    RESTART
+    RUNNING                STARTING               SUCCESS
+    TERMINATED
+</pre>
+                                <p></p>
+                                <vspace><p>----
+                                </p><h3>Examples</h3>
+                                    <vspace><p>Set Global Dates
+                                    </p>
+                                        <vspace><p>
+                                          <pre class="escaped"> sendevent -E SET_GLOBAL -G "DATEA=`date +%Y-%m-%d`" </pre>
+                                          <pre class="escaped"> sendevent -E SET_GLOBAL -G "DATEB=`date +%Y%m%d`" </pre>
+                                          <pre class="escaped"> sendevent -E SET_GLOBAL -G "DATEF=`date +%Y%m`" </pre>
+                                          <pre class="escaped"> sendevent -E SET_GLOBAL -G "DATEM=`date +%Y-%m-01`" </pre>
+                                          <pre class="escaped"> sendevent -E SET_GLOBAL -G "DATEN=`date -d '1 month ago' +%Y-%m-01`" </pre>
+                                          <pre class="escaped"> sendevent -E SET_GLOBAL -G "DATEP=`date -d '1 day ago' +%Y%m%d`" </pre>
+                                        </p>
+                                            <vspace><p> Set Globals in TGQA </p><pre class="escaped">
+sendevent -E SET_GLOBAL -G "APIINBOX=/CISSupport/tgqa/interfaces/inbox"
+sendevent -E SET_GLOBAL -G "APIOUTBOX=/CISSupport/tgqa/interfaces/outbox"
+sendevent -E SET_GLOBAL -G "AUTOBACKUP=/export/home/autosys/AUTOSYS/backup"
+sendevent -E SET_GLOBAL -G "CISFTPSOURCE=/CISSupport/tg/ftp/tgqa/source"
+sendevent -E SET_GLOBAL -G "CISLOGS=/CISSupport/tgqa/logs"
+sendevent -E SET_GLOBAL -G "DATEB=`/usr/local/bin/date +%Y%m%d`"
+sendevent -E SET_GLOBAL -G "DATEC=`/usr/local/bin/date +%y%m%d`"
+sendevent -E SET_GLOBAL -G "DATED=`/usr/local/bin/date +%m%d%Y`"
+sendevent -E SET_GLOBAL -G "KM2_STARTDATE=2009-01-25"
+sendevent -E SET_GLOBAL -G "MRIBCG_READDATE=2009-01-07"
+sendevent -E SET_GLOBAL -G "MRIBCH_READDATE=2009-01-07"
+</pre>
+                                                <p></p>
+                                                <vspace><p> Check Global Variable
+                                                </p>
+                                                    <vspace><p>
+                                                        <pre class="escaped"> autostatus -G DATEA </pre>
+                                                      <pre class="escaped"> autostatus -G DATEB </pre>
+                                                      <pre class="escaped"> autostatus -G DATEC </pre>
+                                                      <pre class="escaped"> autostatus -G DATEP </pre>
+                                                    </p>
+                                                        <vspace><p>Start Box jobs
+                                                        </p>
+                                                            <vspace><p> <pre class="escaped"> sendevent -E FORCE_STARTJOB -J box_TG_archive </pre>
+                                                              <pre class="escaped"> sendevent -E FORCE_STARTJOB -J box_TG_set_environment </pre>
+                                                              <pre class="escaped"> sendevent -E FORCE_STARTJOB -J box_TG_load_MREBCG </pre>
+                                                              <pre class="escaped"> sendevent -E FORCE_STARTJOB -J box_TG_load_MREBCH </pre>
+                                                            </p>
+                                                                <vspace><p> Start Single jobs
+                                                                </p>
+                                                                    <vspace><p> <pre class="escaped"> sendevent -E FORCE_STARTJOB -J job_TG_business_days </pre>
+                                                                      <pre class="escaped"> sendevent -E FORCE_STARTJOB -J job_TG_davox_complaints </pre>
+                                                                      <pre class="escaped"> sendevent -E FORCE_STARTJOB -J job_TG_work_management </pre>
+                                                                      <pre class="escaped"> sendevent -E FORCE_STARTJOB -J job_TG_work_management_fieldwork </pre>
+
+                                                                    </p>
+                                                                        <vspace><p>Change Status
+                                                                          <pre class="escaped"> sendevent -E CHANGE_STATUS -s SUCCESS -J fw_TG_WeeklyUnfunded </pre>
+                                                                        </p>
+                                                                      </vspace></vspace></vspace></vspace></vspace></vspace></vspace></vspace></vspace></vspace></vspace></vspace></vspace></vspace></vspace></vspace></vspace></vspace></div>
+</body>
+</html>

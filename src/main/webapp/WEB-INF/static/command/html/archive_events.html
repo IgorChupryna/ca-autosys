@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The archive_events command is a scheduler component utility that archives data from the CA Workload Automation AE database. It removes data that is older than the specified number of days from the CA Workload Automation AE ujo_proc_event, ujo_job_runs, ujo_audit_info, ujo_chkpnt_rstart, ujo_audit_msg, ujo_alarm, ujo_event2, and ujo_extended_jobrun_info tables and archives it to a flat file. Use archive_events to prevent the database from becoming full.</p>
+                <p>In dual event server mode, the data is archived from both the event servers simultaneously. If information from these tables is not regularly purged from the database, the database can fill up, stopping all processing. We recommend that you run archive_events during the database maintenance cycle.</p>
+                <p>The DBMaint script, which runs daily by default, runs archive_events as a part of its process.</p>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>archive_events&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-A]&nbsp;[-B&nbsp;<em>batch_size</em>]&nbsp;[-C&nbsp;<em>delimiter</em>][-d&nbsp;<em>directory_name</em>]&nbsp;[-D&nbsp;{<em>data_server:database</em>|<em>TNSname}</em>]&nbsp;[-j&nbsp;{<em>num_days</em>|-l&nbsp;<em>num_days</em>|-n&nbsp;<em>num_days</em>|-r&nbsp;<em>num_days}</em>]&nbsp;[{-usr&nbsp;<em>username&nbsp;</em>{-pw|pwx}&nbsp;<em>password</em>|-saml&nbsp;<em>auth_artifact</em>}]</p><p>&nbsp;&nbsp;&nbsp;[-x]</p><p>&nbsp;&nbsp;&nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-A<br></strong>(Optional) Deletes the information after archiving it to a file. If you omit the -A argument, the information is deleted without archiving.<strong>&nbsp;</strong></p></li>
+                    <li><p><strong>-B&nbsp;<em>batch_size<br></em></strong>(Optional) Defines the number of events to archive at a time.<br><strong>Limits:</strong>&nbsp;1-50000<br><strong>Default:</strong>&nbsp;1000</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Notes:</strong>
+                            <ul>
+                                <li>Use the default value unless the database is full and the transaction log is likely to become full if 1000 events are archived at once. Because the database transaction file records each transaction (in this case, the deletion of a single event), and the transaction file shares file space with the actual data, only archive a few events at a time when the amount of available file space is low. If there is ample space in the transaction log file, a larger value can be specified to reduce the archival time.</li>
+                            </ul>
+                            <ul>
+                                <li>If you do not maintain low or optimum job load, the transaction log fills up and the transactions are suspended. In dual event server mode, &lt;UAJM&gt; rolls over to single event server mode if the database transaction log in the primary event server is full.</li>
+                            </ul>
+                        </div> </li>
+                    <li><p><strong>-C&nbsp;<em>delimiter<br></em></strong>(Optional) Defines a character to use as a delimiter for columns in output archive files.<br><strong>Default:</strong>&nbsp;Comma (<strong>,</strong>)<br><strong>Limits:</strong>&nbsp;This value must be one character.</p></li>
+                    <li><p><strong>-d&nbsp;<em>directory_name<br></em></strong>(Optional) Defines the directory in which to store archived data. If you omit this parameter, the product archives data to the default directory ($AUTOUSER/archive for UNIX, or %AUTOUSER%\archive for Windows).</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note:</strong> This option is only valid when you also specify the -A option</p>
+                        </div> </li>
+                    <li><p><strong>-D&nbsp;<em>data_server:database|TNSname</em></strong></p><p>(Optional) Specifies the data source from which to archive events.</p>
+                        <ul>
+                            <li><strong><em>data_server:database</em></strong><br>Specifies the Sybase data server and database from which to archive events.</li>
+                            <li><strong><em>TNSname</em></strong><br>Specifies the TNS alias of the Oracle data server from which to archive events.</li>
+                        </ul></li>
+                    <li><p><strong>-j&nbsp;<em>num_days<br></em></strong>(Optional) Deletes job runs information that is older than the&nbsp;<em>num_days</em>&nbsp;value from the ujo_job_runs table. The<em>&nbsp;num_days</em>&nbsp;value indicates the number of days to leave information about job runs in the database. When a row in the table exceeds this value, the row is deleted.</p></li>
+                    <li><p><strong>-l&nbsp;<em>num_days<br></em></strong>(Optional) Deletes audit information older than the&nbsp;<em>num_days</em>&nbsp;value from the ujo_audit_info and ujo_audit_msg tables. The&nbsp;<em>num_days</em>&nbsp;value indicates the number of days to leave audit information in the database. When a row in the table exceeds this value, the row is deleted.</p></li>
+                    <li><strong>-m num</strong>_<strong>days</strong><br>(Optional)&nbsp;Deletes machine information older than the&nbsp;<em>num_days</em>&nbsp;value from the ujo_machine table. The&nbsp;<em>num_days</em>&nbsp;value indicates the number of days to leave machine information in the database. When a row in the table exceeds this value, the row is deleted.</li>
+                    <li><p><strong>-n&nbsp;<em>num_days<br></em></strong>(Optional) Deletes events and alarms information older than the&nbsp;<em>num_days</em>&nbsp;value from the ujo_proc_event and ujo_alarm tables. The<em>&nbsp;num_days</em>&nbsp;value indicates the number of days to leave events and their associated alarms in the database. When a row in the table exceeds this value, the row is deleted.</p></li>
+                    <li><p><strong>-r&nbsp;<em>num_days<br></em></strong>(Optional) Deletes checkpoint information older than the&nbsp;<em>num_days</em>&nbsp;value from the ujo_chkpnt_rstart table. The<em>&nbsp;num_days&nbsp;</em>value indicates the number of days to leave information about checkpoints in the database. When a row in the table exceeds this value, the row is deleted.</p></li>
+                </ul>
+                <ul>
+                    <li><p><strong><br></strong></p>
+                        <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                            <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                            <p>(Optional) Specifies external security credentials as follows:</p>
+                            <ul>
+                                <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                                <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                    </div> </li>
+                                <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Notes: </strong></p>
+                                <ul>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                        <ul>
+                                            <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                            <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                            <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                        </ul></li>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                    <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                        <ul>
+                                            <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                            <li>CA Workload Automation AE is operating in native security mode.</li>
+                                        </ul></li>
+                                </ul>
+                            </div>
+                        </div><p><strong><br></strong></p></li>
+                    <li><p><strong>-x<br></strong>(Optional) Returns the command version information to standard output.</p></li>
+                    <li><p><strong>-?<br></strong>(Optional) Displays help for the command.<strong>&nbsp;</strong></p></li>
+                </ul>
+                <p><strong>Example: Copy Events Older than Five Days</strong></p>
+                <p>This example copies all events older than five days from the ujo_proc_event table to the default archive file and deletes them from the database.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>archive_events&nbsp;-A&nbsp;-n&nbsp;5</p></pre>
+                </div>
+                <p><strong>Example: Copy All job_runs Statistics Older than Five Days</strong></p>
+                <p>This example copies all job_runs statistics older than five days to a specified archive directory and deletes them from the database.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>archive_events&nbsp;-A&nbsp;-d&nbsp;\my_archive&nbsp;-j&nbsp;5</p></pre>
+                </div>
+                <h2 class="heading3" id="archive_eventsCommand--ArchiveData-ArchiveFiles">Archive Files</h2>
+                <p>The archive_events command removes data from the following database tables and stores the data in the corresponding flat files:</p>
+                <ul>
+                    <li><p><strong>ujo_audit_info</strong></p><p>The archive_events command archives data from the ujo_audit_info table to the following file:</p>
+                        <ul>
+                            <li>archived_audit.$AUTOSERV.<em>MM</em>.<em>dd</em>.<em>yyyy</em>.<em>hh</em>.<em>mm</em>.<em>ss</em>&nbsp;(UNIX)</li>
+                            <li>archived_audit.%AUTOSERV%.<em>MM</em>.<em>dd</em>.<em>yyyy</em>.<em>hh</em>.<em>mm</em>.<em>ss</em>&nbsp;(Windows)<br><strong><em>MM</em>.<em>dd</em>.<em>yyyy</em>.<em>hh</em>.<em>mm</em>.<em>ss</em>&nbsp;</strong><br>Indicates the month, day, year, hour, minute, and second when the archive was created.</li>
+                        </ul><p>The format of each record in the flat file is as follows:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p><em>audit_info_num,entity,time,type</em></p></pre>
+                        </div><p>For example:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>4324,user@domain,1104868885,J</p></pre>
+                        </div><p>Each audit event occupies one row in the archive. By default, a comma (,) delimits each column.</p></li>
+                    <li><p><strong>ujo_audit_msg</strong></p><p>The archive_events command archives data from the ujo_audit_msg table to the following file:</p>
+                        <ul>
+                            <li>archived_audit_msg.$AUTOSERV.<em>MM</em>.<em>dd</em>.<em>yyyy</em>.<em>hh</em>.<em>mm</em>.<em>ss</em>&nbsp;(UNIX)</li>
+                            <li>archived_audit_msg.%AUTOSERV%.<em>MM</em>.<em>dd</em>.<em>yyyy</em>.<em>hh</em>.<em>mm</em>.<em>ss</em>&nbsp;(Windows)<br><strong><em>MM</em>.<em>dd</em>.<em>yyyy</em>.<em>hh</em>.<em>mm</em>.<em>ss</em>&nbsp;</strong><br>Indicates the month, day, year, hour, minute, and second when the archive was created.</li>
+                        </ul><p>The format of each record in the flat file is as follows:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p><em>audit_info_num,seq_no,attribute,value1</em>+<em>value2,is_edit</em></p></pre>
+                        </div><p>For example:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>103,2,job_type,CMD,N</p></pre>
+                        </div><p>Each event occupies one row in the archive. By default, a comma (,) delimits each column.</p><p>If the command argument is more than 2000 characters,&nbsp;<em>value1</em>&nbsp;contains the first 2000 characters and&nbsp;<em>value2</em>&nbsp;contains the remaining characters.</p><p>If the command argument is less than 2000 characters,&nbsp;<em>value1</em>&nbsp;contains the command argument and&nbsp;<em>value2</em>&nbsp;is empty.</p></li>
+                    <li><p><strong>ujo_job_runs</strong></p><p>The archive_events command archives data from the ujo_job_runs table to the following file:</p>
+                        <ul>
+                            <li>archived_job_runs.$AUTOSERV.<em>MM</em>.<em>dd</em>.<em>yyyy</em>.<em>hh</em>.<em>mm</em>.<em>ss</em>&nbsp;(UNIX)</li>
+                            <li>archived_job_runs.%AUTOSERV%.<em>MM</em>.<em>dd</em>.<em>yyyy</em>.<em>hh</em>.<em>mm</em>.<em>ss</em>&nbsp;(Windows)<br><strong><em>MM</em>.<em>dd</em>.<em>yyyy</em>.<em>hh</em>.<em>mm</em>.<em>ss</em>&nbsp;</strong><br>Indicates the month, day, year, hour, minute, and second when the archive was created.</li>
+                        </ul><p>The format of each record in the flat file is as follows:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p><em>joid,run_num,ntry,job_ver,endtune,esp_lstatus,esp_status,evt_num,exit_code,over_num,run_machine,runtime,startime,status,std_out_file,std_err_file,svcdesk_status,svcdesk_handle,wf_joid,run_info,seq_num,type,is_job_onnoexec</em></p></pre>
+                        </div><p>For example:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>5,5,5,1,1287054429,,,3278,0,-1,localhost,1,1287054429,4,,,0,,1,WobId(1147.238_1/WAAE_WF0.1/MAIN),1,1,0</p></pre>
+                        </div><p>Each job run occupies one row in the archive. By default, a comma (,) delimits each column.</p></li>
+                    <li><p><strong>ujo_proc_event</strong></p><p>The archive_events command archives data from the ujo_proc_event table to the following file:</p>
+                        <ul>
+                            <li>archived_events.$AUTOSERV.<em>MM</em>.<em>dd</em>.<em>yyyy</em>.<em>hh</em>.<em>mm</em>.<em>ss</em>&nbsp;(UNIX)</li>
+                            <li>archived_events.%AUTOSERV%.<em>MM</em>.<em>dd</em>.<em>yyyy</em>.<em>hh</em>.<em>mm</em>.<em>ss</em>&nbsp;(Windows)<br><strong><em>MM</em>.<em>dd</em>.<em>yyyy</em>.<em>hh</em>.<em>mm</em>.<em>ss</em>&nbsp;</strong><br>Indicates the month, day, year, hour, minute, and second when the archive was created.</li>
+                        </ul><p>The format of each record in the flat file is as follows:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p><em>eoid,alarm,AUTOSERV,event,event_time_gmt,evt_num,exit_code,global_name, global_value,jc_pid,job_ver,joid,machine,ntry,orig_evt_num,over_num,pid, priority,que_priority,que_status,que_status_stamp,run_num,stamp,status, eventtext,wf_joid</em></p></pre>
+                        </div><p>For example:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>Z5,0,ACE,106,1287054429,3888,0,,,53340618,1,1111,localhost,1,3288,-1,53340597,10,0,2,1999-12-31&nbsp;00:00:00.000,333,1999-12-31&nbsp;00:00:00.000,3,"Some&nbsp;Text",1</p></pre>
+                        </div><p>Each event occupies one row in the archive. By default, a comma (,) delimits each column.</p></li>
+                    <li><p><strong>ujo_chkpnt_rstart</strong></p><p>The archive_events command archives data from the ujo_chkpnt_rstart table to the following file:</p>
+                        <ul>
+                            <li>archived_chkpnt_rstart.$AUTOSERV.<em>MM</em>.<em>dd</em>.<em>yyyy</em>.<em>hh</em>.<em>mm</em>.<em>ss&nbsp;</em>(UNIX)</li>
+                            <li>archived_chkpnt_rstart.%AUTOSERV%.<em>MM</em>.<em>dd</em>.<em>yyyy</em>.<em>hh</em>.<em>mm</em>.<em>ss&nbsp;</em>(Windows)<br><strong><em>MM</em>.<em>dd</em>.<em>yyyy</em>.<em>hh</em>.<em>mm</em>.<em>ss</em>&nbsp;</strong><br>Indicates the month, day, year, hour, minute, and second when the archive was created.</li>
+                        </ul><p>The format of each record in the flat file is as follows:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p><em>dest_machine,dest_app,as_evt_time,ubc_name,ubc_jobnumbr,ubc_sysid,ubc_date,ubc_time,ubc_procid,ubc_userid,ubc_compcode,ubc_jobname,ubc_setname,ubc_jobnumb,ubc_server,ubc_from_sysid,enefill,ubt_cputime,ubt_errcod</em></p></pre>
+                        </div><p>Each record occupies one row in the archive. By default, a comma (,) delimits each column.</p></li>
+                </ul>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

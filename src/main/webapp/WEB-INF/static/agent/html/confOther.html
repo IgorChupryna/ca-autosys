@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div >
+
+
+    <h1 class="article-name" tabindex="0">Set Up Wake On LAN</h1>
+    <div>
+        <div class="col-xs-12 col-md-8 col-lg-8">
+            <p>You can save energy by using the Wake on LAN (WOL) feature to automate the startup of your computers. Setting up WOL lets you define and schedule WOL jobs to send a signal to a server to turn it on. When the server is no longer needed, you can schedule a different job to power it down.</p>
+            <p>Wake on LAN (WOL) is a hardware and software solution that lets you wake up a computer remotely. The solution requires an ACPI-compliant computer and a special software program that sends a signal to the network card of the computer to wake it up. The agent provides the AMD magic packet to broadcast the signal to a computer that has been soft-powered-down (ACPI D3-warm state). You can configure the agent for how many times it broadcasts the signal and the amount of time it waits between broadcasts.</p>
+            <p>To set up Wake on LAN (WOL), follow these steps:</p>
+            <ol>
+                <li><a data-macro-name="sp-plaintextbody-link" href="#SetUpWakeOnLAN-CollecttheMACAddress" class="conf-macro output-inline" data-hasbody="true">Collect the MAC address</a>.</li>
+                <li><a data-macro-name="sp-plaintextbody-link" href="#SetUpWakeOnLAN-ConfigureWOLPropertiesontheAgent" class="conf-macro output-inline" data-hasbody="true">Configure the WOL properties on the agent</a>.</li>
+                <li><a data-macro-name="sp-plaintextbody-link" href="#SetUpWakeOnLAN-DefineaWOLJob" class="conf-macro output-inline" data-hasbody="true">Define a WOL job</a>.</li>
+            </ol>
+            <h2 id="SetUpWakeOnLAN-CollecttheMACAddress">Collect the MAC Address</h2>
+            <p>You require the Media Access Control (MAC) address of the computer you want to receive the Wake on LAN (WOL) signal. The MAC address is burned into the Ethernet card (NIC) of the main logic board.</p>
+            <h2 id="SetUpWakeOnLAN-ConfigureWOLPropertiesontheAgent">Configure WOL Properties on the Agent</h2>
+            <p>To run Wake on LAN (WOL) jobs, define specific parameters to enable communication. You can set up how often the agent sends the magic packet to the WOL-enabled computer.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>(iSeries systems only) <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-system-agent/11-4/en/configuring/control-the-agent/open-a-pase-terminal-session-on-iseries" class="conf-macro output-inline" data-hasbody="true">Open a PASE terminal session</a>.</li>
+                <li>Change to the agent installation directory.</li>
+                <li>Stop the agent.</li>
+                <li>Open the agentparm.txt file.</li>
+                <li><p>Set the following parameter:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+     <pre class="code-block prettyprint"><code>plugin.start_internal_N=management
+</code></pre>
+                    </div> </li>
+                <li>Define the following parameters:
+                    <ul>
+                        <li><strong>management.wol.nudges</strong><br>Specifies the number of times the agent broadcasts the magic packet.<br><strong>Default:</strong> 10</li>
+                        <li><strong>management.wol.nudges.sleep</strong><br>Specifies the amount of time, in milliseconds, between broadcasts of the magic packet.<br><strong>Default:</strong> 1000 (ms)</li>
+                        <li><strong>management.wol.ports</strong><br>Specifies the port that the magic packet is sent to.<br><strong>Default:</strong> 6</li>
+                    </ul></li>
+                <li>Save and close the agentparm.txt file.</li>
+                <li>(iSeries systems only) <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-system-agent/11-4/en/configuring/control-the-agent/start-the-subsystem-that-runs-the-agent-on-iseries#StarttheSubsystemthatRunstheAgentoniSeries-StarttheSubsystemfromPASE" class="conf-macro output-inline" data-hasbody="true">Start the subsystem that runs the agent if it has stopped</a>.</li>
+                <li>Start the agent.<br>The agent is configured for WOL jobs.</li>
+            </ol>
+            <h2 id="SetUpWakeOnLAN-DefineaWOLJob">Define a WOL Job</h2>
+            <p>To define a WOL job, you require the following information:</p>
+            <ul>
+                <li>The broadcast address where the packet must be broadcasted</li>
+                <li>The target computer MAC address. Represented in a '-' or ':' separated list of six octets (bytes) in hexadecimal format.</li>
+                <li>The optional IP address to which the agent attempts the connection to verify that the target host is up.</li>
+                <li>The optional list of ports to which the agent attempts the connection to verify that the target host is up.<br><strong>Defaults:</strong> 21, 22, 23, 80, 111, 135, 139, 445</li>
+                <li>The optional WOL password. The password must be 4 or 6 '.', '-', or ':' separated octets (bytes) in hexadecimal format.</li>
+            </ul>
+            <p>For detailed instructions to define a WOL job, see the documentation for your scheduling manager.</p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-4">
+            <p></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+<div >
+
+    <h1 class="article-name" tabindex="0">Use PAM to Validate User Credentials</h1>
+
+    <div>
+        <div class="col-xs-12 col-md-8 col-lg-8">
+            <p>PAM (Pluggable Authentication Modules) is used for security to verify whether a service should be used. A service is a program that provides a function that requires authentication. Examples of services are login, sshd, pam, and sudo. <span style="color: rgb(0,0,0);">After you set the Pam parameters to validate user credentials, you can test the settings to be sure that they work as intended by using the chkusr utility.</span></p>
+            <h2 id="UsePAMtoValidateUserCredentials-SetCredentialsValidation"><span style="color: rgb(0,0,0);">Set Credentials Validation&nbsp;</span></h2>
+            <p>To set the PAM parameters validate user credentials on UNIX and Linux systems, configure the following parameters on the agent:</p>
+            <ul>
+                <li><p><strong>oscomponent.auth.pam.svc</strong><br>Specifies the default PAM service the agent uses to validate credentials. The list of available PAM services for your system is located in the /etc/pam.conf or /etc/pam.d/ file. <br><strong>Default:</strong> login</p></li>
+                <li><p><strong>oscomponent.auth.pam.lib</strong><br>(Optional) Specifies the path to the PAM shared library.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong> For best results, specify the full path to the library file.</p>
+                    </div> </li>
+            </ul>
+            <h2 id="UsePAMtoValidateUserCredentials-TestCredentialsValidationSettings">Test Credentials Validation Settings</h2>
+            <p>You can use the chkusr utility, which is provided with the agent, to&nbsp;test the user credentials settings on your system by using different PAM services. For example, you can test a PAM service on your system to see whether it can be used to validate a user's credentials.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Change to the agent installation directory.</li>
+                <li><p>Enter the following command at the command prompt:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>$ ./chkusr <em>user</em> <em>password</em> [<em>pam_service</em>]</p></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>user</em></strong><br>Specifies the user to validate.&nbsp;</li>
+                        <li><p><strong><em>password</em></strong><br>Specifies the encrypted password that corresponds to the user.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong>Note:</strong> Encrypt the password by using the
+                                <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-system-agent/11-4/en/configuring/set-up-security/encrypt-a-password-using-the-password-utility" class="conf-macro output-inline" data-hasbody="true">password utility</a>.
+                            </div> </li>
+                        <li><strong><em>pam_service</em></strong><br>(Optional) Specifies the PAM service that <span style="color: rgb(255,0,0);"><span style="color: rgb(0,0,0);">validates&nbsp;the user&nbsp;credentials.</span><br></span>The chkusr utility displays a validation message.</li>
+                    </ul></li>
+            </ol>
+            <p><strong>Example: Test Credentials Validation Settings</strong></p>
+            <p>The following command tests the sshd PAM service for the osuser:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>$ ./chkusr osuser FD5AD34EC7A8F07C0B2BE8 sshd
+</code></pre>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-4">
+            <p></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+
+
+
+
+</body>
+</html>

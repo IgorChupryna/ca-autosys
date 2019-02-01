@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 class="article-name" tabindex="0">Maintain the Event Server</h1>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <h2 id="MaintaintheEventServer-SingleEventServerMode"><span style="color: rgb(0,0,0);">Single Event Server Mode</span></h2>
+            <p>By default, CA Workload Automation AE is configured to run with one event server (database). This configuration is named <em>single event server mode</em>. You can configure CA Workload Automation AE to run with two event servers either during installation or after a single event server mode installation.</p>
+            <p>When CA Workload Automation AE is running in dual event server mode and the scheduler detects an unrecoverable error condition on one of the event servers, it automatically rolls over to single event server mode using the other event server.</p>
+            <p>The following illustration shows how the primary components (the scheduler, the application server, the event server, the web server, and the agent) interact in single event server mode:</p>
+            <p> </p>
+            <div id="gliffy-container-361353049-245" class="gliffy-container   conf-macro output-inline" data-fullwidth="834" data-ceoid="361353048" data-pageid="361353048" data-islinked="false" data-full="/plugins/gliffy/viewer.action?inline=false&amp;pageId=361353048&amp;attachmentId=361353049&amp;name=Single%20Event%20Server%20Mode&amp;lastPage=%2Fpages%2Fviewpage.action%3FpageId%3D361353048" data-attachmentid="361353049" data-version="0" data-filename="Single Event Server Mode" data-hasbody="false" data-macro-name="gliffy">
+                <map id="gliffy-map-361353049-4327" name="gliffy-map-361353049-4327"> </map>
+                <div class="diagram-content-container ">
+                    <div class="gliffy-html5-loading-spinner-container">
+                    </div>
+                    <iframe class="gliffy-html5-container full-width" id="gliffy-html5-361353049-245" src="/plugins/gliffy/viewer.action?wmode=opaque" width="100%" height="245" data-id="361353049" data-version="0" data-scale="0.5995204" data-html5-enabled="true" frameborder="0" style="visibility:hidden;position:absolute;left:-9999px;overflow:hidden;background:#FFFFFF;"> </iframe>
+                    <div class="diagram-image-container ">
+                        <img src="/WEB-INF/static/aedb/Single+Event+Server+Mode.png" width="500"
+                             alt="Single Event Server Mode" data-full-width="834" data-full-height="409" id="gliffy-image-361353049-245" class="" usemap="#gliffy-map-361353049-4327" height="245">
+                    </div>
+                    <map id="gliffy-dynamic-map-361353049-245" class="gliffy-dynamic" name="gliffy-dynamic-map-361353049-245"> </map>
+                </div>
+            </div>
+            <p></p>
+            <h2 id="MaintaintheEventServer-DualEventServerMode">Dual Event Server Mode</h2>
+            <p>CA Workload Automation AE can run in&nbsp;<em>dual event server mode</em>, which means that it runs with two event servers or databases.&nbsp;These two event servers contain identical data, including object definitions and events. CA Workload Automation AE reads from one event server and writes to both the event servers simultaneously.</p>
+            <p>We recommend that you synchronize the event servers when you configure CA Workload Automation AE to run in dual event server mode. Event server synchronization ensures that CA Workload Automation AE recovers after one of the event servers fails.</p>
+            <p>The scheduler reads from both event servers when it processes events. Sometimes the scheduler detects an event on one event server but not on the other event server. The scheduler copies any missing events to the other event server to prevent temporary problems from interrupting the&nbsp;event processing.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> To avoid a single point of failure, ensure that the two event servers reside on two different data servers that are running on two different computers.</p>
+            </div>
+            <p>The following diagram illustrates how the dual event server mode operates:</p>
+            <ul>
+                <li>How the databases are laid out</li>
+                <li>How CA Workload Automation AE verifies which database to use</li>
+                <li>How the primary components (the scheduler, the application server, the event server, the agent, and the web server) interact</li>
+            </ul>
+            <p> </p>
+            <div id="gliffy-container-361353051-7033" class="gliffy-container   conf-macro output-inline" data-fullwidth="611" data-ceoid="361353048" data-pageid="361353048" data-islinked="false" data-full="/plugins/gliffy/viewer.action?inline=false&amp;pageId=361353048&amp;attachmentId=361353051&amp;name=The%20scheduler%20the%20application%20server%20the%20event%20server%20the%20agent%20and%20the%20web%20server%20interact&amp;lastPage=%2Fpages%2Fviewpage.action%3FpageId%3D361353048" data-attachmentid="361353051" data-version="0" data-filename="The scheduler the application server the event server the agent and the web server interact" data-hasbody="false" data-macro-name="gliffy">
+                <map id="gliffy-map-361353051-3192" name="gliffy-map-361353051-3192"> </map>
+                <div class="diagram-content-container ">
+                    <div class="gliffy-html5-loading-spinner-container">
+                    </div>
+                    <iframe class="gliffy-html5-container full-width" id="gliffy-html5-361353051-7033" src="/plugins/gliffy/viewer.action?wmode=opaque" width="100%" height="585" data-id="361353051" data-version="0" data-scale="1.0" data-html5-enabled="true" frameborder="0" style="visibility:hidden;position:absolute;left:-9999px;overflow:hidden;background:#FFFFFF;"> </iframe>
+                    <div class="diagram-image-container ">
+                        <img src="/WEB-INF/static/aedb/The+scheduler+the+application+server+the+event+server+the+agent+and+the+web+server+interact.png"
+                             width="611" alt="The scheduler the application server the event server the agent and the web server interact"
+                             data-full-width="611" data-full-height="585" id="gliffy-image-361353051-7033" class="" usemap="#gliffy-map-361353051-3192" height="585">
+
+
+                    </div>
+                    <map id="gliffy-dynamic-map-361353051-7033" class="gliffy-dynamic" name="gliffy-dynamic-map-361353051-7033"> </map>
+                </div>
+            </div>
+            <p></p>
+            <h2 class="heading3" id="MaintaintheEventServer-DefineEventServerInformation">Define Event Server Information</h2>
+            <p>You can define the event server information used by CA Workload Automation AE during or after installation. To define the event server information after the installation, modify the <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/administrating/ae-configuration/configure-an-event-server/provider" class="conf-macro output-inline" data-hasbody="true">Provider</a>, <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/administrating/ae-configuration/configure-an-event-server/dbaccess" class="conf-macro output-inline" data-hasbody="true">DBAccess</a>, <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/administrating/ae-configuration/configure-an-event-server/eventserver_1-and-eventserver_2" class="conf-macro output-inline" data-hasbody="true">EventServer_1</a>, or <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/administrating/ae-configuration/configure-an-event-server/eventserver_1-and-eventserver_2" class="conf-macro output-inline" data-hasbody="true">EventServer_2</a> parameter. The scheduler, application server, web server, and some client utilities such as dbstatistics, archive_events, and archive_jobs use the event server information to connect to the event server.</p>
+            <h2 class="heading4" id="MaintaintheEventServer-ConfiguretheEventServerTime-OutPeriod">Configure the Event Server Time-Out Period</h2>
+            <p>You can use the DBLibWaitTime parameter to specify the time (in seconds) the scheduler, application server,
+                or web server waits before breaking the connection with an event server in an unknown state. The scheduler, application server, or web server maintain and check connections with the databases, and if an event server is in an unknown state, the connection is broken after the specified time.</p>
+            <p>This section contains the following topics:</p>
+            <p></p>
+            <ul class="childpages-macro conf-macro output-block" data-hasbody="false" data-macro-name="children">
+                <li>Configure CA Workload Automation AE to Run in Dual Event Server Mode</a></li>
+                <li>Switch to Single Event Server Mode</a></li>
+                <li>Event Server Rollover Recovery</a></li>
+                <li>High Availability Recovery</a></li>
+                <li>Database Storage Requirements</a></li>
+                <li>General Database Maintenance</a></li>
+                <li>Oracle Errors</a></li>
+                <li>Rebuild Table Indexes for a CA Workload Automation AE Database</a></li>
+                <li>Tune the Oracle Server</a></li>
+                <li>Tune the Sybase Server</a></li>
+            </ul>
+            <p></p>
+            <p></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

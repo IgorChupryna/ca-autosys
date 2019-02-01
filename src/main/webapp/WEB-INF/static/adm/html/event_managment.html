@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p><strong>Valid on UNIX/Linux, Windows, z/OS</strong></p>
+            <p>Use the oprdb command to save, list, or convert the data in the Event Management database or database image (DSB) file. "Converting" data converts the binary data that is contained in the database into a character command representation. This representation can be used as input to the CAUTIL command utility to restore the database or reproduce its contents in another database.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code">OPRDB [LIST {DB|<em>dsb-file path</em>}]</pre>
+            </div>
+            <p><strong>Valid on Windows</strong></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+   <pre class="ca-code"><pre>  [LOAD dsb-file]
+  [SAVE dsb-file path]
+  [SCRIPT {DB|<em class="italic">dsb-file path|&gt;mycmds.txt|</em>cautil -f <em class="italic">mycmds.txt</em>}]</pre></pre>
+            </div>
+            <p><strong style="line-height: 1.4285715;">Valid on UNIX/Linux, z/OS</strong></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+   <pre class="ca-code"><pre>[SCRIPT {DB|&gt;<em class="italic">mycmds.txt</em>|cautil -f <em class="italic">mycmds.txt</em>}]
+</pre></pre>
+            </div>
+            <p><strong style="line-height: 1.4285715;">Examples</strong></p>
+            <p>This example lists, in report form, the contents of DSB file c:\TNG\logs\caopr.dsb. This file saves the Event Management database each time Enterprise Management is started.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>oprdb list c:\TNG\logs\caopr.dsb</p></pre>
+            </div>
+            <ul>
+                <li><strong>LOAD dsb-file (</strong><strong style="line-height: 1.4285715;"><strong>Valid on Windows)</strong></strong></li>
+                <li>Loads the contents of the <em>dsb-file</em> into the Event Management database. The previous contents of the database is lost unless OPRDB SAVE <em>dsb-file </em>was previously issued. To put this new policy into effect, issue the opreload command.</li>
+                <li><strong>SAVE dsb-file path (</strong><strong>Valid on Windows)</strong><br>Saves the Event Management database messages and actions to the file specified (<em>dsb-file path</em>). These messages are used as an alternative to the database if it becomes unavailable.</li>
+                <li><strong>LIST {DB|<em>dsb-file path</em>}</strong><br>Number of retries to be made when a busy or other recoverable error condition is detected while attempting to send the SNMP trap.</li>
+            </ul>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<body bgcolor="#e8e8e8">
+
+<h1>"Hot" failover of TNG console</h1>
+
+<p>To failover TNG console, consider setting up a message/action to export the oprdb
+    database to a share on the backup system.&nbsp; For example:.</p>
+
+<pre><strong><small>define msgrec
+       msgid="opreload"
+       type="CMD"
+       msgnode="*"
+       desc="Messages reloaded"
+       cont='N'
+       msgact='Y'
+       wcsingle='?'
+       wcmany='*'
+define msgact
+       name=(*,10)
+       action="COMMAND"
+       attrib="DEFAULT"
+       audit='N'
+       color="DEFAULT"
+       condop="  "
+       evaluate='Y'
+       quiet='N'
+       status="ACTIVE"
+       sim='N'
+       text="oprdb script db &gt; f:\test\oprdb.txt"</small></strong></pre>
+
+<p>On the backup system, monitor the main console.&nbsp; The backup system has a single
+    message/action defined to import the message/actions exported from the main console. For
+    example</p>
+
+<pre><strong><small>define msgrec
+       msgid="Host:WindowsNT_Server WindowsNT_Server Ping Poll Agent:Ping * Broken"
+       type="MSG"
+       msgnode="*"
+       desc="main TNG console down"
+       cont='N'
+       msgact='Y'
+       wcsingle='?'
+       wcmany='*'
+       node="TNGCONS"
+define msgact
+       name=(*,10)
+       action="COMMAND"
+       attrib="DEFAULT"
+       audit='N'
+       color="DEFAULT"
+       condop="  "
+       evaluate='Y'
+       quiet='N'
+       status="ACTIVE"
+       sim='N'
+       text="cautil -f c:\test\oprdb.txt"</small></strong></pre>
+
+<p>You should also define a message/action to notify an administrator of the failover.</p>
+
+<div class="jive-rendered-content">
+    Exporting the MRAs does not automatically delete them from the database.<br>
+    It just extracts the data.<br>
+    If you want to remove all data from the database and then reload it you<br>
+    should:<br>
+        1. Extract with:<br>
+    <strong>oprdb script db &gt; oprdb.txt<br></strong>
+    <br>
+        2. Delete existing records either via the GUI or via cautil command:<br>
+    <strong>cautil select msgrec msgid=* delete msgrecord<br></strong>
+    <br>
+        3. Reload the data:<br>
+    <strong>cautil -f oprdb.txt<br></strong>
+    <strong>oprcmd opreload[size]</strong></div>
+</body>
+</body>
+</html>

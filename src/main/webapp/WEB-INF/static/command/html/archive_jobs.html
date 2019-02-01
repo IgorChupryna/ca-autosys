@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The archive_jobs command deletes obsolete job versions from the database. Job versions are considered obsolete when all the following conditions apply:</p>
+                <ul>
+                    <li>The job is inactive.</li>
+                    <li>The job is no longer referenced.</li>
+                    <li>All event data that is related to the job has been deleted.</li>
+                    <li>All job run data that is related to the job has been deleted.</li>
+                </ul>
+                <p>CA Workload Automation AE places jobs in the archive when you delete them using the sendevent command,</p>
+                <p>We recommend that you issue the archive_events command before issuing the archive_jobs command. We also recommend that you run archive_jobs as part of your usual database maintenance.</p>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>archive_jobs&nbsp;-j&nbsp;<em>number_of_days</em></p><p>&nbsp;&nbsp;&nbsp;[-d&nbsp;"<em>directory_name</em>"]&nbsp;[{-usr&nbsp;<em>username&nbsp;</em>{-pw|pwx}&nbsp;<em>password</em>|-saml&nbsp;<em>auth_artifact</em>}]&nbsp;[-A]&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-x]&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><strong>-j&nbsp;<em>number_of_days</em></strong><br>Specifies that jobs in the archive for more than this number of days are permanently deleted.</li>
+                    <li><strong>-d "<em>directory_name</em>"</strong><br>(Optional) Specifies the name of the directory where the archive file is created.</li>
+                    <li><strong>-A</strong><br>(Optional) Copies the job definitions to an archive file.<br><strong>Default:</strong>&nbsp;$AUTOUSER/archive</li>
+                    <li>
+                        <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                            <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                            <p>(Optional) Specifies external security credentials as follows:</p>
+                            <ul>
+                                <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                                <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                    </div> </li>
+                                <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Notes: </strong></p>
+                                <ul>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                        <ul>
+                                            <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                            <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                            <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                        </ul></li>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                    <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                        <ul>
+                                            <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                            <li>CA Workload Automation AE is operating in native security mode.</li>
+                                        </ul></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                    <li><strong>-x</strong><br>(Optional) Displays the version number.</li>
+                    <li><strong>-?</strong><br>(Optional) Displays help for the command.</li>
+                </ul>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Note:</strong> The name of the job being archived is written to the archive file.
+                </div>
+                <p><strong>Example: Delete Obsolete Job Versions</strong></p>
+                <p>This example deletes obsolete job versions older than 7 days:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>archive_jobs&nbsp;-j&nbsp;7</p></pre>
+                </div>
+                <p>This example deletes obsolete job versions older than 7 days and creates the archive flat file in the $AUTOUSER/archive file (the default):</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>archive_jobs&nbsp;-j&nbsp;7&nbsp;-A</p></pre>
+                </div>
+                <p>This example deletes obsolete job versions older than 7 days and creates the archive flat file in the /tmp/archive directory:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>archive_jobs&nbsp;-j&nbsp;7&nbsp;-A&nbsp;-d&nbsp;"/tmp/archive"</p></pre>
+                </div>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Note:</strong> Obsolete job versions include all updated and deleted jobs.
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The dbstatistics command is a scheduler component that generates statistics in the data servers to maintain an optimal performance environment.</p>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>dbstatistics&nbsp;[-x]&nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><strong>-x</strong><br>(Optional) Returns version information.</li>
+                    <li><strong>-?</strong><br>(Optional) Displays help for the command.</li>
+                </ul>
+                <p>The dbstatistics command performs the following tasks:</p>
+                <ul>
+                    <li>Updates the statistics for all the tables except the ujo_meta_enumerations, ujo_meta_properties,ujo_meta_rules,ujo_meta_types, and ujo_real_resource tables.&nbsp;</li>
+                    <li>Runs the dbspace command to determine the available space in the database. If the amount of free space is insufficient, the command issues warnings and generates a DB_PROBLEM alarm.<br>If you use an Oracle database, consider the following points: &nbsp;</li>
+                </ul>
+                <ul>
+                    <li style="list-style-type: none;background-image: none;">
+                        <ul>
+                            <li>The DBMaint command may erroneously report that the database is nearly full. This can occur because DBMaint calculates how much space is not allocated for extents. DBMaint reports entire extents as used space even when they are nearly empty.</li>
+                            <li><p><span>The DBMaint command may incur privilege errors during the execution of either the dbstatistics or dbspace command. These privilege errors may also be incurred when running the programs standalone. Privilege errors occur because the UJOADMIN account has not been granted the ANALYZE ANY privilege or the ujoadmin role does not have SELECT privileges to DBA_TABLES.</span><br>To grant these privileges, run the following SQL commands:</p>
+                                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <pre class="ca-code"><p>sqlplus sys/&lt;passwd&gt;@&lt;ORACLE_SID&gt; as sysdba<br>grant ANALYZE ANY to UJOADMIN;<br>grant SELECT ON DBA_TABLES to UJOADMIN;</p></pre>
+                                </div><p>To revoke these privileges, run the following SQL commands:</p>
+                                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <pre class="ca-code"><p>sqlplus sys/&lt;passwd&gt;@&lt;ORACLE_SID&gt; as sysdba<br>revoke ANALYZE ANY from UJOADMIN;<br>revoke SELECT ON DBA_TABLES from UJOADMIN;</p></pre>
+                                </div></li>
+                        </ul></li>
+                </ul>
+                <ul>
+                    <li>Calculates and updates the average job run statistics in the ujo_avg_job_run table. The old data is overwritten with the new data. The command returns either a 0 or 1; 0 indicates success and 1 indicates failure.</li>
+                </ul>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <p><strong>Note: </strong>By default, the CA Workload Automation AE OS user is "autosys". However, you can define a different ID for the OS user during installation.</p>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

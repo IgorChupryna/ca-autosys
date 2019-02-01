@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p>The autostatus command is a client component utility that reports the current status of the specified job or the current value of a global variable to standard output. This command is especially useful in two circumstances:</p>
+            <ul>
+                <li>When one job needs to know the status of another.</li>
+                <li>When complex starting conditions are required beyond those that can be easily specified in the job definition.<br>For example, you may need to start a job when two out of a set of three jobs have completed successfully. You could handle these dependencies through the starting conditions, but the conditions would be very cumbersome to define. Instead, you can use autostatus to check the status of the three jobs and perform the appropriate action. For more information, see the examples later in this section.</li>
+            </ul>
+            <p>When you invoke autostatus, CA Workload Automation AE verifies that you have read access to the jobs and global variables for which you are requesting information.</p>
+            <p><strong>Syntax</strong></p>
+            <p>This command has the following format:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>autostatus&nbsp;</p><p>&nbsp;&nbsp;&nbsp;{-J&nbsp;<em>jobname&nbsp;</em>|&nbsp;-G&nbsp;<em>globalname</em>}&nbsp;</p><p>&nbsp; &nbsp;[-S&nbsp;<em>instance</em>]&nbsp;[{-usr&nbsp;<em>username&nbsp;</em>{-pw|pwx}&nbsp;<em>password</em>|-saml&nbsp;<em>auth_artifact</em>}]</p><p>&nbsp;&nbsp;&nbsp;[-x]</p><p>&nbsp;&nbsp;&nbsp;[-?]</p></pre>
+            </div>
+            <ul>
+                <li><p><strong>-J&nbsp;<em>jobname</em></strong></p><p>Specifies the job to report on.&nbsp;The job's current status is returned to standard output.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> You do not need to precede the job name that contains a colon with a backslash. You can use wildcards, including the percent (%) character, in this value.
+                    </div> </li>
+                <li><p><strong>-G&nbsp;<em>globalname</em></strong></p><p>Specifies a global variable. The variable's value is returned to standard output.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong>&nbsp;The specified global variable must have been set with the sendevent command.</p>
+                    </div> </li>
+                <li><p><strong>-S&nbsp;<em>instance<br></em></strong></p><p>(Optional) Defines the three-character identifier of the CA Workload Automation AE instance that the job or global variable resides on (for example, ACE).</p><p><strong>UNIX Default:&nbsp;</strong>The value of $AUTOSERV from the current environment.</p><p><strong>Windows Default:&nbsp;</strong>The value of %AUTOSERV%.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong>&nbsp;To use this option, you must also specify the -J or -G option.</p>
+                    </div> </li>
+                <li>
+                    <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                        <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                        <p>(Optional) Specifies external security credentials as follows:</p>
+                        <ul>
+                            <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                            <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                </div> </li>
+                            <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                        </ul>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Notes: </strong></p>
+                            <ul>
+                                <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                    <ul>
+                                        <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                        <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                        <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                        <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                        <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                    </ul></li>
+                                <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                    <ul>
+                                        <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                        <li>CA Workload Automation AE is operating in native security mode.</li>
+                                    </ul></li>
+                            </ul>
+                        </div>
+                    </div></li>
+                <li><p><strong>-x</strong></p><p>(Optional) Returns the command version information to standard output.</p></li>
+                <li><p><strong>-?</strong></p><p>(Optional) Displays help for the command.</p></li>
+            </ul>
+            <p><strong>Example: Check the Status of a Job on the Current Instance</strong></p>
+            <p>This example checks the current status of the test_install job on the current instance.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>autostatus&nbsp;-J&nbsp;test_install</p></pre>
+            </div>
+            <p>The command writes the result to standard output. In the following example, SUCCESS is the current status and ON_NOEXEC is the execution mode of the test_install&nbsp;job.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>SUCCESS/ON_NOEXEC</p></pre>
+            </div>
+            <p><strong>Example: Check the Value of a Global Variable</strong></p>
+            <p>This example checks the value of a global variable named “Today”.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>autostatus&nbsp;-G&nbsp;Today</p></pre>
+            </div>
+            <p>The command writes the result to standard output. For example:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>12/20/2011</p></pre>
+            </div>
+            <p><strong>Example: Replace a Condition Statement</strong></p>
+            <p>This example uses autostatus to replace a complex condition statement. The autostatus command runs the New_Stats job when the following conditions are satisfied:</p>
+            <ul>
+                <li>The Account_Run, Corp_Run, and End_Run jobs ran.</li>
+                <li>At least two of the jobs completed successfully.</li>
+                <li>It is not the 13th day of the month.</li>
+            </ul>
+            <p>The autostatus command is used as follows:</p>
+            <ol>
+                <li><p>Create a job named New_Stats_Starter with the following job definition:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>#</p><p>#&nbsp;JIL&nbsp;for&nbsp;New_Stats_Starter</p><p>#</p><p>insert_job:&nbsp;New_Stats_Starter</p><p>job_type:&nbsp;CMD</p><p>machine:&nbsp;mombo</p><p>command:&nbsp;new_stats_starter</p><p>condition:&nbsp;done(Account_Run)&nbsp;and</p><p>done(Corp_Run)&nbsp;and&nbsp;done(End_Run)</p></pre>
+                    </div></li>
+                <li><p>(UNIX only) Use the following code to create a Bourne shell script with the name new_status_starter to run for the job named New_Stats_Starter. This script determines whether to start the job New_Stats. If the job exits with a 0 exit code (SUCCESS), New_Stats can start; if the job exits with a non-zero exit code (FAILURE), New_Stats cannot start.</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>#!/bin/sh</p><p>#</p><p>#&nbsp;Program&nbsp;to&nbsp;determine&nbsp;when&nbsp;to&nbsp;start&nbsp;New_Stats</p><p>#&nbsp;Check&nbsp;for&nbsp;13th&nbsp;of&nbsp;month&nbsp;-&nbsp;if&nbsp;it&nbsp;is,&nbsp;exit</p><p>#&nbsp;with&nbsp;2</p><p>if&nbsp;[&nbsp;‘date&nbsp;+%d‘&nbsp;-eq&nbsp;13&nbsp;]</p><p>then</p><p>exit&nbsp;2</p><p>fi</p><p>#&nbsp;Add&nbsp;up&nbsp;the&nbsp;Number&nbsp;of&nbsp;SUCCESS&nbsp;endings</p><p>SUCCESS=0</p><p>for&nbsp;JobName&nbsp;in&nbsp;Account_Run&nbsp;Corp_Run&nbsp;End_Run</p><p>do</p><p>if&nbsp;[&nbsp;‘autostatus&nbsp;-J&nbsp;$JobName‘&nbsp;=&nbsp;"SUCCESS"&nbsp;]</p><p>then</p><p>SUCCESS=‘expr&nbsp;$SUCCESS&nbsp;+&nbsp;1‘</p><p>fi</p><p>done</p><p>if&nbsp;[&nbsp;$SUCCESS&nbsp;-gt&nbsp;1&nbsp;]</p><p>then</p><p>exit&nbsp;0</p><p>else</p><p>exit&nbsp;1</p><p>fi</p></pre>
+                    </div>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note: </strong>To reference jobs running on other instances, you must set - S instance to the three-character identifier for that instance in the call to autostatus.
+                    </div> </li>
+                <li><p>(Windows only) Use the following code to create a batch file with the name New_Stats.bat to run for the job New_Stats_Starter. This batch file determines whether to start the job New_Stats. If the job exits with a 0 exit code (SUCCESS), New_Stats can start; if the job exits with a non-zero exit code (FAILURE), New_Stats cannot start.</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>@REM&nbsp;ECHO&nbsp;OFF</p><p>@REM&nbsp;Program&nbsp;to&nbsp;determine&nbsp;when&nbsp;to&nbsp;start&nbsp;New_Stats</p><p>@REM</p><p>@REM&nbsp;Check&nbsp;for&nbsp;13th&nbsp;of&nbsp;month,&nbsp;if&nbsp;it&nbsp;is,&nbsp;exit&nbsp;with&nbsp;2</p><p>@echo&nbsp;|&nbsp;more&nbsp;|&nbsp;date&nbsp;&gt;&nbsp;testdate.out</p><p>@findstr&nbsp;/c:"/13/"&nbsp;testdate.out</p><p>@if&nbsp;errorlevel&nbsp;1&nbsp;goto&nbsp;not13</p><p>@if&nbsp;errorlevel&nbsp;0&nbsp;echo&nbsp;13th&nbsp;of&nbsp;the&nbsp;month</p><p>@del&nbsp;testdate.out</p><p>@autostatus&nbsp;-J&nbsp;%1&nbsp;&gt;&nbsp;test1.dat</p><p>@findstr&nbsp;SUCCESS&nbsp;test1.dat</p><p>@if&nbsp;errorlevel&nbsp;1&nbsp;goto&nbsp;nosuccess</p><p>@if&nbsp;errorlevel&nbsp;0&nbsp;goto&nbsp;sayok</p><p>:nosuccess</p><p>@del&nbsp;test1.dat</p><p>@REM&nbsp;false&nbsp;is&nbsp;supplied&nbsp;in&nbsp;%AUTOSYS%\bin</p><p>@false&nbsp;1</p><p>@goto&nbsp;exit:</p><p>:sayok</p><p>@del&nbsp;test1.dat</p><p>@goto&nbsp;exit</p><p>:not13</p><p>@del&nbsp;testdate.out</p><p>@REM&nbsp;false&nbsp;is&nbsp;supplied&nbsp;in&nbsp;%AUTOSYS%\bin</p><p>@false&nbsp;2</p><p>:exit</p></pre>
+                    </div>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> To reference jobs running on other instances, you must set - S instance to the three-character identifier for that instance in the call to autostatus.
+                    </div> </li>
+                <li><p>Create the job New_Stats and set the following starting condition in the job definition to specify that it should start when the previous job (New_Stats_Starter) completes successfully:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>condition:&nbsp;success(New_Stats_Starter)</p></pre>
+                    </div></li>
+            </ol>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

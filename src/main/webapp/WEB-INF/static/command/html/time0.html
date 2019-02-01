@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The time0 command is a client component that calculates the internal CA Workload Automation AE time and inserts it in MM/DD/YYYY hh:mm:ss format.</p>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>time0&nbsp;[-A&nbsp;<em>autotime&nbsp;</em>|&nbsp;-T&nbsp;"<em>datetime</em>"]&nbsp;[-S]&nbsp;[-O&nbsp;"<em>dateformat</em>"]&nbsp;[-x]&nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-A&nbsp;<em>autotime<br></em></strong>(Optional) Converts the internal CA Workload Automation AE date and time information to MM/DD/YYYY hh:mm:ss format.<br><strong>Limits:</strong>&nbsp;You cannot specify&nbsp;<strong>-A</strong>&nbsp;<em>autotime&nbsp;</em>if you specify&nbsp;<strong>-T</strong>&nbsp;<em>datetime</em>.</p></li>
+                    <li><p><strong>-T&nbsp;<em>datetime<br></em></strong>(Optional) Identifies a date and time to convert to the internal CA Workload Automation AE format.<br><strong>Limits:</strong>&nbsp;You cannot specify&nbsp;<strong>-T</strong>&nbsp;<em>datetime&nbsp;</em>if you specify&nbsp;<strong>-A</strong>&nbsp;<em>autotime</em>.</p></li>
+                    <li><p><strong>-S<br></strong>(Optional) Returns the internal CA Workload Automation AE timeFormat.</p></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-O&nbsp;<em>dateformat<br></em></strong>(Optional) Specifies a format with which to override the MM/DD/YYYY hh:mm:ss format.<br><strong>Limits:</strong>&nbsp;Enclose the dateformat value in quotation marks (").</p></li>
+                    <li><p><strong>-x<br></strong>(Optional) Returns the command version information to standard output.</p></li>
+                    <li><p><strong>-?<br></strong>(Optional) Displays help for the command.<strong>&nbsp;</strong></p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note:</strong>&nbsp;When you use the time0 command with no arguments, the client returns the current CA Workload Automation AE time and date information.</p>
+                        </div> </li>
+                </ul>
+                <p><strong>Example: Return the Current CA Workload Automation AE Date and Time Information</strong></p>
+                <p>This example returns the current CA Workload Automation AE time and date information:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>time0</p></pre>
+                </div>
+                <p>The return from the command resembles the following:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>CAUAJM&nbsp;I&nbsp;50096&nbsp;Current&nbsp;AutoTime(internal):&nbsp;1121265931</p></pre>
+                </div>
+                <p><strong>Example: Convert the CA Workload Automation AE Date and Time to MM/DD/YYYY hh:mm:ss Format</strong></p>
+                <p>This example converts the CA Workload Automation AE date and time to MM/DD/YYYY hh:mm:ss format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>time0&nbsp;-A&nbsp;1121265931</p></pre>
+                </div>
+                <p>The return from the command resembles the following:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>CAUAJM&nbsp;I&nbsp;50097&nbsp;External&nbsp;Time:&nbsp;07/13/2005&nbsp;07:45:31</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

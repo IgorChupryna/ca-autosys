@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+    <div>
+        <div class="">
+            <p>&nbsp;CA Technologies supports the subsequent databases and operating systems during their life cycle. This is as determined by the manufacturer of the operating system or until CA Technologies announces that we are dropping support. The supported operating systems are subject to change. For more information about compatibility and to see the latest operating systems that are supported, click <a rel="nofollow" class="external-link" href="http://www.ca.com/us/services-support/ca-support.html">here</a>.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> The UNIX instructions in this article also apply to Linux systems unless otherwise noted. The term Windows refers to any Microsoft Windows operating system supported by CA Workload Automation AE unless otherwise noted.</p>
+            </div>
+            <p><strong>Contents</strong></p>
+            <p></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H1,H2,H3,H4,H5,H6,H7" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#AEOperatingSystemandDatabaseSupport-SupportonCloud" class="toc-link">Support on Cloud</a></span></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#AEOperatingSystemandDatabaseSupport-DatabaseSupport" class="toc-link">Database Support</a></span></li><li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a href="#AEOperatingSystemandDatabaseSupport-ServerSupportedVersions" class="toc-link">Server Supported Versions</a></span><ul style=""><li><span class="toc-item-body" data-outline="3.1"><span class="toc-outline">3.1</span><a href="#AEOperatingSystemandDatabaseSupport-UNIX" class="toc-link">UNIX</a></span></li><li><span class="toc-item-body" data-outline="3.2"><span class="toc-outline">3.2</span><a href="#AEOperatingSystemandDatabaseSupport-Linux" class="toc-link">Linux</a></span></li><li><span class="toc-item-body" data-outline="3.3"><span class="toc-outline">3.3</span><a href="#AEOperatingSystemandDatabaseSupport-Windows" class="toc-link">Windows</a></span></li></ul></li><li><span class="toc-item-body" data-outline="4"><span class="toc-outline">4</span><a href="#AEOperatingSystemandDatabaseSupport-ClientandSDKSupportedVersions" class="toc-link">Client and SDK Supported Versions</a></span><ul style=""><li><span class="toc-item-body" data-outline="4.1"><span class="toc-outline">4.1</span><a href="#AEOperatingSystemandDatabaseSupport-UNIX.1" class="toc-link">UNIX</a></span></li><li><span class="toc-item-body" data-outline="4.2"><span class="toc-outline">4.2</span><a href="#AEOperatingSystemandDatabaseSupport-Linux.1" class="toc-link">Linux</a></span></li><li><span class="toc-item-body" data-outline="4.3"><span class="toc-outline">4.3</span><a href="#AEOperatingSystemandDatabaseSupport-Windows.1" class="toc-link">Windows</a></span></li></ul></li><li><span class="toc-item-body" data-outline="5"><span class="toc-outline">5</span><a href="#AEOperatingSystemandDatabaseSupport-AgentSupportedVersions" class="toc-link">Agent Supported Versions</a></span><ul style=""><li><span class="toc-item-body" data-outline="5.1"><span class="toc-outline">5.1</span><a href="#AEOperatingSystemandDatabaseSupport-UNIX.2" class="toc-link">UNIX</a></span></li><li><span class="toc-item-body" data-outline="5.2"><span class="toc-outline">5.2</span><a href="#AEOperatingSystemandDatabaseSupport-Linux.2" class="toc-link">Linux</a></span></li><li><span class="toc-item-body" data-outline="5.3"><span class="toc-outline">5.3</span><a href="#AEOperatingSystemandDatabaseSupport-Windows.2" class="toc-link">Windows</a></span></li></ul></li><li><span class="toc-item-body" data-outline="6"><span class="toc-outline">6</span><a href="#AEOperatingSystemandDatabaseSupport-Patch979306--TimeZoneUpdateforWindows" class="toc-link">Patch 979306 -- Time Zone Update for Windows</a></span></li></ul></div>
+            <p></p>
+            <h2 class="heading2" id="AEOperatingSystemandDatabaseSupport-SupportonCloud">Support on Cloud</h2>
+            <p>CA Workload Automation AE Release 11.3.6 and later and CA WCC Release 11.4 and later (including the agents) are supported on the cloud with the following database limitation:</p>
+            <ul>
+                <li>Amazon RDS and Microsoft Azure PaaS databases are not supported.</li>
+            </ul>
+            <p>Consider the following points when hosting CA Workload Automation AE or CA WCC on the cloud:</p>
+            <ul>
+                <li>The CA Workload Automation AE database should be hosted within the same environment as the CA Workload Automation AE server for optimal performance. For example, hosting the database and the CA Workload Automation AE application servers on premise and the CA Workload Automation AE scheduler on the cloud will most likely significantly increase scheduler latency and general response times.</li>
+                <li>Enable the <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/additional-resources/enable-ports-on-aws-or-microsoft-azure-security-group-1" class="conf-macro output-inline" data-hasbody="true">ports</a> that are related to CA Workload Automation AE as well as traffic in the respective network.</li>
+                <li>In Amazon Web Services (AWS) environment, ensure that the IP address is resolvable across the respective domains to enable proper communication between the CA Technologies products. For example, you can resolve the IP address by updating the host file, providing the DNS server details, or by navigating to EC2 configService settings &gt; EC2 Service properties and selecting the Set Computer Name option.</li>
+            </ul>
+            <h2 class="heading2" id="AEOperatingSystemandDatabaseSupport-DatabaseSupport">Database Support</h2>
+            <p>CA Workload Automation AE supports the following databases:</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Database</strong></th>
+                        <th class="confluenceTh"><strong>Supported Versions</strong></th>
+                        <th class="confluenceTh"><strong>Architecture</strong></th>
+                        <th class="confluenceTh"><strong>Notes</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Microsoft SQL Server</td>
+                        <td class="confluenceTd">2008</td>
+                        <td class="confluenceTd">32/64-bit</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Microsoft SQL Server</td>
+                        <td class="confluenceTd">2012</td>
+                        <td class="confluenceTd">32/64-bit</td>
+                        <td class="confluenceTd"><p><span>Bundled Event Manager is supported on Microsoft SQL Server 2012 Enterprise and Standard Editions.</span></p><p><span>Microsoft SQL Server “Always On” feature is supported.</span></p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Microsoft SQL Server</td>
+                        <td class="confluenceTd">2014</td>
+                        <td class="confluenceTd">32/64-bit</td>
+                        <td class="confluenceTd"><p><span>Bundled Event Manager is not supported.</span></p><p><span>Microsoft SQL Server “Always On” feature is supported.</span></p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,51,102);">Microsoft SQL Server</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,51,102);">2016</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,51,102);">64-bit</span></td>
+                        <td colspan="1" class="confluenceTd"><p><span>Bundled Event Manager is not supported.</span></p><p><span>Microsoft SQL Server “Always On” feature is supported.<br></span></p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Oracle</td>
+                        <td class="confluenceTd">11g</td>
+                        <td class="confluenceTd">32/64-bit<br>RAC</td>
+                        <td class="confluenceTd"><p><span>11g R2 is supported.</span></p><p><span>Oracle RAC is supported.</span></p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd">Oracle</td>
+                        <td colspan="1" class="confluenceTd">12c</td>
+                        <td colspan="1" class="confluenceTd">32/64-bit<br>RAC</td>
+                        <td colspan="1" class="confluenceTd"><p><span>Oracle RAC is supported.</span></p><p><span>Oracle Container database is supported.</span></p>
+                            <ul>
+                                <li><span>The CA Workload Automation AE schema must be created only on a pluggable database. Do not use CDB to create the schema and the same is recommended by Oracle.&nbsp;Setting this up is outside the scope of CA Technologies Support.&nbsp;For further information, consult Oracle documentation or Oracle Support.<br class="_mce_tagged_br"></span></li>
+                            </ul><p><span>(Linux only) Oracle 12c client libraries have a known <a data-macro-name="sp-richtextbody-link" href="/ca-workload-automation-ae/11-4-2/en/release-notes/ae-release-notes/ae-known-issues" class="conf-macro output-inline" data-hasbody="true"><span style="color: rgb(51,51,51);">memory leak</span></a> when the glibc version on the machine is below 2.14. The root cause of the memory leak is due to a bug in GNU glibc that is related to a multi-thread program that uses dlopen() to load the libraries. To resolve this issue, apply glibc 2.14 or higher. Contact your Linux vendor to get the GNU glibc compatible patch for bug <a rel="nofollow" class="external-link" href="https://sourceware.org/bugzilla/show_bug.cgi?id=12650"><span style="color: rgb(51,51,51);">12650</span></a> based on your Linux operating environment.</span></p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd">Sybase ASE</td>
+                        <td colspan="1" class="confluenceTd">15.0</td>
+                        <td colspan="1" class="confluenceTd">32/64-bit</td>
+                        <td colspan="1" class="confluenceTd"><p>Sybase ASE 15.0.2 or higher is supported.</p><p>The minimum page size must be at least 4 KB. If you are running CA WA Advanced Integration for Hadoop jobs, the minimum page size must be at least 8 KB.</p><p>Up to 137 free Sybase user connections are required, depending on which CA Workload Automation AE components you install.</p><p>Sybase jConnect 7 is required. For more information about installing Sybase jConnect 7, contact your database vendor.</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,51,102);">Sybase</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,51,102);">16.0</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,51,102);">64-bit</span></td>
+                        <td colspan="1" class="confluenceTd"><p>Sybase 16.0 or higher is supported.</p><p>The minimum page size must be at least 4 KB. If you are running CA WA Advanced Integration for Hadoop jobs, the minimum page size must be at least 8 KB.</p><p>Up to 137 free Sybase user connections are required, depending on which CA Workload Automation AE components you install.</p><p>Sybase jConnect 7 is required. For more information about installing Sybase jConnect 7, contact your database vendor.</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bs-callout bs-callout-warning conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Important!</strong> To use the 64-bit version of an Oracle or Sybase database, install the 32-bit client on the CA Workload Automation AE server, if it is not already installed. Then modify the path or library path environment variable. Complete these procedures before installing CA Workload Automation AE. For HP-UX Itanium (IA-64) support, install the 32-bit HP-UX PA-RISC Oracle or Sybase client. For instructions on configuring the environment to use a 64-bit database, see
+                <a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation/installation-considerations" class="conf-macro output-inline" data-hasbody="false">Installation Considerations</a>.
+            </div>
+            <h2 class="heading2" id="AEOperatingSystemandDatabaseSupport-ServerSupportedVersions">Server Supported Versions</h2>
+            <h3 class="heading3" id="AEOperatingSystemandDatabaseSupport-UNIX">UNIX</h3>
+            <p>The CA Workload Automation AE server component supports the following UNIX versions:</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Operating Environment</strong></th>
+                        <th class="confluenceTh"><strong>Supported Versions</strong></th>
+                        <th class="confluenceTh"><strong>Architecture</strong></th>
+                        <th class="confluenceTh"><strong>Notes</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">AIX</td>
+                        <td class="confluenceTd">6.1</td>
+                        <td class="confluenceTd">64-bit</td>
+                        <td class="confluenceTd">The AIX C++ Runtime Environment must be at level 11.1.0.0 or higher. To see what level your system is at, run: lslpp -l xlC.aix61.rte</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">AIX</td>
+                        <td class="confluenceTd">7.1</td>
+                        <td class="confluenceTd">64-bit</td>
+                        <td class="confluenceTd"><p>The AIX C++ Runtime Environment must be at level 11.1.0.0 or higher. To see what level your system is at, run: lslpp -l xlC.aix61.rte</p><p><span style="color: rgb(51,51,51);">The operating system must be at TL1 SP2 or later.</span></p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd">AIX</td>
+                        <td colspan="1" class="confluenceTd">7.2</td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(55,55,55);">64-bit</span></td>
+                        <td colspan="1" class="confluenceTd"><p>The AIX C++ Runtime Environment must be at level 11.1.0.0 or higher. To see what level your system is at, run: lslpp -l xlC.aix61.rte</p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">HP-UX</td>
+                        <td class="confluenceTd">11i v3 (11.31)</td>
+                        <td class="confluenceTd">IA 64-bit (Itanium)<br>PA-RISC 64-bit</td>
+                        <td class="confluenceTd">Hostname lengths cannot be greater than 8 characters.</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Solaris</td>
+                        <td class="confluenceTd">10</td>
+                        <td class="confluenceTd">SPARC 64-bit</td>
+                        <td class="confluenceTd"><p style="text-align: left;">Global zone and non-global whole/sparse root zone configurations are supported.</p><p>Install the following patch:<br>119963-04 SunOS 5.10: Shared library patch for C++ Nov/30/2005</p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Solaris</td>
+                        <td class="confluenceTd">11</td>
+                        <td class="confluenceTd">SPARC 64-bit</td>
+                        <td class="confluenceTd"><p>Bundled CA EEM and Event Manager are not supported. Install CA EEM and Event Manager on a separate computer.</p><p>Global zone and non-global whole/sparse root zone configurations are supported.</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3 class="heading3" id="AEOperatingSystemandDatabaseSupport-Linux">Linux</h3>
+            <p>The CA Workload Automation AE server component supports the following Linux versions:</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Operating Environment</strong></th>
+                        <th class="confluenceTh"><strong>Supported Versions</strong></th>
+                        <th class="confluenceTh"><strong>Architecture</strong></th>
+                        <th class="confluenceTh"><strong>Notes</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Oracle Enterprise Linux</td>
+                        <td class="confluenceTd">5</td>
+                        <td class="confluenceTd">x86 32/64bit</td>
+                        <td class="confluenceTd"><p>compat-libstdc++-33 or higher is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libstdc++.so.5 and libstdc++.so.6 or higher are required.</span></p><p>The libstdc++.so.5 shared library is contained in the compat-libstdc++ rpm package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</p><p>libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p>libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libbz2.so.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></p><p>Perl version 5.8 or higher is required.</p><p>ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</p><p>glibc 2.4 (32-bit) or higher is required.</p><p>The CA Workload Automation AE web server component is not supported on 32-bit version of Linux.</p><p>CA EEM is not supported. Install CA EEM on a separate computer.</p><p>Both UEK and RedHat Kernels are supported.</p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Oracle Enterprise Linux</td>
+                        <td class="confluenceTd">6</td>
+                        <td class="confluenceTd">x86 32/64bit</td>
+                        <td class="confluenceTd"><p>compat-libstdc++-33 or higher is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libstdc++.so.5 and libstdc++.so.6 or higher are required.</span></p><p>The libstdc++.so.5 shared library is contained in the compat-libstdc++ rpm package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</p><p>libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p>libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libbz2.so.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></p><p>Perl version 5.8 or higher is required.</p><p>ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</p><p>glibc 2.4 (32-bit) or higher is required.</p><p>libgcc-4.4 (32-bit) or higher is required.</p><p>nss-softokn-freebl-3.12 (32-bit) or higher is required.</p><p>The following rpm packages are required on the 64-bit version of Linux:</p>
+                            <ul>
+                                <li>audit-libs-2.0.4-1.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>cracklib-2.8.16-2.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam_passwdqc-1.0.5-6.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam_ldap-185-5.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam_krb5-2.3.11-1.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam-1.1.1-10.el6_2.1.i686.rpm</li>
+                            </ul><p>The CA Workload Automation AE web server component is not supported on 32-bit version of Linux.</p><p>CA EEM is not supported. Install CA EEM on a separate computer.</p><p>Both UEK and RedHat Kernels are supported.</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">Oracle Enterprise Linux</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">7</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">64-bit</span></td>
+                        <td colspan="1" class="confluenceTd"><p><span style="color: rgb(0,0,0);">compat-libstdc++-33 or higher is required. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">libstdc++.so.5 and libstdc++.so.6 or higher are required.</span></p><p><span style="color: rgb(0,0,0);">The libstdc++.so.5 shared library is contained in the compat-libstdc++ rpm package.</span></p><p><span style="color: rgb(0,0,0);">The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</span></p><p><span style="color: rgb(0,0,0);">libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">libbz2.so.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">Perl version 5.8 or higher is required.</span></p><p><span style="color: rgb(0,0,0);">ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">glibc 2.4 (32-bit) or higher is required.</span></p><p><span style="color: rgb(0,0,0);">libgcc-4.4 (32-bit) or higher is required.</span></p><p><span style="color: rgb(0,0,0);">nss-softokn-freebl-3.12 (32-bit) or higher is required.</span></p><p><span style="color: rgb(0,0,0);">The pam.i686 0:1.1.8-12.el7_1.1 rpm package is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">Both UEK and RedHat Kernels are supported.</span></p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Red Hat Enterprise Linux</td>
+                        <td class="confluenceTd">5</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                        <td class="confluenceTd"><p>compat-libstdc++-33 or higher is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libstdc++.so.5 and libstdc++.so.6 or higher are required.</span></p><p>The libstdc++.so.5 shared library is contained in the compat-libstdc++ rpm package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</p><p>libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p>libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libbz2.so</span><span>.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></p><p>Perl version 5.8 or higher is required.</p><p>ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</p><p>glibc 2.4 (32-bit) or higher is required.</p><p>The CA Workload Automation AE web server component is not supported on 32-bit version of Linux.</p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Red Hat Enterprise Linux</td>
+                        <td class="confluenceTd">6</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                        <td class="confluenceTd"><p>compat-libstdc++-33 or higher is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libstdc++.so.5 and libstdc++.so.6 or higher are required.</span></p><p>The libstdc++.so.5 shared library is contained in the compat-libstdc++ rpm package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</p><p>libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p>libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libbz2.so</span><span>.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></p><p>Perl version 5.8 or higher is required.</p><p>ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</p><p>glibc 2.4 (32-bit) or higher is required.</p><p>libgcc-4.4 (32-bit) or higher is required.</p><p>nss-softokn-freebl-3.12 (32-bit) or higher is required.</p><p>The following rpm packages are required on the 64-bit version of Linux:</p>
+                            <ul>
+                                <li>audit-libs-2.0.4-1.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>cracklib-2.8.16-2.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam_passwdqc-1.0.5-6.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam_ldap-185-5.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam_krb5-2.3.11-1.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam-1.1.1-10.el6_2.1.i686.rpm</li>
+                            </ul><p>The CA Workload Automation AE web server component is not supported on 32-bit version of Linux.</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">Red Hat Enterprise Linux</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">7.2</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">64-bit</span></td>
+                        <td colspan="1" class="confluenceTd"><p><span style="color: rgb(0,0,0);">compat-libstdc++-33 or higher is required. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">libstdc++.so.5 and libstdc++.so.6 or higher are required.</span></p><p>The libstdc++.so.5 shared library is contained in the compat-libstdc++-33-3.2.3-72.el7.i686 package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++-4.8.5-4.el7.i686 package.</p><p><span style="color: rgb(0,0,0);">libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">libbz2.so.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">Perl version 5.8 or higher is required.</span></p><p><span style="color: rgb(0,0,0);"><span style="color: rgb(0,0,0);">The&nbsp;</span><span style="color: rgb(0,0,0);">ncurses-libs-5.9-13.20130511.el7.i686&nbsp;version&nbsp;<span>is required on the 64-bit version of Linux.</span></span></span></p><p><span style="color: rgb(0,0,0);">glibc 2.4 (32-bit) or higher is required.</span></p><p><span style="color: rgb(0,0,0);">libgcc-4.4 (32-bit) or higher is required.</span></p><p><span style="color: rgb(0,0,0);">nss-softokn-freebl-3.12 (32-bit) or higher is required.</span></p><p><span style="color: rgb(0,0,0);"><span style="color: rgb(0,0,0);">The&nbsp;</span><span style="color: rgb(0,0,0);">pam.i686 0:1.1.8-12.el7_1.1&nbsp;</span><span style="color: rgb(0,0,0);">rpm package is required on the 64-bit version of Linux.</span></span></p><p><span style="color: rgb(0,0,0);">The CA Workload Automation AE web server component is not supported on 32-bit version of Linux.</span></p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">SuSE Linux Enterprise Server</td>
+                        <td class="confluenceTd">11</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                        <td class="confluenceTd"><p>The 32-bit versions of libstdc++.so.5 and libstdc++.so.6 or higher are required.</p><p>The libstdc++.so.5 shared library is contained in the compat-libstdc++ or libstdc++-33 rpm package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</p><p>libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p>libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libbz2.so</span><span>.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></p><p>Perl version 5.8 or higher is required.</p><p>ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</p><p>glibc 2.4 (32-bit) or higher is required.</p><p>glibc-locale-32bit rpm package is required.</p><p>The CA Workload Automation AE web server component is not supported on 32-bit version of Linux.</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">SuSE Linux Enterprise Server</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">12</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">64-bit</span></td>
+                        <td colspan="1" class="confluenceTd"><p><span style="color: rgb(0,0,0);">The 32-bit versions of libstdc++.so.5 and libstdc++.so.6 or higher are required.</span></p><p><span style="color: rgb(0,0,0);">The libstdc++.so.5 shared library is contained in the compat-libstdc++ or libstdc++-33 rpm package.</span></p><p><span style="color: rgb(0,0,0);">The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</span></p><p><span style="color: rgb(0,0,0);">libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">libbz2.so.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">Perl version 5.8 or higher is required.</span></p><p><span style="color: rgb(0,0,0);">ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">glibc 2.4 (32-bit) or higher is required.</span></p><p><span style="color: rgb(0,0,0);">glibc-locale-32bit rpm package is required.</span></p><p><span style="color: rgb(0,0,0);">The CA Workload Automation AE web server component is not supported on 32-bit version of Linux.</span></p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Red Hat Cluster Suite</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes: </strong></p>
+                <ul>
+                    <li>The Command Sponsor, installed using the CA Workload Automation AE DVD, enables support for the CA WCC Enterprise Command Line. It also forecasts applications. On Linux, the Command Sponsor supports only kernel version 2.6.</li>
+                    <li>If the iGateway built on Linux 2.4 kernel version is already installed, then CA EEM, iGateway and all other iGateway plug-ins, and the Command Sponsor cannot be installed or upgraded. If $IGW_LOC/igw.linux_k26 file is present, then the iGateway built on Linux 2.6 kernel version is installed. In the case where the iGateway built on Linux 2.4 kernel version is already installed, uninstall CA EEM, iGateway and all other iGateway plug-ins, and the Command Sponsor. After uninstalling, then install these products using the CA Workload Automation AE DVD or the CA Common Components DVD. CA EEM policies can then be migrated to the new CA EEM installation. For information about migrating CA EEM policies, see <a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/securing/security-policy-customization" class="conf-macro output-inline" data-hasbody="false">Security Policy Customization</a>. For more information about how to uninstall and install the Command Sponsor, see <a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation" class="conf-macro output-inline" data-hasbody="false">AE Installation</a>.</li>
+                    <li>The glibc-locale-32bit rpm package is required to initialize the CA EEM SDK properly. For more information about CA EEM SDK initialization, see the&nbsp;<a rel="nofollow" class="external-link" href="https://wiki.ca.com/eem">CA EEM documentation</a>.</li>
+                </ul>
+            </div>
+            <h3 class="heading3" id="AEOperatingSystemandDatabaseSupport-Windows">Windows</h3>
+            <p>The CA Workload Automation AE server component supports the following Windows versions:</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Version</strong></th>
+                        <th class="confluenceTh"><strong>Architecture</strong></th>
+                        <th class="confluenceTh"><strong>Notes</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Microsoft Windows 2008</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                        <td class="confluenceTd"><p>Windows patch 979306 is required.</p><p>The CA Workload Automation AE web server component is not supported on 32-bit version of Windows.</p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Microsoft Windows 2012</td>
+                        <td class="confluenceTd">x86 64-bit</td>
+                        <td class="confluenceTd"><p></p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Microsoft Cluster Server</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> Windows R2 and SQL server R2 releases are supported unless noted otherwise.
+            </div>
+            <h2 class="heading2" id="AEOperatingSystemandDatabaseSupport-ClientandSDKSupportedVersions">Client and SDK Supported Versions</h2>
+            <h3 class="heading3" id="AEOperatingSystemandDatabaseSupport-UNIX.1">UNIX</h3>
+            <p>The CA Workload Automation AE client and SDK components support the following UNIX versions:</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Operating Environment</strong></th>
+                        <th class="confluenceTh"><strong>Supported Versions</strong></th>
+                        <th class="confluenceTh"><strong>Architecture</strong></th>
+                        <th class="confluenceTh"><strong>Notes</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">AIX</td>
+                        <td class="confluenceTd">6.1</td>
+                        <td class="confluenceTd">64-bit</td>
+                        <td class="confluenceTd">The AIX C++ Runtime Environment must be at level 11.1.0.0 or higher. To see what level your system is at, run: lslpp -l xlC.aix61.rte</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">AIX</td>
+                        <td class="confluenceTd">7.1</td>
+                        <td class="confluenceTd">64-bit</td>
+                        <td class="confluenceTd"><p>The AIX C++ Runtime Environment must be at level 11.1.0.0 or higher. To see what level your system is at, run: lslpp -l xlC.aix61.rte</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd">AIX</td>
+                        <td colspan="1" class="confluenceTd">7.2</td>
+                        <td colspan="1" class="confluenceTd">64-bit</td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(55,55,55);">The AIX C++ Runtime Environment must be at level 11.1.0.0 or higher. To see what level your system is at, run: lslpp -l xlC.aix61.rte</span></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">HP-UX</td>
+                        <td class="confluenceTd">11i v3 (11.31)</td>
+                        <td class="confluenceTd">IA 64-bit (Itanium)<br>PA-RISC 64-bit</td>
+                        <td class="confluenceTd">Hostname lengths cannot be greater than 8 characters.</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Solaris</td>
+                        <td class="confluenceTd">10</td>
+                        <td class="confluenceTd"><p>SPARC 64-bit</p><p>(client only) x86 32/64-bit</p></td>
+                        <td class="confluenceTd"><p>Global zone and non-global whole/sparse root zone configurations are supported.</p><p>Install the following patch:</p><p>119963-04 SunOS 5.10: Shared library patch for C++ Nov/30/2005</p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Solaris</td>
+                        <td class="confluenceTd">11</td>
+                        <td class="confluenceTd"><p>SPARC 64-bit</p><p>(client only) x86 32/64-bit</p></td>
+                        <td class="confluenceTd">Global zone and non-global whole/sparse root zone configurations are supported.</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3 class="heading3" id="AEOperatingSystemandDatabaseSupport-Linux.1">Linux</h3>
+            <p>The CA Workload Automation AE client and SDK components support the following Linux versions:</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Operating Environment</strong></th>
+                        <th class="confluenceTh"><strong>Supported Versions</strong></th>
+                        <th class="confluenceTh"><strong>Architecture</strong></th>
+                        <th class="confluenceTh"><strong>Notes</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Oracle Enterprise Linux</td>
+                        <td class="confluenceTd">5</td>
+                        <td class="confluenceTd">x86 32/64bit</td>
+                        <td class="confluenceTd"><p>compat-libstdc++-33 or higher is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libstdc++.so.5 and libstdc++.so.6 or higher are required.</span></p><p>The libstdc++.so.5 shared library is contained in the compat-libstdc++ rpm package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</p><p>libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p>libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libbz2.so</span><span>.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></p><p>Perl version 5.8 or higher is required.</p><p>ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</p><p>glibc 2.4 (32-bit) or higher is required.</p><p>The CA Workload Automation AE web server component is not supported on 32-bit version of Linux.</p><p>CA EEM is not supported. Install CA EEM on a separate computer.</p><p>Both UEK and RedHat Kernels are supported.</p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Oracle Enterprise Linux</td>
+                        <td class="confluenceTd">6</td>
+                        <td class="confluenceTd">x86 32/64bit</td>
+                        <td class="confluenceTd"><p>compat-libstdc++-33 or higher is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libstdc++.so.5 and libstdc++.so.6 or higher are required.</span></p><p>The libstdc++.so.5 shared library is contained in the compat-libstdc++ rpm package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</p><p>libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p>libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libbz2.so</span><span>.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></p><p>Perl version 5.8 or higher is required.</p><p>ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</p><p>glibc 2.4 (32-bit) or higher is required.</p><p>libgcc-4.4 (32-bit) or higher is required.</p><p>nss-softokn-freebl-3.12 (32-bit) or higher is required.</p><p>The following rpm packages are required on the 64-bit version of Linux:</p>
+                            <ul>
+                                <li>audit-libs-2.0.4-1.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>cracklib-2.8.16-2.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam_passwdqc-1.0.5-6.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam_ldap-185-5.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam_krb5-2.3.11-1.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam-1.1.1-10.el6_2.1.i686.rpm</li>
+                            </ul><p>The CA Workload Automation AE web server component is not supported on 32-bit version of Linux.</p><p>CA EEM is not supported. Install CA EEM on a separate computer.</p><p>Both UEK and RedHat Kernels are supported.</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">Oracle Enterprise Linux</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">7</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">64-bit</span></td>
+                        <td colspan="1" class="confluenceTd"><p><span style="color: rgb(0,0,0);">compat-libstdc++-33 or higher is required. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">libstdc++.so.5 and libstdc++.so.6 or higher are required.</span></p><p><span style="color: rgb(0,0,0);">The libstdc++.so.5 shared library is contained in the compat-libstdc++ rpm package.</span></p><p><span style="color: rgb(0,0,0);">The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</span></p><p><span style="color: rgb(0,0,0);">libbz2.so.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">Both UEK and RedHat Kernels are supported.&nbsp;</span></p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Red Hat Enterprise Linux</td>
+                        <td class="confluenceTd">5</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                        <td class="confluenceTd"><p>compat-libstdc++-33 or higher is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libstdc++.so.5 and libstdc++.so.6 or higher are required.</span></p><p>The libstdc++.so.5 shared library is contained in the compat-libstdc++ rpm package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</p><p>libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p>libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libbz2.so</span><span>.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></p><p>Perl version 5.8 or higher is required.</p><p>ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</p><p>glibc 2.4 (32-bit) or higher is required.</p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Red Hat Enterprise Linux</td>
+                        <td class="confluenceTd">6</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                        <td class="confluenceTd"><p>compat-libstdc++-33 or higher is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libstdc++.so.5 and libstdc++.so.6 or higher are required.</span></p><p>The libstdc++.so.5 shared library is contained in the compat-libstdc++ rpm package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</p><p>libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p>libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libbz2.so</span><span>.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></p><p>Perl version 5.8 or higher is required.</p><p>ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</p><p>glibc 2.4 (32-bit) or higher is required.</p><p>libgcc-4.4 (32-bit) or higher is required.</p><p>nss-softokn-freebl-3.12 (32-bit) or higher is required.</p><p>The following rpm packages are required on the 64-bit version of Linux:</p>
+                            <ul>
+                                <li>audit-libs-2.0.4-1.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>cracklib-2.8.16-2.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam_passwdqc-1.0.5-6.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam_ldap-185-5.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam_krb5-2.3.11-1.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam-1.1.1-10.el6_2.1.i686.rpm</li>
+                            </ul></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">Red Hat Enterprise Linux</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">7.2</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">64-bit</span></td>
+                        <td colspan="1" class="confluenceTd"><p>compat-libstdc++-33 or higher is required. The 32-bit version is required on the 64-bit version of Linux.</p><p>libstdc++.so.5 and libstdc++.so.6 or higher are required.</p><p>The libstdc++.so.5 shared library is contained in the compat-libstdc++-33-3.2.3-72.el7.i686 package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++-4.8.5-4.el7.i686 package.</p><p>libbz2.so.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</p><p>Both UEK and RedHat Kernels are supported.</p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">SuSE Linux Enterprise Server</td>
+                        <td class="confluenceTd">11</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                        <td class="confluenceTd"><p>The 32-bit versions of libstdc++.so.5 and libstdc++.so.6 or higher are required.</p><p>The libstdc++.so.5 shared library is contained in the libstdc++-33 rpm package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</p><p>libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p>libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libbz2.so</span><span>.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></p><p>Perl version 5.8 or higher is required.</p><p>ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</p><p>glibc 2.4 (32-bit) or higher is required.</p><p>glibc-locale-32bit rpm package is required.</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">SuSE Linux Enterprise Server</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">12</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(0,0,0);">64-bit</span></td>
+                        <td colspan="1" class="confluenceTd"><p><span style="color: rgb(0,0,0);">The 32-bit versions of libstdc++.so.5 and libstdc++.so.6 or higher are required.</span></p><p><span style="color: rgb(0,0,0);">The libstdc++.so.5 shared library is contained in the libstdc++-33 rpm package.</span></p><p><span style="color: rgb(0,0,0);">The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</span></p><p><span style="color: rgb(0,0,0);">libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">libbz2.so.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">Perl version 5.8 or higher is required.</span></p><p><span style="color: rgb(0,0,0);">ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(0,0,0);">glibc 2.4 (32-bit) or higher is required.</span></p><p><span style="color: rgb(0,0,0);">glibc-locale-32bit rpm package is required.</span></p></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note: </strong>The glibc-locale-32bit rpm package is required to initialize the CA EEM SDK properly. For more information about CA EEM SDK initialization, see the <a rel="nofollow" class="external-link" href="https://wiki.ca.com/eem">CA EEM documentation</a><em>.</em></p>
+            </div>
+            <h3 class="heading3" id="AEOperatingSystemandDatabaseSupport-Windows.1">Windows</h3>
+            <p>The CA Workload Automation AE client and SDK components support the following Windows versions:</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Version</strong></th>
+                        <th class="confluenceTh"><strong>Architecture</strong></th>
+                        <th class="confluenceTh"><strong>Notes</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Microsoft Windows 2008</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                        <td class="confluenceTd">Windows patch 979306 is required.</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Microsoft Windows XP SP2 Professional</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                        <td class="confluenceTd">Windows patch 979306 is required.</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Microsoft Windows Vista</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                        <td class="confluenceTd">Windows patch 979306 is required.</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Microsoft Windows 7</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                        <td class="confluenceTd">Windows patch 979306 is required.</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd"><span>Microsoft Windows 10</span></td>
+                        <td colspan="1" class="confluenceTd"><span>x86 32/64-bit</span></td>
+                        <td colspan="1" class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Microsoft Windows 2012</td>
+                        <td class="confluenceTd">x86 64-bit</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> Windows R2 and SQL server R2 releases are supported unless noted otherwise.
+            </div>
+            <h2 class="heading2" id="AEOperatingSystemandDatabaseSupport-AgentSupportedVersions">Agent Supported Versions</h2>
+            <p>CA Workload Automation AE installs CA Workload Automation Agent for UNIX, Linux, or Windows 11.3.07 (Build 979). However, on HP-UX PA-RISC, CA Workload Automation AE installs CA Workload Automation Agent 11.3.05 (11.3 SP5)<span class="Apple-tab-span">&nbsp;</span>(Build 904). For more information on the agent or configuring the agent to behave like the legacy agent, see <a rel="nofollow" class="external-link" href="https://wiki.ca.com/wlaagents">CA Workload Automation Agents</a>.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note: </strong>You cannot issue the autoping command with the -S option or run jobs that contain globs or blobs as input or output, if you installed:</p>
+                <ul>
+                    <li>The agent <span style="line-height: 1.42857;">using the CA Workload Automation Agent for UNIX, Linux, or Windows DVD </span>where the native CA Workload Automation AE client is not installed.</li>
+                    <li>(HP-Itanium only) The agent using the CA Workload Automation AE DVD as the agent installed is 64-bit.</li>
+                    <li>The 64-bit agent using the CA Workload Automation Agent for UNIX, Linux, or Windows DVD.</li>
+                </ul>
+                <p></p>
+            </div>
+            <h3 class="heading3" id="AEOperatingSystemandDatabaseSupport-UNIX.2">UNIX</h3>
+            <p>The CA Workload Automation AE agent component supports the following UNIX versions:</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Operating Environment</strong></th>
+                        <th class="confluenceTh"><strong>Supported Versions</strong></th>
+                        <th class="confluenceTh"><strong>Architecture</strong></th>
+                        <th class="confluenceTh"><strong>Notes</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">AIX</td>
+                        <td class="confluenceTd">5.3</td>
+                        <td class="confluenceTd">32/64-bit</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">AIX</td>
+                        <td class="confluenceTd">6.1</td>
+                        <td class="confluenceTd">64-bit</td>
+                        <td class="confluenceTd">Install the latest fix pack from the IBM website. You can download the patch from <a rel="nofollow" class="external-link" href="http://www-933.ibm.com/support/fixcentral">http://www-933.ibm.com/support/fixcentral</a>.</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">AIX</td>
+                        <td class="confluenceTd">7.1</td>
+                        <td class="confluenceTd">64-bit</td>
+                        <td class="confluenceTd"><p>Install the latest fix pack from the IBM website. You can download the patch from <a rel="nofollow" class="external-link" href="http://www-933.ibm.com/support/fixcentral">http://www-933.ibm.com/support/fixcentral</a>.</p><p><span style="color: rgb(51,51,51);">The operating system must be at TL1 SP2 or later.</span></p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd">AIX</td>
+                        <td colspan="1" class="confluenceTd">7.2</td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(55,55,55);">64-bit</span></td>
+                        <td colspan="1" class="confluenceTd"><p>Install the latest fix pack from the IBM website. You can download the patch from <a rel="nofollow" class="external-link" href="http://www-933.ibm.com/support/fixcentral">http://www-933.ibm.com/support/fixcentral</a>.</p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">HP-UX</td>
+                        <td class="confluenceTd">11i v1 (11.11)</td>
+                        <td class="confluenceTd">PA-RISC 32/64-bit</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">HP-UX</td>
+                        <td class="confluenceTd">11i v2 (11.23)</td>
+                        <td class="confluenceTd">IA 64-bit (Itanium)<br>PA-RISC 32/64-bit</td>
+                        <td class="confluenceTd">On HP-UX PA-RISC computers, install the required patches as follows:
+                            <ul>
+                                <li>HP-UX 11i v1 (11.11) PA-RISC—PHSS_35385</li>
+                                <li>HP-UX 11i v2 (11.23) PA-RISC<span>—</span>PHSS_37201</li>
+                                <li>HP-UX 11i v3 (11.31) PA-RISC<span>—</span>PHSS_37202</li>
+                            </ul></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">HP-UX</td>
+                        <td class="confluenceTd">11i v3 (11.31)</td>
+                        <td class="confluenceTd">IA 64-bit (Itanium)<br>PA-RISC 32/64-bit</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Solaris</td>
+                        <td class="confluenceTd">9</td>
+                        <td class="confluenceTd">SPARC 32/64-bit</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Solaris</td>
+                        <td class="confluenceTd">10</td>
+                        <td class="confluenceTd">SPARC 32/64-bit<br>x86 32/64-bit</td>
+                        <td class="confluenceTd"><p>Global zone and non-global whole/sparse root zone configurations are supported.</p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Solaris</td>
+                        <td class="confluenceTd">11</td>
+                        <td class="confluenceTd">SPARC 32/64-bit<br>x86 32/64-bit</td>
+                        <td class="confluenceTd"><p>Global zone and non-global whole/sparse root zone configurations are supported.</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3 class="heading3" id="AEOperatingSystemandDatabaseSupport-Linux.2">Linux</h3>
+            <p>The CA Workload Automation AE agent component supports the following Linux versions:</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Operating Environment</strong></th>
+                        <th class="confluenceTh"><strong>Supported Versions</strong></th>
+                        <th class="confluenceTh"><strong>Architecture</strong></th>
+                        <th class="confluenceTh"><strong>Notes</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Red Hat Enterprise Linux</td>
+                        <td class="confluenceTd">4</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                        <td class="confluenceTd"><p>compat-libstdc++-33 or higher package (RPM) is required that supports GLIBCXX_3.2.3 or higher. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libstdc++.so.5 and libstdc++.so.6 or higher are required.</span></p><p>The libstdc++.so.5 shared library is contained in the compat-libstdc++ rpm package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</p><p>libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p>libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libbz2.so</span><span>.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></p><p>Perl version 5.8 or higher is required.</p><p>ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</p><p>glibc 2.4 (32-bit) or higher is required.</p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Red Hat Enterprise Linux</td>
+                        <td class="confluenceTd">5</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                        <td class="confluenceTd"><p>compat-libstdc++-33 or higher package (RPM) is required that supports GLIBCXX_3.2.3 or higher. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libstdc++.so.5 and libstdc++.so.6 or higher are required.</span></p><p>The libstdc++.so.5 shared library is contained in the compat-libstdc++ rpm package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</p><p>libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p>libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span><span>libbz2.so</span><span>.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></span></p><p>Perl version 5.8 or higher is required.</p><p>ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</p><p>glibc 2.4 (32-bit) or higher is required.</p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Red Hat Enterprise Linux</td>
+                        <td class="confluenceTd">6</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                        <td class="confluenceTd"><p>compat-libstdc++-33 or higher is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span>libstdc++.so.5 and libstdc++.so.6 or higher are required.</span></p><p>The libstdc++.so.5 shared library is contained in the compat-libstdc++ rpm package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</p><p>libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p>libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span><span>libbz2.so</span><span>.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></span></p><p>Perl version 5.8 or higher is required.</p><p>ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</p><p>glibc 2.4 (32-bit) or higher is required.</p><p>libgcc-4.4 (32-bit) or higher is required.</p><p>nss-softokn-freebl-3.12 (32-bit) or higher is required.</p><p>The following rpm packages are required on the 64-bit version of Linux:</p>
+                            <ul>
+                                <li>audit-libs-2.0.4-1.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>cracklib-2.8.16-2.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam_passwdqc-1.0.5-6.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam_ldap-185-5.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam_krb5-2.3.11-1.el6.i686.rpm</li>
+                            </ul>
+                            <ul>
+                                <li>pam-1.1.1-10.el6_2.1.i686.rpm</li>
+                            </ul></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(51,51,51);">Red Hat Enterprise Linux</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(51,51,51);">7.2</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(51,51,51);">64-bit</span></td>
+                        <td colspan="1" class="confluenceTd"><p>compat-libstdc++-33 or higher is required. The 32-bit version is required on the 64-bit version of Linux.</p><p>libstdc++.so.5 and libstdc++.so.6 or higher are required.</p><p>The libstdc++.so.5 shared library is contained in the compat-libstdc++-33-3.2.3-72.el7.i686 package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++-4.8.5-4.el7.i686 package.</p><p>libbz2.so.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</p><p>Both UEK and RedHat Kernels are supported.</p></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">SuSE Linux Enterprise Server</td>
+                        <td class="confluenceTd">11</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                        <td class="confluenceTd"><p>The 32-bit versions of libstdc++.so.5 and libstdc++.so.6 or higher are required.</p><p>The libstdc++.so.5 shared library is contained in the libstdc++-33 rpm package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</p><p>libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p>libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</p><p><span><span>libbz2.so</span><span>.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></span></p><p>Perl version 5.8 or higher is required.</p><p>ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</p><p>glibc 2.4 (32-bit) or higher is required.</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(51,51,51);">SuSE Linux Enterprise Server</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(51,51,51);">12</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(51,51,51);">64-bit</span></td>
+                        <td colspan="1" class="confluenceTd"><p><span style="color: rgb(51,51,51);">The 32-bit versions of libstdc++.so.5 and libstdc++.so.6 or higher are required.</span></p><p><span style="color: rgb(51,51,51);">The libstdc++.so.5 shared library is contained in the libstdc++-33 rpm package.</span></p><p><span style="color: rgb(51,51,51);">The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</span></p><p><span style="color: rgb(51,51,51);">libuuid.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(51,51,51);">libaio.so.1 is required. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(51,51,51);">libbz2.so.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(51,51,51);">Perl version 5.8 or higher is required.</span></p><p><span style="color: rgb(51,51,51);">ncurses (32-bit) version 5 or higher is required on the 64-bit version of Linux.</span></p><p><span style="color: rgb(51,51,51);">glibc 2.4 (32-bit) or higher is required.</span></p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(51,51,51);">Oracle Enterprise Linux </span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(51,51,51);">&nbsp;7</span></td>
+                        <td colspan="1" class="confluenceTd"><span style="color: rgb(51,51,51);">&nbsp;64-bit</span></td>
+                        <td colspan="1" class="confluenceTd"><p>compat-libstdc++-33 or higher is required. The 32-bit version is required on the 64-bit version of Linux.</p><p>libstdc++.so.5 and libstdc++.so.6 or higher are required.</p><p>The libstdc++.so.5 shared library is contained in the compat-libstdc++ rpm package.</p><p>The libstdc++.so.6 shared library is contained in the libstdc++ rpm package.</p><p>libbz2.so.1 is required. This library is contained in the bzip2-libs rpm package. The 32-bit version is required on the 64-bit version of Linux.</p><p>Both UEK and RedHat Kernels are supported.</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3 class="heading3" id="AEOperatingSystemandDatabaseSupport-Windows.2">Windows</h3>
+            <p>The CA Workload Automation AE agent component supports the following Windows versions:</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Version</strong></th>
+                        <th class="confluenceTh"><strong>Architecture</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Microsoft Windows 2008</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Microsoft Windows 2008 R2 SP2</td>
+                        <td class="confluenceTd">64-bit</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Microsoft Windows 7</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Microsoft Windows 8</td>
+                        <td class="confluenceTd">x86 32/64-bit</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Microsoft Windows 2012</td>
+                        <td class="confluenceTd">64-bit</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd"><span>Microsoft Windows 2012 R2</span></td>
+                        <td colspan="1" class="confluenceTd"><span>64-bit</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 class="heading2" id="AEOperatingSystemandDatabaseSupport-Patch979306--TimeZoneUpdateforWindows">Patch 979306 -- Time Zone Update for Windows</h2>
+            <p>For CA Workload Automation AE to work correctly with daylight saving time (DST), install patch 979306 on the CA Workload Automation AE client computers.</p>
+            <p>You can download the patch from <a rel="nofollow" class="external-link" href="http://support.microsoft.com/kb/955839">http://support.microsoft.com/kb/955839</a>.</p>
+            <p>For more information about configuring DST for Windows, see <a rel="nofollow" class="external-link" href="http://support.microsoft.com/kb/914387">http://support.microsoft.com/kb/914387</a>.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;The patch number is 979306 at the time of General Availability (GA). This patch may be superseded post GA. Ensure that you install the latest patch. For current information about the time zone patches, check the Microsoft Support web site.</p>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

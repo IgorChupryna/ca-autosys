@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The dbspace command calculates and displays a summary of the disk space used by the CA Workload Automation AE database tables.</p>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>dbspace&nbsp;[-x]&nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-x</strong></p><p>(Optional) Returns the product version information.</p></li>
+                    <li><p><strong>-?<br></strong>(Optional) Displays help for the command.&nbsp;</p></li>
+                </ul>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <p><strong>Note:</strong> If you use an Oracle database, consider the following points:</p>
+                    <ul>
+                        <li>To obtain the correct disk space that is used by the CA Workload Automation AE database tables, run the dbstatistics command before running the dbspace command. The dbstatistics command updates the metadata maintained by Oracle in the all_tables and dba_tables tables.</li>
+                        <li>The dbspace command might erroneously report that the database is nearly full. This can occur because dbspace calculates how much space is not allocated for extents. The dbspace command reports entire extents as used space even when they are nearly empty.</li>
+                        <li><p>The dbspace command might incur privilege errors during execution. Privilege errors occur because the UJOADMIN account has not been granted the ANALYZE ANY privilege or the ujoadmin role does not have SELECT privileges to DBA_TABLES. If the ujoadmin role does not have the proper authority, the following messages are displayed</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <pre class="ca-code"><p>CAUAJM_E_18400&nbsp;An&nbsp;error&nbsp;has&nbsp;occurred&nbsp;while&nbsp;interfacing&nbsp;with&nbsp;ORACLE.</p><p>CAUAJM_E_18401&nbsp;Function&nbsp;&lt;Oexec&gt;&nbsp;invoked&nbsp;from&nbsp;&lt;execute&gt;&nbsp;failed&nbsp;&lt;600&gt;</p><p>CAUAJM_E_18402&nbsp;ORA-00942:&nbsp;table&nbsp;or&nbsp;view&nbsp;does&nbsp;not&nbsp;exist</p><p>CAUAJM_I_18403&nbsp;Processing&nbsp;OCI&nbsp;function&nbsp;not&nbsp;used(4)</p><p>dbspace:&nbsp;Failed&nbsp;to&nbsp;retrieve&nbsp;blocksize</p></pre>
+                            </div></li>
+                    </ul>
+                </div>
+                <p>To grant these privileges, run the following SQL commands:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>sqlplus&nbsp;sys/&lt;passwd&gt;@&lt;ORACLE_SID&gt;&nbsp;as&nbsp;sysdba</p><p>grant&nbsp;ANALYZE&nbsp;ANY&nbsp;to&nbsp;UJOADMIN;</p><p>grant&nbsp;SELECT&nbsp;ON&nbsp;DBA_TABLES&nbsp;to&nbsp;UJOADMIN;</p></pre>
+                </div>
+                <p>To revoke these privileges, run the following SQL commands:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>sqlplus&nbsp;sys/&lt;passwd&gt;@&lt;ORACLE_SID&gt;&nbsp;as&nbsp;sysdba</p><p>revoke&nbsp;ANALYZE&nbsp;ANY&nbsp;from&nbsp;UJOADMIN;</p><p>revoke&nbsp;SELECT&nbsp;ON&nbsp;DBA_TABLES&nbsp;from&nbsp;UJOADMIN;</p></pre>
+                </div>
+                <p><strong>Example: Calculate and Report Database Table Space</strong></p>
+                <p>This example calculates and displays the disk space allocated for the CA Workload Automation AE tables:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>dbspace</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

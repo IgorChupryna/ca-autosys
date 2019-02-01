@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div >
+    <h1 class="article-name" tabindex="0">CA WA Agent for UNIX, Linux, Windows, or iSeries Agent Parameters</h1>
+
+
+    <div>
+        <div class="col-xs-12 col-md-8 col-lg-8">
+            <p>You can configure the following agent parameters in the agentparm.txt file. The default parameter values are set during the agent installation. You can add these parameters or can modify them as required.</p>
+            <p></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H3" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.resourcemon.threshold.disk.critical" class="toc-link">agent.resourcemon.threshold.disk.critical</a></span></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.resourcemon.threshold.disk.warning.notice" class="toc-link">agent.resourcemon.threshold.disk.warning.notice</a></span></li><li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.resourcemon.threshold.disk.warning.severe" class="toc-link">agent.resourcemon.threshold.disk.warning.severe</a></span></li><li><span class="toc-item-body" data-outline="4"><span class="toc-outline">4</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.spool.success.autocleanup" class="toc-link">agent.spool.success.autocleanup</a></span></li><li><span class="toc-item-body" data-outline="5"><span class="toc-outline">5</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.authentication.protocol" class="toc-link">agent.ssl.authentication.protocol</a></span></li><li><span class="toc-item-body" data-outline="6"><span class="toc-outline">6</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.cert.selfsigned.allow" class="toc-link">agent.ssl.cert.selfsigned.allow</a></span></li><li><span class="toc-item-body" data-outline="7"><span class="toc-outline">7</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.keymanager.algorithm" class="toc-link">agent.ssl.keymanager.algorithm</a></span></li><li><span class="toc-item-body" data-outline="8"><span class="toc-outline">8</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.keystore" class="toc-link">agent.ssl.keystore</a></span></li><li><span class="toc-item-body" data-outline="9"><span class="toc-outline">9</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.keystore.password" class="toc-link">agent.ssl.keystore.password</a></span></li><li><span class="toc-item-body" data-outline="10"><span class="toc-outline">10</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.reversechain" class="toc-link">agent.ssl.reversechain</a></span></li><li><span class="toc-item-body" data-outline="11"><span class="toc-outline">11</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.truststore" class="toc-link">agent.ssl.truststore</a></span></li><li><span class="toc-item-body" data-outline="12"><span class="toc-outline">12</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.truststore.password" class="toc-link">agent.ssl.truststore.password</a></span></li><li><span class="toc-item-body" data-outline="13"><span class="toc-outline">13</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.useacl" class="toc-link">agent.ssl.useacl</a></span></li><li><span class="toc-item-body" data-outline="14"><span class="toc-outline">14</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agentname" class="toc-link">agentname</a></span></li><li><span class="toc-item-body" data-outline="15"><span class="toc-outline">15</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.alias_N=&lt;AgentName&gt;" class="toc-link">communication.alias_N=<agent name=""></agent></a></span></li><li><span class="toc-item-body" data-outline="16"><span class="toc-outline">16</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.inputport" class="toc-link">communication.inputport</a></span></li><li><span class="toc-item-body" data-outline="17"><span class="toc-outline">17</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.inputport.aux" class="toc-link">communication.inputport.aux</a></span></li><li><span class="toc-item-body" data-outline="18"><span class="toc-outline">18</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.manageraddress_n=address_1;...;address_m" class="toc-link">communication.manageraddress_n=address_1;...;address_m</a></span></li><li><span class="toc-item-body" data-outline="19"><span class="toc-outline">19</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.managerid_n" class="toc-link">communication.managerid_n</a></span></li><li><span class="toc-item-body" data-outline="20"><span class="toc-outline">20</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.managerport_n" class="toc-link">communication.managerport_n</a></span></li><li><span class="toc-item-body" data-outline="21"><span class="toc-outline">21</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.monitorobject_n" class="toc-link">communication.monitorobject_n</a></span></li><li><span class="toc-item-body" data-outline="22"><span class="toc-outline">22</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.nomanagers.abort.disable" class="toc-link">communication.nomanagers.abort.disable</a></span></li><li><span class="toc-item-body" data-outline="23"><span class="toc-outline">23</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.receiver.socket.aux" class="toc-link">communication.receiver.socket.aux</a></span></li><li><span class="toc-item-body" data-outline="24"><span class="toc-outline">24</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.receiver.socket.main" class="toc-link">communication.receiver.socket.main</a></span></li><li><span class="toc-item-body" data-outline="25"><span class="toc-outline">25</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.socket_n" class="toc-link">communication.socket_n</a></span></li><li><span class="toc-item-body" data-outline="26"><span class="toc-outline">26</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.transmitter.interface.address" class="toc-link">communication.transmitter.interface.address</a></span></li><li><span class="toc-item-body" data-outline="27"><span class="toc-outline">27</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.transmitter.interface.port" class="toc-link">communication.transmitter.interface.port</a></span></li><li><span class="toc-item-body" data-outline="28"><span class="toc-outline">28</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.v2.nativeafmencoding" class="toc-link">communication.v2.nativeafmencoding</a></span></li><li><span class="toc-item-body" data-outline="29"><span class="toc-outline">29</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-filemon.firstscan.skip" class="toc-link">filemon.firstscan.skip</a></span></li><li><span class="toc-item-body" data-outline="30"><span class="toc-outline">30</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-filemonplugin.dispatcher.processors" class="toc-link">filemonplugin.dispatcher.processors</a></span></li><li><span class="toc-item-body" data-outline="31"><span class="toc-outline">31</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-filemonplugin.dispatcher.queue_size" class="toc-link">filemonplugin.dispatcher.queue_size</a></span></li><li><span class="toc-item-body" data-outline="32"><span class="toc-outline">32</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-filemon.state.persistence.enable" class="toc-link">filemon.state.persistence.enable</a></span></li><li><span class="toc-item-body" data-outline="33"><span class="toc-outline">33</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-filemon.update.firstscan.skip" class="toc-link">filemon.update.firstscan.skip</a></span></li><li><span class="toc-item-body" data-outline="34"><span class="toc-outline">34</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-filemonplugin.runexternal" class="toc-link">filemonplugin.runexternal</a></span></li><li><span class="toc-item-body" data-outline="35"><span class="toc-outline">35</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-filemonplugin.strategy" class="toc-link">filemonplugin.strategy</a></span></li><li><span class="toc-item-body" data-outline="36"><span class="toc-outline">36</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.anonymous" class="toc-link">ftp.anonymous</a></span></li><li><span class="toc-item-body" data-outline="37"><span class="toc-outline">37</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.ascii.ccsid" class="toc-link">ftp.ascii.ccsid</a></span></li><li><span class="toc-item-body" data-outline="38"><span class="toc-outline">38</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.client.srvtimeout" class="toc-link">ftp.client.srvtimeout</a></span></li><li><span class="toc-item-body" data-outline="39"><span class="toc-outline">39</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.client.ssl" class="toc-link">ftp.client.ssl</a></span></li><li><span class="toc-item-body" data-outline="40"><span class="toc-outline">40</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.client.ssl.accept_new_ca" class="toc-link">ftp.client.ssl.accept_new_ca</a></span></li><li><span class="toc-item-body" data-outline="41"><span class="toc-outline">41</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.client.ssl.reversechain" class="toc-link">ftp.client.ssl.reversechain</a></span></li><li><span class="toc-item-body" data-outline="42"><span class="toc-outline">42</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.client.ssl.start_with_ssl_session" class="toc-link">ftp.client.ssl.start_with_ssl_session</a></span></li><li><span class="toc-item-body" data-outline="43"><span class="toc-outline">43</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.client.ssl.truststore" class="toc-link">ftp.client.ssl.truststore</a></span></li><li><span class="toc-item-body" data-outline="44"><span class="toc-outline">44</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.client.ssl.truststore.password" class="toc-link">ftp.client.ssl.truststore.password</a></span></li><li><span class="toc-item-body" data-outline="45"><span class="toc-outline">45</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.client.updatemsg" class="toc-link">ftp.client.updatemsg</a></span></li><li><span class="toc-item-body" data-outline="46"><span class="toc-outline">46</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.command.retrydelay" class="toc-link">ftp.command.retrydelay</a></span></li><li><span class="toc-item-body" data-outline="47"><span class="toc-outline">47</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.data.compression" class="toc-link">ftp.data.compression</a></span></li><li><span class="toc-item-body" data-outline="48"><span class="toc-outline">48</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.dataports" class="toc-link">ftp.dataports</a></span></li><li><span class="toc-item-body" data-outline="49"><span class="toc-outline">49</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.download.owner" class="toc-link">ftp.download.owner</a></span></li><li><span class="toc-item-body" data-outline="50"><span class="toc-outline">50</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.ebcdic.ccsid" class="toc-link">ftp.ebcdic.ccsid</a></span></li><li><span class="toc-item-body" data-outline="51"><span class="toc-outline">51</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.noserver" class="toc-link">ftp.noserver</a></span></li><li><span class="toc-item-body" data-outline="52"><span class="toc-outline">52</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.passive" class="toc-link">ftp.passive</a></span></li><li><span class="toc-item-body" data-outline="53"><span class="toc-outline">53</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.scp.debug.enable" class="toc-link">ftp.scp.debug.enable</a></span></li><li><span class="toc-item-body" data-outline="54"><span class="toc-outline">54</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.scp.sshd.timeout" class="toc-link">ftp.scp.sshd.timeout</a></span></li><li><span class="toc-item-body" data-outline="55"><span class="toc-outline">55</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.server.ssl" class="toc-link">ftp.server.ssl</a></span></li><li><span class="toc-item-body" data-outline="56"><span class="toc-outline">56</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.server.ssl.keystore" class="toc-link">ftp.server.ssl.keystore</a></span></li><li><span class="toc-item-body" data-outline="57"><span class="toc-outline">57</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.server.ssl.keystore.password" class="toc-link">ftp.server.ssl.keystore.password</a></span></li><li><span class="toc-item-body" data-outline="58"><span class="toc-outline">58</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.serverport" class="toc-link">ftp.serverport</a></span></li><li><span class="toc-item-body" data-outline="59"><span class="toc-outline">59</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.sftp.connect.timeout" class="toc-link">ftp.sftp.connect.timeout</a></span></li><li><span class="toc-item-body" data-outline="60"><span class="toc-outline">60</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.spool.verbose" class="toc-link">ftp.spool.verbose</a></span></li><li><span class="toc-item-body" data-outline="61"><span class="toc-outline">61</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.ssl.protocol" class="toc-link">ftp.ssl.protocol</a></span></li><li><span class="toc-item-body" data-outline="62"><span class="toc-outline">62</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.timeout" class="toc-link">ftp.timeout</a></span></li><li><span class="toc-item-body" data-outline="63"><span class="toc-outline">63</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-i5os.job.cmpc.pattern.maxline" class="toc-link">i5os.job.cmpc.pattern.maxline</a></span></li><li><span class="toc-item-body" data-outline="64"><span class="toc-outline">64</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-initiators.afmjobclassmap_n=verb,subverb,jobclass" class="toc-link">initiators.afmjobclassmap_n=verb,subverb,jobclass</a></span></li><li><span class="toc-item-body" data-outline="65"><span class="toc-outline">65</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-initiators.class_n=jobclass,number_of_initiators" class="toc-link">initiators.class_n=jobclass,number_of_initiators</a></span></li><li><span class="toc-item-body" data-outline="66"><span class="toc-outline">66</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-initiators.throttle.delay" class="toc-link">initiators.throttle.delay</a></span></li><li><span class="toc-item-body" data-outline="67"><span class="toc-outline">67</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-initiators.throttle_n=jobclass,throttle_rate" class="toc-link">initiators.throttle_n=jobclass,throttle_rate</a></span></li><li><span class="toc-item-body" data-outline="68"><span class="toc-outline">68</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-installer.version" class="toc-link">installer.version</a></span></li><li><span class="toc-item-body" data-outline="69"><span class="toc-outline">69</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-log.archive" class="toc-link">log.archive</a></span></li><li><span class="toc-item-body" data-outline="70"><span class="toc-outline">70</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-log.folder" class="toc-link">log.folder</a></span></li><li><span class="toc-item-body" data-outline="71"><span class="toc-outline">71</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-log.level" class="toc-link">log.level</a></span></li><li><span class="toc-item-body" data-outline="72"><span class="toc-outline">72</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-log.maxsize=maximum_size[B|K|M|G]" class="toc-link">log.maxsize=maximum_size[B|K|M|G]</a></span></li><li><span class="toc-item-body" data-outline="73"><span class="toc-outline">73</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.connector_n" class="toc-link">management.connector_n</a></span></li><li><span class="toc-item-body" data-outline="74"><span class="toc-outline">74</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.jmx.host" class="toc-link">management.jmx.host</a></span></li><li><span class="toc-item-body" data-outline="75"><span class="toc-outline">75</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.jmx.port" class="toc-link">management.jmx.port</a></span></li><li><span class="toc-item-body" data-outline="76"><span class="toc-outline">76</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.jmx.security.password" class="toc-link">management.jmx.security.password</a></span></li><li><span class="toc-item-body" data-outline="77"><span class="toc-outline">77</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.jmx.security.user" class="toc-link">management.jmx.security.user</a></span></li><li><span class="toc-item-body" data-outline="78"><span class="toc-outline">78</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.community.read" class="toc-link">management.snmp.agent.community.read</a></span></li><li><span class="toc-item-body" data-outline="79"><span class="toc-outline">79</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.community.write" class="toc-link">management.snmp.agent.community.write</a></span></li><li><span class="toc-item-body" data-outline="80"><span class="toc-outline">80</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.trapsink.community" class="toc-link">management.snmp.agent.trapsink.community</a></span></li><li><span class="toc-item-body" data-outline="81"><span class="toc-outline">81</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.trapsink.host" class="toc-link">management.snmp.agent.trapsink.host</a></span></li><li><span class="toc-item-body" data-outline="82"><span class="toc-outline">82</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.trapsink.port" class="toc-link">management.snmp.agent.trapsink.port</a></span></li><li><span class="toc-item-body" data-outline="83"><span class="toc-outline">83</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.trapsink.user" class="toc-link">management.snmp.agent.trapsink.user</a></span></li><li><span class="toc-item-body" data-outline="84"><span class="toc-outline">84</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.user" class="toc-link">management.snmp.agent.user</a></span></li><li><span class="toc-item-body" data-outline="85"><span class="toc-outline">85</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.user.auth.password" class="toc-link">management.snmp.agent.user.auth.password</a></span></li><li><span class="toc-item-body" data-outline="86"><span class="toc-outline">86</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.user.auth.protocol" class="toc-link">management.snmp.agent.user.auth.protocol</a></span></li><li><span class="toc-item-body" data-outline="87"><span class="toc-outline">87</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.user.priv.password" class="toc-link">management.snmp.agent.user.priv.password</a></span></li><li><span class="toc-item-body" data-outline="88"><span class="toc-outline">88</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.user.priv.protocol" class="toc-link">management.snmp.agent.user.priv.protocol</a></span></li><li><span class="toc-item-body" data-outline="89"><span class="toc-outline">89</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.version" class="toc-link">management.snmp.agent.version</a></span></li><li><span class="toc-item-body" data-outline="90"><span class="toc-outline">90</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.community" class="toc-link">management.snmp.community</a></span></li><li><span class="toc-item-body" data-outline="91"><span class="toc-outline">91</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.host" class="toc-link">management.snmp.host</a></span></li><li><span class="toc-item-body" data-outline="92"><span class="toc-outline">92</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.mibfile" class="toc-link">management.snmp.mibfile</a></span></li><li><span class="toc-item-body" data-outline="93"><span class="toc-outline">93</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.port" class="toc-link">management.snmp.port</a></span></li><li><span class="toc-item-body" data-outline="94"><span class="toc-outline">94</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.wol.nudges" class="toc-link">management.wol.nudges</a></span></li><li><span class="toc-item-body" data-outline="95"><span class="toc-outline">95</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.wol.nudges.sleep" class="toc-link">management.wol.nudges.sleep</a></span></li><li><span class="toc-item-body" data-outline="96"><span class="toc-outline">96</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.wol.ports" class="toc-link">management.wol.ports</a></span></li><li><span class="toc-item-body" data-outline="97"><span class="toc-outline">97</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-objmon.ipmon.retries" class="toc-link">objmon.ipmon.retries</a></span></li><li><span class="toc-item-body" data-outline="98"><span class="toc-outline">98</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-os400.product.library" class="toc-link">os400.product.library</a></span></li><li><span class="toc-item-body" data-outline="99"><span class="toc-outline">99</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-os400.quote.parameter" class="toc-link">os400.quote.parameter</a></span></li><li><span class="toc-item-body" data-outline="100"><span class="toc-outline">100</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-os400.run.job.ccsid" class="toc-link">os400.run.job.ccsid</a></span></li><li><span class="toc-item-body" data-outline="101"><span class="toc-outline">101</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.agentparm.backupfilelimit" class="toc-link">oscomponent.agentparm.backupfilelimit</a></span></li><li><span class="toc-item-body" data-outline="102"><span class="toc-outline">102</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.auth.pam.lib" class="toc-link">oscomponent.auth.pam.lib</a></span></li><li><span class="toc-item-body" data-outline="103"><span class="toc-outline">103</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.auth.pam.svc" class="toc-link">oscomponent.auth.pam.svc</a></span></li><li><span class="toc-item-body" data-outline="104"><span class="toc-outline">104</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.checkvalidshell" class="toc-link">oscomponent.checkvalidshell</a></span></li><li><span class="toc-item-body" data-outline="105"><span class="toc-outline">105</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.classpath" class="toc-link">oscomponent.classpath</a></span></li><li><span class="toc-item-body" data-outline="106"><span class="toc-outline">106</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.cmdprefix.force" class="toc-link">oscomponent.cmdprefix.force</a></span></li><li><span class="toc-item-body" data-outline="107"><span class="toc-outline">107</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponentoscomponent.cmdprefix.force.quotes.full" class="toc-link"> oscomponent.cmdprefix.force.quotes.full</a></span></li><li><span class="toc-item-body" data-outline="108"><span class="toc-outline">108</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.cmdprefix.force.redir.ifstdon" class="toc-link">oscomponent.cmdprefix.force.redir.ifstdon</a></span></li><li><span class="toc-item-body" data-outline="109"><span class="toc-outline">109</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.cmdprefix.force.redir.inline" class="toc-link">oscomponent.cmdprefix.force.redir.inline</a></span></li><li><span class="toc-item-body" data-outline="110"><span class="toc-outline">110</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.default.password" class="toc-link">oscomponent.default.password</a></span></li><li><span class="toc-item-body" data-outline="111"><span class="toc-outline">111</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.default.user" class="toc-link">oscomponent.default.user</a></span></li><li><span class="toc-item-body" data-outline="112"><span class="toc-outline">112</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.defaultfile.permission" class="toc-link">oscomponent.defaultfile.permission</a></span></li><li><span class="toc-item-body" data-outline="113"><span class="toc-outline">113</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.defaultshell" class="toc-link">oscomponent.defaultshell</a></span></li><li><span class="toc-item-body" data-outline="114"><span class="toc-outline">114</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.defaultshell.force" class="toc-link">oscomponent.defaultshell.force</a></span></li><li><span class="toc-item-body" data-outline="115"><span class="toc-outline">115</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.environment.variable" class="toc-link">oscomponent.environment.variable</a></span></li><li><span class="toc-item-body" data-outline="116"><span class="toc-outline">116</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.environment.variable_manager_manager_id" class="toc-link">oscomponent.environment.variable_manager_manager_id</a></span></li><li><span class="toc-item-body" data-outline="117"><span class="toc-outline">117</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.environment.variable_user_user_id" class="toc-link">oscomponent.environment.variable_user_user_id</a></span></li><li><span class="toc-item-body" data-outline="118"><span class="toc-outline">118</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.initialworkingdirectory" class="toc-link">oscomponent.initialworkingdirectory</a></span></li><li><span class="toc-item-body" data-outline="119"><span class="toc-outline">119</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.interactive" class="toc-link">oscomponent.interactive</a></span></li><li><span class="toc-item-body" data-outline="120"><span class="toc-outline">120</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.killsignals" class="toc-link">oscomponent.killsignals</a></span></li><li><span class="toc-item-body" data-outline="121"><span class="toc-outline">121</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.killsignals.interval" class="toc-link">oscomponent.killsignals.interval</a></span></li><li><span class="toc-item-body" data-outline="122"><span class="toc-outline">122</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.interactive.session.ignoreinactive" class="toc-link">oscomponent.interactive.session.ignoreinactive</a></span></li><li><span class="toc-item-body" data-outline="123"><span class="toc-outline">123</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.interactive.sessionzero" class="toc-link">oscomponent.interactive.sessionzero</a></span></li><li><span class="toc-item-body" data-outline="124"><span class="toc-outline">124</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.javapath" class="toc-link">oscomponent.javapath</a></span></li><li><span class="toc-item-body" data-outline="125"><span class="toc-outline">125</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.joblog" class="toc-link">oscomponent.joblog</a></span></li><li><span class="toc-item-body" data-outline="126"><span class="toc-outline">126</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.joblog.success.autocleanup" class="toc-link">oscomponent.joblog.success.autocleanup</a></span></li><li><span class="toc-item-body" data-outline="127"><span class="toc-outline">127</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.loginshell" class="toc-link">oscomponent.loginshell</a></span></li><li><span class="toc-item-body" data-outline="128"><span class="toc-outline">128</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.logon.batch.first" class="toc-link">oscomponent.logon.batch.first</a></span></li><li><span class="toc-item-body" data-outline="129"><span class="toc-outline">129</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.logon.elevated" class="toc-link">oscomponent.logon.elevated</a></span></li><li><span class="toc-item-body" data-outline="130"><span class="toc-outline">130</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.lookupcommand" class="toc-link">oscomponent.lookupcommand</a></span></li><li><span class="toc-item-body" data-outline="131"><span class="toc-outline">131</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.lookuposerror" class="toc-link">oscomponent.lookuposerror</a></span></li><li><span class="toc-item-body" data-outline="132"><span class="toc-outline">132</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.noexitcode" class="toc-link">oscomponent.noexitcode</a></span></li><li><span class="toc-item-body" data-outline="133"><span class="toc-outline">133</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.noforceprofile" class="toc-link">oscomponent.noforceprofile</a></span></li><li><span class="toc-item-body" data-outline="134"><span class="toc-outline">134</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.pamlogin.enable" class="toc-link">oscomponent.pamlogin.enable&nbsp;</a></span></li><li><span class="toc-item-body" data-outline="135"><span class="toc-outline">135</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.pamlogin.svc" class="toc-link">oscomponent.pamlogin.svc</a></span></li><li><span class="toc-item-body" data-outline="136"><span class="toc-outline">136</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.profiles.global.override" class="toc-link">oscomponent.profiles.global.override</a></span></li><li><span class="toc-item-body" data-outline="137"><span class="toc-outline">137</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.profiles.src.delay" class="toc-link">oscomponent.profiles.src.delay</a></span></li><li><span class="toc-item-body" data-outline="138"><span class="toc-outline">138</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.profiles.src.location.iwd" class="toc-link">oscomponent.profiles.src.location.iwd</a></span></li><li><span class="toc-item-body" data-outline="139"><span class="toc-outline">139</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.profiles.src.order.global.first" class="toc-link">oscomponent.profiles.src.order.global.first</a></span></li><li><span class="toc-item-body" data-outline="140"><span class="toc-outline">140</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.profiles.src.verify" class="toc-link">oscomponent.profiles.src.verify&nbsp;</a></span></li><li><span class="toc-item-body" data-outline="141"><span class="toc-outline">141</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.restoredrives" class="toc-link">oscomponent.restoredrives</a></span></li><li><span class="toc-item-body" data-outline="142"><span class="toc-outline">142</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.servicename" class="toc-link">oscomponent.servicename</a></span></li><li><span class="toc-item-body" data-outline="143"><span class="toc-outline">143</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.shell" class="toc-link">oscomponent.shell</a></span></li><li><span class="toc-item-body" data-outline="144"><span class="toc-outline">144</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.su.newconsole" class="toc-link">oscomponent.su.newconsole</a></span></li><li><span class="toc-item-body" data-outline="145"><span class="toc-outline">145</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.terminate.subtree" class="toc-link">oscomponent.terminate.subtree</a></span></li><li><span class="toc-item-body" data-outline="146"><span class="toc-outline">146</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.terminate.wait" class="toc-link">oscomponent.terminate.wait</a></span></li><li><span class="toc-item-body" data-outline="147"><span class="toc-outline">147</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.umask" class="toc-link">oscomponent.umask</a></span></li><li><span class="toc-item-body" data-outline="148"><span class="toc-outline">148</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.validshell" class="toc-link">oscomponent.validshell</a></span></li><li><span class="toc-item-body" data-outline="149"><span class="toc-outline">149</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.wrapper.exec.force" class="toc-link">oscomponent.wrapper.exec.force&nbsp;</a></span></li><li><span class="toc-item-body" data-outline="150"><span class="toc-outline">150</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-persistence.dbfolder" class="toc-link">persistence.dbfolder</a></span></li><li><span class="toc-item-body" data-outline="151"><span class="toc-outline">151</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-persistence.level" class="toc-link">persistence.level</a></span></li><li><span class="toc-item-body" data-outline="152"><span class="toc-outline">152</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-plugins.object.storage.persistasplaintext" class="toc-link">plugins.object.storage.persistasplaintext</a></span></li><li><span class="toc-item-body" data-outline="153"><span class="toc-outline">153</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-plugins.start_internal_n" class="toc-link">plugins.start_internal_n</a></span></li><li><span class="toc-item-body" data-outline="154"><span class="toc-outline">154</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-runnerplugin.spool.clean.enable" class="toc-link">runnerplugin.spool.clean.enable</a></span></li><li><span class="toc-item-body" data-outline="155"><span class="toc-outline">155</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-runnerplugin.spool.expire" class="toc-link">runnerplugin.spool.expire</a></span></li><li><span class="toc-item-body" data-outline="156"><span class="toc-outline">156</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-runnerplugin.spool.sleep" class="toc-link">runnerplugin.spool.sleep</a></span></li><li><span class="toc-item-body" data-outline="157"><span class="toc-outline">157</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-security.cryptkey" class="toc-link">security.cryptkey</a></span></li><li><span class="toc-item-body" data-outline="158"><span class="toc-outline">158</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-security.filename" class="toc-link">security.filename</a></span></li><li><span class="toc-item-body" data-outline="159"><span class="toc-outline">159</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-security.level" class="toc-link">security.level</a></span></li><li><span class="toc-item-body" data-outline="160"><span class="toc-outline">160</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-security.ssh.ciphers" class="toc-link">security.ssh.ciphers</a></span></li><li><span class="toc-item-body" data-outline="161"><span class="toc-outline">161</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-security.ssh.macs" class="toc-link">security.ssh.macs</a></span></li><li><span class="toc-item-body" data-outline="162"><span class="toc-outline">162</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.request.retries" class="toc-link">snmp.request.retries</a></span></li><li><span class="toc-item-body" data-outline="163"><span class="toc-outline">163</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.request.retries.1" class="toc-link">snmp.request.retries</a></span></li><li><span class="toc-item-body" data-outline="164"><span class="toc-outline">164</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.request.timeout" class="toc-link">snmp.request.timeout</a></span></li><li><span class="toc-item-body" data-outline="165"><span class="toc-outline">165</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.response.translate" class="toc-link">snmp.response.translate</a></span></li><li><span class="toc-item-body" data-outline="166"><span class="toc-outline">166</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.response.translate.full" class="toc-link">snmp.response.translate.full</a></span></li><li><span class="toc-item-body" data-outline="167"><span class="toc-outline">167</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.community" class="toc-link">snmp.trap.listener.community</a></span></li><li><span class="toc-item-body" data-outline="168"><span class="toc-outline">168</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.host" class="toc-link">snmp.trap.listener.host</a></span></li><li><span class="toc-item-body" data-outline="169"><span class="toc-outline">169</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.port" class="toc-link">snmp.trap.listener.port</a></span></li><li><span class="toc-item-body" data-outline="170"><span class="toc-outline">170</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.version" class="toc-link">snmp.trap.listener.version</a></span></li><li><span class="toc-item-body" data-outline="171"><span class="toc-outline">171</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.v3.auth.password_n" class="toc-link">snmp.trap.listener.v3.auth.password_n</a></span></li><li><span class="toc-item-body" data-outline="172"><span class="toc-outline">172</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.v3.auth.protocol_n" class="toc-link">snmp.trap.listener.v3.auth.protocol_n</a></span></li><li><span class="toc-item-body" data-outline="173"><span class="toc-outline">173</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.v3.engine_n" class="toc-link">snmp.trap.listener.v3.engine_n</a></span></li><li><span class="toc-item-body" data-outline="174"><span class="toc-outline">174</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.v3.priv.password_n" class="toc-link">snmp.trap.listener.v3.priv.password_n</a></span></li><li><span class="toc-item-body" data-outline="175"><span class="toc-outline">175</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.v3.priv.protocol_n" class="toc-link">snmp.trap.listener.v3.priv.protocol_n</a></span></li><li><span class="toc-item-body" data-outline="176"><span class="toc-outline">176</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.v3.user_n" class="toc-link">snmp.trap.listener.v3.user_n</a></span></li><li><span class="toc-item-body" data-outline="177"><span class="toc-outline">177</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-spooldir" class="toc-link">spooldir</a></span></li><li><span class="toc-item-body" data-outline="178"><span class="toc-outline">178</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-tcpip.authentication.protocol" class="toc-link">tcpip.authentication.protocol</a></span></li><li><span class="toc-item-body" data-outline="179"><span class="toc-outline">179</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-tcpip.keystore.password" class="toc-link">tcpip.keystore.password</a></span></li><li><span class="toc-item-body" data-outline="180"><span class="toc-outline">180</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-tcpip.ssl.allowSelfSigned" class="toc-link">tcpip.ssl.allowSelfSigned</a></span></li><li><span class="toc-item-body" data-outline="181"><span class="toc-outline">181</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-tcpip.ssl.keymanager.algorithm" class="toc-link">tcpip.ssl.keymanager.algorithm</a></span></li><li><span class="toc-item-body" data-outline="182"><span class="toc-outline">182</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-tcpip.ssl.keystore" class="toc-link">tcpip.ssl.keystore</a></span></li><li><span class="toc-item-body" data-outline="183"><span class="toc-outline">183</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-tcpip.ssl.reversechain" class="toc-link">tcpip.ssl.reversechain</a></span></li><li><span class="toc-item-body" data-outline="184"><span class="toc-outline">184</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-tcpip.ssl.useacl" class="toc-link">tcpip.ssl.useacl</a></span></li><li><span class="toc-item-body" data-outline="185"><span class="toc-outline">185</span><a href="#CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-tcpip.truststore.password" class="toc-link">tcpip.truststore.password</a></span></li></ul></div>
+            <p></p>
+            <p><strong>agent.resourcemon.enable</strong></p>
+            <p>Indicates whether to monitor disk space usage and report errors when thresholds are breached.</p>
+            <ul>
+                <li><strong>true</strong><br>Enables resource monitoring. You can configure the amount of available disk space the agent monitors at each threshold and can send notifications when the space is too low.</li>
+                <li><strong>false</strong><br>Disables resource monitoring.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Notes:</strong>
+                <ul>
+                    <li>To send SNMP traps when the disk thresholds are breached, configure the agent to connect with an SNMP manager.</li>
+                    <li>To alert the scheduling manager when a disk threshold has been breached, also set communication.managerhealthmon_n to true.</li>
+                </ul>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.resourcemon.threshold.disk.critical"><strong>agent.resourcemon.threshold.disk.critical</strong></h3>
+            <p>Specifies the amount of disk space that is required before the agent logs a critical warning and shuts down. This parameter is applicable if agent.resourcemon.enable is set to true. This parameter uses the following syntax:</p>
+            <pre><em>size</em>[B|K|M|G]
+</pre>
+            <ul>
+                <li><strong><em>size</em></strong><br>Specifies the amount of disk space in bytes (B), kilobytes (K), megabytes (M), or gigabytes (G).</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;10M</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.resourcemon.threshold.disk.warning.notice"><strong>agent.resourcemon.threshold.disk.warning.notice</strong></h3>
+            <p>Specifies the amount of disk space that is required before the agent logs a warning notice. The agent continues to run and accept new job requests. This parameter is applicable if agent.resourcemon.enable is set to true. This parameter uses the following syntax:</p>
+            <pre><em>size</em>[B|K|M|G]
+</pre>
+            <ul>
+                <li><strong><em>size</em></strong><br>Specifies the amount of disk space in bytes (B), kilobytes (K), megabytes (M), or gigabytes(G).</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;21M or (agent.resourcemon.threshold.disk.warning.severe + 1M), whichever is greater</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.resourcemon.threshold.disk.warning.severe"><strong>agent.resourcemon.threshold.disk.warning.severe</strong></h3>
+            <p>Specifies the amount of disk space that is required before the agent logs a severe warning and stops accepting new job requests. This parameter is applicable if agent.resourcemon.enable is set to true. This parameter uses the following syntax:</p>
+            <pre><em>size</em>[B|K|M|G]
+</pre>
+            <ul>
+                <li><strong><em>size</em></strong><br>Specifies the amount of disk space in bytes (B), kilobytes (K), megabytes (M), or gigabytes (G).</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;20M or (agent.resourcemon.threshold.disk.critical * 2), whichever is greater</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;
+                    <span>The agent resumes accepting new job requests when the available disk space is greater than the size specified by this parameter.</span>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.spool.success.autocleanup"><strong>agent.spool.success.autocleanup</strong></h3>
+            <p>Indicates whether to delete spool files automatically when the job completes successfully.</p>
+            <ul>
+                <li><strong>true</strong><br>Deletes spool files automatically when the job completes successfully.</li>
+                <li><strong>false</strong><br>Does not delete spool files automatically when the job completes successfully.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 class="NormalTerm" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.authentication.protocol"><strong>agent.ssl.authentication.protocol</strong></h3>
+            <p class="NormalTerm">Specifies the authentication protocol for SSL.</p>
+            <p class="NormalTerm"><strong>Default:</strong>&nbsp;TLS</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.cert.selfsigned.allow"><strong>agent.ssl.cert.selfsigned.allow</strong></h3>
+            <p>Specifies whether self-signed SSL certificates are allowed.</p>
+            <ul>
+                <li><strong>true</strong><br>Allows self-signed SSL certificates. Self-signed certificates let you create certificates for free, without having to pay a Certificate Authority (CA) or comply with any auditing requirements.</li>
+                <li><strong>false</strong><br>Does not allow self-signed SSL certificates.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.keymanager.algorithm"><strong>agent.ssl.keymanager.algorithm</strong></h3>
+            <p>Specifies the key manager algorithm for SSL.<br><strong>Default:</strong>&nbsp;SunX509</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.keystore"><strong>agent.ssl.keystore</strong></h3>
+            <p>Specifies the name of a keystore file for SSL. A keystore is a repository of certificates that are used for identifying a client or a server. You can generate your own keystore using the keytool utility that is provided with the JRE.</p>
+            <p><strong>Default:</strong>&nbsp;serverkeystore</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.keystore.password"><strong>agent.ssl.keystore.password</strong></h3>
+            <p>Specifies the encrypted keystore password for SSL support.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.reversechain"><strong>agent.ssl.reversechain</strong></h3>
+            <p>Specifies whether the chain of certificates for SSL is processed in reversed order.</p>
+            <ul>
+                <li style="list-style-type: none;background-image: none;">
+                    <ul>
+                        <li><strong>true</strong><br>Processes the chain of certificates for SSL in reversed order.</li>
+                        <li><strong>false</strong><br>Process the chain of certificates for SSL in regular order.</li>
+                    </ul></li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.truststore"><strong>agent.ssl.truststore</strong></h3>
+            <p>Specifies the name of a truststore file for SSL. The file includes trusted and client certificates.</p>
+            <p><strong>Default:</strong>&nbsp;cacerts</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.truststore.password"><strong>agent.ssl.truststore.password</strong></h3>
+            <p>Specifies the encrypted truststore password for SSL support.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agent.ssl.useacl"><strong>agent.ssl.useacl</strong></h3>
+            <p>Specifies whether ACL is used as the authentication protocol for SSL.</p>
+            <ul>
+                <li style="list-style-type: none;background-image: none;">
+                    <ul>
+                        <li><strong>true</strong><br>Uses ACL as the authentication protocol for SSL.</li>
+                        <li><strong>false</strong><br>Does not use ACL as the authentication protocol for SSL.</li>
+                    </ul></li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-agentname"><strong>agentname</strong></h3>
+            <p>Defines the agent name. You need the agent name when you configure the scheduling manager to work with the agent.</p>
+            <p><strong>Default:</strong>&nbsp;AGENT</p>
+            <p><strong>Limits:</strong>&nbsp;Up to 16 alphanumeric characters and the special characters @, $, and underscore (_); the first character must be a letter.</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Notes:<br></strong>
+                    <ul>
+                        <li>Because the scheduling manager uses agent names as file names, use standard file-naming conventions for your operating system.</li>
+                        <li>For CA Workload Automation DE, the agent name must be in uppercase.</li>
+                    </ul>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.alias_N=<AgentName>"><strong>communication.alias_N=<em>&lt;Agent Name&gt;</em></strong></h3>
+            <p>The name of another CAWA Agent in your clustered environment for&nbsp;which you want to accept AFMs if failover occurs. You can configure&nbsp;numerous aliases by using the _N suffix.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.inputport"><strong>communication.inputport</strong></h3>
+            <p>Specifies the main port number the agent uses to listen for incoming messages from the scheduling manager. You need this port when you configure the scheduling manager to work with the agent.</p>
+            <p><strong>Default:</strong>&nbsp;7520</p>
+            <p><strong>Limits:</strong>&nbsp;1024-65534</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;On UNIX, ports 1 - 1023 are reserved ports, which require root access.
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.inputport.aux"><strong>communication.inputport.aux</strong></h3>
+            <p>Specifies the optional auxiliary port number the agent uses to listen for incoming messages from the scheduling manager.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.manageraddress_n=address_1;...;address_m"><strong>communication.manageraddress_<em>n</em>=<em>address_1</em>;...;<em>address_m</em></strong></h3>
+            <p>Specifies the address of the scheduling manager that the agent works with, where&nbsp;<em>n</em>&nbsp;is an integer that corresponds to the scheduling manager being configured. This value corresponds to the IP address in the connection details for the scheduling manager. You can specify a list of addresses for the scheduling manager.<br><strong>Example:</strong>&nbsp;172.24.36.107 (IPv4) or 0:0:0:0:0:FFFF:192.168.00.00 (IPv6)</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:<br></strong></p>
+                <ul>
+                    <li>You can specify a DNS name instead of the IP address for the scheduling manager. However, your agent computer must always be able to resolve the DNS name. If there is a DNS outage and your agent computer cannot resolve DNS names, the agent cannot communicate with the scheduling manager.</li>
+                    <li>If the scheduling manager address never changes, enter the DNS name for the scheduling manager in the hosts file for your agent computer. This entry ensures that the IP address can be resolved after DNS disruptions.</li>
+                </ul>
+            </div>
+            <p><strong style="font-size: 16.0px;">communication.managerhealthmon_<em>n</em></strong></p>
+            <p>Indicates whether to alert the scheduling manager that a disk threshold has been breached, where&nbsp;<em>n</em>&nbsp;is an integer that corresponds to the scheduling manager being configured. This parameter is applicable if resource monitoring is enabled (agent.resourcemon.enable=true).</p>
+            <ul>
+                <li><p><strong>true</strong><br>Sends a message to the scheduling manager when a disk threshold has been breached. A message is also sent when the notice or severe thresholds are resolved. If the critical threshold is breached, the agent sends an emergency shutdown message to indicate the reason for the shutdown.</p>
+                    <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                        <span class="aui-icon icon-warning">Icon</span>
+                        <div class="message-content">
+                            <strong>Note:</strong>&nbsp;If the disk situation prevents a proper shutdown, the delivery of the emergency shutdown message is not guaranteed.
+                        </div>
+                    </div></li>
+                <li><strong>false</strong><br>Does not send a message to the scheduling manager when a disk threshold has been breached.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;When implemented on the scheduling manager, the scheduling manager can dynamically set this parameter to true.
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.managerid_n"><strong>communication.managerid_<em>n</em></strong></h3>
+            <p>Specifies the name of the scheduling manager instance that the agent works with, where&nbsp;<em>n</em>&nbsp;is an integer that corresponds to the scheduling manager being configured.</p>
+            <p><strong>Default:</strong>&nbsp;CENTRAL_MANAGER</p>
+            <p><strong>Example:&nbsp;</strong>MYSERVER</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.managerport_n"><strong>communication.managerport_<em>n</em></strong></h3>
+            <p>Specifies the port that the scheduling manager listens on for communication from agents, where<em>&nbsp;n&nbsp;</em>is an integer that corresponds to the scheduling manager being configured. This value corresponds to the port number in the connection details for the scheduling manager.</p>
+            <p><strong>Default:</strong>&nbsp;7507</p>
+            <p><strong>Limits:</strong>&nbsp;1024-65534</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.monitorobject_n"><strong>communication.monitorobject_<em>n</em></strong></h3>
+            <p>Specifies the monitor object for the scheduling manager that is used in agent alive ping.</p>
+            <h3 class="NormalTermContinued" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.nomanagers.abort.disable"><strong>communication.nomanagers.abort.disable</strong></h3>
+            <p class="NormalTermContinued">Specifies whether the agent can start with no managers defined in the agentparm.txt file.</p>
+            <ul>
+                <li><strong>true</strong><br>Indicates that the agent can start with no managers defined.</li>
+                <li><strong>false</strong><br>Indicates that the agent cannot start without any managers defined.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.receiver.socket.aux"><strong>communication.receiver.socket.aux</strong></h3>
+            <p>Specifies the type of socket the agent uses for its auxiliary port. The value of this parameter must be different from the communication.receiver.socket.main parameter. You can specify the following socket types:</p>
+            <ul>
+                <li>plain</li>
+                <li>dylan</li>
+            </ul>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <div class="message-content">
+                    <p><strong>Notes:</strong></p>
+                    <ul>
+                        <li>CA Workload Automation DE does not require this parameter.</li>
+                        <li>z/Linux and iSeries systems use plain socket types only.</li>
+                    </ul>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.receiver.socket.main"><strong>communication.receiver.socket.main</strong></h3>
+            <p>Specifies the type of socket the agent uses for its main port. The value of this parameter must be different from the communication.receiver.socket.aux parameter. You can specify the following socket types:</p>
+            <ul>
+                <li>plain</li>
+                <li>dylan</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;plain</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p><strong>Notes:</strong></p>
+                    <ul>
+                        <li>CA Workload Automation DE does not require this parameter.</li>
+                        <li>z/Linux and iSeries systems use plain socket types only.</li>
+                    </ul>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.socket_n"><strong>communication.socket_<em>n</em></strong></h3>
+            <p>Defines the socket type the agent and scheduling manager use for communication, where&nbsp;<em>n</em>&nbsp;is an integer starting at one that corresponds to the scheduling manager being configured. The following socket types are available:</p>
+            <ul>
+                <li>plain</li>
+                <li>dylan</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;plain</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;z/Linux and iSeries systems use plain socket types only.
+                </div>
+            </div>
+            <h3 class="NormalTerm" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.transmitter.interface.address"><strong>communication.transmitter.interface.address</strong></h3>
+            <p class="NormalTermContinued">Specifies a local address that the socket is bound to when creating a communication socket.</p>
+            <h3 class="NormalTerm" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.transmitter.interface.port"><strong>communication.transmitter.interface.port</strong></h3>
+            <p class="NormalTermContinued">Specifies a local range of ports that a socket can be bound to when creating a communication socket.</p>
+            <p class="NormalTermContinued"><strong>Example:</strong>&nbsp;2000-2013</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-communication.v2.nativeafmencoding"><strong>communication.v2.nativeafmencoding</strong></h3>
+            <p>Specifies whether an AFM coming from communication protocol revision two is considered to be encoded with native system encoding. (Parameter added in 11.3.07.)</p>
+            <ul>
+                <li>true <br>The agent assumes that the AFM is encoded with native system encoding.</li>
+                <li>false<br>The agent assumes that the incoming AFM is encoded as UTF-8.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-filemon.firstscan.skip"><strong>filemon.firstscan.skip</strong></h3>
+            <p>Sets whether the agent skips the first scan of a monitored file. Applies to File Trigger jobs for CREATE, UPDATE, SHRINK, or EXPAND file activity. Also applies to File Watcher jobs when monitoring the existence of a file (not the size).</p>
+            <ul>
+                <li><p><strong>true</strong><br>Skips the first scan of the monitored file.</p>
+                    <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                        <span class="aui-icon icon-warning">Icon</span>
+                        <div class="message-content">
+                            <strong>File Watcher Notes:<br></strong>
+                            <ul>
+                                <li>If the file exists in a stable condition when the job runs, the job does not complete immediately after the first scan. The agent waits for the file to be stable for the complete duration of the watch_interval and then completes.</li>
+                                <li>The agent uses the watch_interval as the polling interval for all subsequent scans.</li>
+                            </ul>
+                        </div>
+                    </div></li>
+                <li><p><strong>false</strong><br>Uses the first and subsequent scans for the file system activity monitoring.</p>
+                    <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                        <span class="aui-icon icon-warning">Icon</span>
+                        <div class="message-content">
+                            <strong>File Watcher Notes:<br></strong>
+                            <ul>
+                                <li>If the file exists in a stable condition when the job runs, the job completes immediately after the first scan.</li>
+                                <li>If the agent does not find the file in the first scan, it uses the watch_interval as the polling interval for all subsequent scans.</li>
+                            </ul>
+                        </div>
+                    </div></li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;On CA Workload Automation AE, set this parameter to true for backward compatibility with legacy agents.
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-filemonplugin.dispatcher.processors"><strong>filemonplugin.dispatcher.processors</strong></h3>
+            <p>Specifies the maximum number of dispatch processors (threads) used for processing File Trigger jobs. Each new File Trigger job is assigned to an existing dispatch processor (the one with the least number of jobs). If no dispatch processor exists, one is created. When&nbsp;all the existing dispatch processors&nbsp;are at full capacity as specified by filemonplugin.dispatcher.queue_size, a new dispatch processor is created. When the maximum number of dispatch processors is reached, the filemonplugin.dispatcher.queue_size setting is ignored. The job is dispatched to the queue with the least number of requests.</p>
+            <p><strong>Default:</strong>&nbsp;10&nbsp;</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p><strong>Note:</strong>&nbsp;If a value of -1 is specified, indicating an unlimited number of dispatch processors, the value for filemonplugin.dispatcher.queue_size is ignored. In that case, a dispatch processor is created for each job.</p>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-filemonplugin.dispatcher.queue_size"><strong>filemonplugin.dispatcher.queue_size</strong></h3>
+            <p>Specifies the maximum queue size for the File Trigger jobs in a dispatch processor. When the maximum is reached, a new dispatch processor is created.&nbsp;</p>
+            <p><strong>Default:</strong>&nbsp;100</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p><strong>Note:</strong>&nbsp;This value is ignored when the filemonplugin.dispatcher.processors value is set to unlimited (-1).</p>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-filemon.state.persistence.enable"><strong>filemon.state.persistence.enable</strong></h3>
+            <p>Sets whether the agent persists the current state that it maintains while running a File Trigger job. The agent keeps an internal state to prevent sending events about the same file twice.</p>
+            <ul>
+                <li><strong>true</strong><br>Indicates that the agent persists the current state to disk. When the agent is restarted, the agent restores the current state before scanning for file activity. As a result, the agent does not send out events for files that were processed before the shutdown.</li>
+                <li><strong>false</strong><br>Indicates that the agent does not persist the current state. When the agent is restarted, the current state is not restored. As a result, the agent sends out events for some files that were processed before the shutdown.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-filemon.update.firstscan.skip"><strong>filemon.update.firstscan.skip</strong></h3>
+            <p>Sets whether the agent skips the first scan of a monitored file for UPDATE activity with no change. Applies to only File Trigger jobs.</p>
+            <ul>
+                <li><strong>true</strong><br>Skips the first scan on update of the monitored file.</li>
+                <li><strong>false</strong><br>Uses the first and subsequent scans for the file system activity monitoring.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;Set this parameter to true to emulate R7 agent behavior.
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-filemonplugin.runexternal"><strong>filemonplugin.runexternal</strong></h3>
+            <p><span>Enables File Trigger jobs to be run as external processes.</span></p>
+            <ul>
+                <li><strong>true<br></strong>File Trigger jobs (which are limited to CREATE) are run as external processes.&nbsp;</li>
+                <li><strong>false</strong><br><span>File Trigger jobs are run as threads under the CA Workload Automation Agent process.</span></li>
+            </ul>
+            <p><strong>Default: </strong>false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-filemonplugin.strategy"><strong>filemonplugin.strategy</strong></h3>
+            <p>Specifies the sort order that the agent uses to process the files that match the file monitoring criteria. You can specify the following values for the sort order:</p>
+            <ul>
+                <li><p><strong>native_order</strong><br>Sorts the files in the native order.</p>
+                    <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                        <span class="aui-icon icon-warning">Icon</span>
+                        <div class="message-content">
+                            <strong>Note:</strong>&nbsp;The native order depends on how the files are stored in the directory and how the JRE retrieves them. To preserve the order that the files are created or modified in, we recommend that you use time_asc.
+                        </div>
+                    </div></li>
+                <li><strong>alpha_asc</strong><br>Sorts the files in ascending alphabetical order.</li>
+                <li><strong>alpha_desc</strong><br>Sorts the files in descending alphabetical order.</li>
+                <li><strong>time_asc</strong><br>Sorts the files by creation/modification time, with the oldest file processed first (first in, first out).</li>
+                <li><strong>time_desc</strong><br>Sorts the files by creation/modification time, with the newest file processed first (last in, first out).</li>
+                <li><strong>size_asc</strong><br>Sorts the files by size, with the smallest file processed first.</li>
+                <li><strong>size_desc</strong><br>Sorts the files by size, with the largest file processed first.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;alpha_asc</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;If you specify an invalid value for the sort order, the default value (alpha_asc) is used.
+                </div>
+            </div>
+            <h3 class="NormalTerm" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.anonymous"><strong>ftp.anonymous</strong></h3>
+            <p class="NormalTerm">Specifies whether to allow anonymous login to the FTP server.</p>
+            <ul>
+                <li><strong>true</strong><br>Allows anonymous login to the FTP server.</li>
+                <li><strong>false</strong><br>Does not allow anonymous login to the FTP server.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.ascii.ccsid"><strong>ftp.ascii.ccsid</strong></h3>
+            <p>Defines the Coded Character Set Identifier (CCSID) to use for ASCII file transfers. If the file being transferred exists on the target computer, the file is written using the encoding of the existing file.</p>
+            <p><strong>Default:</strong>&nbsp;819</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.client.srvtimeout"><strong>ftp.client.srvtimeout</strong></h3>
+            <p>Enables socket timeout with the specified timeout value in milliseconds. If set to a non-zero timeout, a call to accept() for this ServerSocket will&nbsp;block for only this amount of time.</p>
+            <p>The FTP service has a socket and a specific port. The client connects to the server on that port. If the connection is successful, the server temporarily gets a new socket for the port so that the server can continue to listen for other connections. After a specified period of time, the server relinquishes the socket.</p>
+            <p>(A socket is an endpoint in two-way communication between programs on a network. The socket is always bound to a port &nbsp;so that the TCP layer knows what applications are sending data and where the data is going.)</p>
+            <p>An error indicates that either the communication was blocked (for example by a firewall) or that the network connection was broken (as a result of an incident such as a network issue, system hang, or a reboot).</p>
+            <p><strong>Default:</strong>&nbsp;300000 (5 minutes)</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.client.ssl"><strong>ftp.client.ssl</strong></h3>
+            <p>Specifies whether all FTP jobs on the agent computer automatically use SSL communication.</p>
+            <ul>
+                <li style="list-style-type: none;background-image: none;">
+                    <ul>
+                        <li><strong>true</strong><br>Enables SSL communication.</li>
+                        <li><strong>false</strong><br>Disables SSL communication.</li>
+                    </ul></li>
+            </ul>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.client.ssl.accept_new_ca"><strong>ftp.client.ssl.accept_new_ca</strong></h3>
+            <p>Specifies whether to accept all root certificates and add them to the keystore while verifying the certificates in the chain against the truststore.</p>
+            <ul>
+                <li><strong>true</strong><br>Accepts all root certificates and adds them to the keystore.</li>
+                <li><strong>false</strong><br>Does not accept all root certificates.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.client.ssl.reversechain"><strong>ftp.client.ssl.reversechain</strong></h3>
+            <p>Specifies whether the chain of certificates that the peer server provides is processed in reversed order during validation.</p>
+            <ul>
+                <li><strong>true</strong><br>Processes the chain of certificates for SSL in reversed order.</li>
+                <li><strong>false</strong><br>Processes the chain of certificates for SSL in regular order.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.client.ssl.start_with_ssl_session"><strong>ftp.client.ssl.start_with_ssl_session</strong></h3>
+            <p>Specifies whether to start the session to the FTP server securely using SSL.</p>
+            <ul>
+                <li><strong>true</strong><br>Starts the session to the FTP server using SSL.</li>
+                <li><strong>false</strong><br>Does not start the session to the FTP server using SSL.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.client.ssl.truststore"><strong>ftp.client.ssl.truststore</strong></h3>
+            <p>Specifies the full path name of the truststore file. The default file name is cacerts. You can use keytool, provided with the JRE, to create your own truststore.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.client.ssl.truststore.password"><strong>ftp.client.ssl.truststore.password</strong></h3>
+            <p>Specifies the encrypted password for the client truststore file (for example, cacerts) that contains some common CA X509 certificates.</p>
+            <p><strong>Default:&nbsp;</strong>changeit (encrypted)</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p><strong>Note:</strong>&nbsp;The password must be encrypted. To encrypt a password, use the&nbsp;<a rel="nofollow" class="external-link" href="https://wiki.ca.com/display/CWAAS/Encrypt+a+Password+Using+the+Password+Utility">Password utility that is provided with the agent</a>.</p>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.client.updatemsg"><strong>ftp.client.updatemsg</strong></h3>
+            <p>Specifies how often in milliseconds status information for a running FTP job is updated.</p>
+            <p><strong>Default:</strong>&nbsp;30000 (30 seconds)</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.command.retrydelay"><strong>ftp.command.retrydelay</strong></h3>
+            <p>Specifies the time in milliseconds to wait before the retry to send the command.</p>
+            <p><strong>Default:</strong>&nbsp;1000 (1 second)</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.data.compression"><strong>ftp.data.compression</strong></h3>
+            <p>Specifies whether to compress data for all FTP jobs on this agent for transfer. The value ranges from zero (0) for no compression to nine (9) for the best compression. If the compression level is also specified in the job definition, the ftp.data.compression value is ignored. The data is compressed using the level that is specified in the job definition. To use FTP data compression, the agent must run both FTP client and FTP server.</p>
+            <p><strong>Default:</strong>&nbsp;0 (no compression)</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.dataports"><strong>ftp.dataports</strong></h3>
+            <p>Specifies a comma&nbsp;separated list of ports that are available for the data channel. Each item in the list can contain a range of ports with a minimum and a maximum port.</p>
+            <p><strong>Example:</strong>&nbsp;ftp.dataports=4000,9000-9100,9400-9500</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.download.owner"><strong>ftp.download.owner</strong></h3>
+            <p>Specifies a default user ID on the computer where the agent is installed. This user ID determines the access permissions of a downloaded file on the agent computer. When the file is downloaded, the file is created with this user as the file owner.</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Notes:<br></strong>
+                    <ul>
+                        <li>This parameter only applies to agents installed on UNIX systems.</li>
+                        <li>A password for the local user ID is not required on the scheduling manager.</li>
+                    </ul>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.ebcdic.ccsid"><strong>ftp.ebcdic.ccsid</strong></h3>
+            <p>Defines the Coded Character Set Identifier (CCSID) to use for EBCDIC file transfers. If the file being transferred exists on the target computer, the file is written using the encoding of the existing file.</p>
+            <p><strong>Default:</strong>&nbsp;37</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.noserver"><strong>ftp.noserver</strong></h3>
+            <p>Specifies whether the agent FTP server is enabled or disabled. If ftp.noserver is set to false, the FTP server is enabled. If the ftp.noserver is set to true, the FTP server is disabled.</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;If you enable the FTP plug-in on the agent, ftp.noserver defaults to false. Therefore, if you set plugins.start_internal_
+                    <em>n</em>=ftp and ftp.noserver is omitted, the agent runs as an FTP server with the default FTP server port of 21.
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.passive"><strong>ftp.passive</strong></h3>
+            <p>Specifies whether the agent FTP client uses a passive mode connection, as follows:</p>
+            <ul>
+                <li><strong>true</strong><br>Indicates that the agent uses a passive mode connection.</li>
+                <li><strong>false</strong><br>Indicates that the agent uses an active mode connection.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;We recommend that you set the value to true under any of the following conditions:
+                    <br>
+                    <ul>
+                        <li>The agent uses IPV4 and the FTP server uses IPV6 for communication.</li>
+                        <li>The FTP server resides beyond the firewall.</li>
+                        <li>The FTP server opens a listening port for the data channel.</li>
+                    </ul>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.scp.debug.enable"><strong>ftp.scp.debug.enable</strong></h3>
+            <p>Sets whether debugging of the secure copy protocol (SCP) sessions is enabled. The output is stored in the ftp_scp_debug.log.</p>
+            <ul>
+                <li><strong>true</strong><br>Enables debugging.</li>
+                <li><strong>false</strong><br>Disables debugging.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.scp.sshd.timeout"><strong>ftp.scp.sshd.timeout</strong></h3>
+            <p>Controls the timeout, in milliseconds (ms), for SCPv2.</p>
+            <p><strong>Default:</strong>&nbsp;30000 (ms)</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.server.ssl"><strong>ftp.server.ssl</strong></h3>
+            <p>Specifies that the FTP server handles both non-SSL and SSL FTP.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.server.ssl.keystore"><strong>ftp.server.ssl.keystore</strong></h3>
+            <p>Specifies the full path of the keystore file. The default file name is serverkeystore. You can use keytool, provided with the JRE, to create your own keystore.</p>
+            <p><strong>Example:</strong>&nbsp;ftp.server.ssl.keys</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.server.ssl.keystore.password"><strong>ftp.server.ssl.keystore.password</strong></h3>
+            <p>Specifies the encrypted password for the server keystore that contains an X509 certificate. This password is sent to the client during the handshake process.</p>
+            <p><strong>Default:</strong>&nbsp;cyberuser (encrypted)</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.serverport"><strong>ftp.serverport</strong></h3>
+            <p>Specifies the port number for the agent to act as an FTP server.</p>
+            <p><strong>Default:</strong>&nbsp;21</p>
+            <p><strong>Limits:</strong>&nbsp;1-65534</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.sftp.connect.timeout"><strong>ftp.sftp.connect.timeout</strong></h3>
+            <p>Specifies the connection timeout value in milliseconds for SFTP file transfers.</p>
+            <p><strong>Default:</strong>&nbsp;30000 (30 seconds)</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.spool.verbose"><strong>ftp.spool.verbose</strong></h3>
+            <p>Specifies whether the agent writes a standard header to the spool file for all FTP jobs.</p>
+            <ul>
+                <li><strong>true</strong><br>Writes a standard header to the spool file for all FTP jobs.</li>
+                <li><strong>false</strong><br>Does not write a standard header to the spool file.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.ssl.protocol"><strong>ftp.ssl.protocol</strong></h3>
+            <p>Specifies the authentication protocol that is used for FTP. Supported mechanisms are SSL and TLS.</p>
+            <p><strong>Default:</strong>&nbsp;TLS</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-ftp.timeout"><strong>ftp.timeout</strong></h3>
+            <p>Specifies the timeout value for the data socket in milliseconds.&nbsp;This parameter controls the time allowed for reading the data socket. This parameter takes effect as soon as the connection is opened and the server accepts the call, using accept().&nbsp;</p>
+            <p>If the server is slow, while it is queuing connections for example, it is possible for the client to time out and go away.&nbsp;</p>
+            <p><strong>Default:</strong>&nbsp;300000 (5 minutes)</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-i5os.job.cmpc.pattern.maxline"><strong>i5os.job.cmpc.pattern.maxline</strong></h3>
+            <p>Defines the maximum number of lines that can be used to search for the indexing anchor when CCExit is set to *PATTERN.</p>
+            <p><strong>Default:</strong>&nbsp;5000</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-initiators.afmjobclassmap_n=verb,subverb,jobclass"><strong>initiators.afmjobclassmap_<em>n</em>=<em>verb</em>,<em>subverb</em>,<em>jobclass</em></strong></h3>
+            <p>Maps verb and subverb combinations of a job request to a job class. When the agent sees an AFM containing a defined pair of verb and subverb, it assigns the specified job class to that job.<br>The defined pair must be a valid verb and subverb combination. Write a separate instance of this parameter for each pair. For some job types, you can also specify a job class in a job definition.</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;To find out which verbs and subverbs you can use, see the agent receiver log.
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-initiators.class_n=jobclass,number_of_initiators"><strong>initiators.class_<em>n</em>=<em>jobclass</em>,<em>number_of_initiators</em></strong></h3>
+            <p>Describes job classes and the number of initiators that can process jobs that are assigned a particular job class. Use a new line for each initiators.class_<em>n</em>&nbsp;parameter, where&nbsp;<em>n</em>&nbsp;is an integer starting at the value 1. By controlling the type and number of initiators, you can have greater control over the initiation of jobs and manually balance the loads on system resources.</p>
+            <p>The parameter initiators.afmjobclassmap_<em>n</em>&nbsp;relates to this parameter. However, the value of&nbsp;<em>n</em>&nbsp;does not have to match in both parameters.<br>For UNIX workload, depending on the number of initiators you assign, you may need to increase the number of threads that can be run per process on your operating system.</p>
+            <p><strong>Examples:</strong><br>initiators.class_1=Default,1000<br>initiators.class_2=POJO,100</p>
+            <h3 class="NormalTerm" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-initiators.throttle.delay"><strong>initiators.throttle.delay</strong></h3>
+            <p class="NormalTerm">Specifies the rate in milliseconds (msec) the agent uses to throttle requests. This parameter applies to all classes of initiators. By default, the agent does not throttle requests.</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p class="NormalTermContinued"><strong>Note:</strong>&nbsp;Using this parameter can slow job throughput.</p>
+                </div>
+            </div>
+            <h3 class="NormalTerm" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-initiators.throttle_n=jobclass,throttle_rate"><strong>initiators.throttle_<em>n=jobclass,throttle_rate</em></strong></h3>
+            <p class="NormalTerm">Specifies the rate in milliseconds (msec) the agent uses to throttle requests for a particular job class. By default, the agent does not throttle requests.</p>
+            <p class="NormalTermContinued"><strong>Example:</strong>&nbsp;initiators.throttle_1=DEFAULT,250</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p class="ListNote"><strong>Note:</strong>&nbsp;Using this parameter can slow job throughput.</p>
+                </div>
+            </div>
+            <h3 class="NormalTerm" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-installer.version"><strong>installer.version</strong></h3>
+            <p class="NormalTerm">Specifies the version of the installer used. For informational purposes only. Do not change the value.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-log.archive"><strong>log.archive</strong></h3>
+            <p>Defines the log archiving options. Options are as follows:</p>
+            <ul>
+                <li><strong>0</strong><br>Appends the current date and time to the log file.</li>
+                <li><strong>1</strong><br>Renames to logfile.archive and starts a new file.</li>
+                <li><strong>2</strong><br>Removes the current file.</li>
+                <li><strong>3</strong><br>Appends new log entries to the current logs.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;0</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-log.folder"><strong>log.folder</strong></h3>
+            <p>Specifies the directory path where the agent creates the log files.</p>
+            <p><strong>Default:</strong><em>agent_install_dir</em>/log</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-log.level"><strong>log.level</strong></h3>
+            <p>Specifies the type and number of logs the agent generates. This parameter is important for troubleshooting. Options are as follows:</p>
+            <ul>
+                <li><strong>0, 1, or 2</strong><br>Creates logs for any errors including the receiver and transmitter logs. Level 2 is adequate for production, unless problems arise requiring more details for troubleshooting.</li>
+                <li><strong>3</strong><br>Adds queues. If this value is specified, the agent ignores the log.maxsize parameter.</li>
+                <li><strong>4 or 5</strong><br>Adds debugging information. Use log level 5 for setup and initial testing.</li>
+                <li><strong>6-8</strong><br>Adds tracing information to diagnose a problem. These levels are not intended for continuous use.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;5</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-log.maxsize=maximum_size[B|K|M|G]"><strong>log.maxsize=<em>maximum_size</em>[<em>B</em>|K|M|G]</strong></h3>
+            <p>Specifies the maximum log size. When the log file exceeds the specified size, the agent archives it and starts a new log file. If the log.archive parameter is set to 3, the agent ignores this parameter. The agent does not create an archive file, but it does append all logs. You can specify the following optional modifiers:</p>
+            <ul>
+                <li><strong>B</strong><br>Specifies the size in bytes.</li>
+                <li><strong>K</strong><br>Specifies the size in kilobytes.</li>
+                <li><strong>M</strong><br>Specifies the size in megabytes.</li>
+                <li><strong>G</strong><br>Specifies the size in gigabytes.</li>
+            </ul>
+            <p><strong>Limits:</strong>&nbsp;Up to 2 GB</p>
+            <p><strong>Default:</strong>&nbsp;1M</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p><strong>Note:</strong>&nbsp;The default (no modifier) size is in bytes.</p>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.connector_n"><strong>management.connector_<em>n</em></strong></h3>
+            <p>Identifies the type of management connector the agent uses to connect to an external application, where&nbsp;<em>n</em>&nbsp;is an integer starting from 1. You can specify the following types of connectors, which are built into the agent:</p>
+            <ul>
+                <li style="list-style-type: none;background-image: none;">
+                    <ul>
+                        <li><strong>jmx</strong><br>Specifies a JMX connector that lets you use a JMX console to monitor and control the agent.</li>
+                        <li><strong>snmp</strong><br>Specifies an SNMP connector that lets you use an SNMP manager to monitor and control the agent.</li>
+                    </ul></li>
+            </ul>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.jmx.host"><strong>management.jmx.host</strong></h3>
+            <p>Specifies the host name or IP address where the JMX connector listens.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.jmx.port"><strong>management.jmx.port</strong></h3>
+            <p>Specifies the port where the JMX connector listens.</p>
+            <p><strong>Default:</strong>&nbsp;1099</p>
+            <p><strong>Limits:</strong>&nbsp;1-65534</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.jmx.security.password"><strong>management.jmx.security.password</strong></h3>
+            <p>Specifies the password for the user name that is specified in the management.jmx.security.user parameter.</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p><strong>Note:</strong>&nbsp;The password must be encrypted. To encrypt a password, use the&nbsp;<a rel="nofollow" class="external-link" href="https://wiki.ca.com/display/CWAAS/Encrypt+a+Password+Using+the+Password+Utility">Password utility that is provided with the agent</a>.</p>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.jmx.security.user"><strong>management.jmx.security.user</strong></h3>
+            <p>Specifies the user for accessing the JMX console. You can use this parameter together with management.jmx.security.password to ensure that only authorized users can view, monitor, and control the agent using the JMX console.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.community.read"><strong>management.snmp.agent.community.read</strong></h3>
+            <p>Specifies the SNMP read community. This parameter applies only to SNMP v1 and v2.</p>
+            <ul>
+                <li style="list-style-type: none;background-image: none;">
+                    <ul>
+                        <li><strong>public</strong><br>Specifies read-only access.</li>
+                        <li><strong>private</strong><br>Specifies read/write access.</li>
+                    </ul></li>
+            </ul>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.community.write"><strong>management.snmp.agent.community.write</strong></h3>
+            <p>Specifies the SNMP write community. This parameter applies only to SNMP v1 and v2.</p>
+            <ul>
+                <li style="list-style-type: none;background-image: none;">
+                    <ul>
+                        <li><strong>public</strong><br>Specifies read-only access.</li>
+                        <li><strong>private</strong><br>Specifies read/write access.</li>
+                    </ul></li>
+            </ul>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.trapsink.community"><strong>management.snmp.agent.trapsink.community</strong></h3>
+            <p>Specifies the SNMP community that receives trap information.</p>
+            <ul>
+                <li><strong>public<br></strong><span>Specifies read-only access.</span></li>
+                <li><strong>private</strong><br>Specifies read/write access.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;public</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.trapsink.host"><strong>management.snmp.agent.trapsink.host</strong></h3>
+            <p>Specifies the host name or the IP address of the SNMP listener that receives trap information. The management connector uses this host to send the trap.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.trapsink.port"><strong>management.snmp.agent.trapsink.port</strong></h3>
+            <p>Specifies the port of the SNMP listener that receives trap information. The management connector uses this port to send the trap.</p>
+            <p><strong>Default:</strong>&nbsp;162</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.trapsink.user"><strong>management.snmp.agent.trapsink.user</strong></h3>
+            <p>Specifies the user authorized to receive trap information.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.user"><strong>management.snmp.agent.user</strong></h3>
+            <p>Specifies the user authorized to communicate with the SNMP agent plug-in. This parameter applies only to SNMP v3.</p>
+            <p><strong>Example:</strong>&nbsp;MBAGENT</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.user.auth.password"><strong>management.snmp.agent.user.auth.password</strong></h3>
+            <p>Specifies the encrypted authentication password for the user authorized to communicate with the SNMP agent plug-in. This parameter applies only to SNMP v3.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.user.auth.protocol"><strong>management.snmp.agent.user.auth.protocol</strong></h3>
+            <p>Specifies the authentication protocol the agent uses. The supported protocols are SHA and MD5. This parameter applies only to SNMP v3.</p>
+            <p><strong>Example:</strong>&nbsp;SHA</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.user.priv.password"><strong>management.snmp.agent.user.priv.password</strong></h3>
+            <p>Specifies the privacy protocol the agent uses. The supported protocols are AES and DES. This parameter applies only to SNMP v3.</p>
+            <p><strong>Example:</strong>&nbsp;AES</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.user.priv.protocol"><strong>management.snmp.agent.user.priv.protocol</strong></h3>
+            <p>Specifies the privacy protocol the agent uses. The supported protocols are AES and DES. This parameter applies only to SNMP v3.</p>
+            <p><strong>Example:</strong>&nbsp;AES</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.agent.version"><strong>management.snmp.agent.version</strong></h3>
+            <p>Specifies the SNMP version of the SNMP manager you want the agent to connect with.</p>
+            <ul>
+                <li>1 -- SNMP v1</li>
+                <li>2 -- SNMP v2</li>
+                <li>3 -- SNMP v3</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;2</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.community"><strong>management.snmp.community</strong></h3>
+            <p>Specifies the type of network the SNMP traps are sent across for SNMP v1 or v2 only. Your SNMP administrator can provide the type.</p>
+            <ul>
+                <li><strong>public</strong><br>Identifies an unsecured network, for example, the Internet.</li>
+                <li><strong>private</strong><br>Identifies a secure network, for example, a local area network.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;public</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.host"><strong>management.snmp.host</strong></h3>
+            <p>Identifies the SNMP Manager IP address or DNS name. Your SNMP administrator can provide the host name.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.mibfile"><strong>management.snmp.mibfile</strong></h3>
+            <p>Specifies the path to the MIB file that describes the metrics and SNMP traps for the agent.</p>
+            <p><strong>Default:&nbsp;</strong><em>agentinstalldir</em>/cybermation.mib</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.snmp.port"><strong>management.snmp.port</strong></h3>
+            <p>Specifies the SNMP Manager UDP port. Your SNMP administrator can provide this port number.</p>
+            <p><strong>Default:</strong>&nbsp;162</p>
+            <p><strong>Limits:</strong>&nbsp;1-65535</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.wol.nudges"><strong>management.wol.nudges</strong></h3>
+            <p>Specifies the number of times the agent broadcasts the magic packet.</p>
+            <p><strong>Default:</strong>&nbsp;10</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.wol.nudges.sleep"><strong>management.wol.nudges.sleep</strong></h3>
+            <p>Specifies the amount of time, in milliseconds, between broadcasts of the magic packet.</p>
+            <p><strong>Default:</strong>&nbsp;1000 (ms)</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-management.wol.ports"><strong>management.wol.ports</strong></h3>
+            <p>Specifies the port that the magic packet is sent to.</p>
+            <p><strong>Default:</strong>&nbsp;6</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-objmon.ipmon.retries"><strong>objmon.ipmon.retries</strong></h3>
+            <p>Specifies the number of times the agent attempts (retries) to receive a response from a target machine to determine whether it is running. When the agent runs an IP monitor job, to determine that a machine at an IP address is running, the agent sends a ping request to the target machine and waits to receive a valid reply.</p>
+            <p>To avoid transient network failures, the agent tries the number of times specified by objmon.ipmon.retries. The agent returns only after it has retried the specified number of times. For each loop (or try), the timeout value is 5 seconds. The agent will&nbsp;retry for the full retries count.</p>
+            <p>For example, after sending the ping, the agent waits 5 seconds. If it does not receive a response from the target machine, it tries 3 more times, waiting 5 seconds in between each try. If no response is received, the agent determines that the machine is down.</p>
+            <p>Adjust this setting based on the nature of your environment. If the possibility of transient network failures is small, or the false returns indicating that a machine is down is not an issue, you can set this value to a lower number to return the status of the machine more quickly. If you receive many returns falsely indicating that the machine is down, set the value higher to give the agent more time to correctly determine that a machine is running.</p>
+            <p><strong>Default:</strong> 4</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-os400.product.library"><strong>os400.product.library</strong></h3>
+            <p>(iSeries only) Specifies the library in which the native iSeries objects are installed.</p>
+            <p><strong>Default:</strong>&nbsp;CAWAGNT113</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-os400.quote.parameter"><strong>os400.quote.parameter</strong></h3>
+            <p>(iSeries only) Sets whether the agent encloses every parameter of the CL program in single quotes. This parameter can be useful for customers migrating from the CA Universal Job Management Agent (CA UJMA).</p>
+            <ul>
+                <li><strong>true</strong><br>Encloses every parameter of the CL program that is passed to the agent in single quotes.</li>
+                <li><strong>false</strong><br>Does not enclose parameters of the CL program in single quotes. The parameters are passed as is.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p><strong>Notes:</strong>&nbsp;When migrating to the agent from CA UJMA, update your CA UJMA job definitions as follows:</p>
+                    <ul>
+                        <li class="NormalTerm">*BLANK is a CA UJMA term, which is not a valid keyword for the agent. Therefore, *BLANK must be converted into ' ' (two single quotes that are separated by a space).</li>
+                        <li class="NormalTerm">*EMPTY is a CA UJMA term, which must be converted into '' (two single quotes that are concatenated together). If *EMPTY ('') is the last argument, os400.quote.parameter must be set to false.</li>
+                        <li class="NormalTerm">If a parameter contains a space, enclose the parameter in single quotes: 'this parameter has a space.'</li>
+                    </ul>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-os400.run.job.ccsid"><strong>os400.run.job.ccsid</strong></h3>
+            <p>(iSeries only) Specifies the default Coded Character Set Identifier (CCSID) to use for iSeries jobs. IBM publishes and maintains the CCSIDs. CCSIDs are always integers. In a job definition, you can override the default value by specifying the CCSID as a parameter that gets passed to the iSeries SBMJOB command.</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p><strong>Note:</strong>&nbsp;If you do not specify the CCSID in either this parameter or the job definition, the system default on iSeries is used.</p>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.agentparm.backupfilelimit"><strong><strong><span style="color: black;">oscomponent.agentparm.backupfilelimit</span></strong></strong></h3>
+            <p>Specifies a limit for the number of agentparm.txt backup files created by the agent. When the specified limit is reached, the number of backup files that exceed the limit are deleted, starting with the oldest. If you do not set this parameter, the agent retains its current behavior and saves all backup copies. The agent logs all activity related to this parameter in the&nbsp;default_agent.log file.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong>&nbsp;You must set the value of this parameter to 1 or greater, otherwise no backup copies are deleted.
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.auth.pam.lib"><strong>oscomponent.auth.pam.lib</strong></h3>
+            <p>(UNIX only) Specifies the path to the PAM shared library.</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p><strong>Note:</strong>&nbsp;We recommend that you specify the full path to the library file.</p>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.auth.pam.svc"><strong>oscomponent.auth.pam.svc</strong></h3>
+            <p>(UNIX only) Specifies the default PAM service the agent uses for login authentication. The list of available PAM services for your system is located in the /etc/pam.conf or /etc/pam.d/ file.&nbsp;<br><strong>Default:</strong>&nbsp;login</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p><strong>Note:</strong>&nbsp;You can use the chkusr utility that the agent provides to test a PAM service being used to authenticate a user and password.</p>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.checkvalidshell"><strong>oscomponent.checkvalidshell</strong></h3>
+            <p>(UNIX only) Determines whether the agent checks valid shells.</p>
+            <ul>
+                <li><strong>true</strong><br>Indicates that the agent checks valid shells. All shells that jobs use must be specified in the oscomponent.validshell parameter.</li>
+                <li><strong>false</strong><br>Indicates that the agent bypasses the valid shell check.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;true</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.classpath"><strong>oscomponent.classpath</strong></h3>
+            <p>Specifies the path to the JAR files that the agent requires.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.cmdprefix.force"><strong>oscomponent.cmdprefix.force</strong></h3>
+            <p>(UNIX) Specifies whether the agent submits the command using a temporary wrapper shell script.&nbsp;<br>(Windows) Specifies whether the agent submits the command using the Windows command interpreter (cmd.exe).</p>
+            <ul>
+                <li><p><strong>true</strong><br>(UNIX) Indicates that the agent submits the command using a temporary wrapper shell script that the agent generates.<br>(Windows) Indicates that the agent submits the command using cmd.exe. The command is prefixed with "cmd /c" to allow built-in commands such as dir and echo to execute properly.</p>
+                    <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                        <span class="aui-icon icon-warning">Icon</span>
+                        <div class="message-content">
+                            <strong>Note:</strong>&nbsp;Commands that contain embedded blanks in their path (for example, c:\temp\tst one\test.cmd) fail unless oscomponent.cmdprefix.force.quotes.full is also set to true.
+                        </div>
+                    </div></li>
+                <li><strong>false</strong><br>(UNIX) Indicates that the agent submits the command by itself without generating the temporary wrapper shell script.&nbsp;When set to false, a wrapper shell can still be created unless oscomponent.profiles.src.delay=false and oscomponent.lookupcommand=false.<br>(Windows) Indicates that the agent submits the command by itself without using cmd.exe.&nbsp;</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;On CA Workload Automation AE, set this parameter to true for backward compatibility with legacy agents.
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponentoscomponent.cmdprefix.force.quotes.full"><strong><span class="confluence-anchor-link conf-macro output-inline" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent" data-hasbody="false" data-macro-name="anchor"> </span>oscomponent.cmdprefix.force.quotes.full</strong></h3>
+            <p>(Windows only) Specifies whether the agent wraps the entire command in double quotes before the Windows command interpreter (cmd.exe) runs the command. This parameter is applicable if oscomponent.cmdprefix.force is set to true.</p>
+            <p><strong>true</strong><br>Indicates that the agent wraps the entire command in double quotes before cmd.exe runs the command. Set this parameter to true to allow a command that has spaces and special characters (such as, &amp;()[];,!^%)&nbsp;in its path to run without error, for example:</p>
+            <div>
+                <div class="syntaxhighlighter nogutter  text">
+                    <p></p>
+                    <div class="table-responsive">
+                        <table class="wrapped table">
+                            <tbody>
+                            <tr>
+                                <td class="confluenceTd">
+                                    <div class="container" title="Hint: double-click to select code">
+                                        <div class="line number1 index0 alt2">
+                                            <code class="text plain">"C:\ Program Files (x86)\command.bat" "C:\ Program Files (x86)\input-file"</code>
+                                        </div>
+                                    </div></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p></p>
+                </div>
+            </div>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Notes:</strong>
+                </div>
+                <div class="message-content">
+                    <ul>
+                        <li><span style="line-height: 1.42857;">Commands that contain&nbsp;contain spaces or special characters&nbsp;in their paths succeed, for example: C:\Program Files\program.exe.</span></li>
+                    </ul>
+                </div>
+                <div class="message-content">
+                    <ul>
+                        <li>Commands that contain an argument in quotes succeed, for example: Command=%TEMP%\bin\test.bat, Args=\“Test Message”<br>This job succeeds because the final executable string is: cmd.exe /c ““%TEMP%\bin\test.bat” “Test Message””</li>
+                    </ul>
+                    <ul>
+                        <li>Commands with arguments that do not contain a quote succeed, for example: Command=%TEMP%\bin\sleep.exe, Args=5<br>This job succeeds because the final executable string is: cmd.exe /c “%TEMP%\bin\sleep.exe” 5”</li>
+                    </ul>
+                    <ul>
+                        <li>Commands with arguments fail if the entire command, including arguments, is quoted, for example: "C:\tools\program.exe arg1 arg2".</li>
+                    </ul>
+                </div>
+            </div>
+            <p><strong>false</strong><br>Indicates that the agent does not wrap the entire command in double quotes before cmd.exe runs the command.</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Notes:<br></strong>
+                    <ul>
+                        <li>Commands that contain spaces or special characters in their paths fail, for example: C:\Program Files\program.exe.</li>
+                    </ul>
+                    <ul>
+                        <li>Commands with arguments that contain a quote fail, for example: Command=%TEMP%\bin\test.bat, Args=\“Test Message\”<br>This job fails because the final executable string is: cmd.exe /c “%TEMP%\bin\test.bat” “Test Message”</li>
+                    </ul>
+                    <ul>
+                        <li>Command with arguments that do not contain a quote succeed, for example: Command=%TEMP%\bin\sleep.exe, Args=5<br>This job succeeds because the final executable string is: cmd.exe /c “%TEMP%\bin\sleep.exe” 5</li>
+                    </ul>
+                    <ul>
+                        <li>Commands with arguments succeed if the entire command, including arguments, is quoted and the path does not contain embedded spaces, for example: "C:\tools\program.exe arg1 arg2".</li>
+                    </ul>
+                </div>
+            </div>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;On CA Workload Automation AE, set this parameter to true for backward compatibility with legacy agents.
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.cmdprefix.force.redir.ifstdon"><strong>oscomponent.cmdprefix.force.redir.ifstdon</strong></h3>
+            <p>(Windows only) Sets whether to prevent the agent from redirecting STDOUT/STDERR if none&nbsp;are specified in the job definition.</p>
+            <ul>
+                <li><strong>true</strong><br>Prevents the agent from redirecting STDOUT/STDERR if none&nbsp;are specified in the job definition. If the output of the command requires user input, such as pause, it is displayed in the cmd.exe console window.</li>
+                <li><strong>false</strong><br>Does not prevent the agent from redirecting STDOUT/STDERR if none&nbsp;are specified in the job definition.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;This parameter requires oscomponent.cmdprefix.force=true and the Windows job has to be interactive.
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.cmdprefix.force.redir.inline"><strong>oscomponent.cmdprefix.force.redir.inline</strong></h3>
+            <p>(Windows only) Sets whether the agent forces inline redirection. In&nbsp;some&nbsp;cases, such as Windows Server 2008 R2, inline redirection is required for the console to be displayed in Session 0.</p>
+            <ul>
+                <li><strong>true</strong><br>Forces inline redirection using cmd.exe /c&nbsp;<em>command</em><em>args</em><em>stdin_file</em>&nbsp;&gt;<em>stdout_file</em>&nbsp;&gt;<em>stderr_file</em>.</li>
+                <li><strong>false</strong><br>Does not force inline redirection.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;This parameter requires oscomponent.cmdprefix.force=true and affects FTP verbose mode. If regular redirection is used, the commandftp - s:command_file will not output raw FTP commands with completion codes as per FTP protocol.
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.default.password"><strong>oscomponent.default.password</strong></h3>
+            <p>Specifies the password for the default user ID.</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p><strong>Note:</strong>&nbsp;This parameter is only required for Windows systems.</p>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.default.user"><strong>oscomponent.default.user</strong></h3>
+            <p>Specifies the default operating system user name.</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p><strong>Note:</strong>&nbsp;The user that is specified in a job definition overrides this value.</p>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.defaultfile.permission"><strong>oscomponent.defaultfile.permission</strong></h3>
+            <p>(UNIX only) Specifies the standard UNIX file permission in octal notation starting with 0. The four-digit octal code specifies the default file access permissions for the following files that the agent creates:</p>
+            <ul>
+                <li>Temporary working shell scripts (CA Workload Automation AE only)</li>
+                <li>Standard output and standard error files</li>
+                <li>Job logs</li>
+                <li>Spool files</li>
+            </ul>
+            <p><strong>Example:</strong>&nbsp;0600 (grants read and write permissions to the owner, but prevents anybody else from accessing the file)</p>
+            <p>This parameter works in conjunction with the oscomponent.umask parameter, which turns off (disables) specific permissions that the oscomponent.defaultfile.permission parameter allows.</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Notes:<br></strong>
+                    <ul>
+                        <li>If oscomponent.defaultfile.permission is not specified, all files the agent creates will&nbsp;have the same permissions as before 11.3 SP1 cumulative 4.</li>
+                        <li>Temporary working shell scripts are granted execute permissions by the agent regardless of this parameter.</li>
+                        <li>This parameter does not change the access permission of the spool directory (that is, drwxrwxrwt).</li>
+                    </ul>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.defaultshell"><strong>oscomponent.defaultshell</strong></h3>
+            <p>(UNIX only) Identifies the shell in which scripts are run on the system.</p>
+            <p><strong>Default:</strong>&nbsp;/bin/sh</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.defaultshell.force"><strong>oscomponent.defaultshell.force</strong></h3>
+            <p>(UNIX only) Indicates whether to force the agent to use the default shell that is specified in the oscomponent.defaultshell parameter.</p>
+            <ul>
+                <li><strong>true</strong><br>Forces the agent to use the default shell to run UNIX scripts and to source the user profile.</li>
+                <li><strong>false</strong><br>Does not force the agent to use the default shell.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.environment.variable"><strong>oscomponent.environment.variable</strong></h3>
+            <p>Specifies the path to the file that defines agent-wide variables.</p>
+            <p><strong>Example:</strong>&nbsp;C:\MyVars\agent_vars.txt</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.environment.variable_manager_manager_id"><strong>oscomponent.environment.variable_manager_<em>manager_id</em></strong></h3>
+            <p>Specifies the path to the file that defines manager-specific variables.</p>
+            <ul>
+                <li><strong><em>manager_id</em></strong><br>Specifies the name of the specific scheduling manager the environment variables apply to.</li>
+            </ul>
+            <p><strong>Example:</strong>&nbsp;C:\MyVars\mgr_stress_vars.txt</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.environment.variable_user_user_id"><strong>oscomponent.environment.variable_user_<em>user_id</em></strong></h3>
+            <p>Specifies the path to the file that defines user-specific variables.</p>
+            <ul>
+                <li><strong><em>user_id</em></strong><br>Specifies the name of the user the environment variables apply to.</li>
+            </ul>
+            <p><strong>Example:</strong>&nbsp;C:\MyVars\usr_abc.txt</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.initialworkingdirectory"><strong>oscomponent.initialworkingdirectory</strong></h3>
+            <p>Specifies the default initial working directory for all scripts. Options are as follows:</p>
+            <ul>
+                <li><strong>SCRIPT</strong><br>Sets the path to where the script resides.</li>
+                <li><strong>USER</strong><br>Sets the path to the home directory of the owner of the script.</li>
+                <li><strong>USER_CONT_NOT_AVAIL</strong><br>Specifies that the script should run even if a home directory for the user is not defined.</li>
+                <li><em><strong>path</strong></em><br>Specifies the path to the directory in which the script should run.</li>
+            </ul>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Notes:<br></strong>
+                    <ul>
+                        <li>On CA Workload Automation AE, set this parameter to&nbsp;USER_CONT_NOT_AVAIL for backward compatibility with legacy agents.</li>
+                        <li>If you do not specify a value, the parameter defaults to the path where the running cybAgent resides.</li>
+                        <li><span style="line-height: 1.4285715;">You can override the initial working directory on a per-job basis by specifying a value for the PWD or HOME environment variable.</span></li>
+                        <li><span style="line-height: 1.4285715;">If the specified directory either does not exist or cannot be accessed, jobs can fail:</span></li>
+                    </ul>
+                    <ul>
+                        <li style="list-style-type: none;background-image: none;">
+                            <ul>
+                                <li><p><span>While trying to create or access the file,&nbsp;</span>if there is an&nbsp;stdout, stderr, or stdin file specified using a relative path (which should make it look in the initial working directory)</p></li>
+                                <li><p>When trying to set the initial working directory (the equivalent of typing “cd newdirectory” at a command prompt) before executing the job’s command</p></li>
+                            </ul></li>
+                    </ul>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.interactive"><strong>oscomponent.interactive</strong></h3>
+            <p>(Windows only) Indicates whether the agent submits Windows jobs in interactive mode instead of batch mode.</p>
+            <ul>
+                <li><strong>true</strong><br>Submits Windows jobs in interactive mode. Interactive mode lets users view and interact with jobs that invoke Windows Terminal Services or user interface processes, for example, Notepad.</li>
+                <li><strong>false</strong><br>Submits Windows jobs in batch mode.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.killsignals"><span style="color: rgb(0,0,0);"><strong>oscomponent.killsignals</strong></span></h3>
+            <p><span style="color: rgb(0,0,0);">&nbsp;</span><span style="color: rgb(0,0,0);">Specifies a list of signals to be sent to the process for a job. If the process does not go away after sending the first signal in the list, the agent sends the next signal. (If you do not specify a list of signals for this parameter, the agent defaults to the current behavior of using SIGKILL.)</span><br><span style="color: rgb(0,0,0);"><strong>Example:</strong>&nbsp;oscomponent.killsignals=2,10,9</span><br><span style="color: rgb(0,0,0);"><strong>Default:</strong>&nbsp;9</span></p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.killsignals.interval"><span style="color: rgb(0,0,0);"><strong>oscomponent.killsignals.interval</strong></span></h3>
+            <p><span style="color: rgb(0,0,0);">&nbsp;</span><span style="color: rgb(0,0,0);">Specifies the time in seconds after a signal is sent that the agent waits for the process to go away before sending the next signal.&nbsp;(If you do not specify a value for this parameter, the agent defaults to an interval of 5 seconds.)</span><br><span style="color: rgb(0,0,0);"><strong>Example:&nbsp;</strong>oscomponent.killsignals.interval=7&nbsp;</span><br><span style="color: rgb(0,0,0);"><strong>Default:</strong>&nbsp;5&nbsp;</span></p>
+            <p><span style="color: rgb(0,0,0);">If you do not set this parameter, the current behavior is maintained; the agent sends a SIGKILL by default.</span></p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.interactive.session.ignoreinactive"><strong>oscomponent.interactive.session.ignoreinactive</strong></h3>
+            <p>(Windows only) Sets whether the agent reuses an inactive terminal session.</p>
+            <ul>
+                <li><strong>true</strong><br>Reuses an inactive terminal session.</li>
+                <li><strong>false</strong><br>Ignores an inactive terminal session. If the session is disconnected remotely, the interactive job fails.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.interactive.sessionzero"><strong>oscomponent.interactive.sessionzero</strong></h3>
+            <p>(Windows only) Sets whether the agent runs the interactive job in Session 0.</p>
+            <ul>
+                <li><strong>true</strong><br>Runs all interactive jobs using Session 0. The user is not required to log in to the agent computer before the job runs. A greater amount of resources is available to run the job.</li>
+                <li><strong>false</strong><br>Runs all interactive jobs using Terminal Services.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.javapath"><strong>oscomponent.javapath</strong></h3>
+            <p>Specifies the full path to the directory where Java resides.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.joblog"><strong>oscomponent.joblog</strong></h3>
+            <p>Sets whether the agent creates a job log for each job that runs.</p>
+            <ul>
+                <li><strong>true</strong><br>Enables job logs.</li>
+                <li><strong>false</strong><br>Disables job logs.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;true</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.joblog.success.autocleanup"><strong>oscomponent.joblog.success.autocleanup</strong></h3>
+            <p>Indicates whether to delete the job log automatically when the job completes successfully.</p>
+            <ul>
+                <li><strong>true</strong><br>Deletes the job log automatically when the job completes successfully.</li>
+                <li><strong>false</strong><br>Does not delete the job log automatically when the job completes successfully.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.loginshell"><strong>oscomponent.loginshell</strong></h3>
+            <p>(UNIX only) Indicates how to invoke the Shell program when executing a script.</p>
+            <ul>
+                <li><strong>true</strong><br>Invokes the shell as a login shell. The shell program looks in the directory that the HOME environment variable specifies and tries to execute the login scripts of the user (in addition to the&nbsp;.cshrc script).</li>
+                <li><strong>false</strong><br>Ignores the shell as a login shell.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p><strong>Note:</strong>&nbsp;For most systems, this parameter affects only the C and Korn shells. The Bourne shell ignores the oscomponent.loginshell parameter.</p>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.logon.batch.first"><strong>oscomponent.logon.batch.first</strong></h3>
+            <p>(Windows only) This parameter specifies the order of the logon attempts. When set to true,&nbsp;the logon attempt order is changed from ‘interative first, batch second’ to ‘batch first, interactive second.’</p>
+            <p>RUN jobs that target an agent running on Windows can specify that the jobs run as a specific user. When the agent logs in as the specified user, it logs in as either an Interactive or a Batch session.&nbsp;By default the agent first tries to log on as Interactive; if that fails, it then tries to log on as Batch.</p>
+            <p>In&nbsp;some&nbsp;cases (typically for security reasons), a user is prevented from logging in as Interactive.&nbsp;If the batch logon&nbsp;succeed, the job runs successfully. However, this approach can be inefficient. The failed logon attempt slows the job’s execution and results in extra logging in the agent. This extra logging can appear to be Java exception failures.</p>
+            <p>For situations where it is understood that batch logons will&nbsp;be&nbsp;used, you can reverse the logon attempt order. Set this parameter to true to change the order from ‘interative first, batch second’ to ‘batch first, interactive second.’</p>
+            <p><strong>Example:&nbsp;</strong>oscomponent.logon.batch.first=true</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.logon.elevated"><strong>oscomponent.logon.elevated</strong></h3>
+            <p>(Windows only) Indicates whether the agent submits jobs in elevated mode on Windows.</p>
+            <ul>
+                <li><strong>true</strong><br>Submits the job in elevated mode on Windows.</li>
+                <li><strong>false</strong><br>Does not submit the job in elevated mode on Windows.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.lookupcommand"><strong>oscomponent.lookupcommand</strong></h3>
+            <p>Determines how to specify the script or command name (UNIX) or command file (Windows) to run in a job definition.</p>
+            <ul>
+                <li><strong>true</strong><br>Indicates that the script, command name, or command file can be specified without the full path in a job definition. On UNIX, the agent looks up the path to the script or command name for the specified user ID. On Windows, the agent looks up the path to the command file in the following directories, in the order listed:
+                    <ul>
+                        <li>agent installation directory</li>
+                        <li>WINDOWS\system32 directory on 32-bit versions of Windows (or WINDOWS\SysWow64 directory on 64-bit versions of Windows)</li>
+                        <li>WINDOWS\system directory</li>
+                        <li>WINDOWS directory</li>
+                        <li>system path</li>
+                        <li>user path</li>
+                    </ul></li>
+                <li><strong>false</strong><br>Indicates that the full path to the script, command name, or command file must be specified in the job definition.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;true</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Notes:<br></strong>
+                    <ul>
+                        <li>On CA Workload Automation AE, set this parameter to true for backward compatibility with legacy agents.</li>
+                        <li>If set to true, verify that the agent on UNIX is running under the root account.</li>
+                        <li>The agent does not resolve environment variables that are specified in the command file path for Windows jobs.</li>
+                    </ul>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.lookuposerror"><strong>oscomponent.lookuposerror</strong></h3>
+            <p>Enables operating system errors to pass from the agent to the scheduling manager.</p>
+            <ul>
+                <li><strong>true</strong><br>Enables the operating system errors.</li>
+                <li><strong>false</strong><br>Disables the operating system errors.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.noexitcode"><strong>oscomponent.noexitcode</strong></h3>
+            <p>Specifies the exit code that tells the agent not to send a completion code to the scheduling manager host.&nbsp;Valid values depend on what return codes are allowed by the application, the shell, and the operating system. For example, on Linux, shell scripts can only return values between 0 and 255.</p>
+            <p><strong>Default:</strong>&nbsp;255 for UNIX, 127 for Windows</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;On CA Workload Automation AE, set this parameter to 256 for backward compatibility with legacy agents.
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.noforceprofile"><strong>oscomponent.noforceprofile</strong></h3>
+            <p>(UNIX only) Specifies whether the agent allows loading a .profile/.login file that is based on the usual UNIX rules for sourcing .profile/.login.&nbsp;</p>
+            <ul>
+                <li><strong>true</strong><br>Prevents the agent from loading the .profile/.login file.</li>
+                <li><strong>false</strong><br>Allows the agent to load the&nbsp;.profile file.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Notes:<br></strong>
+                    <ul>
+                        <li>On CA Workload Automation AE, set this parameter to true for backward compatibility with legacy agents.</li>
+                        <li><p>If oscomponent.loginshell is set to false and a user is not specified in the job definition, no .profile/.login is sourced and oscomponent.noforceprofile is ignored.</p></li>
+                    </ul>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.pamlogin.enable"><strong>oscomponent.pamlogin.enable&nbsp;</strong></h3>
+            <p>Specifies that the agent use PAM to log a user in.&nbsp;(Parameter added in 11.3.07.)</p>
+            <ul>
+                <li><strong>true<br class="_mce_tagged_br"></strong>The agent uses PAM to log the user in.</li>
+                <li><strong>false<br></strong>The agent does not use PAM to log the user in.</li>
+            </ul>
+            <p><strong>Default: </strong>false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.pamlogin.svc"><strong>oscomponent.pamlogin.svc</strong></h3>
+            <p>When set, this parameter specifies the PAM service to use to log a user in. The value can be su, login, sshd, sudo, or any other PAM service installed on the system that supports password authentication.<br><br>For example,&nbsp;if PAM login is enabled and "oscomponent.pamlogin.svc=su"&nbsp;on Linux, and "<a rel="nofollow" class="external-link" href="http://pam_limits.so/">pam_limits.so</a>" is specified for the session module interface in the PAM configuration file for the su service, when the user session is created, it loads the user-specific ulimit values from the limits.conf file and applies them to the session.&nbsp;<br><br>If the System Agent is run as the root user, typically no password is required for a user to log in as another user when using the su service. This allows administrators the benefit of using PAM session initialization (such as "<a rel="nofollow" class="external-link" href="http://pam_limits.so/">pam_limits.so</a>"), without having to change the job definition to send a password for the user.<br><br><span style="color: rgb(0,0,0);">If oscomponent.pamlogin.svc is set to login, sshd, or any other PAM service, a password is required.&nbsp;</span>This behavior is similar to the behavior on Windows, where a password is always required.&nbsp;(Parameter added in 11.3.07.)</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong><strong><span style="color: rgb(0,0,0);">Note:&nbsp;</span></strong></strong>
+                <span style="color: rgb(0,0,0);">For more information about how to configure PAM, see the documentation for PAM on your system.</span>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.profiles.global.override"><strong>oscomponent.profiles.global.override</strong></h3>
+            <p>Specifies whether or not the agent sources an available job profile or the profile specified by the&nbsp;EWAGLOBALPROFILE&nbsp;environment variable.</p>
+            <ul>
+                <li><strong>true</strong><br>If the job profile is present, the agent sources the job profile. The agent does not source the profile specified by EWAGLOBALPROFILE (/etc/auto.profile).</li>
+                <li><strong>false</strong><br>If the job profile is not present, the agent sources EWAGLOBALPROFILE.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.profiles.src.delay"><strong>oscomponent.profiles.src.delay</strong></h3>
+            <p>(UNIX only) Specifies whether the agent executes the sourcing of profiles (global and job) from a temporary shell script.</p>
+            <ul>
+                <li><strong>true</strong><br>Indicates that the agent executes the sourcing of profiles from a temporary shell script that the agent generates. The agent does not add /etc/profile or the login profile of the user to this temporary shell script. To further control which profile (global or job) gets sourced as part of execution, use the oscomponent.profiles.global.override parameter.</li>
+                <li><strong>false</strong><br>Indicates that the agent does not execute the sourcing of profiles from a temporary shell script.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;On CA Workload Automation AE, set this parameter to true for backward compatibility with legacy agents.
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.profiles.src.location.iwd"><strong>oscomponent.profiles.src.location.iwd</strong></h3>
+            <p>(UNIX only) Specifies whether the initial working directory is used to source the specified profile when it does not contain a full path.</p>
+            <ul>
+                <li><p><strong>true</strong><br>Indicates that the initial working directory is used to source the specified profile when it does not contain a full path.</p>
+                    <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                        <span class="aui-icon icon-warning">Icon</span>
+                        <div class="message-content">
+                            <p><strong>Note:</strong>&nbsp;If the profile is located in a subdirectory under the initial working directory, specify the profile using a relative path:&nbsp;<em>subdirectory</em>/my_profile or ./<em>subdirectory</em>/my_profile.</p>
+                        </div>
+                    </div></li>
+                <li><strong>false</strong><br>Indicates that the&nbsp;<em>installDir</em>/profiles directory is used to source the specified profile when it does not contain a full path.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;If the profile path starts with a /, it is considered a full path, for example: /
+                    <em>subdirectory</em>/my_profile. In this case, the oscomponent.profiles.src.location.iwd setting is ignored.
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.profiles.src.order.global.first"><strong>oscomponent.profiles.src.order.global.first</strong></h3>
+            <p>(UNIX only) Indicates whether EWAGLOBALPROFILE (/etc/auto.profile) is sourced before or after the job profiles.</p>
+            <ul>
+                <li><strong>true</strong><br>Indicates that EWAGLOBALPROFILE is sourced first before the job profile.</li>
+                <li><strong>false</strong><br>Indicates that EWAGLOBALPROFILE is sourced last after the job profile.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;On CA Workload Automation AE, set this parameter to true for backward compatibility with legacy agents.
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.profiles.src.verify"><strong>oscomponent.profiles.src.verify&nbsp;</strong></h3>
+            <p>(UNIX only) Specifies whether the agent verifies that the job profile that is specified in the job definition exists before the job runs. This parameter is applicable if oscomponent.profiles.src.delay is set to true.</p>
+            <ul>
+                <li><strong>true</strong><br>Indicates that the agent verifies that the job profile that is specified in the job definition exists before the job runs. If the specified job profile does not exist, the job returns a submission error indicating the reason for the error.</li>
+                <li><strong>false</strong><br>Indicates that the agent does not verify that the job profile that is specified in the job definition exists before the job runs. If the specified job profile does not exist, the job fails without an appropriate error message.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:</strong>&nbsp;On CA Workload Automation AE, set this parameter to true for backward compatibility with legacy agents.
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.restoredrives"><strong>oscomponent.restoredrives</strong></h3>
+            <p>When set to true, this parameter restores mapped drive letters when jobs are run as external OS users.&nbsp;When jobs run as external OS users, the agent can restore the mapped drive letters defined by the external user prior to executing the job. With the mapped drives restored, jobs can reference external files by drive letters rather than the UNC style file names.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> This setting is global to the agent. Because it takes time for the agent to restore the drive letters before executing the job, the preferred method for referencing external files is through UNC style file names.
+            </div>
+            <p><strong style="font-size: 16.0px;">oscomponent.sendsig.term.group</strong></p>
+            <p>(UNIX only) Indicates whether the SIGTERM and SIGKILL signals are always sent to the entire process group.</p>
+            <ul>
+                <li><strong>true</strong><br>Indicates that the SIGTERM and SIGKILL signals are always sent to the entire process group. The signal is sent to the entire group whether the signal number is positive or negative.</li>
+                <li><p><strong>false</strong><br>Indicates that the SIGTERM and SIGKILL signals are not always sent to the entire process group.</p>
+                    <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                        <span class="aui-icon icon-warning">Icon</span>
+                        <div class="message-content">
+                            <p><strong>Note:</strong>&nbsp;On CA Workload Automation AE, this setting ensures full compatibility with the legacy agent and maintains the correct behavior of the sendevent command.</p>
+                        </div>
+                    </div></li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <p><strong style="font-size: 16.0px;">oscomponent.servicedisplayname</strong></p>
+            <p>(Windows only) Specifies the name of the Windows service for the agent. You can control the agent on Windows as a service.</p>
+            <p><strong>Default:</strong>&nbsp;CA Workload Automation Agent 11.3</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.servicename"><strong>oscomponent.servicename</strong></h3>
+            <p>(Windows only) Specifies the agent name as it appears in the list of services. The length of the service display name must fall within Windows guidelines. Use a unique name if you install more than one agent.</p>
+            <p><strong>Default:</strong>&nbsp;CA Workload Automation Agent 11.3</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.shell"><strong>oscomponent.shell</strong></h3>
+            <p>(Windows only) Specifies the executable file name for an alternative Windows shell.</p>
+            <p><strong>Default:</strong>&nbsp;explorer.exe</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.su.newconsole"><strong>oscomponent.su.newconsole</strong></h3>
+            <p>(Windows only) Sets whether to force the agent to create a console when running a Windows job.</p>
+            <ul>
+                <li><strong>true</strong><br>Creates a console when running a Windows job.</li>
+                <li><strong>false</strong><br>Does not create a console when running a Windows job.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.terminate.subtree"><strong>oscomponent.terminate.subtree</strong></h3>
+            <p>(UNIX only) Specifies whether the agent kills the process group or manually kills each process in the process subtree when a UNIX job is canceled.</p>
+            <ul>
+                <li><strong>true</strong><br>Indicates that the agent assembles the process subtree and manually kills each process. This approach ensures that all processes&nbsp;associated with the UNIX job are terminated.</li>
+                <li><strong>false</strong><br>Indicates that the agent sends the kill signal to the script's process group ID&nbsp;. As a result, the kill signal is delivered individually to all processes that are members of the group. Any process that is not a member of the group does not get terminated.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Note:&nbsp;</strong>If oscomponent.terminate.subtree is set to true, the agent sends the SIGKILL signal to cause the process to terminate immediately. The agent does not provide the option to send the SIGTERM signal, so the receiving process cannot perform any clean-up upon receiving the signal. The default behavior (oscomponent.terminate.subtree=false) does provide an option to send the SIGTERM signal.
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.terminate.wait"><strong>oscomponent.terminate.wait</strong></h3>
+            <p>(Unix only) Indicates that&nbsp;when a CONTROL CANCEL for a job is received, the agent should first attempt to kill the job’s process with SIGTERM (signal 15), then wait the number of seconds set in the parameter. If the process is still running after that time has elapsed, the agent sends the default SIGKILL (signal 9) to kill the process.&nbsp;This parameter can be set to any integer value.</p>
+            <p><span><strong>Default:</strong>&nbsp;none</span></p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong>
+                <span>&nbsp;The setting for oscomponent.killsignals overrides the setting for oscomponent.terminate.wait.&nbsp;</span>
+                <span>When&nbsp;</span>
+                <span>oscomponent.killsignals</span>
+                <span>&nbsp;is set, only the signals in oscomponent.killsignals are sent.</span>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.umask"><strong>oscomponent.umask</strong></h3>
+            <p>(UNIX only) Provides support for the umask command, which turns off (disables) specific permissions that the oscomponent.defaultfile.permission parameter allows. The three-digit octal code sets the file mode creation mask (umask) for the following files that the agent creates:</p>
+            <ul>
+                <li>Temporary working shell scripts (CA Workload Automation AE only)</li>
+                <li>Standard output and standard error files</li>
+                <li>Job logs</li>
+                <li>Spool files</li>
+            </ul>
+            <p><strong>Example:</strong>&nbsp;066 (assuming the default file access permission is 666, this value turns off read and write permissions for the group and others)</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <strong>Notes:<br></strong>
+                    <ul>
+                        <li>If oscomponent.umask is not specified, the default umask of the user that started the agent is used for job logs, spool files, and wrapping scripts.</li>
+                        <li>For standard output and error files, the default umask of the user that runs the job is used with an exception on AIX and HP-UX. On AIX and HP-UX, the default umask is only used if the umask is set in the user profile.</li>
+                    </ul>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.validshell"><strong>oscomponent.validshell</strong></h3>
+            <p>(UNIX only) Identifies the full path and name of every shell that is valid for use on the agent. Separate each shell with a comma.</p>
+            <p><strong>Default:</strong>&nbsp;/usr/bin/sh,/bin/csh,/bin/ksh,/bin/sh,/bin/bash</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p><strong>Note:</strong>&nbsp;This parameter is verified when the oscomponent.checkvalidshell parameter is set to true (the default). If the shell used in a job definition or script is not specified in this parameter, the job fails.</p>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-oscomponent.wrapper.exec.force"><strong>oscomponent.wrapper.exec.force&nbsp;</strong></h3>
+            <p>Specifies whether the wrapper script the agent generates puts exec in front of the target script or binary. This parameter is applicable if oscomponent.cmdprefix.force is set to true.</p>
+            <ul>
+                <li><strong>true</strong><br>Indicates that the wrapper script the agent generates puts exec in front of the target script or binary.</li>
+                <li><p><strong>false</strong><br>Indicates that the wrapper script the agent generates does not put exec in front of the target script or binary. Set this parameter to false to enable chained commands, for example, bin/sleep 10; echo hello.</p>
+                    <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                        <span class="aui-icon icon-warning">Icon</span>
+                        <div class="message-content">
+                            <p><strong>Note:</strong>&nbsp;If this parameter is set to false, you cannot send a signal to the job unless you set oscomponent.sendsig.term.group to send the signal to the entire process group.</p>
+                        </div>
+                    </div></li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 class="NormalTerm" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-persistence.dbfolder"><strong>persistence.dbfolder</strong></h3>
+            <p class="NormalTerm">Specifies the name of a directory where persistence files are stored. When the agent is restarted, these files are used to track outstanding jobs.</p>
+            <p class="NormalTermContinued"><strong>Default:</strong>&nbsp;database</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-persistence.level"><strong>persistence.level</strong></h3>
+            <p>Specifies the persistence level. Options are as follows:</p>
+            <ul>
+                <li>0<br>Indicates no persistence; maximum speed.</li>
+                <li>1<br>Indicates that most queues and registration maps are persistent, so there is some recovery ability.</li>
+                <li>2<br>Indicates the maximum persistence level.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;2</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-plugins.object.storage.persistasplaintext"><strong>plugins.object.storage.persistasplaintext</strong></h3>
+            <p>Specifies whether to persist the Java serialized object of a payload producing job in text format in addition to the binary output.</p>
+            <ul>
+                <li><p><strong>true</strong><br>Persists the Java serialized object of a payload producing job in text format. The agent converts the Java object to text and outputs it to a text file in the same location as the binary file. The output file of the plain text version has the same name as the binary file, except with a .txt extension.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Notes:</strong>
+                        <br>This global setting applies to all payload producing jobs. Depending on the number of payload producing jobs, this setting can cause an excess number of files to be created. Alternatively, when supported on the scheduling manager, you can enable this setting at the job-level for specific jobs.
+                        <br>SNMP jobs return an array as the Java object. If the array contains only one element, the agent removes the extraneous Java array from the element before converting it to text format. If the array contains more than one element, the agent outputs the entire array in text format. Most SNMP jobs return only one item in the array.
+                    </div> </li>
+            </ul>
+            <ul>
+                <li><strong>false</strong><br>Does not persist the Java serialized object of a payload producing job in text format.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p></p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong>&nbsp;Currently, you cannot retrieve the text or binary format of Java serialized objects from the scheduling manager.&nbsp;
+                    </div>
+                    <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-plugins.start_internal_n"><strong>plugins.start_internal_<em>n</em></strong></h3>
+                </div>
+            </div>
+            <p>Specifies the agent plug-in to start by the core Java agent.</p>
+            <ul>
+                <li><strong><em>n</em></strong><br>Denotes an integer that is assigned to the agent plug-in, starting at 1. The&nbsp;<em>n</em>&nbsp;suffix must increase sequentially for each agent plug-in.</li>
+            </ul>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-runnerplugin.spool.clean.enable"><strong>runnerplugin.spool.clean.enable</strong></h3>
+            <p>Specifies whether the agent deletes spool files.</p>
+            <ul>
+                <li><strong>true</strong><br>Enables the spool file cleaner.</li>
+                <li><strong>false</strong><br>Disables the spool file cleaner.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p><strong>Note:</strong>&nbsp;If enabled, the agent deletes spool files older than 10 days (7 days for CA Workload Automation AE) and checks the spool files every day. To specify a different file expiration value, set the runnerplugin.spool.expire parameter. To specify a different sleep interval value, set the runnerplugin.spool.sleep parameter.</p>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-runnerplugin.spool.expire"><strong>runnerplugin.spool.expire</strong></h3>
+            <p>Specifies the file expiration time. The agent deletes spool files that are older than this value. This parameter uses the following syntax:</p>
+            <pre><em>n</em>[D|H|M|S]
+</pre>
+            <ul>
+                <li><strong><em>n</em></strong><br>Specifies the time period.</li>
+                <li><strong><em>D</em></strong><br>Specifies the time period unit as days. This is the default.</li>
+                <li><strong>H</strong><br>Specifies the time period unit as hours.</li>
+                <li><strong>M</strong><br>Specifies the time period unit as minutes.</li>
+                <li><strong>S</strong><br>Specifies the time period unit as seconds.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;10D (10 days)</p>
+            <div class="aui-message warning shadowed information-macro" style="margin-left: 0.0px;">
+                <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                    <p><strong>Note:</strong>&nbsp;You cannot specify combinations of time periods. For example, 12D3H is not valid.</p>
+                </div>
+            </div>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-runnerplugin.spool.sleep"><strong>runnerplugin.spool.sleep</strong></h3>
+            <p>Specifies the sleep interval. At every interval, the agent checks for spool files that meet the expiration time and deletes them.</p>
+            <p><strong>Default:</strong>&nbsp;1D (1 day)</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-security.cryptkey"><strong>security.cryptkey</strong></h3>
+            <p>Specifies the path to the text file that stores the encryption key for the agent.</p>
+            <p><strong>Default:</strong></p>
+            <ul>
+                <li><p>For UNIX:</p>
+                    <div>
+                        <div class="syntaxhighlighter nogutter  text">
+                            <p></p>
+                            <div class="table-responsive">
+                                <table class="wrapped table">
+                                    <tbody>
+                                    <tr>
+                                        <td class="confluenceTd">
+                                            <div class="container" title="Hint: double-click to select code">
+                                                <div class="line number1 index0 alt2">
+                                                    <code class="text plain">/CA/WA_Agent_R11_3/cryptkey.txt</code>
+                                                </div>
+                                            </div></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div></li>
+                <li><p>For Windows:</p>
+                    <div>
+                        <div class="syntaxhighlighter nogutter  text">
+                            <p></p>
+                            <div class="table-responsive">
+                                <table class="wrapped table">
+                                    <tbody>
+                                    <tr>
+                                        <td class="confluenceTd">
+                                            <div class="container" title="Hint: double-click to select code">
+                                                <div class="line number1 index0 alt2">
+                                                    <code class="text plain">C:\Program Files\CA\WA Agent R11.3\cryptkey.txt</code>
+                                                </div>
+                                            </div></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div></li>
+                <li><p>For iSeries</p>
+                    <div>
+                        <div class="syntaxhighlighter nogutter  java">
+                            <p></p>
+                            <div class="table-responsive">
+                                <table class="wrapped table">
+                                    <tbody>
+                                    <tr>
+                                        <td class="confluenceTd">
+                                            <div class="container" title="Hint: double-click to select code">
+                                                <div class="line number1 index0 alt2">
+                                                    <code class="java plain">/CA/WA_Agent_R11_3/cyrptkey.txt</code>
+                                                </div>
+                                            </div></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div></li>
+            </ul>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-security.filename"><strong>security.filename</strong></h3>
+            <p>Specifies the path to the security file that contains the security rules that define local security on the agent.</p>
+            <p><strong>Default:</strong><em>agentinstallDir</em>/security.txt</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-security.level"><strong>security.level</strong></h3>
+            <p>Specifies whether local security on the agent is enabled or disabled. Local security on the agent controls which scheduling manager user IDs can perform certain actions, for example, which user IDs can issue CONTROL messages to the agent. If you enable local security, define security rules in a security.txt file.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-security.ssh.ciphers"><strong>security.ssh.ciphers</strong></h3>
+            <p>Specifies the list of ciphers to be used by the agent for SSH communications. Separate the ciphers in the list with a comma. The first cipher in the list is the preferred cipher.</p>
+            <p><strong>Values:</strong></p>
+            <p>3des-cbc</p>
+            <p>3des-ctr</p>
+            <p>blowfish-cbc</p>
+            <p>blowfish-ctr</p>
+            <p>twofish128-cbc</p>
+            <p>twofish128-ctr</p>
+            <p>twofish192-cbc</p>
+            <p>twofish192-ctr</p>
+            <p>twofish-cbc</p>
+            <p>twofish256-cbc</p>
+            <p>twofish256-ctr</p>
+            <p>aes128-cbc</p>
+            <p>aes128-ctr*</p>
+            <p>aes192-cbc</p>
+            <p>aes192-ctr</p>
+            <p>aes256-cbc</p>
+            <p>aes256-ctr</p>
+            <p>serpent128-cbc</p>
+            <p>serpent128-ctr</p>
+            <p>serpent192-cbc</p>
+            <p>serpent192-ctr</p>
+            <p>serpent256-cbc</p>
+            <p>serpent256-ctr</p>
+            <p>idea-cbc</p>
+            <p>idea-ctr</p>
+            <p>cast128-cbc</p>
+            <p>cast128-ctr</p>
+            <p>arcfour</p>
+            <p>arcfour128</p>
+            <p>arcfour256</p>
+            <p><strong>Example:</strong>&nbsp;aes128-ctr,aes192-ctr</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-security.ssh.macs"><strong>security.ssh.macs</strong></h3>
+            <p>Specifies the list of MACs to be used by the agent for SSH communications.&nbsp;Separate the MACs in the list with a comma. The first MAC in the list is the preferred MAC.</p>
+            <p><strong>Values:</strong></p>
+            <p>hmac-sha1</p>
+            <p>hmac-sha1-96</p>
+            <p>hmac-md5</p>
+            <p>hmac-md5-96</p>
+            <p>hmac-sha2-256</p>
+            <p>hmac-sha2-256-96</p>
+            <p>hmac-sha2-512</p>
+            <p>hmac-sha2-512-96</p>
+            <p><em><strong>Example:</strong>&nbsp;hmac-md5,hmac-sha1</em></p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.request.retries"><strong>snmp.request.retries</strong></h3>
+            <p>Defines the maximum number of times the agent requests SNMP trap information. Zero indicates one attempt.</p>
+            <p><strong>Default:</strong>&nbsp;0</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.request.retries.1"><strong>snmp.request.retries</strong></h3>
+            <p>Defines the maximum number of times the agent requests SNMP trap information. Zero indicates one attempt.</p>
+            <p><strong>Default:</strong>&nbsp;0</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.request.timeout"><strong>snmp.request.timeout</strong></h3>
+            <p>Defines the time-out, in milliseconds (ms), when the agent requests SNMP trap information.</p>
+            <p><strong>Default:</strong>&nbsp;2000 (ms)</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.response.translate"><strong>snmp.response.translate</strong></h3>
+            <p>Sets whether the agent translates Object Identifiers (OIDs).</p>
+            <ul>
+                <li><strong>true</strong><br>Enables translation.</li>
+                <li><strong>false</strong><br>Disables translation.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.response.translate.full"><strong>snmp.response.translate.full</strong></h3>
+            <p>Sets whether the agent translates the Object Identifiers (OIDs) from the numeric format to the string format.</p>
+            <ul>
+                <li><strong>true</strong><br>Enables full-name translation.</li>
+                <li><strong>false</strong><br>Disables full-name translation.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.community"><strong>snmp.trap.listener.community</strong></h3>
+            <p>Specifies the v1 or v2 SNMP trap community. The SNMP trap listener ignores traps that do not match this community type.<br><strong>Default:</strong>&nbsp;public</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.host"><strong>snmp.trap.listener.host</strong></h3>
+            <p>Specifies the IP address of the agent listening for trap information.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.port"><strong>snmp.trap.listener.port</strong></h3>
+            <p>Specifies the agent port listening for trap information.<br><strong>Default:</strong>&nbsp;162<br><strong>Limits:</strong>&nbsp;1-65535</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.version"><strong>snmp.trap.listener.version</strong></h3>
+            <p>Specifies the SNMP version of the SNMP manager you want the agent to connect with.</p>
+            <ul>
+                <li>1 -- SNMP v1</li>
+                <li>2 -- SNMP v2</li>
+                <li>3 -- SNMP v3</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;2</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.v3.auth.password_n"><strong>snmp.trap.listener.v3.auth.password_<em>n</em></strong></h3>
+            <p>Specifies the encrypted authentication password for the SNMP v3 user, where&nbsp;<em>n</em>&nbsp;is an integer starting from 1. All parameters ending with the same value of&nbsp;<em>n</em>&nbsp;belong to the same group. This parameter applies only to SNMP v3.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.v3.auth.protocol_n"><strong>snmp.trap.listener.v3.auth.protocol_<em>n</em></strong></h3>
+            <p>Specifies the authentication protocol of the SNMP trap listener, where&nbsp;<em>n</em>&nbsp;is an integer starting from 1. All parameters ending with the same value of&nbsp;<em>n</em>&nbsp;belong to the same group. This parameter applies only to SNMP v3.</p>
+            <ul>
+                <li style="list-style-type: none;background-image: none;">
+                    <ul>
+                        <li>MD5 -- Message Digest 5 Algorithm</li>
+                        <li>SHA -- Secure Hash Algorithm</li>
+                    </ul></li>
+            </ul>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.v3.engine_n"><strong>snmp.trap.listener.v3.engine_<em>n</em></strong></h3>
+            <p>Specifies the agent engine ID that sends trap information, where&nbsp;<em>n</em>&nbsp;is an integer starting from 1. All parameters ending with the same value of n belong to the same group. This parameter applies only to SNMP v3.</p>
+            <p><strong>Default:&nbsp;</strong>AGENT_ENGINE</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.v3.priv.password_n"><strong>snmp.trap.listener.v3.priv.password_<em>n</em></strong></h3>
+            <p>Specifies the encrypted privacy password for the SNMP v3 user, where&nbsp;<em>n</em>&nbsp;is an integer starting from 1. All parameters ending with the same value of&nbsp;<em>n</em>&nbsp;belong to the same group. This parameter applies only to SNMP v3.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.v3.priv.protocol_n"><strong>snmp.trap.listener.v3.priv.protocol_<em>n</em></strong></h3>
+            <p>Specifies the privacy protocol for the SNMP v3 user, where&nbsp;<em>n</em>&nbsp;is an integer starting from 1. All parameters ending with the same value of&nbsp;<em>n</em>&nbsp;belong to the same group. This parameter applies only to SNMP v3. Options are as follows.</p>
+            <ul>
+                <li style="list-style-type: none;background-image: none;">
+                    <ul>
+                        <li><strong>AES</strong><br>Specifies the Advanced Encryption Standard that uses a 32-character encryption key. AES is the algorithm that U.S. Government organizations require to protect sensitive (unclassified) information (FIPS-140-2 compliance).</li>
+                        <li><strong>DES<br></strong>Specifies the Data Encryption Standard that uses a 16-character encryption key.</li>
+                    </ul></li>
+            </ul>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-snmp.trap.listener.v3.user_n"><strong>snmp.trap.listener.v3.user_<em>n</em></strong></h3>
+            <p>Specifies the user authorized to communicate with the SNMP v3 agent, where&nbsp;<em>n</em>&nbsp;is an integer starting from 1. All parameters ending with the same value of&nbsp;<em>n</em>&nbsp;belong to the same group. This parameter applies only to SNMP v3.</p>
+            <h3 id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-spooldir"><strong>spooldir</strong></h3>
+            <p>Specifies the path to the spool file directory.</p>
+            <p><strong>Default:</strong>&nbsp;spool subdirectory of the agent installation directory.</p>
+            <h3 class="NormalTerm" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-tcpip.authentication.protocol"><strong>tcpip.authentication.protocol</strong></h3>
+            <p class="NormalTermContinued">Specifies the authentication protocol for SSL.</p>
+            <p class="NormalTermContinued"><strong>Default:</strong>&nbsp;TLS</p>
+            <h3 class="NormalTerm" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-tcpip.keystore.password"><strong>tcpip.keystore.password</strong></h3>
+            <p class="NormalTermContinued">Specifies the encrypted keystore password for SSL support</p>
+            <h3 class="NormalTerm" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-tcpip.ssl.allowSelfSigned"><strong>tcpip.ssl.allowSelfSigned</strong></h3>
+            <p class="NormalTermContinued">Specifies whether self-signed SSL certificates are allowed.</p>
+            <ul>
+                <li><strong>true</strong><br>Allows self-signed SSL certificates. Self-signed certificates let you create certificates for free, without having to pay a Certificate Authority (CA) or comply with any auditing requirements.</li>
+                <li><strong>false</strong><br>Does not allow self-signed SSL certificates.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 class="NormalTerm" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-tcpip.ssl.keymanager.algorithm"><strong>tcpip.ssl.keymanager.algorithm</strong></h3>
+            <p class="NormalTermContinued">Specifies the key manager algorithm for SSL.</p>
+            <p class="NormalTermContinued"><strong>Default:</strong>&nbsp;SunX509</p>
+            <h3 class="NormalTerm" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-tcpip.ssl.keystore"><strong>tcpip.ssl.keystore</strong></h3>
+            <p class="NormalTerm">Specifies the name of a keystore file for SSL. A keystore is a repository of certificates that are used for identifying a client or a server. You can generate your own keystore using the keytool utility that is provided with the JRE.</p>
+            <p class="NormalTermContinued"><strong>Default:</strong>&nbsp;tlskeys.txt</p>
+            <h3 class="NormalTerm" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-tcpip.ssl.reversechain"><strong>tcpip.ssl.reversechain</strong></h3>
+            <p class="NormalTermContinued">Specifies whether the chain of certificates for SSL is processed in reversed order.</p>
+            <ul>
+                <li><strong>true</strong><br>Processes the chain of certificates for SSL in reversed order.</li>
+                <li><strong>false</strong><br>Process the chain of certificates for SSL in regular order.</li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 class="NormalTerm" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-tcpip.ssl.useacl"><strong>tcpip.ssl.useacl</strong></h3>
+            <p class="NormalTerm">Specifies whether ACL is used as the authentication protocol for SSL.</p>
+            <ul>
+                <li><strong>true</strong><br>Uses ACL as the authentication protocol for SSL.</li>
+                <li><strong>false</strong><br><p class="NormalTermContinued2">Does not use ACL as the authentication protocol for SSL.</p></li>
+            </ul>
+            <p><strong>Default:</strong>&nbsp;false</p>
+            <h3 class="NormalTerm" id="CAWAAgentforUNIX,Linux,Windows,oriSeriesAgentParameters-tcpip.truststore.password"><strong>tcpip.truststore.password</strong></h3>
+            <p class="NormalTermContinued">Specifies the encrypted truststore password for SSL support.</p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-4">
+            <p></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

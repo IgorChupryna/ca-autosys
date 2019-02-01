@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2 class="article-name" tabindex="0">Install CA Workload Automation AE with Oracle</h2>
+<div id="wiki-content">
+
+    <div>
+        <div class="">
+            <p>When installing CA Workload Automation AE with an Oracle database, consider the following points:</p>
+            <p><strong>Remote Connections</strong></p>
+            <p>Verify that the computer where you plan to install the CA Workload Automation AE server can connect to the remote database using one of the database client utilities before installing the server. Contact your database administrator about any problems connecting to the remote server.</p>
+            <p><strong>Configure the CA Workload Automation AE Server&nbsp;to Work with Oracle RAC</strong></p>
+            <p>Transparent Application Failover (TAF) mode prevents CA Workload Automation AE from accessing its database schema on the active database node following a failover on the Oracle Server. So, for CA Workload Automation AE to work with the Oracle server that is running in the TAF mode, ensure that the Oracle client on the CA Workload Automation AE server is configured for the Oracle RAC failover (FAILOVER = false and ENABLE=broken). No configuration changes are required on the Oracle server.</p>
+            <p>The following configuration changes on the Oracle client do not impede CA Workload Automation AE from supporting nodes failing over on the Oracle Server. It only prevents the Oracle failover mechanism from controlling the failover on the Oracle Server for the database connections that are opened by CA Workload Automation AE.</p>
+            <p>If the Oracle client is configured for the Oracle RAC failover, the entries in the tnsnames.ora file are similar to the following:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>RAC-NOTAF =<br>&nbsp; (DESCRIPTION =<br>&nbsp; &nbsp;(ADDRESS = (PROTOCOL = TCP)(HOST = xxx)(PORT = 1521))<br>&nbsp; &nbsp;(ADDRESS = (PROTOCOL = TCP)(HOST = xxxx)(PORT = 1521))<br>&nbsp; &nbsp;(LOAD_BALANCE = yes)<br>&nbsp; &nbsp;(FAILOVER = false)<br>&nbsp; &nbsp;(ENABLE = broken<br>&nbsp; &nbsp;(CONNECT_DATA =<br>&nbsp; &nbsp; (SERVER = DEDICATED)<br>&nbsp; &nbsp; (SERVICE_NAME = RACDB)<br>)<br>)</p></pre>
+            </div>
+            <p><span style="color: rgb(51,51,51);">If the entries in the&nbsp;tnsnames.ora file are similar to the following, then Oracle client is not configured for the Oracle RAC failover. In such a case, edit the entries in the tnsnames.ora file as shown above.</span></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>RAC-TAF =<br>&nbsp; (DESCRIPTION =<br>&nbsp; &nbsp;(ADDRESS = (PROTOCOL = TCP)(HOST = xxx)(PORT = 1521))<br>&nbsp; &nbsp;(ADDRESS = (PROTOCOL = TCP)(HOST = xxxx)(PORT = 1521))<br>&nbsp; &nbsp;(LOAD_BALANCE = yes)<br>&nbsp; &nbsp;(ENABLE = broken)<br>&nbsp; &nbsp;(CONNECT_DATA =<br>&nbsp; &nbsp; (SERVER = DEDICATED)<br>&nbsp; &nbsp; (SERVICE_NAME = RACDB)<br>&nbsp; &nbsp; (FAILOVER_MODE =<br>&nbsp; &nbsp; &nbsp;(TYPE = SELECT)<br>&nbsp; &nbsp; &nbsp;(METHOD = BASIC)<br> )<br>)</p></pre>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <span style="color: rgb(51,51,51);"><strong>Note:</strong> For more information about running the Oracle server in the TAF mode, see the Oracle documentation.</span>
+            </div>
+            <p><strong>Define an Oracle User to Install CA Workload Automation AE Oracle Objects</strong></p>
+            <p>The installer connects to the Oracle AEDB database to create database objects if you enable the installer to create objects and define an Oracle user with sufficient permissions. To define an Oracle user with authority to install CA Workload Automation AE, use the following SQL statements:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>CREATE&nbsp;USER&nbsp;&lt;user&gt;&nbsp;IDENTIFIED&nbsp;BY&nbsp;&lt;password&gt;;</p><p>GRANT&nbsp;DBA&nbsp;TO&nbsp;&lt;user&gt;;</p><p>GRANT&nbsp;CREATE&nbsp;SESSION&nbsp;TO&nbsp;&lt;user&gt;;</p><p>GRANT&nbsp;SELECT&nbsp;ON&nbsp;"SYS"."DBA_TABLESPACES"&nbsp;TO&nbsp;&lt;user&gt;&nbsp;WITH&nbsp;GRANT&nbsp;OPTION;</p><p><span style="color: rgb(51,51,51);">GRANT SELECT ON "SYS"."V_$PARAMETER" TO &lt;user&gt;;</span></p></pre>
+            </div>
+            <p><span style="color: rgb(51,51,51);"><strong>Use Single Sign-On Wallets with Certificates for Database Access</strong></span></p>
+            <p><span style="color: rgb(51,51,51);">On Oracle, you can use password or single sign-on wallets with certificates that are present on the file system to&nbsp;access the database.&nbsp;CA Workload Automation AE uses the sqlnet.ora and tnsnames.ora files from the location that you specified in the TNS_ADMIN environment variable and the cwallet.sso file from the configured Oracle wallet location to connect to the database.</span></p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> <span>For information about creating Oracle wallets with certificates, see <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation/environment-and-database-connection/oracle-only-switch-the-database-access-mode/create-oracle-wallets-with-certificates" class="conf-macro output-inline" data-hasbody="true">Create Oracle Wallets with Certificates</a></span><span>.</span></p>
+            </div>
+            <p><span style="color: rgb(0,51,102);"><span style="color: rgb(51,51,51);">You can set the database access mode that you want to use either during installation or later by using the&nbsp;<a rel="nofollow" class="external-link" href="http://switchDBAccessMode.pl"><span style="color: rgb(51,51,51);">switchDBAccessMode.pl</span></a>&nbsp;script. For more information about switching the database access mode after installation, see</span>&nbsp;<a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation/environment-and-database-connection/oracle-only-switch-the-database-access-mode" class="conf-macro output-inline" data-hasbody="true">Switch the Database Access Mode</a>.</span></p>
+            <p><span style="color: rgb(51,51,51);">Before switching CA Workload Automation AE to use an SSL certificate to access the database, perform the following tasks:</span></p>
+            <ul>
+                <li><p><span style="color: rgb(51,51,51);">Generate the SSL certificates for the Oracle system administrator user. Execute the following SQL statements to create an&nbsp;Oracle system administrator user that is mapped to the SSL certificate:</span></p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p><span style="color: rgb(51,51,51);">create user &lt;user&gt; identified externally as '&lt;Certificate Distinguished Name&gt;';</span><br><span style="color: rgb(51,51,51);">GRANT DBA TO &lt;user&gt;;</span><br><span style="color: rgb(51,51,51);">GRANT CREATE SESSION TO &lt;user&gt;;</span><br><span style="color: rgb(51,51,51);">GRANT SELECT ON "SYS"."DBA_TABLESPACES" TO &lt;user&gt; WITH GRANT OPTION;</span></p><p><span style="color: rgb(51,51,51);">GRANT SELECT ON "SYS"."V_$PARAMETER" TO &lt;user&gt;;</span></p></pre>
+                    </div></li>
+                <li><span style="color: rgb(51,51,51);">Generate the SSL certificates for the CA Workload Automation AE database administrator user (aedbadmin) and the CA Workload Automation AE database user (autosys).</span></li>
+                <li><span style="color: rgb(51,51,51);">Gather the following data&nbsp;as you&nbsp;need this information during the installation process:<br></span>
+                    <ul>
+                        <li><p><span style="color: rgb(0,51,102);">T<span style="color: rgb(51,51,51);">NS_ADMIN value of the Oracle system administrator user for connecting to the primary and secondary event servers.</span></span></p></li>
+                        <li><span style="color: rgb(51,51,51);">TNS_ADMIN value of the autosys user for connecting to the&nbsp;primary and secondary&nbsp;event servers.</span></li>
+                        <li><span style="color: rgb(51,51,51);">TNS_ADMIN value of the aedbadmin user for connecting to the&nbsp;primary and secondary&nbsp;event servers.</span></li>
+                        <li><p><span style="color: rgb(51,51,51);">Distinguished name of the SSL certificate that you want to associate with the aedbadmin user on the primary and secondary event servers.</span></p></li>
+                        <li><p><span style="color: rgb(51,51,51);">Distinguished name of the SSL certificate that you want to associate with the autosys user on the primary event server. The same distinguished name is used for the secondary event server.&nbsp;</span></p></li>
+                        <li><p><span style="color: rgb(51,51,51);">Absolute path of the Oracle wallet file (cwallet.sso)&nbsp;in the file system.&nbsp;</span></p></li>
+                        <li><p><span style="color: rgb(51,51,51);">Directory that contains the oraclepki.jar, osdt_core.jar, and osdt_cert.jar files.</span></p></li>
+                    </ul></li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><span style="color: rgb(51,51,51);"><strong>Note: </strong>On UNIX, the autosys user must have read privileges on the Oracle wallet that is specified using the TNS_ADMIN environment variable. On Windows, the local system account must have read privileges on the Oracle wallet that is specified using the TNS_ADMIN environment variable.</span></p>
+            </div>
+            <p><strong>Create the Oracle Tablespaces, Users, and Roles</strong></p>
+            <p>An Oracle database user with administrator privileges (such as SYS) is required to create the CA Workload Automation AE tablespaces, database users, and roles when you install server components. To bypass this requirement, run the waae_oracle.sql script before you install a server component. The waae_oracle.sql script creates the tablespaces, database users, and roles.</p>
+            <p>CA Workload Automation AE uses the TNS alias name to locate and connect to Oracle databases.&nbsp;Depending on how the Oracle client is configured, it uses either the tnsnames.ora file or the sqlnet.ora and ldap.ora files to look up the alias name. These files typically reside in the administrative directories.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes: </strong></p>
+                <ul>
+                    <li>When you run the waae_oracle.sql script, connect as an Oracle database user with administrative privileges and run the waae_oracle.sql script from the Oracle command prompt.</li>
+                    <li>When you run the waae_oracle.sql script, verify that you clear the Create the tablespaces, database users, and roles check box on the Primary Event Server Properties page during the installation. The installer does not prompt you to specify the Oracle administrator user and password information.</li>
+                </ul>
+            </div>
+            <h2 class="heading4" id="InstallCAWorkloadAutomationAEwithOracle-waae_oracle.sqlscript—CreatesOracleTablespaces,Users,andRoles">waae_oracle.sql script—Creates Oracle Tablespaces, Users, and Roles</h2>
+            <p>The waae_oracle.sql script creates the Oracle tablespaces, users, and roles.</p>
+            <p>On UNIX, the waae_oracle.sql script is located in the ORA/DB directory in the CA Workload Automation AE Release 11.3.6 DVD.</p>
+            <p>On Windows, you can download the waae_oracle.sql script by selecting the SQL script to create Oracle database tablespaces, users, and roles option under Database Scripts on the CA Workload Automation AE Release 11.3.6 Product Explorer window.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> Follow the instructions in the waae_oracle.sql script file if you are using&nbsp;Oracle Managed Files (OMF), Automatic Storage Management (ASM),&nbsp;or SSL certificates to access the database.</p>
+            </div>
+            <p>The waae_oracle.sql script has the following format:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>waae_oracle.sql&nbsp;<em>ADB_TS_DATANM ADB_TS_DATASZ ADB_TS_DATADIR ADB_TS_IXNM ADB_TS_IXSZ ADB_TS_IXDIR aedbadmin_password</em>|<em>certifcate_DN</em>&nbsp;<em>autosys_password|<em>certifcate_DN</em></em></p></pre>
+            </div>
+            <ul>
+                <li><strong><em>ADB_TS_DATANM</em></strong><br>Specifies the Oracle data tablespace name.</li>
+                <li><strong><em>ADB_TS_DATASZ</em></strong><br>Specifies the Oracle data tablespace size (in MB). The minimum value is 800.</li>
+                <li><strong><em>ADB_TS_DATADIR</em></strong><br>Specifies the Oracle data tablespace directory path, including the database file (.dbf). This directory must exist on the Oracle server.</li>
+                <li><strong><em>ADB_TS_IXNM</em></strong><br>Specifies the Oracle index tablespace name.</li>
+                <li><strong><em>ADB_TS_IXSZ</em></strong><br>Specifies the Oracle index tablespace size (in MB). The minimum value is 80.</li>
+                <li><strong><em>ADB_TS_IXDIR</em></strong><br>Specifies the Oracle index tablespace directory path, including the database file (.dbf). This directory must exist on the Oracle server.</li>
+                <li><strong><em>aedbadmin_password</em>&nbsp;|&nbsp;<em>certificate_DN&nbsp;</em></strong><br>Specifies the password of the database administrator user (aedbadmin) or the&nbsp;distinguished name of the SSL certificate that is associated with the database administrator user (aedbadmin).</li>
+                <li><strong><em>autosys_password&nbsp;<strong>&nbsp;|&nbsp;</strong></em><strong>&nbsp;<em>certificate_DN</em></strong></strong><br>Specifies the password of the database user (autosys)&nbsp;or the&nbsp;distinguished name of the SSL certificate that is associated with the database user (autosys).</li>
+            </ul>
+            <p><strong>Example: Create the Oracle Tablespaces, Users, and Roles on UNIX</strong></p>
+            <p>This example creates the Oracle tablespaces, users, and roles when you are using password to connect to the Oracle database. The waae_oracle.sql script is copied to the /tmp/waae directory. The Oracle data tablespace that is named&nbsp;<em>AEDB_DATA</em>&nbsp;stores up to 800 MB of data and is located in the /home/oracle/product/10.2.0/oradata/orcl directory. The database file is named&nbsp;<em>AEDB_DATA.DBF</em>. The Oracle index tablespace that is named&nbsp;<em>AEDB_INDEX</em>&nbsp;stores up to 80 MB of data and is located in the /home/oracle/product/10.2.0/oradata/orcl directory. The database file is named&nbsp;<em>AEDB_INDEX.DBF</em>. The aedbadmin user password is AedbAdm1 and the autosys user password is AutoSys1.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>&gt;&nbsp;sqlplus&nbsp;/nolog</p><p>SQL*Plus:&nbsp;Release&nbsp;10.2.0.1.0&nbsp;-&nbsp;Production&nbsp;on&nbsp;Tue&nbsp;Feb&nbsp;15&nbsp;14:39:35&nbsp;2011</p><p>Copyright&nbsp;(c)&nbsp;1982,&nbsp;2005,&nbsp;Oracle.&nbsp;&nbsp;All&nbsp;rights&nbsp;reserved.</p><p>SQL&gt;&nbsp;connect&nbsp;SYS/********&nbsp;as&nbsp;SYSDBA</p><p>Connected.</p><p>SQL&gt;&nbsp;&nbsp;@/tmp/waae/waae_oracle.sql&nbsp;AEDB_DATA&nbsp;800&nbsp;/home/oracle/oracle/product/10.2.0/oradata/orcl/AEDB_DATA.DBF&nbsp;AEDB_INDEX&nbsp;80&nbsp;/home/oracle/oracle/product/10.2.0/oradata/orcl/AEDB_INDEX.DBF&nbsp;AedbAdm1&nbsp;AutoSys1</p></pre>
+            </div>
+            <p>The output is displayed as follows.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>old&nbsp;&nbsp;&nbsp;1:&nbsp;CREATE&nbsp;TABLESPACE&nbsp;&amp;1&nbsp;DATAFILE&nbsp;'&amp;3'&nbsp;SIZE&nbsp;&amp;2.M&nbsp;REUSE&nbsp;AUTOEXTEND&nbsp;ON&nbsp;NEXT&nbsp;300K&nbsp;MAXSIZE&nbsp;UNLIMITED&nbsp;LOGGING&nbsp;EXTENT&nbsp;MANAGEMENT&nbsp;LOCAL&nbsp;SEGMENT&nbsp;SPACE&nbsp;MANAGEMENT&nbsp;AUTO</p><p>new&nbsp;&nbsp;&nbsp;1:&nbsp;CREATE&nbsp;TABLESPACE&nbsp;AEDB_DATA&nbsp;DATAFILE&nbsp;'/home/oracle/oracle/product/10.2.0/oradata/orcl/AEDB_DATA.DBF'&nbsp;SIZE&nbsp;800M&nbsp;REUSE&nbsp;AUTOEXTEND&nbsp;ON&nbsp;NEXT&nbsp;300K&nbsp;MAXSIZE&nbsp;UNLIMITED&nbsp;LOGGING&nbsp;EXTENT&nbsp;MANAGEMENT&nbsp;LOCAL&nbsp;SEGMENT&nbsp;SPACE&nbsp;MANAGEMENT&nbsp;AUTO</p><p>Tablespace&nbsp;created.</p><p>old&nbsp;&nbsp;&nbsp;1:&nbsp;CREATE&nbsp;TABLESPACE&nbsp;&amp;4&nbsp;DATAFILE&nbsp;'&amp;6'&nbsp;SIZE&nbsp;&amp;5.M&nbsp;REUSE&nbsp;AUTOEXTEND&nbsp;ON&nbsp;NEXT&nbsp;300K&nbsp;MAXSIZE&nbsp;UNLIMITED&nbsp;LOGGING&nbsp;EXTENT&nbsp;MANAGEMENT&nbsp;LOCAL&nbsp;SEGMENT&nbsp;SPACE&nbsp;MANAGEMENT&nbsp;AUTO</p><p>new&nbsp;&nbsp;&nbsp;1:&nbsp;CREATE&nbsp;TABLESPACE&nbsp;AEDB_INDEX&nbsp;DATAFILE&nbsp;'/home/oracle/oracle/product/10.2.0/oradata/orcl/AEDB_INDEX.DBF'&nbsp;SIZE&nbsp;80M&nbsp;REUSE&nbsp;AUTOEXTEND&nbsp;ON&nbsp;NEXT&nbsp;300K&nbsp;MAXSIZE&nbsp;UNLIMITED&nbsp;LOGGING&nbsp;EXTENT&nbsp;MANAGEMENT&nbsp;LOCAL&nbsp;SEGMENT&nbsp;SPACE&nbsp;MANAGEMENT&nbsp;AUTO</p><p>Tablespace&nbsp;created.</p><p>old&nbsp;&nbsp;&nbsp;1:&nbsp;CREATE&nbsp;USER&nbsp;aedbadmin&nbsp;PROFILE&nbsp;DEFAULT&nbsp;IDENTIFIED&nbsp;BY&nbsp;"AedbAdm1"&nbsp;DEFAULT&nbsp;TABLESPACE&nbsp;&amp;1&nbsp;ACCOUNT&nbsp;UNLOCK</p><p>new&nbsp;&nbsp;&nbsp;1:&nbsp;CREATE&nbsp;USER&nbsp;aedbadmin&nbsp;PROFILE&nbsp;DEFAULT&nbsp;IDENTIFIED&nbsp;BY&nbsp;"AedbAdm1"&nbsp;DEFAULT&nbsp;TABLESPACE&nbsp;AEDB_DATA&nbsp;ACCOUNT&nbsp;UNLOCK</p><p>User&nbsp;created.</p><p>Grant&nbsp;succeeded.</p><p>Grant&nbsp;succeeded.</p><p>Grant&nbsp;succeeded.</p><p>Grant&nbsp;succeeded.</p><p>Grant&nbsp;succeeded.</p><p>Grant&nbsp;succeeded.</p><p>old&nbsp;&nbsp;&nbsp;1:&nbsp;CREATE&nbsp;USER&nbsp;autosys&nbsp;PROFILE&nbsp;DEFAULT&nbsp;IDENTIFIED&nbsp;BY&nbsp;"AutoSys1"&nbsp;DEFAULT&nbsp;TABLESPACE&nbsp;&amp;1&nbsp;ACCOUNT&nbsp;UNLOCK</p><p>new&nbsp;&nbsp;&nbsp;1:&nbsp;CREATE&nbsp;USER&nbsp;autosys&nbsp;PROFILE&nbsp;DEFAULT&nbsp;IDENTIFIED&nbsp;BY&nbsp;"AutoSys1"&nbsp;DEFAULT&nbsp;TABLESPACE&nbsp;AEDB_DATA&nbsp;ACCOUNT&nbsp;UNLOCK</p><p>User&nbsp;created.</p><p>Role&nbsp;created.</p><p>Grant&nbsp;succeeded.</p><p>Grant&nbsp;succeeded.</p><p>Grant&nbsp;succeeded.</p><p>Grant&nbsp;succeeded.</p><p>Grant&nbsp;succeeded.</p><p>old&nbsp;&nbsp;&nbsp;1:&nbsp;ALTER&nbsp;USER&nbsp;aedbadmin&nbsp;QUOTA&nbsp;UNLIMITED&nbsp;ON&nbsp;&amp;1</p><p>new&nbsp;&nbsp;&nbsp;1:&nbsp;ALTER&nbsp;USER&nbsp;aedbadmin&nbsp;QUOTA&nbsp;UNLIMITED&nbsp;ON&nbsp;AEDB_DATA</p><p>User&nbsp;altered.</p><p>old&nbsp;&nbsp;&nbsp;1:&nbsp;ALTER&nbsp;USER&nbsp;aedbadmin&nbsp;QUOTA&nbsp;UNLIMITED&nbsp;ON&nbsp;&amp;4</p><p>new&nbsp;&nbsp;&nbsp;1:&nbsp;ALTER&nbsp;USER&nbsp;aedbadmin&nbsp;QUOTA&nbsp;UNLIMITED&nbsp;ON&nbsp;AEDB_INDEX</p><p>User&nbsp;altered.</p></pre>
+            </div>
+            <h2 class="heading3" id="InstallCAWorkloadAutomationAEwithOracle-(UNIX)InstallingCAWorkloadAutomationAEwithOracle">(UNIX) Installing CA Workload Automation AE with Oracle</h2>
+            <p>Consider the following&nbsp;points when installing CA Workload Automation AE with Oracle on UNIX or Linux:</p>
+            <p><strong>Oracle Directory Permissions</strong></p>
+            <p>CA Workload Automation AE requires access to the Oracle shared libraries. By default, Oracle does not allow this access. Perform one of the following procedures for CA Workload Automation AE to function properly:</p>
+            <ul>
+                <li>Before you run the CA Workload Automation AE installation, create the autosys OS user and specify the OSDBA group of&nbsp;Oracle&nbsp;as the autosys primary group, or add the OSDBA group of&nbsp;Oracle&nbsp;to the autosys supplemental group list.</li>
+                <li>Allow the CA Workload Automation AE installation to automatically create the autosys OS user. When you are prompted to specify the autosys owner and group, specify the OSDBA group of Oracle&nbsp;as the autosys group.</li>
+            </ul>
+            <p>If one of these two procedures is not followed, the CA Workload Automation AE startup fails with the following message:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>CAUAJM_E_90013&nbsp;Unable&nbsp;to&nbsp;load&nbsp;Oracle&nbsp;client&nbsp;libraries&nbsp;&lt;/opt/CA/CAlib/libclntsh.so:&nbsp;cannot&nbsp;open&nbsp;shared&nbsp;object&nbsp;file:&nbsp;No&nbsp;such&nbsp;file&nbsp;or&nbsp;directory&gt;</p><p>CAUAJM_E_10368&nbsp;Failed&nbsp;to&nbsp;connect&nbsp;to&nbsp;Oracle&nbsp;server:&nbsp;&lt;SID&gt;</p><p>Cannot&nbsp;find&nbsp;key=""&nbsp;in&nbsp;the&nbsp;resource&nbsp;bundle</p><p>CAUAJM_E_10649&nbsp;Server&nbsp;orcl&nbsp;was&nbsp;not&nbsp;available&nbsp;during&nbsp;connection&nbsp;operation.</p></pre>
+            </div>
+            <p><strong>Determine the OSDBA group</strong></p>
+            <p>To determine the OSDBA group, issue the following command:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>ls&nbsp;-dl&nbsp;$ORACLE_HOME&nbsp;|&nbsp;awk&nbsp;'{print&nbsp;$4}'</p></pre>
+            </div>
+            <p><strong>Modify an Existing autosys User</strong></p>
+            <p>To add the owner of an existing autosys user to the OSDBA group, issue the following command. For this example, the OSDBA group is dba and the autosys owner is autosys.</p>
+            <p>HP-UX, Linux, Solaris:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>usermod&nbsp;-G&nbsp;dba&nbsp;autosys&nbsp;#&nbsp;To&nbsp;add&nbsp;to&nbsp;the&nbsp;supplemental&nbsp;group&nbsp;list</p><p>usermod&nbsp;-g&nbsp;dba&nbsp;autosys&nbsp;&nbsp;#&nbsp;To&nbsp;set&nbsp;as&nbsp;the&nbsp;primary&nbsp;group&nbsp;&nbsp;&nbsp;</p></pre>
+            </div>
+            <p>AIX:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>chuser&nbsp;groups=dba&nbsp;autosys&nbsp;#&nbsp;To&nbsp;add&nbsp;to&nbsp;the&nbsp;supplemental&nbsp;group&nbsp;list</p><p>chuser&nbsp;pgrp=dba&nbsp;autosys&nbsp;#&nbsp;To&nbsp;set&nbsp;as&nbsp;the&nbsp;primary&nbsp;group</p></pre>
+            </div>
+            <p><strong>Create the autosys User</strong></p>
+            <p>To create the autosys user and set its primary or supplemental group as the OSDBA group, issue the following command:</p>
+            <p>HP-UX, Linux, Solaris:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>useradd&nbsp;-G&nbsp;dba&nbsp;autosys&nbsp;&nbsp;#&nbsp;To&nbsp;add&nbsp;to&nbsp;the&nbsp;supplemental&nbsp;group&nbsp;list&nbsp;</p><p>useradd&nbsp;-g&nbsp;dba&nbsp;autosys&nbsp;&nbsp;#&nbsp;To&nbsp;set&nbsp;as&nbsp;the&nbsp;primary&nbsp;group&nbsp;&nbsp;&nbsp;</p></pre>
+            </div>
+            <p>AIX:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>mkuser&nbsp;groups=dba&nbsp;autosys&nbsp;#&nbsp;To&nbsp;add&nbsp;to&nbsp;the&nbsp;supplemental&nbsp;group&nbsp;list</p><p>mkuser&nbsp;pgrp=dba&nbsp;autosys&nbsp;#&nbsp;To&nbsp;set&nbsp;as&nbsp;the&nbsp;primary&nbsp;group</p></pre>
+            </div>
+            <p><strong>Use Oracle Instant Client</strong></p>
+            <p>If an Oracle user decides to use the Oracle Instant Client instead of a native Oracle client, the following modifications must be made to the base Oracle Instant Client installation:</p>
+            <ul>
+                <li>Oracle Instant Client users must set up a directory structure that looks exactly like a native Oracle client installation.</li>
+                <li>The shared libraries must reside in the ORACLE_HOME/lib directory and the sqlplus binary must reside in the ORACLE_HOME/bin directory. In addition, the user must create a soft link for libclntsh in the ORACLE_HOME/lib directory.</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> If you install CA Workload Automation AE (that uses Oracle Instant Client to connect to the database) as a non-root user having root privileges, you must set the Oracle Instant Client library path in the /etc/profile file before you install CA Workload Automation AE. For example, on Linux, set the Oracle Instant Client library path as follows:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>export&nbsp;LD_LIBRARY_PATH=<em>oracle_instant_client_path</em>:$LD_LIBRARY_PATH</p></pre>
+                </div>
+                <p><strong><em>oracle_instant_client_path<br></em></strong>Specifies the path where the Oracle Instant Client is installed. <br><strong>Example:</strong> /home/instantclient_11_2</p>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

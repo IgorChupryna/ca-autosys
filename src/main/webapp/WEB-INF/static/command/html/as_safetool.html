@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The as_safetool command manages the repository of CA EEM security policies that CA Workload Automation AE uses.</p>
+                <p>CA Workload Automation AE integrates with CA EEM, adding a comprehensive security layer. This integration results in consistent identity management, increased access security, comprehensive in-depth auditing, reduced application development costs, and improved responsiveness to business and regulatory demands. With as_safetool, you can install or remove security policies and grant administrative privileges to a CA EEM identity.</p>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>as_safetool&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[{-g<em>&nbsp;|</em>&nbsp;-r}&nbsp;<em>user_name -b</em>&nbsp;<em>EEM_server_name</em>&nbsp;[-a&nbsp;<em>EEM_admin_name</em>][-q]]</p><p>&nbsp;&nbsp;&nbsp;[-i&nbsp;<em>instance</em>&nbsp;-b&nbsp;<em>EEM_server_name</em>&nbsp;[-a&nbsp;<em>EEM_admin_name</em>][-f][-q]]</p><p>&nbsp;&nbsp;&nbsp;[{-s&nbsp;|&nbsp;-S}&nbsp;-b&nbsp;<em>EEM_server_name</em>&nbsp;[-a&nbsp;<em>EEM_admin_name</em>]]&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-u&nbsp;<em>instance</em>&nbsp;-b&nbsp;<em>EEM_server_name</em>&nbsp;[-a&nbsp;<em>EEM_admin_name</em>][-q]]</p><p><span style="color: rgb(255,0,0);">&nbsp; &nbsp;<span style="color: rgb(51,51,51);">[-m -v <em>version</em>] [-b <em>EEM_server_name</em>] [-a <em>EEM_admin_name</em>] [-q]</span>&nbsp;</span></p><p>&nbsp;&nbsp;&nbsp;[-x]</p><p>&nbsp;&nbsp;&nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><strong>-a<em>&nbsp;EEM_admin_name</em></strong><br>(Optional) Specifies the CA EEM administrator.<br><strong>Default:</strong>&nbsp;EiamAdmin<br><span style="color: rgb(51,51,51);"><strong>Limits:</strong>&nbsp;This option is only valid when you use the&nbsp;<strong>-g</strong>,&nbsp;<strong>-i</strong>,&nbsp;<strong>-r</strong>,&nbsp;<strong>-s</strong>,&nbsp;<strong>-S</strong>, or&nbsp;<strong>-u</strong>&nbsp;parameter.</span> The value for the&nbsp;<em>EEM_admin_name</em>&nbsp;variable must<em>&nbsp;</em>match the name of an existing user with administrative privileges to the CA EEM repository.</li>
+                    <li><strong>-b&nbsp;<em>EEM_server_name</em></strong><br>(Optional) Specifies the CA EEM server host.<br><strong>Default:</strong>&nbsp;localhost<br><strong>Limits:</strong>&nbsp;Specify this option when you define the&nbsp;<strong>-i&nbsp;</strong>or&nbsp;<strong>-u</strong>&nbsp;option.</li>
+                    <li><p><strong>-f</strong><br>(Optional) Forces the reinstallation of security policies.<br><strong>Limit:</strong><span>&nbsp;This option is only valid when you also specify the&nbsp;</span><strong>-i</strong><span>&nbsp;option.</span></p></li>
+                    <li><strong>-g&nbsp;<em>user_name</em></strong><br>(Optional) Grants application instance administrative privileges to the specified user.</li>
+                    <li><p><strong>-i&nbsp;<em>instance</em></strong><br>(Optional) Installs the CA EEM security policies on the specified instance.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note: </strong>The repository on the CA EEM server stores these policies. For more information about setting, changing, and storing CA EEM security policies, see
+                            <a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/securing/security-policy-customization" class="conf-macro output-inline" data-hasbody="false">Security Policy Customization</a>
+                            <em>. </em>
+                        </div> </li>
+                    <li><p><strong>-q</strong><br>(Optional) Issues the command in quiet mode.&nbsp;<strong><br></strong></p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note:</strong>&nbsp;When you use this option, CA Workload Automation AE does not display error messages.</p>
+                        </div> </li>
+                    <li><strong>-r&nbsp;<em>user_name</em></strong><br>(Optional) Revokes the application instance administrative privileges of the specified user.</li>
+                    <li><p><strong>-s(Optional)&nbsp;<br></strong>Displays all instances with an installed security policy.</p></li>
+                    <li><p><strong>-S&nbsp;<em>instance<br></em></strong>(Optional) Displays all Application Administrators for the specified instance.</p></li>
+                    <li><p><strong>-u&nbsp;<em>instance</em></strong><br>(Optional) Uninstalls the CA EEM security policies on the specified instance.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note: </strong>The repository on the CA EEM server stores these policies. For more information about setting, changing, and storing CA EEM security policies, see
+                            <a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/securing/security-policy-customization" class="conf-macro output-inline" data-hasbody="false">Security Policy Customization</a>
+                            <em>. </em>
+                        </div> </li>
+                    <li><p><span style="color: rgb(255,0,0);"><span style="color: rgb(51,51,51);"><strong>-m<br></strong>(Optional) Updates the security policies after migration. This option updates the actions&nbsp;(that are added in a later release level than the release level that you specified in the -v&nbsp;<em>version</em>&nbsp;option)&nbsp;under each CA EEM policy to the default.</span><br></span></p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><span style="color: rgb(51,51,51);"><strong>Note:</strong> Do not use this option on a machine that has customized policies as this option resets the actions to the default.</span></p>
+                        </div> </li>
+                    <li><p><span style="color: rgb(51,51,51);"><strong>-v</strong> <em>version<br></em>(Optional) Specifies the CA Workload Automation AE release level from which the security policies are imported.&nbsp;Specify this value in the <em>major.minor.release.maintenance</em> format. For example, 11.3.6.SP6; specifies that the security policies are imported from Release 11.3.6 SP6.</span></p></li>
+                    <li><p><strong>-x<br></strong>(Optional) Returns the as_safetool version to standard output.</p></li>
+                    <li><p><strong>-?<br></strong>Displays help for the command.</p></li>
+                </ul>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <p><strong>Notes: </strong></p>
+                    <ul>
+                        <li><span style="color: rgb(51,51,51);">The<strong>&nbsp;-g</strong>,&nbsp;<strong>-i</strong>,&nbsp;<strong>-s</strong>,&nbsp;<strong>-S</strong>, <strong>- u,</strong>&nbsp;or <strong>-m</strong> option are only valid if the value of the ASSAFETOOLPW environment variable and the value of EiamAdmin user account password match.</span></li>
+                        <li>You cannot run the command in batch mode unless the value of the ASSAFETOOLPW environmental variable and the value of the CA EEM administrator password match.</li>
+                        <li>You can use the ASSAFETOOLFIPS environment variable to override the default FIPS compliance setting. If the default setting is off, you can enable FIPS compliance by setting the value of this variable to 1. If the default setting is on, you can disable FIPS compliance by setting the value of this variable to 0.</li>
+                    </ul>
+                </div>
+                <p><strong>Example: Install the Default Security Policy for a CA Workload Automation AE Instance</strong></p>
+                <p>This example installs the default security policy for instance ACE into the local CA EEM server.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>as_safetool&nbsp;&nbsp;-&nbsp;i&nbsp;ACE</p></pre>
+                </div>
+                <p><strong>Example: Show All CA Workload Automation AE Instances with an Installed Security Policy</strong></p>
+                <p>This example shows all instances with an installed security policy on host securityhost.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>as_safetool&nbsp;&nbsp;-&nbsp;b&nbsp;securityhost&nbsp;&nbsp;-&nbsp;s</p></pre>
+                </div>
+                <h2 class="heading3" id="as_safetoolCommand--ManagetheRepositoryofCAEEMSecurityPolicies-ExamplesRunningas_safetoolinInteractiveMode">Examples Running as_safetool in Interactive Mode</h2>
+                <p>The following examples describe how to use as_safetool in interactive mode:</p>
+                <p><strong>Example: Deregister CA Workload Automation AE from CA EEM</strong></p>
+                <p>Suppose that you want to deregister a CA Workload Automation AE instance with CA EEM in interactive mode. Do the following:</p>
+                <ol>
+                    <li><p>Enter the following command at the UNIX operating system prompt or the Windows instance command prompt:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>as_safetool</p></pre>
+                        </div><p>The following menu appears:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>Please&nbsp;select&nbsp;from&nbsp;the&nbsp;following&nbsp;options:</p><p>[1]&nbsp;Manage&nbsp;CA&nbsp;EEM&nbsp;Backend&nbsp;Server&nbsp;Location.</p><p>[0]&nbsp;Exit&nbsp;CA&nbsp;WAAE&nbsp;IAM&nbsp;Toolkit&nbsp;Safetool&nbsp;Utility.</p></pre>
+                        </div></li>
+                    <li><p>Enter 1 and press the Enter key.<br>The following menu appears:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>Please&nbsp;select&nbsp;from&nbsp;the&nbsp;following&nbsp;options:</p><p>[1]&nbsp;Set&nbsp;and&nbsp;Connect&nbsp;CA&nbsp;EEM&nbsp;Backend&nbsp;Server&nbsp;Location&nbsp;as&nbsp;an&nbsp;Administrator.&nbsp;</p><p>[2]&nbsp;Set&nbsp;CA&nbsp;EEM&nbsp;Backend&nbsp;Server&nbsp;Location.</p><p>[3]&nbsp;Show&nbsp;current&nbsp;Backend&nbsp;Server&nbsp;Location.</p><p>[9]&nbsp;Exit&nbsp;from&nbsp;"Manage&nbsp;CA&nbsp;EEM&nbsp;Backend&nbsp;Server&nbsp;Location"&nbsp;menu.</p><p>[0]&nbsp;Exit&nbsp;CA&nbsp;WAAE&nbsp;EEM&nbsp;Toolkit&nbsp;Safetool&nbsp;Utility.</p></pre>
+                        </div></li>
+                    <li>Enter 1 and press the Enter key.</li>
+                    <li>Enter the CA EEM backend server host name, the application instance name, and the CA EEM administrator user name and password when prompted.</li>
+                    <li><p>Enter 9 and press the Enter key after connecting to the CA EEM backend server.<br>The following menu appears:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>Please&nbsp;select&nbsp;from&nbsp;the&nbsp;following&nbsp;options:</p><p>[1]&nbsp;Manage&nbsp;CA&nbsp;EEM&nbsp;Backend&nbsp;Server&nbsp;Location.</p><p>[2]&nbsp;Generate&nbsp;Instance&nbsp;Authentication&nbsp;Certificate.</p><p>[3]&nbsp;Manage&nbsp;Instance&nbsp;Security&nbsp;Policy.</p><p>[4]&nbsp;Manage&nbsp;Application&nbsp;Instance&nbsp;Administrators.</p><p>[0]&nbsp;Exit&nbsp;CA&nbsp;WAAE&nbsp;EEM&nbsp;Toolkit&nbsp;Safetool&nbsp;Utility.&nbsp;</p></pre>
+                        </div></li>
+                    <li><p>Enter 3 and press the Enter key.&nbsp;<br>The following menu appears:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>Please&nbsp;select&nbsp;from&nbsp;the&nbsp;following&nbsp;options:</p><p>[1]&nbsp;Install&nbsp;Default&nbsp;Security&nbsp;Policy.</p><p>[2]&nbsp;Uninstall&nbsp;Default&nbsp;Security&nbsp;Policy.</p><p>[3]&nbsp;Show&nbsp;Instances&nbsp;with&nbsp;Security&nbsp;Policy&nbsp;Installed.</p><p>[4]&nbsp;Perform&nbsp;Permission&nbsp;Checks&nbsp;against&nbsp;Instance&nbsp;Security&nbsp;Policy.</p><p>[9]&nbsp;Exit&nbsp;from&nbsp;"Manage&nbsp;Instance&nbsp;Security&nbsp;Policy"&nbsp;menu.</p><p>[0]&nbsp;Exit&nbsp;CA&nbsp;WAAE&nbsp;EEM&nbsp;Toolkit&nbsp;Safetool&nbsp;Utility.</p></pre>
+                        </div></li>
+                    <li>Enter 2 and press the Enter key.</li>
+                    <li>Enter the CA Workload Automation AE instance name when prompted.<br>The CA Workload Automation AE instance is deregistered with CA EEM and the security policies are uninstalled.</li>
+                </ol>
+                <p><strong>Example: Perform Permission Checks Against a Security Policy</strong></p>
+                <p>Suppose that you want to verify a CA EEM security policy for a CA Workload Automation AE instance in interactive mode. Do the following:</p>
+                <ol>
+                    <li><p>Enter the following command at the UNIX operating system prompt or the Windows instance command prompt:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>as_safetool</p></pre>
+                        </div><p>The following menu appears:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>Please&nbsp;select&nbsp;from&nbsp;the&nbsp;following&nbsp;options:</p><p>[1]&nbsp;Manage&nbsp;CA&nbsp;EEM&nbsp;Backend&nbsp;Server&nbsp;Location.</p><p>[0]&nbsp;Exit&nbsp;CA&nbsp;WAAE&nbsp;EEM&nbsp;Toolkit&nbsp;Safetool&nbsp;Utility.</p></pre>
+                        </div></li>
+                    <li><p>Enter 1 and press the Enter key.<br>The following menu appears:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>Please&nbsp;select&nbsp;from&nbsp;the&nbsp;following&nbsp;options:</p><p>[1]&nbsp;Set&nbsp;and&nbsp;Connect&nbsp;CA&nbsp;EEM&nbsp;Backend&nbsp;Server&nbsp;Location&nbsp;as&nbsp;an&nbsp;Administrator.&nbsp;</p><p>[2]&nbsp;Set&nbsp;CA&nbsp;EEM&nbsp;Backend&nbsp;Server&nbsp;Location.</p><p>[3]&nbsp;Show&nbsp;current&nbsp;Backend&nbsp;Server&nbsp;Location.</p><p>[9]&nbsp;Exit&nbsp;from&nbsp;"Manage&nbsp;CA&nbsp;EEM&nbsp;Backend&nbsp;Server&nbsp;Location"&nbsp;menu.</p><p>[0]&nbsp;Exit&nbsp;CA&nbsp;WAAE&nbsp;EEM&nbsp;Toolkit&nbsp;Safetool&nbsp;Utility.</p></pre>
+                        </div></li>
+                    <li>Enter 1 and press the Enter key.</li>
+                    <li>Enter the CA EEM backend server host name, the application instance name, and the CA EEM administrator user name and password when prompted.</li>
+                    <li><p>Enter 9 and press the Enter key after connecting to the CA EEM back-end server.<br>The following menu appears:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>Please&nbsp;select&nbsp;from&nbsp;the&nbsp;following&nbsp;options:</p><p>[1]&nbsp;Manage&nbsp;CA&nbsp;EEM&nbsp;Backend&nbsp;Server&nbsp;Location.</p><p>[2]&nbsp;Generate&nbsp;Instance&nbsp;Authentication&nbsp;Certificate.</p><p>[3]&nbsp;Manage&nbsp;Instance&nbsp;Security&nbsp;Policy.</p><p>[4]&nbsp;Manage&nbsp;Application&nbsp;Instance&nbsp;Administrators.</p><p>[0]&nbsp;Exit&nbsp;CA&nbsp;WAAE&nbsp;EEM&nbsp;Toolkit&nbsp;Safetool&nbsp;Utility.&nbsp;</p></pre>
+                        </div></li>
+                    <li><p>Enter 3 and press the Enter key.&nbsp;<br>The following menu appears:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>Please&nbsp;select&nbsp;from&nbsp;the&nbsp;following&nbsp;options:</p><p>[1]&nbsp;Install&nbsp;Default&nbsp;Security&nbsp;Policy.</p><p>[2]&nbsp;Uninstall&nbsp;Default&nbsp;Security&nbsp;Policy.</p><p>[3]&nbsp;Show&nbsp;Instances&nbsp;with&nbsp;Security&nbsp;Policy&nbsp;Installed.</p><p>[4]&nbsp;Perform&nbsp;Permission&nbsp;Checks&nbsp;against&nbsp;Instance&nbsp;Security&nbsp;Policy.</p><p>[9]&nbsp;Exit&nbsp;from&nbsp;"Manage&nbsp;Instance&nbsp;Security&nbsp;Policy"&nbsp;menu.</p><p>[0]&nbsp;Exit&nbsp;CA&nbsp;WAAE&nbsp;EEM&nbsp;Toolkit&nbsp;Safetool&nbsp;Utility.</p></pre>
+                        </div></li>
+                    <li>Enter 4 and press the Enter key.</li>
+                    <li>Enter the CA Workload Automation AE instance name when prompted.</li>
+                    <li><p>Enter the security policy that you want to verify when prompted. The syntax is as follows:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p><em>class resource access user</em></p></pre>
+                        </div>
+                        <ul>
+                            <li><strong><em>class</em></strong><br>Specifies the policy class. Options are the following:
+                                <ul>
+                                    <li>appl</li>
+                                    <li>base_jobtype</li>
+                                    <li>calendar</li>
+                                    <li><span>connectionprofile</span></li>
+                                    <li>control</li>
+                                    <li>cycle</li>
+                                    <li>group</li>
+                                    <li>gvar</li>
+                                    <li>job</li>
+                                    <li>joblog</li>
+                                    <li>jobtype</li>
+                                    <li>list</li>
+                                    <li>machine</li>
+                                    <li>owner</li>
+                                    <li>resources</li>
+                                    <li><span>sendevent</span></li>
+                                </ul></li>
+                            <li><strong><em>resource</em></strong><br>Specifies the name of the resource policy that you want to verify.</li>
+                            <li><strong><em>access</em></strong><br>Specifies the type of access. Options are the following:
+                                <ul>
+                                    <li><strong>x</strong><br>Specifies execute access.</li>
+                                    <li><strong>w</strong><br>Specifies write access.</li>
+                                    <li><strong>r</strong><br>Specifies read access.</li>
+                                    <li><strong>c</strong><br>Specifies create access.</li>
+                                    <li><strong>d</strong><br>Specifies delete access.</li>
+                                </ul><span>For the sendevent policy class, the access levels are as follows:</span>
+                                <ul>
+                                    <li><span>alarm</span></li>
+                                    <li><p><span>change_priority</span></p></li>
+                                    <li><p><span>change_status</span></p></li>
+                                    <li><p><span>comment</span></p></li>
+                                    <li><p><span>delete_job</span></p></li>
+                                    <li><p><span>force_startjob</span></p></li>
+                                    <li><p><span>job_off_hold</span></p></li>
+                                    <li><p><span>job_off_ice</span></p></li>
+                                    <li><p><span>job_off_noexec</span></p></li>
+                                    <li><p><span>job_on_hold</span></p></li>
+                                    <li><p><span>job_on_ice</span></p></li>
+                                    <li><p><span>job_on_noexec</span></p></li>
+                                    <li><p><span>killjob</span></p></li>
+                                    <li><p><span>mach_offline</span></p></li>
+                                    <li><p><span>mach_online</span></p></li>
+                                    <li><p><span>release_resource</span></p></li>
+                                    <li><p><span>reply_response</span></p></li>
+                                    <li><p><span>restartjob</span></p></li>
+                                    <li><p><span>resumejob</span></p></li>
+                                    <li><p><span>send_signal</span></p></li>
+                                    <li><p><span>set_global</span></p></li>
+                                    <li><p><span>startjob</span></p></li>
+                                    <li><p><span>suspendjob</span></p></li>
+                                    <li><p><span>unsend_event</span></p></li>
+                                </ul></li>
+                            <li><span><strong><em>user</em></strong></span><br><span style="color: rgb(255,0,0);"><span style="color: rgb(51,51,51);">Specifies the user name</span>.</span></li>
+                        </ul>The specified resource policy is verified.</li>
+                </ol>
+                <p><span style="color: rgb(51,51,51);"><strong>Example: Update Security Policies After Migration</strong></span></p>
+                <p><span style="color: rgb(51,51,51);">Suppose that you want to update the security policies after migration in interactive mode. Do the following:</span></p>
+                <ol>
+                    <li><p><span style="color: rgb(51,51,51);">Enter the following command at the UNIX operating system prompt or the Windows instance command prompt:</span></p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p><span style="color: rgb(51,51,51);">as_safetool</span></p></pre>
+                        </div><p><span style="color: rgb(51,51,51);">The following menu appears:</span></p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p><span style="color: rgb(51,51,51);">Please&nbsp;select&nbsp;from&nbsp;the&nbsp;following&nbsp;options:</span></p><p><span style="color: rgb(51,51,51);">[1]&nbsp;Manage&nbsp;CA&nbsp;EEM&nbsp;Backend&nbsp;Server&nbsp;Location.</span></p><p><span style="color: rgb(51,51,51);">[0]&nbsp;Exit&nbsp;CA&nbsp;WAAE&nbsp;IAM&nbsp;Toolkit&nbsp;Safetool&nbsp;Utility.</span></p></pre>
+                        </div></li>
+                    <li><p><span style="color: rgb(51,51,51);">Enter 1 and press the Enter key.</span><br><span style="color: rgb(51,51,51);">The following menu appears:</span></p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p><span style="color: rgb(51,51,51);">Please&nbsp;select&nbsp;from&nbsp;the&nbsp;following&nbsp;options:</span></p><p><span style="color: rgb(51,51,51);">[1]&nbsp;Set&nbsp;and&nbsp;Connect&nbsp;CA&nbsp;EEM&nbsp;Backend&nbsp;Server&nbsp;Location&nbsp;as&nbsp;an&nbsp;Administrator.&nbsp;</span></p><p><span style="color: rgb(51,51,51);">[2]&nbsp;Set&nbsp;CA&nbsp;EEM&nbsp;Backend&nbsp;Server&nbsp;Location.</span></p><p><span style="color: rgb(51,51,51);">[3]&nbsp;Show&nbsp;current&nbsp;Backend&nbsp;Server&nbsp;Location.</span></p><p><span style="color: rgb(51,51,51);">[9]&nbsp;Exit&nbsp;from&nbsp;"Manage&nbsp;CA&nbsp;EEM&nbsp;Backend&nbsp;Server&nbsp;Location"&nbsp;menu.</span></p><p><span style="color: rgb(51,51,51);">[0]&nbsp;Exit&nbsp;CA&nbsp;WAAE&nbsp;EEM&nbsp;Toolkit&nbsp;Safetool&nbsp;Utility.</span></p></pre>
+                        </div></li>
+                    <li><span style="color: rgb(51,51,51);">Enter 1 and press the Enter key.</span></li>
+                    <li><span style="color: rgb(51,51,51);">Enter the CA EEM backend server host name, the application instance name, and the CA EEM administrator user name and password when prompted.</span></li>
+                    <li><p><span style="color: rgb(51,51,51);">Enter 9 and press the Enter key after connecting to the CA EEM backend server.</span><br><span style="color: rgb(51,51,51);">The following menu appears:</span></p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p><span style="color: rgb(51,51,51);">Please&nbsp;select&nbsp;from&nbsp;the&nbsp;following&nbsp;options:</span></p><p><span style="color: rgb(51,51,51);">[1]&nbsp;Manage&nbsp;CA&nbsp;EEM&nbsp;Backend&nbsp;Server&nbsp;Location.</span></p><p><span style="color: rgb(51,51,51);">[2]&nbsp;Generate&nbsp;Instance&nbsp;Authentication&nbsp;Certificate.</span></p><p><span style="color: rgb(51,51,51);">[3]&nbsp;Manage&nbsp;Instance&nbsp;Security&nbsp;Policy.</span></p><p><span style="color: rgb(51,51,51);">[4]&nbsp;Manage&nbsp;Application&nbsp;Instance&nbsp;Administrators.</span></p><p><span style="color: rgb(51,51,51);">[0]&nbsp;Exit&nbsp;CA&nbsp;WAAE&nbsp;EEM&nbsp;Toolkit&nbsp;Safetool&nbsp;Utility.&nbsp;</span></p></pre>
+                        </div></li>
+                    <li><p><span style="color: rgb(51,51,51);">Enter 3 and press the Enter key.&nbsp;</span><br><span style="color: rgb(51,51,51);">The following menu appears:</span></p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p><span style="color: rgb(51,51,51);">Please&nbsp;select&nbsp;from&nbsp;the&nbsp;following&nbsp;options:</span></p><p><span style="color: rgb(51,51,51);">[1]&nbsp;Install&nbsp;Default&nbsp;Security&nbsp;Policy.</span></p><p><span style="color: rgb(51,51,51);">[2]&nbsp;Uninstall&nbsp;Default&nbsp;Security&nbsp;Policy.</span></p><p><span style="color: rgb(51,51,51);">[3]&nbsp;Show&nbsp;Instances&nbsp;with&nbsp;Security&nbsp;Policy&nbsp;Installed.</span></p><p><span style="color: rgb(51,51,51);">[4]&nbsp;Perform&nbsp;Permission&nbsp;Checks&nbsp;against&nbsp;Instance&nbsp;Security&nbsp;Policy.</span></p><p><span style="color: rgb(51,51,51);">[5] Update security policies post migration.</span></p><p><span style="color: rgb(51,51,51);">[9]&nbsp;Exit&nbsp;from&nbsp;"Manage&nbsp;Instance&nbsp;Security&nbsp;Policy"&nbsp;menu.</span></p><p><span style="color: rgb(51,51,51);">[0]&nbsp;Exit&nbsp;CA&nbsp;WAAE&nbsp;EEM&nbsp;Toolkit&nbsp;Safetool&nbsp;Utility.</span></p></pre>
+                        </div></li>
+                    <li><span style="color: rgb(51,51,51);">Enter 5 and press the Enter key.</span></li>
+                    <li><span style="color: rgb(51,51,51);">Enter the CA Workload Automation AE release level from which you want to import the security policies when prompted.</span><br><span style="color: rgb(51,51,51);">The security policies are updated.&nbsp;The actions (that are added in a later release level than the release level that you entered in this step) under each CA EEM policy are set to the default.</span></li>
+                </ol>
+                <h2 class="heading3" id="as_safetoolCommand--ManagetheRepositoryofCAEEMSecurityPolicies-ExitCodesfortheas_safetoolCommand">Exit Codes for the as_safetool Command</h2>
+                <p>The following exit codes are associated with the as_safetool command:</p>
+                <ul>
+                    <li><strong>0</strong><br>Indicates that the command was successful.</li>
+                    <li><strong>1</strong><br>Indicates that the command contained a syntax error.</li>
+                    <li><strong>2&nbsp;</strong><br>Indicates that the back-end server is not available or the EiamAdmin user account password is invalid.</li>
+                    <li><strong>3&nbsp;</strong><br>Indicates that the CA Workload Automation AE registration to CA EEM failed.</li>
+                    <li><strong>4&nbsp;</strong><br>Indicates that installation of the CA Workload Automation AE security policy failed.</li>
+                    <li><strong>5&nbsp;</strong><br>Indicates that removal of the CA Workload Automation AE security policy failed.</li>
+                    <li><strong>6&nbsp;</strong><br>Indicates that the unregistration of CA Workload Automation AE from CA EEM failed.</li>
+                    <li><strong>7&nbsp;</strong><br>Indicates that the ASSAFETOOLPW environment variable is not defined.</li>
+                    <li><p><strong>8&nbsp;</strong><br>Indicates that the CA EEM client configuration file is missing or corrupted.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> The CA EEM client configuration file is located in the $AUTOUSER/eiam.client.config (on UNIX) or %AUTOUSER%\eiam.client.config (on Windows) directory.
+                        </div> </li>
+                </ul>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

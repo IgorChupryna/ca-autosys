@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The as_config command lets you manage the encryption keys for the application server and for CA Workload Automation Agent for UNIX, Linux, or Windows. You can use as_config to encrypt a key and store it in $AUTOUSER/cryptkey.txt. If you want to use that encrypted key for the agent, you can copy the cryptkey.txt file to the&nbsp;<em>install_directory</em>/SystemAgent/<em>agent_name</em>&nbsp;directory.</p>
+                <p><strong>Syntax</strong></p>
+                <p><strong>This command has the following format:</strong></p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>as_config&nbsp;[-g&nbsp;<em>key</em>]&nbsp;[-a&nbsp;<em>key</em>]&nbsp;[&nbsp;-c&nbsp;<em>file name</em>&nbsp;[&nbsp;-e&nbsp;<em>key string</em>&nbsp;]&nbsp;]&nbsp;[-d]&nbsp;[-h]&nbsp;[&nbsp;-p&nbsp;|&nbsp;-p&nbsp;-n&nbsp;<em>pwvar</em>&nbsp;]&nbsp;[&nbsp;-m&nbsp;<em>message_key</em>&nbsp;|&nbsp;-m&nbsp;<em>message_key</em>&nbsp;<em>argument...</em>]&nbsp;[-x]&nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-g&nbsp;<em>key</em></strong><br>(Optional) Encrypts the specified key and stores it in $AUTOUSER/cryptkey.txt.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note:</strong>&nbsp;To use the -g option, you must set the AUTOUSER environment variable.</p>
+                        </div> </li>
+                    <li><p><strong>-a&nbsp;<em>key</em></strong><br>(Optional) Encrypts the specified key and stores it in $AUTOUSER/cryptkey_alias.txt. This option supports 32-character hexadecimal key only.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note: </strong>To use the -a option, you must set the AUTOUSER environment variable.
+                        </div> </li>
+                    <li><strong>-c&nbsp;<em>file name</em></strong><br>(Optional) Compares the encrypted key in the file specified in this option with the key string specified in the -e option.</li>
+                </ul>
+                <ul>
+                    <li><strong>-e&nbsp;<em>key string<br></em></strong>(Optional) Defines a key string that is used to compare with the encrypted key in the file specified in the -c option.
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note: </strong>To use the -e option, you must also specify the -c option. If you do not use the -e option, the default encryption key is compared with file specified in the -c option.</p>
+                        </div> </li>
+                </ul>
+                <ul>
+                    <li><strong>-d</strong><br>Encrypts the default encryption key and stores it in $AUTOUSER/cryptkey.txt.</li>
+                    <li><strong>-h</strong><br>(Optional) Prints the usage statement.</li>
+                    <li><strong>-p</strong><br>(Optional) Encrypts the password specified by the - n option (environment variable) to standard output. If - n is not specified the password must be entered through stdin. This option invokes the AES encryption algorithm to encode the password, which is the equivalent of using the autosys_secure Get encrypted password function and Encrypt database access password (using AES).</li>
+                    <li><p><strong>-n&nbsp;<em>pwvar</em></strong><br>(Optional) Defines an environment variable containing the password.<br><strong>Default:</strong>&nbsp;If you do not define this parameter, the password is read from standard input.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note:</strong> To use the -n option, you must also specify the -a or -g option.</p>
+                        </div> </li>
+                    <li><p><strong>-m&nbsp;<em>message_key</em></strong><br>(Optional) Displays the message that corresponds to the specified key.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note:</strong>&nbsp;To use the -m option, you must set the AUTOSYS environment variable.</p>
+                        </div> <p><strong>Example:</strong>&nbsp;as_config -m CAUAJM_I_40005</p></li>
+                    <li><strong><em>argument</em>&nbsp;...</strong><br>Specifies one or more arguments to pass to the -m option.</li>
+                    <li><strong>-x&nbsp;</strong><br>(Optional) Displays the version information.</li>
+                    <li><strong>-?</strong><br>(Optional) Displays help for the command.</li>
+                </ul>
+                <p><strong>Example: Encrypt the Default Encryption Key</strong></p>
+                <p>This example encrypts the default encryption key of the product and stores it in the $AUTOUSER location as cryptkey.txt.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>as_config&nbsp;&nbsp;-&nbsp;d</p></pre>
+                </div>
+                <p><strong>Example: Encrypt a Custom Key for Instance Wide Encryption</strong></p>
+                <p>This example encrypts the custom key WAAE for instance-wide encryption and stores it in the $AUTOUSER location as cryptkey_alias.txt.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>as_config&nbsp;&nbsp;-&nbsp;g&nbsp;WAAE</p></pre>
+                </div>
+                <p><strong>Example: Encrypt an Agent’s Encryption Key</strong></p>
+                <p>This example encrypts the 32-character hexadecimal key of the agent and stores it in the $AUTOUSER location as cryptkey_alias.txt.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>as_config&nbsp;&nbsp;-&nbsp;a&nbsp;0x0123456789ABCDEF01234567890ABCDE</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The autosec_test command is a client component utility that is used to test the security subsystem by a CA Workload Automation AE application for a given secured asset.</p>
+                <p>Use the autosec_test command to test basic communication between a CA Workload Automation AE secured application and the security subsystem and to verify enforcement of the security policies for CA Workload Automation AE resources (jobs, calendars, machines, and so on).</p>
+                <p>When you customize external security policy, you specify an action (execute, write, read, create, or delete) to grant users a particular level of access to particular resources. If CA Workload Automation AE is running in external security mode, the autosec_test command returns a message indicating whether a security access check for a given resource to an action passes or fails as governed by the security policy. If no&nbsp;<em>username</em>&nbsp;value is specified, the application issues a security check as the currently logged-on user.</p>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <p><strong>Note:</strong>&nbsp;For more information about customized security policy, see&nbsp;<a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/securing/security-policy-customization" class="conf-macro output-inline" data-hasbody="false">Security Policy Customization</a>.</p>
+                </div>
+                <p><strong><br>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autosec_test [<em>class</em>&nbsp;<em>resource</em>&nbsp;<em>access</em>&nbsp;[<em>username</em>]]</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[STAT]</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[-usr AuthUser [-pw AuthPassword | -pwx AuthEncryptedPassword] | -saml AuthArtifact]</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[-x]</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><strong><em>class&nbsp;<br></em></strong>(Optional) Specifies the name of the resource class on which the security check is issued. The resource class name can be&nbsp;<em>one</em>&nbsp;of the following:<br>
+                        <ul>
+                            <li><p>APPL</p></li>
+                            <li><p>BASE_JOBTYPE</p></li>
+                            <li><p>CALENDAR</p></li>
+                            <li><p>CONNECTIONPROFILE</p></li>
+                            <li><p>CONTROL</p></li>
+                            <li><p>CYCLE</p></li>
+                            <li><p>GLOBAL_VAR</p></li>
+                            <li><p>GROUP</p></li>
+                            <li><p>JOB</p></li>
+                            <li><p>JOBLOG</p></li>
+                            <li><p>JOBTYPE</p></li>
+                            <li><p>LIST</p></li>
+                            <li><p>MACHINE</p></li>
+                            <li><p>OWNER</p></li>
+                            <li><p>RESOURCES</p></li>
+                            <li><p>SENDEVENT</p></li>
+                        </ul>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note:</strong> For more information about the resource classes, see <a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/securing/security-policy-customization/customize-security-policy-and-settings/customize-access-policy/ca-eem-resource-classes-for-ca-workload-automation-ae" class="conf-macro output-inline" data-hasbody="false">CA EEM Resource Classes for CA Workload Automation AE</a></p>
+                        </div> </li>
+                    <li><em><strong>resource</strong></em><br>(Optional) Specifies the name of the resource to which the user is granted a particular level of access to perform an action. &nbsp;</li>
+                    <li><em><strong>access</strong></em><br>(Optional) Specifies the access level to perform an action for a given resource class name. The access levels are as follows:&nbsp;C(create) | D(delete) | R(read) | W(write) | X(execute). The access levels for each resource class are as follows:
+                        <ul>
+                            <li><p>APPL: R|W|X</p></li>
+                            <li><p>BASE_JOBTYPE: X</p></li>
+                            <li><span>CALENDAR: C|D|R|W|X</span></li>
+                            <li><span>CONNECTIONPROFILE: C|D|R|W|X</span></li>
+                            <li><span>CONTROL: X<br></span></li>
+                            <li><span>CYCLE: C|D|R|W<br></span></li>
+                            <li><span>GLOBAL_VAR: C|D|R|W|X<br></span></li>
+                            <li><span>GROUP: R|W|X<br></span></li>
+                            <li><span>JOB: C|D|R|W|X<br></span></li>
+                            <li><span>JOBLOG: R<br></span></li>
+                            <li><span>JOBTYPE: C|D|R|W|X<br></span></li>
+                            <li><span>LIST: R<br></span></li>
+                            <li><span>MACHINE: C|D|R|W|X<br></span></li>
+                            <li><span>OWNER: X|<span style="color: rgb(51,51,51);">SENDEVENT_JOBEXECUTE</span><br></span></li>
+                            <li><span>RESOURCES: C|D|R|W|X<br></span></li>
+                        </ul>The access levels for the SENDEVENT resource class are as follows:&nbsp;
+                        <ul>
+                            <li><p>ALARM</p></li>
+                            <li>CHANGE_PRIORITY</li>
+                            <li><span>CHANGE_STATUS</span></li>
+                            <li><span>COMMENT</span></li>
+                            <li><span>DELETE_JOB</span></li>
+                            <li><span>FORCE_STARTJOB</span></li>
+                            <li><span>JOB_OFF_HOLD</span></li>
+                            <li><span>JOB_OFF_ICE</span></li>
+                            <li><span>JOB_OFF_NOEXEC</span></li>
+                            <li><span>JOB_ON_HOLD</span></li>
+                            <li><span>JOB_ON_ICE</span></li>
+                            <li><span>JOB_ON_NOEXEC</span></li>
+                            <li><span>KILLJOB</span></li>
+                            <li><span>MACH_OFFLINE</span></li>
+                            <li><span>MACH_ONLINE</span></li>
+                            <li><span>RELEASE_RESOURCE</span></li>
+                            <li><span>REPLY_RESPONSE</span></li>
+                            <li><span>RESTARTJOB</span></li>
+                            <li><span>RESUMEJOB</span></li>
+                            <li><span>SEND_SIGNAL</span></li>
+                            <li><span>SET_GLOBAL</span></li>
+                            <li><span>STARTJOB</span></li>
+                            <li><span>SUSPENDJOB</span></li>
+                            <li><span>UNSEND_EVENT</span></li>
+                        </ul></li>
+                    <li><p><em><strong>username<br></strong></em>(Optional) Specifies the name of the user accessing the resource. The&nbsp;user is granted a particular level of access to particular resources.&nbsp;<br><strong>Default:</strong>&nbsp;If no user name is specified, access is checked on behalf of the currently logged-on user who is issuing the command.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note:&nbsp;</strong><span style="color: rgb(51,51,51);">The issuing SERVER of the user attribute must be set in the CA EEM environment to allow issuance of a CA EEM security check on behalf of another user.</span></p>
+                        </div> </li>
+                    <li><p><strong>STAT<br></strong>(Optional) Displays a message indicating the security mode that CA Workload Automation AE is running under.</p></li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                            <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                            <p>(Optional) Specifies external security credentials as follows:</p>
+                            <ul>
+                                <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                                <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                    </div> </li>
+                                <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Notes: </strong></p>
+                                <ul>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                        <ul>
+                                            <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                            <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                            <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                        </ul></li>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                    <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                        <ul>
+                                            <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                            <li>CA Workload Automation AE is operating in native security mode.</li>
+                                        </ul></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                    <li><p><strong>-x</strong></p><p>(Optional) Returns the command version information to standard output.</p></li>
+                    <li>-?<br>&nbsp;(Optional) Displays help for the command.</li>
+                </ul>
+                <p><strong>Example: Determine Whether the Current User May Issue an Event for a Job</strong></p>
+                <p>This example simulates a request by the CA Workload Automation AE secured application to the security subsystem to determine whether the current user has access to issue a STARTJOB event for the job good_test:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autosec_test&nbsp;JOB&nbsp;good_test&nbsp;X</p></pre>
+                </div>
+                <p>If the user has execute access to the job, the following message is displayed:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>Security&nbsp;check&nbsp;passed!&nbsp;</p></pre>
+                </div>
+                <p>If the user does not have execute access to the job, the following message is displayed:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>Security&nbsp;check&nbsp;failed!</p></pre>
+                </div>
+                <p><strong>Example: Determine Whether a Specified User May Issue an Event for a Job</strong></p>
+                <p>This example simulates a request by the CA Workload Automation AE secured application to the security subsytem to determine whether the user <a rel="nofollow" class="external-link" href="mailto:admin@example.com">admin@example.com</a> can issue a STARTJOB event for the job good_test:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autosec_test&nbsp;JOB&nbsp;good_test&nbsp;X&nbsp;admin@example.com</p></pre>
+                </div>
+                <p>If admin@example.com has execute access to the job, the following message appears:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>Security&nbsp;check&nbsp;passed!&nbsp;</p></pre>
+                </div>
+                <p>If admin@example.com does not have execute access to the job, the following message appears:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>Security&nbsp;check&nbsp;failed!</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

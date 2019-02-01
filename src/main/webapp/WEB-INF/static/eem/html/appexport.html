@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+    <div>
+        <div class="">
+            <p>Safex is a Command Line Interface (CLI) provided by CA EEM. Safex lets you generate XML files to perform
+                product registration, include objects such as policies, users, and calendars. It can also be used to
+                export the data from CA EEM to an XML file.</p>
+            <p>The safex syntax has the following format:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>{path} safex [-h backend] [-l locale] [-u user -p password] [-c cert -p password] [-n]
+[-v verbose level (0-4)] [-s simulate] [-pause]  [-b bulk insert] [-f xml_file] [-munge password] [-sdkconfig configfile] [-sha1encodeddigest password]
+</code></pre>
+            </div>
+            <p><strong>Example: </strong>C:\Program Files\CA\Embedded Entitlements Manager SDK\bin\&gt;safex -h
+                localhost -u eiamAdmin -p eiam -f abc.xml</p>
+            <p>Where:</p>
+            <ul>
+                <li><p><strong>- h backend</strong><br>Specifies the hostname of the CA EEM backend server to
+                    communicate.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note: </strong>You can set localhost as your backend server.
+                    </div>
+                </li>
+                <li><strong>- l locale (Optional)</strong><br>Specifies the locale.<br><strong>Default:</strong> us-en
+                </li>
+                <li><strong>- u user</strong><br>Specifies the username to attach.</li>
+                <li><strong>- c certificate</strong><br>Specifies the certificate filename.</li>
+                <li><strong>- p password</strong><br>Specifies the password of the user or password used to encrypt the
+                    certificate passed with the -c option.
+                </li>
+                <li><p><strong>- n (Optional)</strong><br>Specifies CA EEM to use existing the native authentication.
+                </p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note: </strong>This parameter is valid only on Windows.
+                    </div>
+                </li>
+                <li><strong>- v verbose (Optional)</strong><br>Specifies the level of feedback provided by the utility.
+                    Higher levels are useful for support personnel.<br><strong>Limits: </strong>0 - 4
+                </li>
+                <li><strong>- b bulk (Optional)</strong><br>Processes large number of objects.</li>
+                <li><strong>- pause (Optional)</strong><br>Specifies safex to pause before processing the data.</li>
+                <li><strong>- f XML file</strong><br>Specifies the XML file to process.</li>
+                <li><strong>- munge (Optional)</strong><br>Converts plaintext password to encrypted versions and
+                    displays.&nbsp;The generated value is host specific.<br><strong>Example: </strong>[-munge password1
+                    (password2 …)]
+                </li>
+                <li><strong>- -sha1encodeddigest (Optional)</strong><br>Converts plaintext password to SHA1 encoded
+                    digest. Encode your password using this option, and specify the encoded password in the XML file
+                    using the DirectoryPasswordDigest tag. The DirectoryPasswordDigest tag is used when creating global
+                    users.
+                </li>
+                <li><p><strong>-sdkconfig</strong></p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        Specifies the absolute path to the eiam.config.
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+
+</div>
+
+<div>
+
+
+    <div>
+        <div class="">
+            <p><strong>Example: Register application and store certificates in P12 format</strong></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>&lt;Safex&gt;
+&lt;Attach/&gt;
+&lt;Register certfile="appcertfile.p12" password="123"&gt;
+
+&lt;ApplicationInstance name="product name" label="application instance label"&gt;
+&lt;Brand&gt;brand_name&lt;/Brand&gt;
+&lt;MajorVersion&gt;12&lt;/MajorVersion&gt;
+&lt;MinorVersion&gt;0&lt;/MinorVersion&gt;
+&lt;Translations&gt;product_trans_file&lt;/Translations&gt;
+&lt;Description&gt;description of the product&lt;/Description&gt;
+
+&lt;ResourceClass&gt;
+&lt;Name&gt;file&lt;/Name&gt;
+&lt;Action&gt;read&lt;/Action&gt;
+&lt;Action&gt;write&lt;/Action&gt;
+&lt;Action&gt;delete&lt;/Action&gt;
+&lt;NamedAttr&gt;Size&lt;/NamedAttr&gt;
+&lt;NamedAttr&gt;Count&lt;/NamedAttr&gt;
+&lt;/ResourceClass&gt;
+
+&lt;ResourceClass&gt;
+&lt;Name&gt;menu&lt;/Name&gt;
+&lt;Action&gt;open&lt;/Action&gt;
+&lt;Action&gt;update&lt;/Action&gt;
+&lt;NamedAttr&gt;Name&lt;/NamedAttr&gt;
+&lt;/ResourceClass&gt;
+
+&lt;UserAttribute&gt;text:location&lt;/UserAttribute&gt;
+&lt;UserAttribute&gt;password:extrapassword&lt;/UserAttribute&gt;
+&lt;UserAttribute&gt;number:pagesize&lt;/UserAttribute&gt;
+&lt;UserAttribute&gt;text:menu_preference&lt;/UserAttribute&gt;
+&lt;UserAttribute&gt;number:writefilecount&lt;/UserAttribute&gt;
+
+&lt;/ApplicationInstance&gt;
+&lt;/Register&gt;
+&lt;/Safex&gt;
+</code></pre>
+            </div>
+            <p><strong>Example: Register application and store certificates in PKCS#11 device</strong></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>&lt;Safex&gt;
+&lt;Attach/&gt;
+&lt;Register certtype="p11" pkcs11lib="pkcs11lib " token="lodocs" userpin="userpin" id="id" sensitive="false"&gt;
+
+&lt;ApplicationInstance name="product name" label="application instance label"&gt;
+&lt;Brand&gt;brand_name&lt;/Brand&gt;
+&lt;MajorVersion&gt;12&lt;/MajorVersion&gt;
+&lt;MinorVersion&gt;0&lt;/MinorVersion&gt;
+&lt;Translations&gt;product_trans_file&lt;/Translations&gt;
+&lt;Description&gt;description of the product&lt;/Description&gt;
+
+&lt;ResourceClass&gt;
+&lt;Name&gt;file&lt;/Name&gt;
+&lt;Action&gt;read&lt;/Action&gt;
+&lt;Action&gt;write&lt;/Action&gt;
+&lt;Action&gt;delete&lt;/Action&gt;
+&lt;NamedAttr&gt;Size&lt;/NamedAttr&gt;
+&lt;NamedAttr&gt;Count&lt;/NamedAttr&gt;
+&lt;/ResourceClass&gt;
+
+&lt;ResourceClass&gt;
+&lt;Name&gt;menu&lt;/Name&gt;
+&lt;Action&gt;open&lt;/Action&gt;
+&lt;Action&gt;update&lt;/Action&gt;
+&lt;NamedAttr&gt;Name&lt;/NamedAttr&gt;
+&lt;/ResourceClass&gt;
+
+&lt;UserAttribute&gt;text:location&lt;/UserAttribute&gt;
+&lt;UserAttribute&gt;password:extrapassword&lt;/UserAttribute&gt;
+&lt;UserAttribute&gt;number:pagesize&lt;/UserAttribute&gt;
+&lt;UserAttribute&gt;text:menu_preference&lt;/UserAttribute&gt;
+&lt;UserAttribute&gt;number:writefilecount&lt;/UserAttribute&gt;
+
+&lt;/ApplicationInstance&gt;
+&lt;/Register&gt;
+&lt;/Safex&gt;
+</code></pre>
+            </div>
+            <p><strong>Example: Register application and store certificates in PEM format</strong></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>&lt;Safex&gt;
+&lt;Attach/&gt;
+&lt;Register certtype="pem" certfile="sample.pem" keyfile="sample.key" password="sample"&gt;
+
+&lt;ApplicationInstance name="product name" label="application instance label"&gt;
+&lt;Brand&gt;brand_name&lt;/Brand&gt;
+&lt;MajorVersion&gt;12&lt;/MajorVersion&gt;
+&lt;MinorVersion&gt;0&lt;/MinorVersion&gt;
+&lt;Translations&gt;product_trans_file&lt;/Translations&gt;
+&lt;Description&gt;description of the product&lt;/Description&gt;
+
+&lt;ResourceClass&gt;
+&lt;Name&gt;file&lt;/Name&gt;
+&lt;Action&gt;read&lt;/Action&gt;
+&lt;Action&gt;write&lt;/Action&gt;
+&lt;Action&gt;delete&lt;/Action&gt;
+&lt;NamedAttr&gt;Size&lt;/NamedAttr&gt;
+&lt;NamedAttr&gt;Count&lt;/NamedAttr&gt;
+&lt;/ResourceClass&gt;
+
+&lt;ResourceClass&gt;
+&lt;Name&gt;menu&lt;/Name&gt;
+&lt;Action&gt;open&lt;/Action&gt;
+&lt;Action&gt;update&lt;/Action&gt;
+&lt;NamedAttr&gt;Name&lt;/NamedAttr&gt;
+&lt;/ResourceClass&gt;
+
+&lt;UserAttribute&gt;text:location&lt;/UserAttribute&gt;
+&lt;UserAttribute&gt;password:extrapassword&lt;/UserAttribute&gt;
+&lt;UserAttribute&gt;number:pagesize&lt;/UserAttribute&gt;
+&lt;UserAttribute&gt;text:menu_preference&lt;/UserAttribute&gt;
+&lt;UserAttribute&gt;number:writefilecount&lt;/UserAttribute&gt;
+
+&lt;/ApplicationInstance&gt;
+&lt;/Register&gt;
+&lt;/Safex&gt;
+</code></pre>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

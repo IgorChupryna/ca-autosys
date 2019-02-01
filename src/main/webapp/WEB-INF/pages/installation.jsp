@@ -58,11 +58,12 @@
 <div class="container">
     <p></p>
     <h2 class="heading2" id="VideoInstallation">Video installation</h2>
-    <video width="480" height="320" controls>
-        <source src=${install.pathVideo} type="video/mp4">
-
-    </video>
+    <div class="embed-responsive embed-responsive-4by3">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/${install.pathVideo}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
 </div>
+
+
 
 
 <div class="container">

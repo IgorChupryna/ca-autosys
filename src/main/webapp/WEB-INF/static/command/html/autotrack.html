@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The autotrack command is a client component utility that tracks changes to the database (for example, job definition changes, sendevent calls, and job overrides) and writes this information to the database.</p>
+                <p>When you query for this information, autotrack prints a report to the screen, or you can redirect the output to a file.&nbsp;autotrack can track changes that are made to job definitions from jil, CA WCC, or the SDK. It cannot track changes that are made directly to the database through SQL commands.</p>
+                <p>This command is especially useful in sites that require careful monitoring of the job definition environment or where multiple users have permission to edit job definitions or send CA Workload Automation AE events.</p>
+                <p>CA Workload Automation AE stores autotrack output in two tables: ujo_audit_info and ujo_audit_msg. By default, these tables reside in the same database (or tablespace) as all other CA Workload Automation AE tables. If you frequently unload all your jobs from the database and reload, turn off autotrack while you unload and reload your jobs to prevent the database from growing large. After you have unloaded and reloaded your jobs, turn on autotrack.</p>
+                <p>Running archive_events helps to prevent the database from filling up with autotrack output. The archive_events - l&nbsp;<em>num_of_days</em>&nbsp;command archives information older than the specified number of days from the ujo_audit_info and ujo_audit_msg tables.</p>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autotrack&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[{-u&nbsp;<em>level</em>|-l}]&nbsp;[-v]&nbsp;[-F&nbsp;“<em>from_time</em>”]&nbsp;[-T&nbsp;“<em>to_time</em>”]&nbsp;[-U&nbsp;<em>username</em>]&nbsp;[-m&nbsp;<em>machine</em>]&nbsp;[-J&nbsp;<em>jobname</em>] <span style="color: rgb(51,51,51);">[-B <em>group</em>] [-I <em>application</em>]&nbsp;[-R <em>resource</em>]</span> [-t&nbsp;<em>type</em>] [{-usr&nbsp;<em>username&nbsp;</em>{-pw|pwx}&nbsp;<em>password</em>|-saml&nbsp;<em>auth_artifact</em>}]</p><p>&nbsp;&nbsp;&nbsp;[-x]</p><p>&nbsp;&nbsp;&nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-u&nbsp;<em>level<br></em></strong>(Optional) Defines the level of detail that autotrack writes to the database.<br><strong>Default:</strong>&nbsp;0<br><strong>Limits:</strong>&nbsp;This value can be one of the following:</p>
+                        <ul>
+                            <li><strong>0</strong><br>Writes no tracking detail.</li>
+                            <li><strong>1</strong><br>Tracks the following and condenses each tracked event to a one-line summary:
+                                <ul>
+                                    <li>Job, calendar, monitor, browser, and machine definition changes</li>
+                                    <li>Job overrides</li>
+                                    <li>autosys_secure, autotrack, and sendevent calls</li>
+                                </ul></li>
+                            <li><strong>2</strong><br>Tracks the same information as level 1, but also writes the entire job definition for overrides and job definition changes. This level is very database intensive and significantly impairs JIL performance.</li>
+                        </ul>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Notes:</strong>
+                            <ul>
+                                <li>Only the EXEC or EDIT superuser can change the tracking level.</li>
+                            </ul>
+                            <ul>
+                                <li>The autotrack command writes the entire job definition for overrides and job definition changes only when you use the level 2 option with the -v option.</li>
+                            </ul>
+                        </div> </li>
+                </ul>
+                <ul>
+                    <li><p><strong>-l<br></strong>(Optional) Displays the current tracking level (0, 1, or 2).</p></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-v<br></strong>(Optional) Activates verbose autotrack reporting.</p></li>
+                </ul>
+                <ul>
+                    <li><strong>-F "<em>from_time</em>"</strong><br>(Optional) Defines the date and time that starts the interval about which to report.<br><strong>Limits:</strong>&nbsp;This value can be in “<em>MM/dd/yyyy hh:mm</em>” format, as follows:<br>
+                        <ul>
+                            <li><strong><em>MM</em></strong><br>This value can be a number in the range 01 through 12 specifying the month in which to begin the reporting interval.</li>
+                            <li><strong><em>dd</em></strong><br>This value can be a number in the range 01 through 31 specifying the day on which to begin the reporting interval.</li>
+                            <li><strong><em>yyyy</em></strong><br>This value can be a number in the range 00 through 99 or 1900 through 2100 specifying the year in which to begin the reporting interval. When you enter a two-digit year, CA Workload Automation AE saves the setting to the database as a four-digit year. If you enter 79 or less, the product precedes your entry with 20; if you enter 80 or greater, the product precedes your entry with 19.</li>
+                            <li><strong><em>hh</em></strong><br>This value can be a number in the range 00 through 23 specifying the hour in which to begin the reporting interval.</li>
+                            <li><strong><em>mm</em></strong><br>This value can be a number in the range 00 through 59 specifying the minute in which to begin the reporting interval.</li>
+                        </ul>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note:&nbsp;</strong>You must enclose this value in quotation marks (").</p>
+                        </div> </li>
+                    <li><strong>-T "<em>to_time</em>"</strong><br>(Optional) Defines the date and time that ends the interval about which to report.<br><strong>Limits:</strong>&nbsp;This value can be in “<em>MM/dd/yyyy hh:mm</em>” format, as follows:<br>
+                        <ul>
+                            <li><strong><em>MM</em></strong><br>This value can be a number in the range 01 through 12 specifying the month in which to end the reporting interval.</li>
+                            <li><strong><em>dd</em></strong><br>This value can be a number in the range 01 through 31 specifying the day on which to end the reporting interval.</li>
+                            <li><strong><em>yyyy</em></strong><br>This value can be a number in the range 00 through 99 or 1900 through 2100 specifying the year in which to end the reporting interval. When you enter a two-digit year, CA Workload Automation AE saves the setting to the database as a four-digit year. If you enter 79 or less, the product precedes your entry with 20; if you enter 80 or greater, the product precedes your entry with 19.</li>
+                            <li><strong><em>hh</em></strong><br>This value can be a number in the range 00 through 23 specifying the hour in which to end the reporting interval.</li>
+                            <li><strong><em>mm</em></strong><br>This value can be a number in the range 00 through 59 specifying the minute in which to end the reporting interval.</li>
+                        </ul>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note:&nbsp;</strong>You must enclose this value in quotation marks (").</p>
+                        </div> </li>
+                    <li><p><strong>-U&nbsp;<em>username<br></em></strong>(Optional) Reports changes or events initiated by the specified user.</p></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-m&nbsp;<em>machine<br></em></strong>(Optional) Reports changes or events initiated from the specified machine.</p></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-J&nbsp;<em>jobname<br></em></strong>(Optional) Defines the job about which to report.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Notes:</strong></p>
+                            <ul>
+                                <li>You can use the percent (%) and underscore (_) characters as wildcards in this value.</li>
+                                <li>You do not need to precede the job name that contains a colon with a backslash.</li>
+                            </ul>
+                        </div> </li>
+                    <li><p><span style="color: rgb(51,51,51);"><strong>-B<em> group<br></em></strong>(Optional) Defines the group about which to report.</span><br><span style="color: rgb(51,51,51);"><strong>Limits:</strong> When <strong>-I</strong> <em>application</em> is also defined, the command generates the report only for jobs that match both <strong>-I</strong> <em>application</em> and <strong>-B</strong> <em>group</em>. To search for jobs or boxes without group names, you can specify a blank group name by enclosing a blank with quotes, for example <strong>-B</strong> " ".</span></p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><span style="color: rgb(51,51,51);"><strong>Notes:</strong></span></p>
+                            <ul>
+                                <li><span style="color: rgb(51,51,51);">The<strong> -J</strong> <em>jobname</em> and<strong> -B</strong> <em>group</em> or<strong> -I</strong> <em>application</em> are mutually exclusive. That is, you cannot specify the <strong>-J</strong> <em>jobname</em> with <strong>-B</strong> <em>group</em> or <strong>-I</strong> <em>application</em> and conversely.</span></li>
+                                <li><span style="color: rgb(51,51,51);">This value allows wildcard characters.</span></li>
+                                <li><span style="color: rgb(51,51,51);">You can use the percent (%) and underscore (_) characters as wildcards in this value.</span></li>
+                                <li><span style="color: rgb(51,51,51);">You do not need to precede the box name that contains a colon with a backslash.</span></li>
+                            </ul>
+                        </div> </li>
+                    <li><p><span style="color: rgb(51,51,51);"><strong>-I <em>application<br></em></strong>(Optional) Defines the application about which to report.</span><br><span style="color: rgb(51,51,51);"><strong>Limits:</strong> When <strong>-B</strong> <em>group</em> is also defined, the command generates the report only for jobs that match both <strong>-I</strong> <em>application</em> and <strong>-B</strong> <em>group</em>. To search for jobs or boxes without application names, you can specify a blank application name by enclosing a blank with quotes, for example <strong>-I</strong> " ".</span></p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><span style="color: rgb(51,51,51);"><strong>Notes:</strong></span></p>
+                            <ul>
+                                <li><span style="color: rgb(51,51,51);">The<strong> -J</strong> <em>jobname</em> and<strong> -B</strong> <em>group</em> or<strong> -I</strong> <em>application</em> are mutually exclusive. That is, you cannot specify the <strong>-J</strong> <em>jobname</em> with <strong>-B</strong> <em>group</em> or <strong>-I</strong> <em>application</em> and conversely.</span></li>
+                                <li><span style="color: rgb(51,51,51);">This value allows wildcard characters.</span></li>
+                                <li><span style="color: rgb(51,51,51);">You can use the percent (%) and underscore (_) characters as wildcards in this value.</span></li>
+                                <li><span style="color: rgb(51,51,51);">You do not need to precede the box name that contains a colon with a backslash.</span></li>
+                            </ul>
+                        </div> </li>
+                    <li><p><span style="color: rgb(51,51,51);"><strong>-R <em>resource<br></em></strong>(Optional) Defines the virtual resource about which to report.</span></p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><span style="color: rgb(51,51,51);"><strong>Notes:</strong></span></p>
+                            <ul>
+                                <li><span style="color: rgb(51,51,51);">This value allows wildcard characters.</span></li>
+                                <li><span style="color: rgb(51,51,51);">You can use the percent (%) and underscore (_) characters as wildcards in this value.</span></li>
+                            </ul>
+                        </div> </li>
+                    <li><p><strong>-t&nbsp;<em>type<br></em></strong></p><p>(Optional) Reports a specific event. This value can be one of the following:</p>
+                        <ul>
+                            <li><strong>A</strong><br>Reports the calls that are generated by the autosys_secure command.</li>
+                            <li><strong>B</strong><br>Reports Monitor/Browser definition changes generated by jil.</li>
+                            <li><strong>C</strong><br>Reports calendar definition changes generated by the autocal_asc command.</li>
+                            <li><strong>J</strong><br>Reports job definition changes, sendevent -J, or overrides to a specific job generated by jil.</li>
+                            <li><strong>M</strong><br>Reports machine definition changes generated by jil.</li>
+                            <li><strong>N</strong><br>Reports connection profile definition changes generated by jil.</li>
+                            <li><strong>O</strong><br>Reports override definition changes generated by jil.</li>
+                            <li><strong>S</strong><br>Reports the calls that are generated by the sendevent command evoked through client utilities.</li>
+                            <li><strong>T</strong><br>Reports the calls that are generated by the autotrack command (for example, changes to the tracking level).</li>
+                        </ul></li>
+                    <li>
+                        <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                            <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                            <p>(Optional) Specifies external security credentials as follows:</p>
+                            <ul>
+                                <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                                <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                    </div> </li>
+                                <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Notes: </strong></p>
+                                <ul>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                        <ul>
+                                            <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                            <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                            <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                        </ul></li>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                    <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                        <ul>
+                                            <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                            <li>CA Workload Automation AE is operating in native security mode.</li>
+                                        </ul></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                    <li><p><strong>-x</strong></p><p>(Optional) Returns the command version information to standard output.</p></li>
+                    <li><p><strong>-?</strong></p><p>(Optional) Displays help for the command.</p></li>
+                </ul>
+                <p><strong>Example: Display Level 1 Verbose Reporting About a Job</strong></p>
+                <p>This example displays verbose reporting about the job NightlyReport.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autotrack&nbsp;-J&nbsp;NightlyReport&nbsp;-v</p></pre>
+                </div>
+                <p>The output resembles the following:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>jane@taurus</p><p>11/21&nbsp;10:04:54</p><p>job&nbsp;definition&nbsp;change</p><p>::::::::::::::::::::::::::::::::::::::::::::::::</p><p>jane@taurus</p><p>11/21&nbsp;10:05:49</p><p>job&nbsp;definition&nbsp;change</p><p>command:&nbsp;date</p><p>::::::::::::::::::::::::::::::::::::::::::::::::</p><p>jane@taurus</p><p>11/21&nbsp;10:06:29</p><p>sendevent&nbsp;issued</p></pre>
+                </div>
+                <p><strong>Example: Display Level 2 Verbose Reporting About a Job</strong></p>
+                <p>This example displays a report that includes the entire job definition with changes indicated by asterisks.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autotrack&nbsp;-J&nbsp;NightlyReport&nbsp;-v</p></pre>
+                </div>
+                <p>The output resembles the following:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>jane@taurus&nbsp;</p><p>05/26/2010&nbsp;13:13:51</p><p>CAUAJM_I_50191&nbsp;Job&nbsp;definition&nbsp;change.</p><p>&nbsp;&nbsp;insert_job:&nbsp;NightlyReport</p><p>&nbsp;&nbsp;job_type:&nbsp;CMD</p><p>&nbsp;&nbsp;box_name:&nbsp;holdBox</p><p>&nbsp;&nbsp;alarm_if_fail:&nbsp;1</p><p>&nbsp;&nbsp;auto_delete:&nbsp;-1</p><p>&nbsp;&nbsp;auto_hold:&nbsp;0</p><p>&nbsp;&nbsp;box_terminator:&nbsp;0</p><p>&nbsp;&nbsp;command:&nbsp;rpt_util&nbsp;nightly</p><p>&nbsp;&nbsp;date_conditions:&nbsp;0</p><p>&nbsp;&nbsp;interactive:&nbsp;0</p><p>&nbsp;&nbsp;job_load:&nbsp;0</p><p>&nbsp;&nbsp;job_terminator:&nbsp;0</p><p>&nbsp;&nbsp;machine:&nbsp;taurus</p><p>&nbsp;&nbsp;max_exit_success:&nbsp;0</p><p>&nbsp;&nbsp;max_run_alarm:&nbsp;0</p><p>&nbsp;&nbsp;min_run_alarm:&nbsp;0</p><p>&nbsp;&nbsp;n_retrys:&nbsp;0</p><p>&nbsp;&nbsp;owner:&nbsp;"jane@taurus"</p><p>&nbsp;&nbsp;priority:&nbsp;0</p><p>&nbsp;&nbsp;service_desk:&nbsp;0</p><p>&nbsp;&nbsp;term_run_time:&nbsp;0</p><p>:::::::::::::::::::::::::::::::::::::::::::::::::::::</p><p>jane@taurus&nbsp;</p><p>05/26/2010&nbsp;13:14:04</p><p>CAUAJM_I_50152&nbsp;Sendevent&nbsp;issued.</p><p>&nbsp;</p><p>&nbsp;&nbsp;eoid:&nbsp;WCCz10000628</p><p>&nbsp;&nbsp;job_name:&nbsp;env</p><p>&nbsp;&nbsp;command:&nbsp;sendevent&nbsp;"-E"&nbsp;"STARTJOB"&nbsp;"-J"&nbsp;"NightlyReport"</p><p>:::::::::::::::::::::::::::::::::::::::::::::::::::::</p><p>jane@taurus</p><p>05/26/2010&nbsp;13:23:31</p><p>CAUAJM_I_50191&nbsp;Job&nbsp;definition&nbsp;change.</p><p>&nbsp;</p><p>&nbsp;&nbsp;insert_job:&nbsp;NightlyReport</p><p>&nbsp;&nbsp;job_type:&nbsp;CMD</p><p>*&nbsp;command:&nbsp;rpt_util&nbsp;NIGHTLY</p></pre>
+                </div>
+                <p><strong>Example: Report Changes After a Specific Date and Time</strong></p>
+                <p>This example requests a report of all the changes that occurred to the job NightlyReport after 1 a.m. on November 12, 2009.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autotrack&nbsp;-F&nbsp;"11/12/2009&nbsp;01:00"&nbsp;-J&nbsp;NightlyReport</p></pre>
+                </div>
+                <p><strong>Example: Report Changes Made by a Specific User</strong></p>
+                <p>This example requests a report of all changes made by the user Sue over the weekend of May 8 and 9, 2010.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autotrack&nbsp;-U&nbsp;sue&nbsp;-F&nbsp;"5/8/2010&nbsp;01:00"&nbsp;-T&nbsp;"5/9/2010&nbsp;23:59"</p></pre>
+                </div>
+                <p><strong>Example: Report autosys_secure Changes from a Specific Machine</strong></p>
+                <p>This example requests a report of all autosys_secure changes that occurred from the machine gemini.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autotrack&nbsp;-t&nbsp;A&nbsp;-m&nbsp;gemini</p></pre>
+                </div>
+                <p>The output from this command resembles the following:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>jane@gemini</p><p>11/05&nbsp;19:08:12</p><p>autosys_secure&nbsp;change</p><p>EDIT&nbsp;Super-User:&nbsp;jane</p><p>EXEC&nbsp;Super-User:&nbsp;jane</p><p>password:&nbsp;**************</p></pre>
+                </div>
+                <p><strong>Example: Report Job Deletions from the Database</strong></p>
+                <p>This example requests a report of all jobs that have been deleted from the database from 1.00 a.m. on May 8, 2010 to 8.00 p.m. on May 20, 2010.</p>
+                <p><strong>UNIX:</strong></p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autotrack&nbsp;-t&nbsp;J&nbsp;-F&nbsp;"5/8/2010&nbsp;01:00"&nbsp;-T&nbsp;"5/20/2010&nbsp;20:00"&nbsp;-v&nbsp;|&nbsp;grep&nbsp;delete_job</p></pre>
+                </div>
+                <p><strong>Windows:</strong></p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autotrack&nbsp;-t&nbsp;J&nbsp;-F&nbsp;"5/8/2010&nbsp;01:00"&nbsp;-T&nbsp;"5/20/2010&nbsp;20:00"&nbsp;-v&nbsp;|&nbsp;findstr&nbsp;delete_job</p></pre>
+                </div>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Note: </strong>You can also use the GetDeletedJobsReq SDK API to get the list of jobs that have been deleted from the database. For more information about how to view the documentation about GetDeletedJobsReq SDK API, see
+                    <a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/getting-started/ae-overview/ca-workload-automation-ae-components" class="conf-macro output-inline" data-hasbody="false">CA Workload Automation AE Components</a>.
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 class="article-name" tabindex="0">Prepare for Installation</h1>
+<div id="wiki-content">
+    <div>
+        <div class="col-xs-12 col-md-8 col-lg-8">
+            <h2 id="PrepareforInstallation-ReviewtheSystemRequirements">Review the System Requirements</h2>
+            <p>To ensure that your system meets the minimum requirements for installation, see&nbsp;<a
+                    data-macro-name="sp-plaintextbody-link"
+                    href="/ca-workload-automation-agent-for-remote-execution/11-3/en/reference/remote-systems-usage-information"
+                    class="conf-macro output-inline" data-hasbody="true">Review the system requirements</a>.</p>
+            <h2 id="PrepareforInstallation-DecideWhethertoCreateanAlias">Decide Whether to Create an Alias</h2>
+            <p>You install an agent plug-in into the agent installation directory to extend the core functionality of
+                the agent. By default, the agent plug-in operates under the same agent name that is assigned to the
+                agent. An alias lets you create a unique agent name for an agent plug-in, which is useful for
+                controlling agent security or for&nbsp;setting up clustered environments. The installation program
+                generates the alias by adding a suffix to the agent name.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> If you are installing the agent plug-in to work with CA Workload Automation DE,
+                an alias is required. Setting up an alias for use with other scheduling managers is optional.
+            </div>
+            <p>Suppose that you have installed an agent that is named AGT10 on a Windows computer. Users who have access
+                to that agent through their security permissions specify AGT10 as the agent name in their job
+                definitions. Now suppose that you install an agent plug-in into the installation directory for AGT10.
+                You can create an alias for the agent plug-in, for example, AGT10_PROXY. You can then restrict access to
+                that alias to only those users that run Remote Execution workload. Those specific users then must
+                specify AGT10_PROXY as the agent name in their job definitions.</p>
+            <p>Each agent plug-in has a default alias that you can enable during installation. For example, the agent
+                plug-in for CA WA Agent for Remote Execution has the default alias&nbsp;<em>agentname</em>_PROXY. You
+                can enable or change the default alias name after installation. To work, also configure the alias on the
+                scheduling manager.</p>
+        </div>
+
+    </div>
+    <div style="clear:both"></div>
+</div>
+</body>
+</html>

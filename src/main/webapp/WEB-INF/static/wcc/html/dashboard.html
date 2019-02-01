@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p></p>
+            <p>This article describes the widgets, links, and tabs available from the main CA WCC page, Dashboard.</p>
+            <p></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H1,H2,H3,H4,H5,H6,H7" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#CAWCCDashboard-DashboardWidgets" class="toc-link">Dashboard Widgets</a></span></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#CAWCCDashboard-DashboardLinks" class="toc-link">Dashboard Links</a></span></li><li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a href="#CAWCCDashboard-ApplicationTabs" class="toc-link">Application Tabs</a></span></li></ul></div>
+            <p></p>
+            <h2 class="heading2" id="CAWCCDashboard-DashboardWidgets">Dashboard Widgets</h2>
+            <p>The Dashboard contains one or more of the following widgets that may be useful to schedulers, console operators, and executives in your enterprise:</p>
+            <ul>
+                <li><strong>Alerts</strong><br>Displays all server-related alerts and alarms. From this widget, you can initiate an action on one or more alerts.</li>
+                <li><strong>Connection Status</strong><br>Displays the status of the connections to CA WCC databases and the remote services server.</li>
+                <li><strong>Servers</strong><br>Displays all the&nbsp;servers configured in CA WCC to which you have access. From this widget, you can monitor the status of the servers. You can also issue send event commands to CA Workload Automation AE servers.</li>
+                <li><strong>Views</strong><br>Displays information about all the views defined in CA WCC to which you have access. By default, all available views are displayed. When you double-click the link for a view name, the Monitoring page opens, displaying the jobs and alerts associated with the selected view.</li>
+                <li><p><strong>Jobs</strong><br>Displays information about all&nbsp;the jobs, contained in the specified view or server, to which you have access. You have the option of selecting a view-based or server-based list of jobs.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong> Multiple jobs widgets can be added to a single dashboard.</p>
+                    </div> </li>
+                <li><strong>Active Users</strong><br>Displays a list of the users and active user sessions that are currently connected to the CA WCC server.</li>
+                <li><strong>Machines</strong><br>Displays a list of the machines that are currently defined on the CA AE instance connected to CA WCC server.<br><br></li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> The availability of each widget is role-based and is determined by your administrator using the CA EEM WidgetAccess security policy. Clicking
+                <img alt="UWCC--DB--add widget--FAL--ico" data-macro-name="sp-image" class="img-responsive" src="/ca-workload-automation-ae/11-4-2/en/files/361355987/361355988/1/1473156964110/add_widget.png" data-hasbody="false"> on the Dashboard tab opens a menu from which you can select the widgets that you want to display on the Dashboard (from those available).
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li><span style="color: rgb(51,51,51);">The auto-refresh check box in the monitoring views widget remains persistent between user sessions.</span></li>
+                    <li>The visibility of the widget filter is persistent between user sessions.</li>
+                </ul>
+            </div>
+            <div class="bs-callout bs-callout-warning conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Important! </strong>By default, the Jobs and Active User widgets are not displayed on the Dashboard, so you must select Jobs or Active User from this menu to add it.
+            </div>
+            <h2 class="heading2" id="CAWCCDashboard-DashboardLinks">Dashboard Links</h2>
+            <p>The Dashboard contains the following links:</p>
+            <ul>
+                <li><p><strong>My Profile</strong><br>Opens the My Profile dialog, which lets you select the time zone and the format in which CA WCC displays date and time. In this dialog, you can also change your password.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> The selections made in the My Profile dialog affect only the date and time displayed in CA WCC. They do not affect the formatting requirements of fields in CA WCC where you enter date and time. When you enter date and time values in CA WCC, you should use the short format of the selected format locale. Only SAP jobs require a different date and time format.
+                    </div> </li>
+                <li><p><strong>EEM</strong><br>Opens the CA EEM application, accessible to authorized users only. Security administrators can use the EEM component to access and configure the CA EEM security subsystem. For more information, see the CA Embedded Entitlements Manager documentation.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> When the CA EEM login dialog opens, select the appropriate CA WCC application from the Application drop-down list and enter valid credentials for a security administrator.
+                    </div> </li>
+                <li><strong>Help</strong><br>Opens an application-specific help system, depending on which tab is selected.</li>
+                <li><strong>About</strong><br>Opens the About dialog, which displays CA WCC release and build information. The About dialog also provides access to environmental information about the system. The system information available is primarily of use for troubleshooting with CA Support.</li>
+            </ul>
+            <h2 class="heading2" id="CAWCCDashboard-ApplicationTabs">Application Tabs</h2>
+            <p>CA WCC applications are accessed using tabs in the user interface. When you move from one application to another, the displayed information is retained and redisplayed when you return.</p>
+            <p>In addition to the Dashboard, the following applications are available:</p>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Application</strong></th>
+                        <th class="confluenceTh"><strong>Description</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Configuration</td>
+                        <td class="confluenceTd">Lets you perform all system setup for CA WCC. For example, you can configure Quick Edit, Application Editor, and Monitoring run-time parameters, and connectivity to back end servers.</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Credentials</td>
+                        <td class="confluenceTd">Provides a summary of the servers to which the logged-in user has access. Credential also lets you add or delete credentials for a selected server, update the password for a selected user and server, and validate credentials for the active users against a back-end server.</td>
+                    </tr>
+                    <tr>
+                        <th class="confluenceTh">Enterprise Command Line</th>
+                        <th class="confluenceTh">Lets you run a command-line interface command such as jil or autorep on the selected CA Workload Automation AE server. Enterprise Command Line also lets you save commands, modify and run saved commands, and import and export CA Workload Automation AE jobs and calendars.</th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Forecast</td>
+                        <td class="confluenceTd">Lets you create, modify, and delete report definitions that specify the time period of the forecast window. Forecast report output includes jobs that are forecasted to start during the forecast window period. You can view forecast report output in table and Gantt chart formats.</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Monitoring</td>
+                        <td class="confluenceTd">Lets you add, edit, delete, export, and import views, monitor jobs and box jobs within the views, and view any associated alerts. You can view the jobs and box jobs by server (workload automation scheduling manager instances) or by user-defined views.</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Quick Edit</td>
+                        <td class="confluenceTd">Lets you manage all the properties of your CA Workload Automation AE workload objects, such as jobs and calendars, from a single page view.</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Quick View</td>
+                        <td class="confluenceTd">Provides detailed CA Workload Automation AE job information in a single page view. Quick View lets you view a job definition, access Quick Edit, view a job flow, send an event to one or more jobs, view a prior job run report, and view logs. Quick View can be used as an alternative to searching through a command line report for the job status information that you want.</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Reporting</td>
+                        <td class="confluenceTd">Lets you run predefined reports for multiple servers. These reports display server statistical information and job run information in a table and graphical view.</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Resources</td>
+                        <td class="confluenceTd">Lets you add, edit, or delete virtual resources, monitor resources, and view resource dependencies for a job or collection of jobs in a graphical view. You can specify box job or job predecessors that must complete successfully before a box job or job can run. Similarly, you can specify virtual and real resource requirements that must be met before a box job or job can run.</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">+</td>
+                        <td class="confluenceTd">Lets you add, edit, or delete external applications in additional tabs.</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>Application availability is role-based and is determined by the CA EEM ApplicationAccess security policy.</li>
+                    <li>External application availability is role-based and is determined by the CA EEM ExternalApplicationAccess security policy.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+
+
+
+
+
+</div>
+</body>
+</html>

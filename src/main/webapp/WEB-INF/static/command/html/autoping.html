@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The autoping command is a client component utility that verifies that the server and agent computers are properly configured and are communicating successfully. It also verifies that the agent is able to communicate with the application server. If you are running multiple application servers, autoping verifies that the agent is able to communicate with all the application servers. When requested, the command generates an alarm if it detects problems.</p>
+                <p>Because the client/server communication facilities are critical, autoping provides valuable information for troubleshooting. We recommend that you use autoping early in the troubleshooting process.</p>
+                <p>You can issue autoping from any machine where the autoping executable resides, and the target can be any machine that has a valid machine definition defined.</p>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autoping&nbsp;</p><p>&nbsp;&nbsp;&nbsp;{-m&nbsp;<em>machine&nbsp;</em>|&nbsp;-m&nbsp;ALL}&nbsp;</p><p>&nbsp; &nbsp;[-A]&nbsp;[-S][{-usr&nbsp;<em>username&nbsp;</em>{-pw|pwx}&nbsp;<em>password</em>|-saml&nbsp;<em>auth_artifact</em>}]&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-x]&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-m&nbsp;<em>machine</em>&nbsp;| -m ALL<br></strong>Specifies a valid machine to verify. The machine must be defined to the database and accessible over the network. Specify&nbsp;<strong>-m ALL</strong>&nbsp;to verify all machines.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Notes:</strong>&nbsp;</p>
+                            <ul>
+                                <li><span>If you specify&nbsp;</span><strong>-m localhost</strong><span>, the scheduler must have associated a valid machine definition to localhost on startup. If localhost is not associated with a valid machine, the autoping command fails.</span></li>
+                                <li>You cannot issue the autoping command to a machine of type 'v' (virtual machine).</li>
+                            </ul>
+                        </div> </li>
+                    <li><strong>-A</strong><br>(Optional) Sends an alarm when errors occur.</li>
+                </ul>
+                <ul>
+                    <li><p><strong>-S<br></strong>Tests the connectivity between the application server and the specified agent.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Notes:</strong></p>
+                            <ul>
+                                <li>If you issue&nbsp;<strong>autoping -M&nbsp;</strong><em>machine&nbsp;</em><strong>-S</strong>&nbsp;against the legacy agent (machine type r, n, L, or l), the command reverts to its r11 behavior and tests the database connectivity between the event server and the legacy agent.</li>
+                                <li><p>You cannot issue the autoping command with the -S option or cannot run jobs that contain globs or blobs as input or output, if you installed:</p>
+                                    <ul>
+                                        <li><p>The agent <span>using the CA Workload Automation Agent for UNIX, Linux, or Windows DVD </span>where the native CA Workload Automation AE client is not installed.</p></li>
+                                        <li><p>The 64-bit agent using earlier version than the CA Workload Automation Agent for UNIX, Linux, or Windows <span>11.4.00.0 (Build 1609)</span>.</p></li>
+                                    </ul></li>
+                            </ul>
+                        </div> </li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                            <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                            <p>(Optional) Specifies external security credentials as follows:</p>
+                            <ul>
+                                <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                                <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                    </div> </li>
+                                <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Notes: </strong></p>
+                                <ul>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                        <ul>
+                                            <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                            <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                            <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                        </ul></li>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                    <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                        <ul>
+                                            <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                            <li>CA Workload Automation AE is operating in native security mode.</li>
+                                        </ul></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-x<br></strong>(Optional) Returns the command version information to standard output.</p></li>
+                    <li><p><strong>-?<br></strong>(Optional) Displays help for the command.</p></li>
+                </ul>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <p><strong>Notes: </strong></p>
+                    <ul>
+                        <li>When you issue the autoping command to a machine of type 'a', the client (the machine from which you issued autoping) sends a request to the application server and waits for the application server to respond. The application server contacts the scheduler and notifies it to ping the agent and waits for the scheduler to respond. The application server then pings the agent and prepares a response to autoping. If successful, the autoping command writes the following message to standard output on the server:</li>
+                    </ul>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>AutoPinging&nbsp;Machine&nbsp;[machine]</p><p>AutoPing&nbsp;WAS&nbsp;SUCCESSFUL!</p></pre>
+                    </div>
+                    <ul>
+                        <li>When you issue the autoping command to a machine of type 'r', 'n', ’l’, or ‘L’ (legacy agent), the client (the machine from which you issued autoping) establishes a connection with the legacy agent and waits for the legacy agent to respond. If successful, the autoping command writes the following message to standard output on the server:</li>
+                    </ul>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>AutoPinging&nbsp;Machine&nbsp;[<em>machine</em>]</p><p>AutoPing&nbsp;WAS&nbsp;SUCCESSFUL!</p></pre>
+                    </div>
+                    <ul>
+                        <li>If there is a configuration problem, the autoping command writes a message indicating that the remote machine did not respond or that a more serious problem (such as a socket read error) exists. It also writes messages on behalf of the scheduler and the application server.</li>
+                    </ul>
+                </div>
+                <p><strong>Example: Verify Machine Configuration</strong></p>
+                <p>This example verifies that the machine named myhost is properly configured and that its agent can function properly.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autoping&nbsp;-m&nbsp;myhost</p></pre>
+                </div>
+                <p>If successful, the following displays:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>CAUAJM_I_50023&nbsp;AutoPinging&nbsp;Machine&nbsp;[myhost]</p><p>CAUAJM_I_50025&nbsp;AutoPing&nbsp;WAS&nbsp;SUCCESSFUL.</p></pre>
+                </div>
+                <p><strong>Example: Verify Agent and Application Server Connectivity</strong></p>
+                <p>This example verifies agent and application server connectivity for all CA Workload Automation Agents defined in the event server.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autoping&nbsp;-m&nbsp;ALL&nbsp;-S</p></pre>
+                </div>
+                <p>If successful, the following is displayed:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>CAUAJM_I_50023&nbsp;AutoPinging&nbsp;Machine&nbsp;[myhost1]</p><p>CAUAJM_I_50031&nbsp;Checking&nbsp;the&nbsp;Agent's&nbsp;connectivity&nbsp;to&nbsp;the&nbsp;Application&nbsp;Server.</p><p>CAUAJM_I_50025&nbsp;AutoPing&nbsp;WAS&nbsp;SUCCESSFUL.</p><p>&nbsp;</p><p>CAUAJM_I_50023&nbsp;AutoPinging&nbsp;Machine&nbsp;[myhost2]</p><p>CAUAJM_I_50031&nbsp;Checking&nbsp;the&nbsp;Agent's&nbsp;connectivity&nbsp;to&nbsp;the&nbsp;Application&nbsp;Server.</p><p>CAUAJM_I_50025&nbsp;AutoPing&nbsp;WAS&nbsp;SUCCESSFUL.</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="col-xs-12 col-md-8 col-lg-8">
+            <p>The CA WA Agent for SAP installs into the CA WA Agent for UNIX, Linux, or Windows installation directory.</p>
+            <div class="bs-callout bs-callout-info conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <h4>Important</h4> Before you can install CA Workload Automation Agent for SAP, CA Workload Automation System Agent must be installed. See
+                <a data-macro-name="sp-plaintextbody-link" href="/display/SYSAG/.Install+CA+Workload+Automation+Agent+v11.3" class="conf-macro output-inline" data-hasbody="true">Install CA Workload Automation System Agent.</a>
+            </div>
+            <p>To install and configure the agent plug-in, follow these steps:</p>
+            <ol>
+                <li>If you have not already installed CA Workload Automation System Agent, install it. For more information, see&nbsp;<a data-macro-name="sp-plaintextbody-link" href="/display/SYSAG/.Install+CA+Workload+Automation+Agent+v11.3" class="conf-macro output-inline" data-hasbody="true">Install CA Workload Automation System Agent</a>.</li>
+                <li><a data-macro-name="sp-plaintextbody-link" href="#InstallAgentforSAP-InstallCAWAAgentforSAP" class="conf-macro output-inline" data-hasbody="true">Install the agent plug-in</a>.</li>
+                <li><a data-macro-name="sp-plaintextbody-link" href="#InstallAgentforSAP-InstalltheSAPJavaConnector(SAPJCo)" class="conf-macro output-inline" data-hasbody="true">Install the SAP Java Connector (SAP JCo)</a>.</li>
+                <li><a data-macro-name="sp-plaintextbody-link" href="#InstallAgentforSAP-ModifythecybAgentfile(forAIXandSolaris)" class="conf-macro output-inline" data-hasbody="true">Modify the cybAgent file (AIX and Solaris systems only)</a>.</li>
+            </ol>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> After installing the agent plug-in, configure the scheduling manager to work with the agent plug-in. For more information, see the documentation for your scheduling manager.</p>
+            </div>
+            <h2 id="InstallAgentforSAP-InstallCAWAAgentforSAP">Install CA WA Agent for SAP</h2>
+            <p>You install CA WA Agent for SAP using an interactive program that prompts you for the required information.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Copy the sap.pak file into the directory where the agent is installed. You can copy this file from the product DVD or you can download a zip file that contains the file from the CA Support Online website (<a rel="nofollow" class="external-link" href="http://www.ca.com/support">http://ca.com/support</a>).</li>
+                <li>Change to the agent installation directory. For example, type the following command:
+                    <ul>
+                        <li><p>On UNIX:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>cd opt/CA/WA_Agent_R11_3
+</code></pre>
+                            </div> </li>
+                        <li><p>On Windows:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>cd C:\Program Files\CA\WA Agent R11.3
+</code></pre>
+                            </div> </li>
+                    </ul></li>
+                <li>Stop the agent using one of the following commands:
+                    <ul>
+                        <li><p>On UNIX:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>./cybAgent -s
+</code></pre>
+                            </div> </li>
+                        <li><p>On Windows:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>cybAgent -s
+</code></pre>
+                            </div> </li>
+                    </ul></li>
+                <li>Start the installation program using one of the following commands:<br>
+                    <ul>
+                        <li><p>On UNIX:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>./PluginInstaller sap.pak .
+</code></pre>
+                            </div> <p>On Windows:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+                                <pre class="code-block prettyprint"><code>PluginInstaller sap.pak .</code></pre>
+                            </div> </li>
+                    </ul></li>
+                <li>Enter the&nbsp;<a data-macro-name="sp-plaintextbody-link" href="#InstallAgentforSAP-CAWAAgentforSAPInstallationOptions" class="conf-macro output-inline" data-hasbody="true">information the installation program prompts you for</a>.<br>The installation program displays a message and closes automatically upon a successful installation.</li>
+                <li>Start the agent using one of the following commands:
+                    <ul>
+                        <li><p>On UNIX:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>./cybAgent &amp;
+</code></pre>
+                            </div> </li>
+                        <li><p>On Windows:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>cybAgent -a
+</code></pre>
+                            </div> </li>
+                    </ul></li>
+            </ol>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> The installation program backs up all modified and replaced files. The backup files are compressed into a file that is named backup_timestamp.zip, located in the backups subdirectory of the agent installation directory. You can use Winzip or other similar utilities to open the backup file. A backup copy of the agentparm.txt file is stored in the zip file.
+            </div>
+            <h2 id="InstallAgentforSAP-InstalltheSAPJavaConnector(SAPJCo)">Install the SAP Java Connector (SAP JCo)</h2>
+            <p>For the agent to communicate with an SAP system, you must install the SAP Java Connector (SAP JCo) package.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>The required minimum version is SAP JCo 3.0.x</li>
+                    <li>Whether you use the 32-bit or 64-bit JCo version depends on the JVM provided with the agent.</li>
+                    <li>For Windows systems, you require the msvsr71.dll and msvcp71.dll files. You must add these files to the agent installation directory.</li>
+                </ul>
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Log in to SAP Service Marketplace.</li>
+                <li>Navigate to SAP Java Connector, Tools &amp; Services.</li>
+                <li>Download the latest version of SAP JCo for your operating system.</li>
+                <li>Stop the agent if it is running</li>
+                <li>Remove any previous version of the JCo library from the agent installation directory.&nbsp;<br>For example, to remove SAP JCo 2.1.10, complete these steps:
+                    <ol>
+                        <li>Delete the following files and links from the agent installation directory:<br>librfccm* and libsapjcorfc.* &nbsp;(UNIX)&nbsp;<br>librfc32.dll and sapjcorfc.dll (Windows)</li>
+                        <li>Delete the sapjco.jar file from the jars/ext subdirectory of the agent installation directory.</li>
+                    </ol></li>
+                <li>Copy the&nbsp;sapjco3.jar file to the jars/ext subdirectory of the agent installation directory.</li>
+                <li><p>Extract the following library file from the sapjco3.jar file, and copy it to the agent installation directory:<br>• On UNIX, extract libsapjco3.* (.so or .sl depending on the platform)<br>• On Windows, extract sapjco3.dll</p><p><strong>Example<br></strong></p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code">jar xf sapjco3.jar <a rel="nofollow" class="external-link" href="http://libsapjco3.so">libsapjco3.so<br></a>cp <a rel="nofollow" class="external-link" href="http://libsapjco3.so">libsapjco3.so</a> &lt;<em>agent installation directory</em>&gt;</pre>
+                    </div></li>
+                <li>Start the agent.&nbsp;<br>The SAP Java Connector is installed.</li>
+            </ol>
+            <h2 id="InstallAgentforSAP-ModifythecybAgentfile(forAIXandSolaris)">Modify the cybAgent file (for AIX and Solaris)</h2>
+            <p>If you are installing the agent plug-in on an AIX or Solaris system, modify the cybAgent file after completing the installation. This step is necessary for AIX installations to increase the heap space for downloading large files. This step is necessary for Solaris installations to add environment variables that SAP JCo 3.0.x requires.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Change to the agent installation directory.</li>
+                <li>Stop the agent.</li>
+                <li>Open the cybAgent file for editing.</li>
+                <li>Add the following command for your system after the first line in the file:
+                    <ul>
+                        <li><p>On AIX, add the following two lines:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>LDR_CNTRL=MAXDATA=0x80000000
+export LDR_CNTRL
+</code></pre>
+                            </div> <p>The script should look similar to the following example:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>#!/bin/sh
+LDR_CNTRL=MAXDATA=0x80000000
+export LDR_CNTRL
+LIBPATH=.:./jre/bin:./jre/bin/classic
+export LIBPATH
+exec `pwd`/cybAgent.bin "$@"
+</code></pre>
+                            </div> </li>
+                        <li><p>On Solaris, add the following two lines:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>LD_PRELOAD_32=/usr/lib/libCrun.so.1
+export LD_PRELOAD_32
+</code></pre>
+                            </div> </li>
+                    </ul></li>
+                <li>Save and close the cybAgent file.</li>
+                <li>Start the agent.<br>The cybAgent file is modified for your system.</li>
+            </ol>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-4">
+            <div class="bs-callout bs-callout-info conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <h4>Related Topics</h4>
+                <p><a data-macro-name="sp-nobody-link" href="/ca-workload-automation-agent-for-sap/11-3/en/installing/prepare-for-installation" class="conf-macro output-inline" data-hasbody="false">Prepare for Installation</a></p>
+                <p><a data-macro-name="sp-nobody-link" href="/ca-workload-automation-agent-for-sap/11-3/en/configuring" class="conf-macro output-inline" data-hasbody="false">Configuring</a></p>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p>This article contains recommended procedures to configure the SAP system to work with the agent plug-in:</p>
+            <p></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H2" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#ConfiguretheSAPSystem-InstalltheABAPsfortheAgentPlug-in" class="toc-link">Install the ABAPs for the Agent Plug-in</a></span></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#ConfiguretheSAPSystem-ABAPsfortheAgentPlug-in" class="toc-link">ABAPs for the Agent Plug-in</a></span></li><li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a href="#ConfiguretheSAPSystem-InitializeXBP2.0Functionality" class="toc-link">Initialize XBP 2.0 Functionality</a></span></li><li><span class="toc-item-body" data-outline="4"><span class="toc-outline">4</span><a href="#ConfiguretheSAPSystem-SwitchtheSAPOperationalMode" class="toc-link">Switch the SAP Operational Mode</a></span></li></ul></div>
+            <p></p>
+            <h2 id="ConfiguretheSAPSystem-InstalltheABAPsfortheAgentPlug-in">Install the ABAPs for the Agent Plug-in</h2>
+            <p>To use many features of the agent plug-in, we recommend that you install the ABAPs for the agent plug-in.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> You require an SAP R/3(R3) or Business Warehouse (BW) system to use the agent plug-in ABAPs.
+            </div>
+            <p>To install the ABAPs for the agent plug-in, complete these steps:</p>
+            <ol>
+                <li><a data-macro-name="sp-plaintextbody-link" href="#ConfiguretheSAPSystem-CollectingInformationRequiredtoInstalltheABAPs" class="conf-macro output-inline" data-hasbody="true">Collect information that is required to install the ABAPs</a>.</li>
+                <li><a data-macro-name="sp-plaintextbody-link" href="#ConfiguretheSAPSystem-InstalltheABAPsonanSAPSystem" class="conf-macro output-inline" data-hasbody="true">Install the ABAPs on the SAP system</a>.</li>
+            </ol>
+            <h3 id="ConfiguretheSAPSystem-CollectInformationRequiredtoInstalltheABAPs">Collect Information Required to Install the ABAPs</h3>
+            <p>To install the ABAPs, you require the following information:</p>
+            <ul>
+                <li>The path to the SAP system</li>
+                <li>The system ID of the SAP system</li>
+            </ul>
+            <h3 id="ConfiguretheSAPSystem-InstalltheABAPsonanSAPSystem">Install the ABAPs on an SAP System</h3>
+            <p>This procedure describes how to install the ABAPs on an SAP system.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> If you do not have administrator access to the SAP system, ask your SAP administrator to help install the ABAPs.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Copy the following zip files, which are located in the agent installation directory, onto the computer where your SAP system resides:
+                    <ul>
+                        <li>BW_ABAPs.zip</li>
+                        <li>R3_ABAPs_NonUnicode.zip</li>
+                        <li>R3_ABAPs_Unicode.zip</li>
+                    </ul></li>
+                <li>Extract the files from each zip file.</li>
+                <li><p>Copy the extracted files for your operating system to the subdirectories named cofiles and data where the SAP system is installed.<br>For example, using the default SAP trans directories, copy the files for your operating system as follows:</p>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th class="confluenceTh"><strong>Operating System</strong></th>
+                                <th class="confluenceTh"><strong>Files to Copy</strong></th>
+                                <th class="confluenceTh"><strong>SAP Directories</strong></th>
+                            </tr>
+                            <tr>
+                                <td class="confluenceTd">UNIX</td>
+                                <td class="confluenceTd">Any files prefixed with K</td>
+                                <td class="confluenceTd">/usr/sap/trans/cofiles</td>
+                            </tr>
+                            <tr>
+                                <td class="confluenceTd">UNIX</td>
+                                <td class="confluenceTd">Any files prefixed with R</td>
+                                <td class="confluenceTd">/usr/sap/trans/data</td>
+                            </tr>
+                            <tr>
+                                <td class="confluenceTd">Windows (SAP on drive D)</td>
+                                <td class="confluenceTd">Any files prefixed with K</td>
+                                <td class="confluenceTd">D:\usr\sap\trans\cofiles</td>
+                            </tr>
+                            <tr>
+                                <td class="confluenceTd">Windows (SAP on drive D)</td>
+                                <td class="confluenceTd">Any files prefixed with R</td>
+                                <td class="confluenceTd">D:\usr\sap\trans\data</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div></li>
+                <li><p>Install the ABAPs using the following commands, substituting the appropriate path to the SAP trans directory:</p>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th class="confluenceTh"><strong>Type</strong></th>
+                                <th class="confluenceTh"><strong>OS</strong></th>
+                                <th class="confluenceTh"><strong>Syntax</strong></th>
+                            </tr>
+                            <tr>
+                                <td class="confluenceTd">BW</td>
+                                <td class="confluenceTd">UNIX</td>
+                                <td class="confluenceTd">cybsapinstBW.ksh <em>SAP_ID</em> /usr/sap/trans</td>
+                            </tr>
+                            <tr>
+                                <td class="confluenceTd">BW</td>
+                                <td class="confluenceTd">Windows</td>
+                                <td class="confluenceTd">cybsapinstBW <em>SAP_ID</em> “D:\usr\sap\trans”</td>
+                            </tr>
+                            <tr>
+                                <td class="confluenceTd">R3</td>
+                                <td class="confluenceTd">UNIX</td>
+                                <td class="confluenceTd">cybsapinstR3.ksh <em>SAP_ID</em> /usr/sap/trans</td>
+                            </tr>
+                            <tr>
+                                <td class="confluenceTd">R3</td>
+                                <td class="confluenceTd">Windows</td>
+                                <td class="confluenceTd">cybsapinstR3 <em>SAP_ID</em> “D:\usr\sap\trans”</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div></li>
+            </ol>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>On Windows, enclose the path name in double quotation marks if the path name has spaces.</li>
+                    <li>If the SAP system was down when you installed the ABAPs, you can rerun the procedure.</li>
+                </ul>
+            </div>
+            <h2 id="ConfiguretheSAPSystem-ABAPsfortheAgentPlug-in">ABAPs for the Agent Plug-in</h2>
+            <p>The following ABAPs are provided with the agent plug-in:</p>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>ABAP Name</strong></th>
+                        <th class="confluenceTh"><strong>Purpose</strong></th>
+                        <th class="confluenceTh"><strong>Type</strong></th>
+                        <th class="confluenceTh"><strong>Applies to</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Z_CYB_OLTPSOURCE_GET</td>
+                        <td class="confluenceTd">Get Info Package Details.</td>
+                        <td class="confluenceTd">RFC</td>
+                        <td class="confluenceTd">BW</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Z_CYB_DUMP_OUTPUT</td>
+                        <td class="confluenceTd">Get SAP Job dump output information.</td>
+                        <td class="confluenceTd">RFC</td>
+                        <td class="confluenceTd">R3</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Z_CYB_TRIGGER_EVENT</td>
+                        <td class="confluenceTd">Trigger SAP Event (XBP 1.0 only).</td>
+                        <td class="confluenceTd">RFC</td>
+                        <td class="confluenceTd">R3</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Z_CYB_BDC_SESSION</td>
+                        <td class="confluenceTd">Handle BDC sessions.</td>
+                        <td class="confluenceTd">RFC</td>
+                        <td class="confluenceTd">R3</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Z_CYB_TABLE_UPDATE</td>
+                        <td class="confluenceTd">Provide UPDATE and INSERT SQL queries. Used to define SAP Event handler (any XBP level) and set up SAP Job class (XBP 1.0 only).</td>
+                        <td class="confluenceTd">RFC</td>
+                        <td class="confluenceTd">R3</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Z_CYB_GET_EVENT_LIST</td>
+                        <td class="confluenceTd">Get list of SAP Events.</td>
+                        <td class="confluenceTd">RFC</td>
+                        <td class="confluenceTd">R3</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Z_CYB_SWITCH_OPMODE</td>
+                        <td class="confluenceTd">Switch operational mode. This ABAP is not mandatory for the agent plug-in functionality.</td>
+                        <td class="confluenceTd">ABAP</td>
+                        <td class="confluenceTd">R3</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>BW refers to a Business Warehouse system and R3 refers to a basic SAP system.</li>
+                    <li>The BW ABAPs are only needed if you have a Business Warehouse system.</li>
+                    <li>Your SAP administrator can remove the ABAPs from within SAP.</li>
+                </ul>
+            </div>
+            <h2 id="ConfiguretheSAPSystem-InitializeXBP2.0Functionality">Initialize XBP 2.0 Functionality</h2>
+            <p>To use new background processing features introduced in XBP 2.0, turn on the features using SAPGUI.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p class="Note"><strong>Note:</strong> The agent plug-in currently does not support the new features of XBP 3.0 such as modifying variants.</p>
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li><p>Go to transaction SE38 using SAPGUI and run ABAP program INITXBP2.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong> If you cannot find the INTXBP2 ABAP, then XBP 2.0 is probably not installed on your system.</p>
+                    </div> <p><br>A dialog showing Interception and Parent-Child Functions opens.</p></li>
+                <li>Select Switch On to enable the appropriate options:
+                    <ul>
+                        <li>Interception (Job interception support)</li>
+                        <li>Parent-Child Functions (Parent-Child relationship support)</li>
+                    </ul></li>
+            </ol>
+            <h2 id="ConfiguretheSAPSystem-SwitchtheSAPOperationalMode">Switch the SAP Operational Mode</h2>
+            <p>Switching the SAP operational mode is useful if you want to assign a different operational mode for different work shifts. For each shift, you can alternate resource availability to suit the needs of that shift, for example, batch at night and interactive during the day.</p>
+            <p>To switch the SAP operational mode, create and define a variant for the CA ABAP Z_CYB_SWITCH_OPMODE ABAP using the ABAP Editor (SE38). Once the variant is available, you can define an SAP R/3 job with the appropriate variant and can schedule it when needed.</p>
+            <p>The following screenshot shows the ABAP Editor screen (SE38):</p>
+            <p><img alt="ABAP Editor screen" data-macro-name="sp-image" class="img-responsive" src="/WEB-INF/static/install/image/sap_plugin_switch.png" data-hasbody="false"></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

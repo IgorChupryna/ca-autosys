@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 class="article-name" tabindex="0">User Access Permissions</h1>
+<div id="wiki-content">
+
+
+    <div>
+        <div class="">
+            <p>CA EEM independently manages the access to an application. You can assign a user with different
+                permissions to access different applications. To define user permissions, create a scoping policy for
+                each application with required permissions. The following table specifies the available user permissions
+                to manage CA EEM:</p>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Task</strong></th>
+                        <th class="confluenceTh"><strong>Scoping Policy Resource</strong></th>
+                        <th class="confluenceTh"><strong>Scoping Policy Action</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Attach to an application</td>
+                        <td class="confluenceTd">ApplicationInstance</td>
+                        <td class="confluenceTd">read</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Add, Modify, or Delete an Application</td>
+                        <td class="confluenceTd">ApplicationInstance</td>
+                        <td class="confluenceTd">read, write</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">View AppObjects</td>
+                        <td class="confluenceTd">AppObject</td>
+                        <td class="confluenceTd">read</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Add, Modify, or Delete an AppObject</td>
+                        <td class="confluenceTd">AppObject</td>
+                        <td class="confluenceTd">read, write</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">View an Application User</td>
+                        <td class="confluenceTd">User, iPoz</td>
+                        <td class="confluenceTd">read</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Add, Modify, or Delete an Application User</td>
+                        <td class="confluenceTd">User<br>iPoz</td>
+                        <td class="confluenceTd">read, write<br>read</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">View a Global User</td>
+                        <td class="confluenceTd">GlobalUser, iPoz</td>
+                        <td class="confluenceTd">read</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Add, Modify, or Delete Global User</td>
+                        <td class="confluenceTd">GlobalUser<br>iPoz</td>
+                        <td class="confluenceTd">read, write<br>read</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">View an Application Group</td>
+                        <td class="confluenceTd">UserGroup, iPoz</td>
+                        <td class="confluenceTd">read</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Add, Modify, or Delete an Application Group</td>
+                        <td class="confluenceTd">UserGroup<br>iPoz</td>
+                        <td class="confluenceTd">read, write<br>read</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">View a Global Group</td>
+                        <td class="confluenceTd">GlobalUserGroup, iPoz</td>
+                        <td class="confluenceTd">read</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Add, Modify, or Delete a Global Group</td>
+                        <td class="confluenceTd">GlobalUserGroup<br>iPoz</td>
+                        <td class="confluenceTd">read, write<br>read</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">View a Calendar</td>
+                        <td class="confluenceTd">Calendar</td>
+                        <td class="confluenceTd">read</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Add, Modify, or Delete a Calendar</td>
+                        <td class="confluenceTd">Calendar</td>
+                        <td class="confluenceTd">read, write</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">View a Policy</td>
+                        <td class="confluenceTd">Policy</td>
+                        <td class="confluenceTd">read</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Add, Modify, or Delete a Policy</td>
+                        <td class="confluenceTd">Policy</td>
+                        <td class="confluenceTd">read, write</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">View an Application Folder</td>
+                        <td class="confluenceTd">Folder</td>
+                        <td class="confluenceTd">read</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Add, Modify, or Delete an Application Folder</td>
+                        <td class="confluenceTd">Folder</td>
+                        <td class="confluenceTd">read, write</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">View a Global Folder</td>
+                        <td class="confluenceTd">GlobalFolder</td>
+                        <td class="confluenceTd">read</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Add, Modify, or Delete a Global Folder</td>
+                        <td class="confluenceTd">GlobalFolder</td>
+                        <td class="confluenceTd">read, write</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">View a Server Configuration</td>
+                        <td class="confluenceTd">iPoz</td>
+                        <td class="confluenceTd">read</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Add, Modify, or Delete a Server Configuration</td>
+                        <td class="confluenceTd">iPoz</td>
+                        <td class="confluenceTd">read, write</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Perform Certificate Validation</td>
+                        <td class="confluenceTd">CertificateValidation</td>
+                        <td class="confluenceTd">read</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note</strong>: By default, EiamAdmin has all the permissions to manage the CA EEM server.
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+<h1 class="article-name" tabindex="0">Certificate Validation</h1>
+<div>
+
+
+    <div>
+        <div class="">
+            <p>After the embedding application has verified that the caller has the private key corresponding to the
+                public key of the certificate, you can use CA EEM to perform the following steps:</p>
+            <ol>
+                <li>Validate a certificate against trusted Certification Authorities (CAs)</li>
+                <li>Validate the revocation status of the certificate using the following revocation mechanisms:
+                    <ul>
+                        <li>Certificate Revocation List (CRL)</li>
+                        <li>CRL Distribution Point (CRLDP)</li>
+                        <li>Online Certificate Status Protocol (OCSP)</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+<h1 class="article-name" tabindex="0">How to Validate a Certificate</h1>
+
+<div>
+
+
+    <div>
+        <div class="">
+            <p>You can validate a certificate by performing the following steps:</p>
+            <ol>
+                <li>Log on to CA EEM.</li>
+                <li>Click Configure, EEM Server, Certificate Validation.</li>
+                <li>The Certification Validation pane appears on the right pane.</li>
+                <li>Select Enable Certificate Validation.<br>The certificate validation configuration panes appear.</li>
+                <li>Configure CA EEM with a trusted CA.</li>
+                <li>Select a revocation mechanism.</li>
+                <li>Select a user mapping attribute you want to extract from the certificate.</li>
+                <li>(Optional) Map the keystore with an external LDAP directory.</li>
+                <li>Invoke the ValidateUserCertificate API. For information about invoking the ValidateUserCertificate
+                    API, see the Programming Guide.
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+
+<h1 class="article-name" tabindex="0">Create an Offline Backup of the Data Store</h1>
+
+<div>
+
+
+    <div>
+        <div class="">
+            <p>An offline backup requires that you stop and start the DSA services every time you take a backup.</p>
+            <p><strong>To create an offline backup</strong></p>
+            <ol>
+                <li>Login as the user dsa (on UNIX) or the administrator (on Windows).</li>
+                <li>Stop the local DSA services using the following commands:<br>
+                    <ul>
+                        <li><strong>Windows</strong></li>
+                    </ul>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-plaintextbody-block">
+     <pre class="code-block prettyprint"><code>dxserver stop dsaname
+su - dsa -c "dxserver stop dsaname"
+</code></pre>
+                    </div>
+                    <ul>
+                        <li><strong>Linux and UNIX</strong></li>
+                    </ul>
+                </li>
+                <li>Run the following command from the command line:<br>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-plaintextbody-block">
+     <pre class="code-block prettyprint"><code>dxdumpdb -f filename  dsaname
+</code></pre>
+                    </div>
+                    <ul>
+                        <li><strong>-f <em>filename</em></strong><br>Specifies the file path and name of the LDIF file.
+                        </li>
+                    </ul>
+                </li>
+                <li>Start the local DSA services using the following commands:<br>
+                    <ul>
+                        <li><strong>Windows</strong></li>
+                    </ul>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-plaintextbody-block">
+     <pre class="code-block prettyprint"><code>dxserver start dsaname
+su - dsa -c "dxserver start dsaname"
+</code></pre>
+                    </div>
+                    <ul>
+                        <li><strong>Linux and UNIX</strong></li>
+                    </ul>
+                    The LDIF file is created at the specified path and the offline backup is successful.
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+
+</body>
+</html>

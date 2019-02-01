@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 class="article-name" tabindex="0">Configure CA Workload Automation AE to Run in Dual Event Server Mode</h1>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p class="heading3"><span style="color: rgb(51,51,51);">By default, CA Workload Automation AE is configured to run in single event server mode during installation. You can configure CA Workload Automation AE to run in dual event server mode during installation or later by using the Event Server - CA Workload Automation AE Administrator window of the Administrator utility (on Windows) or by modifying the parameters in the configuration file (on UNIX).</span></p>
+            <p>If you configured CA Workload Automation AE to run in dual event server mode and one event server goes down, CA Workload Automation AE automatically rolls over to the second event server and continues running in single event server mode. After you recover the event server that failed, you can reconfigure CA Workload Automation AE to run in dual event server mode.</p>
+            <div class="bs-callout bs-callout-warning conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Important!</strong> Do not try to run CA Workload Automation AE in dual event server mode if it was previously running in single event server mode or if it rolled over to single event server mode. You must synchronize the two event servers before configuring CA Workload Automation AE to run in dual event server mode.
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes: </strong></p>
+                <ul>
+                    <li>On Windows, the A Database Rollover Has Occurred check box indicates whether a database rollover has occurred from dual event server mode to single event server mode. If there has been a rollover and a switch to single event server mode, the A Database Rollover Has Occurred check box is selected and the Status field displays which event server is down.</li>
+                    <li>For more information about how to install and configure dual event servers, see&nbsp;<a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/administrating/ae-configuration/windows-improve-workload-performance-highly-available-environments" class="conf-macro output-inline" data-hasbody="false">(Windows) Improve Workload Performance: Highly-Available Environments</a> or <a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/administrating/ae-configuration/unix-improve-workload-performance-highly-available-environments" class="conf-macro output-inline" data-hasbody="false">(UNIX) Improve Workload Performance: Highly-Available Environments</a>.&nbsp;</li>
+                </ul>
+            </div>
+            <p><strong>(Windows) Follow these steps:</strong></p>
+            <ol>
+                <li>Click Start, Programs, CA, Workload Automation AE, Administrator.<br>The Instance - CA Workload Automation AE Administrator window opens.</li>
+                <li>Select an instance from the Instance drop-down list in the Settings pane.</li>
+                <li>Click the Event Server icon on the toolbar.<br>The Event Server - CA Workload Automation AE Administrator window appears.</li>
+                <li><p>Verify that the A Database Rollover Has Occurred check box is disabled.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> By default, the A Database Rollover Has Occurred check box is disabled.
+                    </div> </li>
+                <li>Stop the scheduler and the application server services as follows:
+                    <ol>
+                        <li>Click the Services icon on the toolbar.<br>The Services - CA Workload Automation AE Administrator window appears, displaying a list of services installed on the selected instance.</li>
+                        <li>Right-click the scheduler and select Stop. Repeat this action for the application server.<br>The scheduler and application server stop.</li>
+                    </ol></li>
+                <li><p>Enter the following command at the instance command prompt:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>cd&nbsp;%AUTOSYS%\dbobj\<em>dbtype</em></p></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>dbtype</em></strong><br>Specifies the type of database in use: MSQ (Microsoft SQL Server), ORA (Oracle), or SYB (Sybase).</li>
+                    </ul>The database type is identified.</li>
+                <li>Run the bulk copy script (autobcp<em>DB</em>) based on your database vendor to&nbsp;synchronize the event servers.&nbsp;</li>
+                <li>Enable the second event server as follows:
+                    <ol>
+                        <li><p>Click the Event Server icon on the toolbar.<br>The Event Server - CA Workload Automation AE Administrator window appears.</p></li>
+                        <li><p>Click the Event Server 1 or Event Server 2 tab based on the event server you want to enable and click Enable.<br>The second event server is enabled. The status of the second event server is displayed as UP and the A Database Rollover Has Occurred check box is cleared and disabled.</p></li>
+                    </ol></li>
+                <li><p>Start the scheduler and the application server services as follows:</p>
+                    <ol>
+                        <li><p>Click the Services icon on the toolbar.<br>The Services - CA Workload Automation AE Administrator window appears, displaying a list of services installed on the selected instance.</p></li>
+                        <li><p>Right-click the scheduler and select Start. Repeat this action for the application server.<br>The scheduler and application server start.</p></li>
+                    </ol></li>
+            </ol>
+            <p>CA Workload Automation AE is configured to run in dual event server mode.</p>
+            <p><strong style="line-height: 1.42857;">(UNIX) Follow these steps:</strong></p>
+            <ol>
+                <li>Run the shell that is sourced to use CA Workload Automation AE.</li>
+                <li><p>Enter the following commands at the operating system prompt:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>unisrvcntr&nbsp;stop&nbsp;waae_sched.$AUTOSERV</p><p>unisrvcntr&nbsp;stop&nbsp;waae_server.$AUTOSERV</p></pre>
+                    </div><p>The scheduler and the application server stop.</p></li>
+                <li><p>Open the configuration file and add the following parameter after the EventServer_1 parameter that corresponds to the first event server:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>EventServer_2=SYBASE_SVR:<em>SYBASE_DB,DBPORT,DBHOST&nbsp;</em>|&nbsp;<em>ORACLE_SVR,DBPORT,DBHOST</em>&nbsp;</p></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>SYBASE_DB,DBPORT,DBHOST</em></strong><br>Identifies the Sybase database for the second event server.</li>
+                        <li><strong><em>ORACLE_SVR,DBPORT,DBHOST&nbsp;</em></strong><br>Identifies the Oracle database for the second event server.</li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note: </strong>When the scheduler automatically rolls over to single event server mode, it creates a backup of the configuration file and modifies the existing file by commenting out the EventServer_1 or EventServer_2 parameter based on the event server that experienced the unrecoverable error. Uncomment the parameter to recover the event server. Alternatively, you can delete the modified configuration file and rename the backed up copy to config.
+                        <em>INSTANCENAME</em>.
+                    </div> </li>
+                <li><p>Specify the database reconnect behavior for the second event server by modifying the following parameter in the configuration file:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>DBEventReconnect=value,&nbsp;value2</p></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>value</em></strong><br>Identifies the database reconnect behavior for the first event server.<br><strong>Limits:</strong>&nbsp;0-99</li>
+                        <li><strong><em>value2</em></strong><br>Identifies the database reconnect behavior for the second event server.<br><strong>Limits:</strong>&nbsp;0-99</li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> During typical installation, CA Workload Automation AE sets the reconnect value for the single event server to 50 by default. During a custom installation in which you enable dual event server mode, CA Workload Automation AE sets the reconnect value for both event servers to 50.5 by default. Ensure that you add a reconnect value for the second event server when you configure CA Workload Automation AE to run in dual event server mode after running it in single event server mode. Optionally, you can modify the default reconnect value for the first event server.
+                    </div> </li>
+                <li>Save and exit the configuration file.<br>The database information and reconnect behavior for the second event server is defined. The database configuration changes from single event server mode to dual event server mode.</li>
+                <li>Run the CA Workload Automation AE bulk copy script (autobcpORA or autobcpSYB) based on your database type.<br>The event servers are synchronized.</li>
+                <li><p>Enter the following commands at the operating system prompt:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>unisrvcntr&nbsp;start&nbsp;waae_sched.$AUTOSERV</p><p>unisrvcntr&nbsp;start&nbsp;waae_server.$AUTOSERV</p></pre>
+                    </div><p>The scheduler and the application server start. CA Workload Automation AE is configured to run in dual event server mode.</p></li>
+            </ol>
+            <h2 id="ConfigureCAWorkloadAutomationAEtoRuninDualEventServerMode-autobcpDBScript--SynchronizeDatabases">autobcpDB Script -- Synchronize Databases</h2>
+            <p>The autobcp<em>DB</em>&nbsp;script synchronizes data servers on different computers to prepare them for dual event server mode. This script uses the information on the source data server to create two identical servers.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>The autobcp<em>DB</em>&nbsp;script deletes all of the data in the target database and replaces it with the data in the source database. If you want to save the data in the target database, archive it before you run the autobcp<em>DB</em>&nbsp;script.</li>
+                    <li>You must stop the scheduler and application server before you run the autobcp<em>DB</em>&nbsp;script.</li>
+                    <li>You can enter the autobcp<em>DB</em>&nbsp;script on a single line or in interactive mode which prompts you for the required information line by line.</li>
+                    <li>On Oracle, you can also use the autobcpORAdp.pl script to move data from the source database to the target database quickly; thereby improving performance. The autobcpORAdp script is located at $AUTOSYS/dbobj/ORA/autobcpORAdp.pl (UNIX) or %AUTOSYS%\dbobj\ORA\autobcpORAdp.pl (Windows).</li>
+                </ul>
+            </div>
+            <p>An autobcp<em>DB</em>&nbsp;script for each database vendor is included in the following directories:</p>
+            <ul>
+                <li><p>Oracle</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>$AUTOSYS/dbobj/ORA/autobcpORA.pl&nbsp;</p></pre>
+                    </div></li>
+                <li><p>Sybase</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>$AUTOSYS/dbobj/SYB/autobcpSYB.pl</p></pre>
+                    </div></li>
+                <li><p>Microsoft SQL Server</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>$AUTOSYS/dbobj/MSQ/autobcpSQL.pl&nbsp;</p></pre>
+                    </div></li>
+            </ul>
+            <p>The autobcp<em>DB</em>&nbsp;script that you use to synchronize the event servers depends on your database platform:</p>
+            <ul>
+                <li><p>Oracle;&nbsp;if using password to access the database</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>perl&nbsp;autobcpORA.pl<em>&nbsp;source_server target_server source_userid source_password target_userid target_password dump_file oracle_directory</em></p></pre>
+                    </div></li>
+                <li><p>Oracle; if using an SSL certificate to access the database</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>perl&nbsp;autobcpORA.pl<em>&nbsp;</em>–CERTMODE<em>&nbsp;source_server target_server source_tnsadmin target_tnsadmin dump_file oracle_directory</em></p></pre>
+                    </div></li>
+                <li><p>Sybase;&nbsp;if using password to access the database</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>perl&nbsp;autobcpSYB.pl<em>&nbsp;source_server source_db target_server target_db source_userid source_password target_userid target_password dump_file blk_size</em></p></pre>
+                    </div></li>
+                <li><p><span style="color: rgb(51,51,51);">Sybase;&nbsp;if using Kerberos authentication to access the database</span></p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p><span style="color: rgb(51,51,51);">perl&nbsp;autobcpSYB.pl<em>&nbsp;</em>–EXTAUTH<em>&nbsp;source_server source_db target_server target_db dump_file SPN_1 SPN_2 blk_size</em></span></p></pre>
+                    </div>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><span style="color: rgb(51,51,51);"><strong>Note:</strong>&nbsp;To use Kerberos authentication, ensure that the logged in OS user running this script is already authenticated with Kerberos and is mapped to a Sybase login which is the owner of the database schema.</span></p>
+                    </div> </li>
+                <li><p>Microsoft SQL Server</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>perl&nbsp;autobcpMSQ.pl&nbsp;source_server&nbsp;source_db&nbsp;target_server&nbsp;target_db&nbsp;source_userid&nbsp;source_password&nbsp;target_userid&nbsp;target_password&nbsp;dump_file</p></pre>
+                    </div></li>
+            </ul>
+            <ul>
+                <li><p><strong><strong>CERTMODE<br></strong></strong>Specifies that an SSL certificate is used to access the database.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong> For information about creating Oracle wallets with certificates, see <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation/environment-and-database-connection/oracle-only-switch-the-database-access-mode/create-oracle-wallets-with-certificates" class="conf-macro output-inline" data-hasbody="true">Create Oracle Wallets with Certificates</a>.</p>
+                    </div> </li>
+                <li><p><span style="color: rgb(51,51,51);"><strong><strong><strong>EXTAUTH</strong></strong><em><strong><strong><br></strong></strong></em></strong>Specifies that Kerberos authentication is used to access the database. &nbsp;<br></span></p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong> For information about configuring MIT Kerberos on CA Workload Automation AE, see <a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation/environment-and-database-connection/sybase-only-switch-the-database-access-mode/configure-mit-kerberos-on-ca-workload-automation-ae" class="conf-macro output-inline" data-hasbody="false">Configure MIT Kerberos on CA Workload Automation AE</a></p>
+                    </div> <p><span style="color: rgb(51,51,51);">&nbsp;</span></p></li>
+                <li><strong><em>source_server<br></em></strong>Defines the name of the source Oracle System ID (for example, AEDB), Sybase server (for example, SourceServer), or Microsoft SQL Server server (for example, SourceServer). For Sybase, the source server name is defined in the interfaces file. For Microsoft SQL Server, you can view the source server name using Microsoft SQL Enterprise Manager.</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note: </strong>On Windows, the entire value of the database server name and the database name can be up to 64 characters.</p>
+            </div>
+            <ul>
+                <li><strong><em>source_db</em></strong><br>Defines the source Microsoft SQL Server or Sybase database (for example, AEDB).</li>
+                <li><p><strong><em>source_userid</em></strong><br>Defines the user ID that is used to connect to the source Oracle System ID, Microsoft SQL Server server, or Sybase server.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> On Oracle, use aebadmin as the source user ID.
+                    </div> </li>
+                <li><strong><em>source_password</em></strong><br>Defines the password that corresponds to the user ID that is used to connect to the source Oracle System ID, Microsoft SQL Server server, or Sybase server.</li>
+                <li><p><strong><em>target_server</em></strong><br>Defines the target Oracle System ID (for example, AEDB2), Microsoft SQL Server server (for example, DestinationServer), or Sybase server (for example, DestinationServer). For Sybase, the target server name is defined in the interfaces file. For Microsoft SQL Server, you can view the target server name using Microsoft SQL Enterprise Manager.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Notes:</strong>
+                        <ul>
+                            <li><p>For Oracle, the source server must be different from the target server.</p></li>
+                            <li><p>On Windows, the entire value of the database server name and the database name can be up to 64 characters.</p></li>
+                        </ul>
+                    </div> </li>
+                <li><strong><em>target_db<br></em></strong>Defines the target Microsoft SQL Server or Sybase database (for example, AEDB2).</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p style="margin-left: 30.0px;"><strong>Note:</strong> The autobcpDB script deletes all of the data in the target database and replaces it with the data in the source database. If you want to save the data in the target database, archive it before you run the autobcpDB script.</p>
+            </div>
+            <ul>
+                <li><p><strong><em>target_userid</em></strong><br>Defines the user ID that is used to connect to the target Oracle System ID, Microsoft SQL Server server, or Sybase server.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> On Oracle, use aedbadmin as the target user ID.
+                    </div> </li>
+                <li><strong><em>target_password</em></strong><br>Defines the password that corresponds to the user ID that is used to connect to the target Oracle System ID, Microsoft SQL Server server, or Sybase server.</li>
+                <li><p><strong><em>dump_file</em></strong><br>Defines the temporary file that is used in the transfer of data from one database to the other database.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> Specify a file that is local to the computer where this script is running.
+                    </div> </li>
+                <li><strong><em>oracle_directory</em></strong><br>Defines the path to the Oracle home directory.</li>
+                <li><p><span style="color: rgb(51,51,51);"><strong><em>SPN_1<br></em></strong>(Optional) Specifies the source service principal name to be used for Kerberos authentication. If you do not want to specify the service principal name, include an empty space for this parameter. &nbsp;</span></p></li>
+                <li><p><span style="color: rgb(51,51,51);"><strong><em>SPN_2<br></em></strong>(Optional) Specifies the target service principal name to be used for Kerberos authentication. If you do not want to specify the service principal name, include an empty space for this parameter.<br></span><strong>&nbsp;Example:</strong> pe<span style="color: rgb(51,51,51);">rl autobcp.pl&nbsp; -EXTAUTH WAKRB1 AEDBHP1 WAKRB1&nbsp; AEDBHP dump.fil "" "" 5000</span></p></li>
+                <li><p><strong><em>blk_size</em></strong><br>(Optional) Specifies the number of rows that can be inserted from the dump_file to the destination database at a time.&nbsp;<br><strong>Default:</strong>&nbsp;5000</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong> The default value is used if you run the autobcpSYB.pl script in the interactive mode or you do not specify the blk_size value. Do not specify a large value because the transaction log encounters problems when it becomes too full.</p>
+                    </div> </li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> While running the autobcpSYB.pl script on Sybase, ensure the following:</p>
+                <ul>
+                    <li>Both event servers use the same ‘Character set’.</li>
+                    <li>The ‘LANG’ environment variable is unset from the shell or the command prompt window (from which the autobcpSYB.pl script is executed) using the following commands for Windows and UNIX.
+                        <ul>
+                            <li><p>On UNIX, use the following command:</p>
+                                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <pre class="ca-code"><p>$&nbsp;unset&nbsp;LANG</p></pre>
+                                </div></li>
+                            <li><p>On Windows, use the following command:</p>
+                                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <pre class="ca-code"><p>C:\PROGRA~1\CA\UNICEN~1&gt;&nbsp;set&nbsp;LANG=&nbsp;</p></pre>
+                                </div></li>
+                        </ul><p>The autobcpSYB.pl script might have problems while copying data from one event server to another, and might fail with errors if the environment variables are different. For more information, see the Sybase documentation.</p></li>
+                </ul>
+            </div>
+            <p><strong>Example: Synchronize Databases on Sybase</strong></p>
+            <p>This example copies data from the source database (AEDB) to the target database (AEDB2) on the source server (AUTOSYSDB) and the target server (AUTOSYSDB2).</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> You can copy data faster and reduce the database log requirements by using the target user ID with the truncate command.
+            </div>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>perl&nbsp;$AUTOSYS/dbobj/SYB/autobcpSYB.pl&nbsp;AUTOSYSDB&nbsp;AEDB&nbsp;AUTOSYSDB2&nbsp;AEDB2&nbsp;autosys&nbsp;autosys&nbsp;sa&nbsp;autosys&nbsp;/tmp/dumpfile&nbsp;&nbsp;|&nbsp;tee&nbsp;/tmp/autobcp.out</p></pre>
+            </div>
+            <h3 class="heading3" id="ConfigureCAWorkloadAutomationAEtoRuninDualEventServerMode-SynchronizetheEventServersonOracle">Synchronize the Event Servers on Oracle</h3>
+            <div class="bs-callout bs-callout-tip conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><a rel="nofollow" class="external-link" href="https://communities.ca.com/videos/3239">https://communities.ca.com/videos/3239</a>: This video&nbsp;covers how to use the autobcp Oracle data pump option for fast HADS rollover recovery.</p>
+            </div>
+            <p>You can use the autobcpORAdp.pl script to move data from the source database to the target database quickly; thereby improving performance.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> Before you run the autobcpORAdp.pl script, ensure that you perform the following tasks:
+                <ul>
+                    <li>Create an Oracle dump directory with read and write permissions granted to the aedbadmin user on the target database.</li>
+                </ul>
+                <ul>
+                    <li>Create a database link pointing to the source database on the target database so that data from the source server is accessed by the target server.</li>
+                </ul>
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li><p>Stop the CA Workload Automation AE services as follows:</p><p>UNIX—Run the following commands from the operating system prompt:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>unisrvcntr stop waae_sched.$AUTOSERV<br>unisrvcntr stop waae_server.$AUTOSERV</p></pre>
+                    </div><p>Windows—Navigate to the Services - CA Workload Automation AE Administrator window of the Administrator utility, right-click the service, and select Stop.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> Repeat this step on the primary, shadow, and tie-breaker schedulers for all instances.
+                    </div> </li>
+                <li><p>Log in as a user with SYSDBA permissions on the target database and run the following commands:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code">CREATE OR REPLACE DIRECTORY <em>autobcpdump</em> as '<em>path_to_oradata</em>';<br>GRANT READ, WRITE ON DIRECTORY <em>autobcpdump</em> to aedbadmin;</pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>autobcpdump</em></strong><br>Specifies the name of the Oracle dump directory.</li>
+                        <li><strong><em>path_to_oradata</em></strong><br>Defines the absolute directory path on the computer where you run the command to create the database link.</li>
+                    </ul><p>The Oracle dump directory with read and write permissions granted to the aedbadmin user is created on the target database.</p></li>
+                <li><p>Run the following command:<br>If using password to access the database:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code">CREATE DATABASE LINK <em>dblink_to_src</em> CONNECT TO aedbadmin IDENTIFIED BY <em>aedbadmin_pwd</em> USING '<em>SOURCE_INSTANCE_SID</em>';</pre>
+                    </div><p>If using an SSL certificate to access the database:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>CREATE DATABASE LINK&nbsp;<em>dblink_to_src</em>&nbsp;USING '<em>SOURCE_INSTANCE_SID</em>';</p></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>dblink_to_src</em></strong><br>Defines the name of the database link that is created between the source database and the target database.</li>
+                        <li><strong><em>aedbadmin_pwd</em></strong><br>Specifies the password that is associated with the aedbadmin user.</li>
+                    </ul>
+                    <ul>
+                        <li><strong><em>SOURCE_INSTANCE_SID</em></strong><br>Specifies the name of the source Oracle instance; enclose this value in single quotes.</li>
+                    </ul><p>A network link or database link pointing to the source database is created on the target server so that data from the source server is accessed by the target server.</p></li>
+                <li><p>Log in as the aedbadmin user and verify if the database link is created.<br>If using password to access the database, run the following commands on the destination server:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>$ sqlplus aedbadmin/<em>aedbadmin_pwd@dest_sid</em><br>1&gt; SELECT * FROM ujo_alamode@<em>DATABASE_LINK_NAME</em>;</p></pre>
+                    </div><p>If using an SSL certificate to access the database, set the&nbsp;TNS_ADMIN value for the Oracle aedbadmin user of the destination server and run the following commands on the destination server:&nbsp;</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>$ sqlplus /<em>@dest_sid</em></p><p>1&gt; SELECT * FROM&nbsp;aedbadmin.ujo_alamode@<em>db_link</em></p></pre>
+                    </div><p>The contents of the ujo_alamode table in the source database are displayed. If you encounter any errors, fix your database link or the source database before you run the <a rel="nofollow" class="external-link" href="http://autobcpORAdp.pl">autobcpORAdp.pl</a> script.</p></li>
+                <li><p>Run the following command from the UNIX operating system prompt or the Windows instance command prompt:<br>If using password to access the database:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>perl autobcpORAdp.pl&nbsp;<em>TARGET_SID</em>&nbsp;<em>aedbadmin_pwd</em>&nbsp;<em>dblink_dest_SRC autobcpdump oracle_directory</em></p></pre>
+                    </div><p>If using an SSL certificate to access the database:&nbsp;</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>perl autobcpORAdp.pl<em>&nbsp;-</em>CERTMODE<em>&nbsp;<em>TARGET_SID</em>&nbsp;target_tnsadmin&nbsp;<em>dblink_dest_SRC autobcpdump oracle_directory</em></em></p></pre>
+                    </div>
+                    <ul>
+                        <li><p><strong>CERTMODE<br></strong>Specifies that an SSL certificate is used to access the database.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Note:</strong> For information about creating Oracle wallets with certificates, see <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation/environment-and-database-connection/oracle-only-switch-the-database-access-mode/create-oracle-wallets-with-certificates" class="conf-macro output-inline" data-hasbody="true">Create Oracle Wallets with Certificates</a>.</p>
+                            </div> </li>
+                        <li><strong><em>TARGET_SID</em></strong><br>Specifies the name of the target Oracle instance; enclose this value in single quotes.</li>
+                        <li><strong><em>aedbadmin_pwd</em></strong><br>Specifies the password that is associated with the aedbadmin user.</li>
+                        <li><strong><em>target_tnsadmin</em></strong><br>Specifies the TNS_ADMIN value for the Oracle aedbadmin user of the target database.</li>
+                    </ul>
+                    <ul>
+                        <li><strong><em>dblink_dest_SRC</em></strong><br>Defines the name of the database link that is created between the source database and the target database.</li>
+                        <li><strong><em>autobcpdump</em></strong><br>Specifies the name of the Oracle dump directory.</li>
+                        <li><strong><em>oracle_directory</em></strong><br>Defines the path to the Oracle home directory.&nbsp;</li>
+                    </ul></li>
+                <li><p>Start the CA Workload Automation AE services as follows:<br>UNIX—Run the following commands from the operating system prompt:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>unisrvcntr start waae_sched.$AUTOSERV<br>unisrvcntr start waae_server.$AUTOSERV</p></pre>
+                    </div><p>Windows—Navigate to the Services - CA Workload Automation AE Administrator window of the Administrator utility, right-click the service, and select Start.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> Repeat this step on the primary, shadow, and tie-breaker schedulers for all instances.
+                    </div> <p>The event servers are synchronized.</p></li>
+            </ol>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> If you want the aedbadmin user to create the datbase_link and directory, your SYSDBA must grant permissions to the aedbadmin user by running the following command:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code">GRANT CREATE ANY DIRECTORY TO aedbadmin;<br>GRANT CREATE DATABASE LINK TO aedbadmin;</pre>
+                </div>
+            </div>
+            <p><strong>Example: (UNIX) Synchronize Databases on Oracle</strong><br>This example copies the data to the target database (AEDB) using the database link (dblink) that is created between the source database and the target database.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>perl $AUTOSYS/dbobj/ORA/autobcpORAdp.pl&nbsp;AEDB password dblink&nbsp;autobcpdump $ORACLE_HOME</p></pre>
+            </div>
+            <h3 id="ConfigureCAWorkloadAutomationAEtoRuninDualEventServerMode-EventServerSynchronization">Event Server Synchronization</h3>
+            <p>CA Workload Automation AE provides the CA Workload Automation AE bulk copy scripts (autobcpORA, autobcpORAdp, autobcpSYB, and autobcpMSQ) to synchronize the event servers. These scripts identify one event server as the source and the other event server as the target for the synchronization process.&nbsp;</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes: </strong></p>
+                <ul>
+                    <li>You must synchronize the event servers before enabling dual event server mode.</li>
+                    <li>The greater the data that must be synchronized, the longer the CA Workload Automation AE bulk copy script runs.</li>
+                </ul>
+            </div>
+            <p>Before you synchronize the event servers, do the following:</p>
+            <ul>
+                <li>Check that both event servers are running.</li>
+                <li>Check that no CA Workload Automation AE schedulers, application servers, or client utilities like archive_events, sendevent, and so on are running.</li>
+                <li>For Microsoft SQL Server, check that both databases are defined correctly. Use the Microsoft SQL Enterprise Manager to view the information.</li>
+                <li><p>For Oracle, check that the $TNS_ADMIN/tnsnames.ora (on UNIX) or %TNS_ADMIN%\tnsnames.ora (on Windows) file contains valid entries for both event servers.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> If you installed Oracle Instant Client with the SQL*Plus package, you need not configure the tnsnames.ora file. Check that you can sqlplus to both the Oracle databases using the proper Oracle Net connection identifier.
+                    </div> </li>
+                <li>For Sybase, check that the $SYBASE/interfaces (on UNIX) or %SYBASE%\ini\sql.ini (on Windows) file contains entries for both event servers.</li>
+                <li>Note the path to the database software so you can provide it when you run the CA Workload Automation AE bulk copy script.</li>
+                <li>Check that you have at least as much free disk space as the size of your database to store the temporary file that the CA Workload Automation AE bulk copy script creates. The script deletes this temporary file after the synchronization process is complete.</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> When you stop the scheduler, any jobs that are running on the agent run to completion. Although it is recommended that you stop all jobs before synchronizing the databases, you can run the CA Workload Automation AE bulk copy script while the jobs are running on the agent.
+            </div>
+            <h3 class="heading4" id="ConfigureCAWorkloadAutomationAEtoRuninDualEventServerMode-HandleEventServerSynchronizationErrors">Handle Event Server Synchronization Errors</h3>
+            <p>Sometimes the autobcpDB script encounters errors when it is running. In these cases, the script exits and CA Workload Automation AE displays the following message:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>The&nbsp;CA&nbsp;WAAE&nbsp;data&nbsp;server&nbsp;is&nbsp;not&nbsp;accessible.</p><p>Please&nbsp;check&nbsp;the&nbsp;data&nbsp;server&nbsp;and&nbsp;rerun&nbsp;this&nbsp;script.</p></pre>
+            </div>
+            <p>You can handle errors by correcting data server problems and rerunning the script.</p>
+            <p>To handle errors, verify the following and rerun&nbsp;the autobcpORA, autobcpORAdp, autobcpSYB, or autobcpMSQ script:</p>
+            <ul>
+                <li>Are both event servers running?&nbsp;<br>To verify this, ensure that you can connect to the event server.
+                    <ul>
+                        <li>For Microsoft SQL Server, look for the MSSQLSERVER and SQLSERVERAGENT services.</li>
+                        <li>For Oracle, look for the OracleService*, OracleStart*, and OracleTNSListener services (where * indicates the Oracle SID).</li>
+                        <li>For Sybase, the service name is user-configurable.</li>
+                    </ul></li>
+                <li>Did you specify the source and the target event servers correctly in the&nbsp;autobcpORA, autobcpORAdp, autobcpSYB, or autobcpMSQ script?</li>
+                <li>Did you enter the passwords correctly in the&nbsp;autobcpORA, autobcpORAdp, autobcpSYB, or autobcpMSQ script?</li>
+                <li>Did you set the Sybase or Oracle environment variables correctly?
+                    <ul>
+                        <li>The Oracle environment variable, ORACLE_HOME, defines the path to the top-level Oracle directory.</li>
+                        <li>The Sybase environment variables are DSQUERY and SYBASE. The DSQUERY variable defines the name of the Sybase event server. The SYBASE variable defines the complete path to the Sybase software directory.</li>
+                    </ul></li>
+                <li>Did you specify the event server names and ports correctly?
+                    <ul>
+                        <li>For Microsoft SQL Server, you can view this information using the Microsoft SQL Enterprise Manager.</li>
+                        <li>For Oracle, this information is located in the TNSNAMES.ORA file.</li>
+                        <li>For Sybase, this information is located in the interfaces file.</li>
+                    </ul></li>
+            </ul>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

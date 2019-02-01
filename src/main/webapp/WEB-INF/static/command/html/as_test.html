@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p>The as_test command is a utility that can run for a specified amount of time, write a message to either stdout or stderr or to both stdout and stderr, and exit with a specific exit code. When the scheduler is running in test mode to agents, command job commands are automatically replaced with the execution of this command. You can use as_test to test job dependencies and error handling.</p>
+            <p><strong>Syntax</strong></p>
+            <p>This command has the following format:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>as_test&nbsp;[-t&nbsp;<em>Seconds</em>]&nbsp;[-e&nbsp;<em>Exit Code</em>]&nbsp;[-c&nbsp;<em>Message</em>]&nbsp;[-r&nbsp;<em>Message</em>]&nbsp;[-x]&nbsp;[-?]</p></pre>
+            </div>
+            <ul>
+                <li><strong>-t&nbsp;<em>Seconds</em></strong><br>(Optional) Specifies the number of seconds for the machine to sleep.</li>
+                <li><strong>-e&nbsp;<em>Exit Code</em>&nbsp;</strong><br>(Optional) Specifies the return code for the job to complete.</li>
+                <li><strong>-c&nbsp;<em>Message</em></strong><br>(Optional) Specifies the message to write to the STDOUT file.</li>
+                <li><strong>-r&nbsp;<em>Message</em></strong><br>(Optional) Specifies the message to write to the STDERR file.</li>
+                <li><strong>-x</strong><br>(Optional) Displays version information.</li>
+                <li><strong>-?</strong><br>(Optional) Displays help for the command.</li>
+            </ul>
+            <p><strong>Example: Run the as_test Command on a Windows machine</strong></p>
+            <p>This example runs the as_test command on the Windows machine named winagent. The as_test command waits for 5 seconds and exits with a return code of 0.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>insert_job:&nbsp;win_cmd&nbsp;</p><p>job_type:&nbsp;CMD&nbsp;</p><p>machine:&nbsp;winagent&nbsp;</p><p>command:&nbsp;as_test&nbsp;-t&nbsp;5&nbsp;-e&nbsp;0</p></pre>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

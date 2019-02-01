@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="col-xs-12 col-md-8 col-lg-8">
+            <p>To configure agent parameters, edit the agentparm.txt file, which is located in the agent installation directory. When you install the agent, the installation program adds frequently configured agent parameters to the file. Other agent parameters exist, which you must manually add to the agentparm.txt file to configure the agent. For any configuration changes to take effect, always stop and restart the agent. For some agent parameters, such as the agent name and communication parameters, also configure the parameters on the scheduling manager.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note: </strong>
+                <span style="color: rgb(0,0,0);">Take care when editing the agentparm.txt file. The file must not contain errors, or the agent might not start.</span>
+            </div>
+            <p><span style="color: rgb(51,51,51);">Configure agent parameters on CA Workload Automation System Agent by using the procedure that follows.</span></p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>(iSeries systems only)&nbsp;<a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-system-agent/11-4/en/configuring/control-the-agent/open-a-pase-terminal-session-on-iseries" class="conf-macro output-inline" data-hasbody="true">Open a PASE terminal session</a>.<br>(HPE Integrity Nonstop only)&nbsp;<span>Log on to the OSS environment from the computer running NonStop. The way you log in to the OSS environment depends on the method you are using to access the computer:</span></li>
+            </ol>
+            <ol>
+                <li style="list-style-type: none;background-image: none;">
+                    <ul>
+                        <li><span>If you are using Telnet, log in as follows:</span>
+                            <ol>
+                                <li><p>Type&nbsp;<strong>oss</strong>&nbsp;for the Enter Choice prompt under Available Services.</p></li>
+                                <li><p>Type your user ID.</p></li>
+                                <li><p>Enter your password.</p></li>
+                                <li><p>Press Enter.</p></li>
+                            </ol></li>
+                        <li><p><span>If you are using SSH (for example, Putty), you can be sent to OSS directly.</span></p>
+                            <ol>
+                                <li>Change to the agent installation directory.</li>
+                                <li>Stop the agent using one of the following commands:</li>
+                            </ol>
+                            <ul>
+                                <li><p>On UNIX:</p>
+                                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+         <pre class="code-block prettyprint"><code>./cybAgent -s
+</code></pre>
+                                    </div> </li>
+                                <li><p>On Windows:</p>
+                                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+         <pre class="code-block prettyprint"><code>cybAgent -s
+</code></pre>
+                                    </div> </li>
+                                <li><p>On iSeries:</p>
+                                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+                                        <pre class="code-block prettyprint"><code>./cybAgent -s</code></pre>
+                                    </div> </li>
+                                <li><pre>On HPE Integrity Nontop:</pre>
+                                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <pre class="ca-code"><pre>./cybAgent –s</pre></pre>
+                                    </div></li>
+                            </ul></li>
+                    </ul></li>
+                <li>Open the agentparm.txt file that is located in the agent installation directory.</li>
+                <li>Make the required changes to the agent parameters.</li>
+                <li>Save and close the agentparm.txt file.</li>
+                <li>(iSeries systems only)&nbsp;<a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-system-agent/11-4/en/configuring/control-the-agent/start-the-subsystem-that-runs-the-agent-on-iseries" class="conf-macro output-inline" data-hasbody="true">Start the subsystem that runs the agent if it has stopped</a>.
+                    <ol>
+                        <li>Start the agent using one of the following commands</li>
+                    </ol>
+                    <ul>
+                        <li>On UNIX:</li>
+                    </ul></li>
+            </ol>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>./cybAgent -a
+</code></pre>
+            </div>
+            <ul>
+                <li>
+                    <ul>
+                        <li><span>On Windows:</span></li>
+                    </ul></li>
+            </ul>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>cybAgent -a
+</code></pre>
+            </div>
+            <ul>
+                <li style="list-style-type: none;background-image: none;">
+                    <ul>
+                        <li><span>On iSeries:<br class="_mce_tagged_br"></span></li>
+                    </ul></li>
+            </ul>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p style="margin-left: 30.0px;">./cybAgent</p></pre>
+            </div>
+            <ul>
+                <li style="list-style-type: none;background-image: none;">
+                    <ul>
+                        <li><span>&nbsp;On HPE Integrity Nonstop:<br class="_mce_tagged_br"></span></li>
+                    </ul></li>
+            </ul>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code">./cybAgent &amp;</pre>
+            </div>
+            <h2 style="margin-left: 30.0px;" id="ConfigureAgentParameters-AgentParameterChangesontheSchedulingManager">Agent Parameter Changes on the Scheduling Manager&nbsp;</h2>
+            <p style="margin-left: 30.0px;">Changes to agent parameters in the agentparm.txt file can be made either manually, by you, or automatically by the agent. When you change an agent parameter in the agentparm.txt file that is also defined on the scheduling manager, such as the agent name, the agent might make the corresponding update in&nbsp;the scheduling manager, as shown in the following example:&nbsp;</p>
+            <p style="margin-left: 30.0px;"><span style="color: rgb(0,0,0);"><strong>Example from receiver.log</strong></span></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><span style="color: rgb(0,0,0);">01/13/2015 04:35:02.531 IST+0530 5 TCP/IP Controller Plugin.Receiver pool thread &lt;Regular:1&gt;.CybReceiverSession.accept[:269] - Message accepted: 20150113 04350251-0530 NEW_AGENT DSERIES_7500 1421103.902501/DSERIES_7500.1/MAIN Control Mgraddr Address(<a rel="nofollow" class="external-link" href="http://de.example.com/"><span style="color: rgb(0,0,0);">de.example.com</span></a>) Port(7507) User(DSERIES_7500) Persistent(TRUE)…..</span></pre>
+            </div>
+            <p style="margin-left: 30.0px;"><span style="color: rgb(0,0,0);">The agent can also update the agentparm.txt file in response to information provided by the scheduling manager. Updates from the scheduling manager are reflected at the bottom of the agentparm.txt file, as shown in the following example.</span></p>
+            <p style="margin-left: 30.0px;"><span style="color: rgb(0,0,0);"><strong>Example updates to the agentparm.txt file</strong></span></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><span style="color: rgb(0,0,0);">#</span><br><span style="color: rgb(0,0,0);"># Added by Manager</span><br><span style="color: rgb(0,0,0);">#</span><br><span style="color: rgb(0,0,0);">communication.manageraddress_2=<a rel="nofollow" class="external-link" href="http://de.example.com/"><span style="color: rgb(0,0,0);">de.example.com</span></a></span><br><span style="color: rgb(0,0,0);">communication.managerid_2=DSERIES_7500</span><br><span style="color: rgb(0,0,0);">communication.managerport_2=7507</span><br><span style="color: rgb(0,0,0);">communication.socket_2=plain</span></pre>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> For detailed instructions about how to configure agent parameters on the scheduling manager, see the documentation for your scheduling manager.
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-4">
+            <p></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

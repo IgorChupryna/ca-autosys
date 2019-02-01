@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p><strong>Valid on UNIX</strong></p>
+                <p>The cron2jil command is a client component utility that converts each line in a UNIX crontab file to a corresponding JIL script (*.jil file) and, if necessary, a run calendar file (*.cal file).</p>
+                <p>Because the cron2jil command cannot comprehensively address all job processing requirements, you should use it as a first step in converting from cron to the environment. The second step requires editing the newly created JIL and calendar files to&nbsp;ensure the preferred job processing.</p>
+                <p>When cron2jil reads a crontab file, it assigns job names by combining the base name of the job’s command and the line number of the file. For example, the following crontab entries would result in the job names “cp_1” and “mail_2” respectively.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>&gt;&gt;0,59&nbsp;0,23&nbsp;*&nbsp;*&nbsp;0,6&nbsp;/bin/cp&nbsp;/etc/passwd&nbsp;/etc/passwd.bak</p><p>&gt;&gt;0,59&nbsp;*&nbsp;*&nbsp;*&nbsp;0,6&nbsp;/usr/ucb/mail&nbsp;root@support1&nbsp;&lt;&nbsp;/tmp/errorLog</p></pre>
+                </div>
+                <p>After conversion, cron commands involving pipes and I/O redirection perform merely&nbsp;as they did in the cron environment. If run calendars are created, cron2jil only generates calendars with one year duration. After conversion, pipe and I/O redirections might&nbsp;not take full advantage of the fault tolerance mechanisms of CA Workload Automation AE. For example, the exit code of a failed command in a pipe might&nbsp;not result in the failure of the complete command expression. Therefore, you should edit converted JIL scripts and split pipes into separate jobs with the appropriate conditions and job control. With this approach, problems can be detected and reported at the point of failure.</p>
+                <p>cron2jil does not generate JIL files for jobs that are defined in crontab to start every minute; for example, with an asterisk (*) specified in the first field of the cron listing. This special case should be remedied by defining successful job completion as a starting condition for the same job.</p>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Note: </strong>After the *.jil or *.cal files are generated, you must use the jil or autocal_asc command to define the jobs and calendars to CA Workload Automation AE.
+                </div>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>cron2jil&nbsp;-f&nbsp;<em>crontab_file</em>&nbsp;[-d&nbsp;<em>output_directory</em>]&nbsp;[-i&nbsp;<em>include_file</em>]&nbsp;[-m&nbsp;<em>machine</em>]&nbsp;[-p&nbsp;<em>prefix</em>]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-f&nbsp;<em>crontab_file</em></strong></p><p>Defines the name of the crontab-formatted file to convert.</p></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-d&nbsp;<em>output_directory</em></strong></p><p>(Optional) Defines the directory to which the product should write the *.jil and *.cal files.</p><p><strong>Default:</strong>&nbsp;The current working directory.</p></li>
+                    <li><p><strong>-i&nbsp;<em>include_file</em></strong></p><p>(Optional) Defines a file containing JIL statements to include in every generated *.jil file. You must create this file before the conversion; it can contain any default JIL statements.</p></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-m&nbsp;<em>machine</em></strong></p><p>(Optional) Defines the name of the machine on which the conversion should occur.</p><p><strong>Default:</strong>&nbsp;localhost</p></li>
+                    <li><p><strong>-p&nbsp;<em>prefix</em></strong></p><p>(Optional) Defines a prefix to insert before each job’s name. For example, if you set&nbsp;<em>prefix</em>&nbsp;to AUTO, JobA becomes AUTOJobA.</p></li>
+                </ul>
+                <p><strong>Example: Convert a crontab File to a JIL Script</strong></p>
+                <p>This example converts the crontab file named daily:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>cron2jil&nbsp;-f&nbsp;daily&nbsp;</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

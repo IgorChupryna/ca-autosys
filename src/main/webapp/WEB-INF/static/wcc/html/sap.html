@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p>This article explains how to manage SAP jobs, which&nbsp;let you run SAP workload.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> To run these jobs, your system requires CA WA Agent for UNIX, Linux, or Windows and CA WA Agent for SAP.
+            </div>
+            <p>You can define the following SAP jobs:</p>
+            <ul>
+                <li><strong>SAP Batch Input Session</strong><br>Imports data from external systems to the SAP system.</li>
+                <li><strong>SAP Business Warehouse (BW) InfoPackage</strong><br>Transfers data from a data source to an SAP Business Warehouse system.</li>
+                <li><strong>SAP Business Warehouse (BW) Process Chain</strong><br>Creates Process Chains on the SAP system.</li>
+                <li><strong>SAP Data Archiving</strong><br>Stores information in an SAP Archiving Object.</li>
+                <li><strong>SAP Event Monitor</strong><br>Monitors and triggers SAP events.</li>
+                <li><strong>SAP Job Copy</strong><br>Copies an existing SAP R/3 job.</li>
+                <li><strong>SAP Process Monitor</strong><br>Monitors for a specific SAP process status.</li>
+                <li><strong>SAP R/3</strong><br>Schedules an SAP R/3 job on your SAP system.</li>
+            </ul>
+            <hr>
+            <p class="heading2"></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H1,H2" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#ManageSAPJobsUsingCAWCC-DefineanSAPBatchInputSessionJob" class="toc-link">Define an SAP Batch Input Session Job</a></span></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#ManageSAPJobsUsingCAWCC-DefineanSAPBusinessWarehouseInfoPackageJob" class="toc-link">Define an SAP Business Warehouse InfoPackage Job</a></span></li><li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a href="#ManageSAPJobsUsingCAWCC-DefineanSAPBusinessWarehouseProcessChainJob" class="toc-link">Define an SAP Business Warehouse Process Chain Job</a></span></li><li><span class="toc-item-body" data-outline="4"><span class="toc-outline">4</span><a href="#ManageSAPJobsUsingCAWCC-DefineanSAPDataArchivingJob" class="toc-link">Define an SAP Data Archiving Job</a></span></li><li><span class="toc-item-body" data-outline="5"><span class="toc-outline">5</span><a href="#ManageSAPJobsUsingCAWCC-DefineanSAPEventMonitorJob" class="toc-link">Define an SAP Event Monitor Job</a></span></li><li><span class="toc-item-body" data-outline="6"><span class="toc-outline">6</span><a href="#ManageSAPJobsUsingCAWCC-DefineanSAPJobCopyJob" class="toc-link">Define an SAP Job Copy Job</a></span></li><li><span class="toc-item-body" data-outline="7"><span class="toc-outline">7</span><a href="#ManageSAPJobsUsingCAWCC-DefineanSAPProcessMonitorJob" class="toc-link">Define an SAP Process Monitor Job</a></span></li><li><span class="toc-item-body" data-outline="8"><span class="toc-outline">8</span><a href="#ManageSAPJobsUsingCAWCC-DefineanSAPR/3JobJob" class="toc-link">Define an SAP R/3 Job Job</a></span></li><li><span class="toc-item-body" data-outline="9"><span class="toc-outline">9</span><a href="#ManageSAPJobsUsingCAWCC-DefineRecipientsfortheJob'sOutput" class="toc-link">Define Recipients for the Job's Output</a></span></li><li><span class="toc-item-body" data-outline="10"><span class="toc-outline">10</span><a href="#ManageSAPJobsUsingCAWCC-DefinePrintorArchiveParametersforaStep" class="toc-link">Define Print or Archive Parameters for a Step</a></span></li><li><span class="toc-item-body" data-outline="11"><span class="toc-outline">11</span><a href="#ManageSAPJobsUsingCAWCC-SendtheSAPSpoolFilebyEmailonStepCompletionorFailure" class="toc-link">Send the SAP Spool File by Email on Step Completion or Failure</a></span></li></ul></div>
+            <p></p>
+            <h2 class="heading2" id="ManageSAPJobsUsingCAWCC-DefineanSAPBatchInputSessionJob">Define an SAP Batch Input Session Job</h2>
+            <p>You can define an SAP Batch Input Session job to import large amounts of data from external systems to the SAP system. You create Batch Input Session jobs on the SAP system. This procedure lets you create a job from scratch; however, you can use an SAP filter and copy an existing job from the SAP system to save time.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> To run these jobs, your system requires CA WA Agent for UNIX, Linux, or Windows and CA WA Agent for SAP.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP Batch Input Session (SAPBDC) job.</li>
+                <li>Specify the following required properties:
+                    <ul>
+                        <li><strong>Name</strong><br>Defines the name of the job that you want to schedule. <br><strong>Limits:</strong> Up to 64 characters; valid characters are a-z, A-Z, 0-9, period (.), underscore (_), hyphen (-), and pound (#); do not include embedded spaces or tabs</li>
+                        <li><strong>Send to machine</strong><br>Specifies the name of the machine on which the job runs.</li>
+                        <li><strong>SAP job name</strong><br>Specifies the name of the ABAP job that creates the BDC session on<br>the SAP system.</li>
+                    </ul></li>
+                <li>(Optional) Specify optional <a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-SAPBatchInputSessionProperties" class="conf-macro output-inline" data-hasbody="true">SAP Batch Input Session properties</a>.</li>
+                <li>(Optional) Specify <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/scheduling/schedule-with-ca-wcc/manage-common-job-properties" class="conf-macro output-inline" data-hasbody="true">common properties that apply to all job types</a>.</li>
+                <li>Commit the job.<br>The SAP Batch Input Session job is defined.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-SAPBatchInputSessionJobExamples">SAP Batch Input Session Job Examples</h3>
+            <p>The following example describes a sample SAP Batch Input Session job.</p>
+            <p><strong>Example: Define an SAP Batch Input Session Job</strong></p>
+            <p>This example runs the ZBDCTEST ABAP that creates a Batch Input Session (BDC ABAP) on the SAP system. The job runs as soon as possible after the job is defined. After this job runs, the BDC job starts the data transfer.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP Batch Input Session job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- bdcjob</li>
+                        <li>Send to machine -- sapagent</li>
+                        <li>Owner -- WAAESAP@sapagent</li>
+                        <li>SAP job name -- ZBDCTEST</li>
+                        <li>Release option -- As soon as possible</li>
+                    </ul></li>
+                <li>Click <img alt="edit " data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353575/1/1427800948426/1148411.png" data-hasbody="false"> to open the Step Parameters dialog.</li>
+                <li>Enter the following property on the Command tab:
+                    <ul>
+                        <li>ABAP Name -- ZBDCTEST</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-SAPBatchInputSessionProperties">SAP Batch Input Session Properties</h3>
+            <p>The SAP Batch Input Session category includes the following properties:</p>
+            <p><strong>Agent job class</strong></p>
+            <p>(Optional) Specifies the job class that this job runs under. The agent maintains a list of job classes and the number of initiators assigned to each job class. A job class with more initiators can process a greater number of jobs more quickly. For higher-priority jobs, assign a job class that contains more initiators.</p>
+            <p><strong>Limits:</strong> Up to 32 characters; cannot contain delimiters (such as spaces)</p>
+            <p><strong>JIL attribute:</strong> job_class</p>
+            <p><strong>Error rate (%)</strong></p>
+            <p>(Optional) Specifies the maximum acceptable error rate as a percentage of the total transactions. When set to 100, all errors are acceptable. When set to zero (0), the job fails if any transaction contains an error. When set to 5, for example, the job fails if more than five percent of the transactions contain errors.</p>
+            <p><strong>Limits:</strong> 0-100</p>
+            <p><strong>Default:</strong> 0</p>
+            <p><strong>JIL attribute:</strong> bdc_err_rate</p>
+            <p><strong>Extended logging</strong></p>
+            <p>(Defaulted) Indicates whether to generate advanced logging of the Batch Input Session (BDC) running on the SAP system. When selected, the agent uses extended logging.</p>
+            <p><strong>Default:</strong> not selected</p>
+            <p><strong>JIL attribute:</strong> bdc_ext_log</p>
+            <p><strong>Logon Parameters: Client</strong></p>
+            <p>(Optional) Specifies the client within the SAP system. The value corresponds to the General data, Target server field on the Define Background Job dialog.</p>
+            <p><strong>Limits:</strong> Up to three digits</p>
+            <p><strong>JIL attribute:</strong> sap_client</p>
+            <p><strong>Logon Parameters: Language</strong></p>
+            <p>(Optional) Specifies a character code representing a valid language for SAP.</p>
+            <p><strong>Limits:</strong> Up to two characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_lang</p>
+            <p><strong>Logon Parameters: RFC destination</strong></p>
+            <p>(Optional) Indicates the destination specified in the connection properties file during installation.</p>
+            <p><strong>Limits:</strong> Up to 256 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_rfc_dest</p>
+            <p><strong>Office output</strong></p>
+            <p>(Defaulted) Indicates whether to save outgoing documents to the SAPoffice outbox of the SAP user associated with the job. When selected, the agent saves outgoing documents to the SAPoffice outbox.</p>
+            <p><strong>Default: </strong>not selected</p>
+            <p><strong>JIL attribute:</strong> sap_office</p>
+            <p><strong>Processed rate (%)</strong></p>
+            <p>(Optional) Specifies the minimum acceptable process rate as a percentage of the total transactions. When set to 100, the job fails if all transactions are not processed. When set to zero (0), no minimum processed transactions are required. When set to 90, for example, the job fails if less than 90 percent of the transactions are processed.</p>
+            <p><strong>Limits:</strong> 0-100</p>
+            <p><strong>JIL attribute:</strong> bdc_proc_rate</p>
+            <p><strong>Release option</strong></p>
+            <p>(Defaulted) Specifies the action to take with a job after it is defined, as follows:</p>
+            <ul>
+                <li>Immediately -- Releases the job immediately</li>
+                <li>As soon as possible -- Releases the job as soon as possible</li>
+            </ul>
+            <p><strong>Default:</strong> As soon as possible</p>
+            <p><strong>JIL attribute:</strong> sap_release_option</p>
+            <p><strong>SAP job class</strong></p>
+            <p>(Optional) Specifies a valid SAP system job class.</p>
+            <p><strong>Limits:</strong> One character</p>
+            <p><strong>JIL attribute:</strong> sap_job_class</p>
+            <p><strong>SAP job name</strong></p>
+            <p>Specifies the name of the ABAP job that creates the BDC session on the SAP system.</p>
+            <p><strong>Limits:</strong> Up to 32 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_job_name</p>
+            <p><strong>Spool list recipients</strong></p>
+            <p>(Optional) Specifies the <a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-SpoolListRecipientProperties" class="conf-macro output-inline" data-hasbody="true">recipient properties</a> for the job's output (spool file).</p>
+            <p>This property supports Global Variable substitution.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;To add spool list recipients, select Add and click Go. A row appears below the Spool list recipients field. Click&nbsp;<img alt="Click to edit." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353579/1/1427800948462/696541.png" data-hasbody="false">&nbsp;to open the Spool List Recipient dialog to specify the recipients.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> sap_recipients</p>
+            <p><strong>Step parameters</strong></p>
+            <p>(Optional) Specifies the <a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-StepParameters-CommandProperties" class="conf-macro output-inline" data-hasbody="true">SAP R/3 step specifications</a>.</p>
+            <p>This property supports Global Variable substitution.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;The SAP Batch Input Session job can have only one step. Click&nbsp;<img alt="Click to edit." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353579/1/1427800948462/696541.png" data-hasbody="false">&nbsp;to open the Step Parameters dialog to specify the parameters for the job definition.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> sap_step_parms</p>
+            <p><strong>System</strong></p>
+            <p>(Optional) Specifies the system the BDC session should be executed on.</p>
+            <p><strong>Limits:</strong> Up to 256 characters</p>
+            <p><strong>JIL attribute:</strong> bdc_system</p>
+            <p><strong>Target system</strong></p>
+            <p>(Optional) Specifies the host computer within the SAP system architecture that is capable of running SAP system workload.</p>
+            <p>This property supports Global Variable substitution.</p>
+            <p><strong>Limits:</strong> Up to 256 characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false">&nbsp;opens the Browse SAP Target Systems dialog, which lets you locate the host computer.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> sap_target_sys</p>
+            <h2 class="heading2" id="ManageSAPJobsUsingCAWCC-DefineanSAPBusinessWarehouseInfoPackageJob">Define an SAP Business Warehouse InfoPackage Job</h2>
+            <p>You can define an SAP Business Warehouse InfoPackage job to transfer data from any data source into an SAP Business Warehouse system. This procedure lets you create a job from scratch; however, you can use an SAP filter and copy an existing job from the SAP system to save time.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> To run these jobs, your system requires CA WA Agent for UNIX, Linux, or Windows and CA WA Agent for SAP.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP BW InfoPackage (SAPBWIP) job.</li>
+                <li>Specify the following required properties:<br>
+                    <ul>
+                        <li><strong>Name</strong><br>Defines the name of the job that you want to schedule. <br><strong>Limits:</strong> Up to 64 characters; valid characters are a-z, A-Z, 0-9, period (.), underscore (_), hyphen (-), and pound (#); do not include embedded spaces or tabs</li>
+                        <li><strong>Send to machine</strong><br>Specifies the name of the machine on which the job runs.</li>
+                        <li><strong>InfoPackage name</strong></li>
+                    </ul><p>Specifies the name of the Business Warehouse InfoPackage.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false">&nbsp;opens the Search SAP InfoPackage dialog, which lets you locate an SAP InfoPackage for the job definition.</p>
+                    </div> </li>
+                <li>(Optional) Specify optional <a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-SAPBWInfoPackageProperties" class="conf-macro output-inline" data-hasbody="true">SAP BW InfoPackage properties</a>.</li>
+                <li>(Optional) Specify <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/scheduling/schedule-with-ca-wcc/manage-common-job-properties" class="conf-macro output-inline" data-hasbody="true">common properties that apply to all job types</a>.</li>
+                <li>Commit the job.<br>The SAP BW InfoPackage job is defined.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-SAPBWInfoPackageJobExamples">SAP BW InfoPackage Job Examples</h3>
+            <p>The following examples describe sample SAP BW InfoPackage jobs.</p>
+            <p><strong>Example: Define an SAP BW InfoPackage Job</strong></p>
+            <p>This example runs the Business Warehouse InfoPackage 0PAK_D2XZMZ1HD5WFVFL3EN1NVIT4V in the SAP destination SM1.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP BW InfoPackage job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- InfoBW2</li>
+                        <li>Send to machine -- sapagent</li>
+                        <li>Owner -- WAAESAP@sapagent</li>
+                        <li>Logon Parameters: RFC destination -- SM1</li>
+                        <li>SAP job name -- InfoBW2</li>
+                        <li>InfoPackage name -- 0PAK_D2XZMZ1HD5WFVFL3EN1NVIT4V</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-SAPBWInfoPackageProperties">SAP BW InfoPackage Properties</h3>
+            <p>The SAP BW InfoPackage category includes the following properties:</p>
+            <p><strong>Agent job class</strong></p>
+            <p>(Optional) Specifies the job class that this job runs under. The agent maintains a list of job classes and the number of initiators assigned to each job class. A job class with more initiators can process a greater number of jobs more quickly. For higher-priority jobs, assign a job class that contains more initiators.</p>
+            <p><strong>Limits:</strong> Up to 32 characters; cannot contain delimiters (such as spaces)</p>
+            <p><strong>JIL attribute:</strong> job_class</p>
+            <p><strong>InfoPackage details</strong></p>
+            <p>(Optional) Specifies the SAP Business Warehouse (BW) InfoPackage data selection criteria, as follows:</p>
+            <ul>
+                <li><strong>Field Name</strong><br>Specifies the BW InfoPackage Technical Name.<br><strong>Limits:</strong> Up to 100 characters</li>
+                <li><strong>High</strong><br>Specifies the BW InfoPackage Technical To Value.<br><strong>Limits:</strong> Up to 256 characters</li>
+                <li><strong>Low</strong><br>Specifies the BW InfoPackage Technical From Value.<br><strong>Limits:</strong> Up to 256 characters</li>
+                <li><p><strong>Object Name</strong><br>Specifies the BW InfoPackage Technical InfoObject.<br><strong>Limits:</strong> Up to 100 characters</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong>&nbsp;To assign no value to this data selection criterion, use apostrophes.</p>
+                    </div> </li>
+                <li><strong>Operation</strong><br>Specifies the BW InfoPackage Technical Operation, as follows:
+                    <ul>
+                        <li>BT -- Between</li>
+                        <li>EQ -- Equal</li>
+                    </ul></li>
+                <li><strong>Sign</strong><br>Specifies the BW InfoPackage Technical Sign, as follows:
+                    <ul>
+                        <li>E -- Exclude</li>
+                        <li>I -- Include</li>
+                    </ul></li>
+            </ul>
+            <p><strong>Limits:</strong> Up to 4096 characters</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;You must click&nbsp;<img alt="Click to synchonize InfoPackage details with the SAP agent." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353574/1/1427800948414/1137679.png" data-hasbody="false">&nbsp;to complete the InfoPackage details. The agent returns values for the InfoPackage based on details that are configured in the SAP system.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> sap_ext_table</p>
+            <p><strong>InfoPackage name</strong></p>
+            <p>Specifies the name of the Business Warehouse InfoPackage.</p>
+            <p><strong>Limits:</strong> Up to 30 valid SAP characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;You can click&nbsp;<img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false">&nbsp;to open the Search SAP InfoPackage dialog to locate the SAP InfoPackage.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> sap_info_pack</p>
+            <p><strong>Logon Parameters: Client</strong></p>
+            <p>(Optional) Specifies the client within the SAP system. The value corresponds to the General data, Target server field on the Define Background Job dialog.</p>
+            <p><strong>Limits:</strong> Up to three digits</p>
+            <p><strong>JIL attribute:</strong> sap_client</p>
+            <p><strong>Logon Parameters: Language</strong></p>
+            <p>(Optional) Specifies a character code representing a valid language for SAP.</p>
+            <p><strong>Limits:</strong> Up to two characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_lang</p>
+            <p><strong>Logon Parameters: RFC destination</strong></p>
+            <p>(Optional) Indicates the destination specified in the connection properties file during installation.</p>
+            <p><strong>Limits:</strong> Up to 256 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_rfc_dest</p>
+            <p><strong>SAP job name</strong></p>
+            <p>(Optional) Specifies the SAP R/3 job name.</p>
+            <p><strong>Limits:</strong> Up to 32 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_job_name</p>
+            <h2 class="heading2" id="ManageSAPJobsUsingCAWCC-DefineanSAPBusinessWarehouseProcessChainJob">Define an SAP Business Warehouse Process Chain Job</h2>
+            <p>You can define an SAP Business Warehouse Process Chain job to run a sequence of background processes on the SAP system. Some SAP processes trigger events that can start other processes. A job runs the individual processes in the chain as job steps. This procedure lets you create a job from scratch; however, you can use an SAP filter and copy an existing job from the SAP system to save time.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> To run these jobs, your system requires CA WA Agent for UNIX, Linux, or Windows and CA WA Agent for SAP.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP BW Process Chain (SAPBWPC) job.</li>
+                <li>Specify the following required properties:
+                    <ul>
+                        <li><strong>Name</strong><br>Defines the name of the job that you want to schedule. <br><strong>Limits:</strong> Up to 64 characters; valid characters are a-z, A-Z, 0-9, period (.), underscore (_), hyphen (-), and pound (#); do not include embedded spaces or tabs</li>
+                        <li><strong>Send to machine</strong><br>Specifies the name of the machine on which the job runs.</li>
+                        <li><p><strong>Chain identifier</strong><br>Specifies the name of the Business Warehouse Process Chain.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false">&nbsp;opens the Browse Process Chain Identifiers dialog, which lets you locate a BW Process Chain for the job definition.</p>
+                            </div> </li>
+                    </ul></li>
+                <li>(Optional) Specify optional <a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-SAPBWProcessChainProperties" class="conf-macro output-inline" data-hasbody="true">SAP BW Process Chain properties</a>.</li>
+                <li>(Optional) Specify <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/scheduling/schedule-with-ca-wcc/manage-common-job-properties" class="conf-macro output-inline" data-hasbody="true">common properties that apply to all job types</a>.</li>
+                <li>Commit the job.<br>The SAP BW Process Chain job is defined.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-SAPBWProcessChainJobExamples">SAP BW Process Chain Job Examples</h3>
+            <p>The following example describes a sample SAP BW Process Chain job.</p>
+            <p><strong>Example: Define an SAP BW Process Chain Job</strong></p>
+            <p>This example defines the SAPBWPC3 job, which runs the DEMO_CHAIN1 Process Chain on the SAP system. The language used to log on to the SAP system is English.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP BW Process Chain job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- SAPBWPC3</li>
+                        <li>Send to machine -- sapagent</li>
+                        <li>Owner -- WAAESAP@sapagent</li>
+                        <li>Logon Parameters: Language -- EN</li>
+                        <li>Logon Parameters: RFC destination -- SM1</li>
+                        <li>Chain identifier -- DEMO_CHAIN1</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-SAPBWProcessChainProperties">SAP BW Process Chain Properties</h3>
+            <p>The SAP BW Process Chain category includes the following properties:</p>
+            <p><strong>Agent job class</strong></p>
+            <p>(Optional) Specifies the job class that this job runs under. The agent maintains a list of job classes and the number of initiators assigned to each job class. A job class with more initiators can process a greater number of jobs more quickly. For higher-priority jobs, assign a job class that contains more initiators.</p>
+            <p><strong>Limits:</strong> Up to 32 characters; cannot contain delimiters (such as spaces)</p>
+            <p><strong>JIL attribute:</strong> job_class</p>
+            <p><strong>Chain identifier</strong></p>
+            <p>Specifies the name of the Business Warehouse Process Chain.</p>
+            <p><strong>Limits:</strong> Up to 30 characters</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false">&nbsp;opens the Browse Process Chain Identifiers dialog, letting you locate the process chain.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> sap_chain_id</p>
+            <p><strong>Logon Parameters: Client</strong></p>
+            <p>(Optional) Specifies the client within the SAP system. The value corresponds to the General data, Target server field on the Define Background Job dialog.</p>
+            <p><strong>Limits:</strong> Up to three digits</p>
+            <p><strong>JIL attribute:</strong> sap_client</p>
+            <p><strong>Logon Parameters: Language</strong></p>
+            <p>(Optional) Specifies a character code representing a valid language for SAP.</p>
+            <p><strong>Limits:</strong> Up to two characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_lang</p>
+            <p><strong>Logon Parameters: RFC destination</strong></p>
+            <p>(Optional) Indicates the destination specified in the connection properties file during installation.</p>
+            <p><strong>Limits:</strong> Up to 256 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_rfc_dest</p>
+            <h2 class="heading2" id="ManageSAPJobsUsingCAWCC-DefineanSAPDataArchivingJob">Define an SAP Data Archiving Job</h2>
+            <p>You can define an SAP Data Archiving job to store information described in an SAP archiving object in an SAP data archive.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> To run these jobs, your system requires CA WA Agent for UNIX, Linux, or Windows and CA WA Agent for SAP.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP Data Archiving (SAPDA) job.</li>
+                <li><span style="line-height: 1.4285;"><span style="line-height: 1.4285;">Specify the following required properties:<br></span></span>
+                    <ul>
+                        <li><strong>Name<br class="_mce_tagged_br"></strong>Defines the name of the job that you want to schedule.<br><strong>Limits:</strong><span>&nbsp;Up to 64 characters; valid characters are a-z, A-Z, 0-9, period (.), underscore (_), hyphen (-), and pound (#); do not include embedded spaces or tabs</span></li>
+                    </ul><span style="line-height: 1.4285;"><span style="line-height: 1.4285;">&nbsp;</span></span>
+                    <ul>
+                        <li><strong>Send to machine</strong><br>Specifies the name of the machine on which the job runs.</li>
+                        <li><p><strong>Archiving object name</strong><br>Specifies the name of the archiving object.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Note:</strong> Clicking &nbsp;opens the Search Archiving Objects dialog, which lets you locate an archiving object for the job definition.</p>
+                            </div> </li>
+                        <li><p><strong><strong>Archiving object variant<br></strong></strong>Specifies the name of the archiving object variant.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Note:</strong><span>&nbsp;</span><span>Clicking </span><img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false"><span>&nbsp;</span><span>opens the Browse Archiving Objects Variants dialog, which lets you locate an archiving object variant for the job definition.</span></p>
+                            </div> </li>
+                        <li><p><strong>Print parameters</strong><br>Specifies&nbsp;<a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-PrintParameters" class="conf-macro output-inline" data-hasbody="true">print parameters</a>.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="Click to edit." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353579/1/1427800948462/696541.png" data-hasbody="false">&nbsp;opens the Print Parameters dialog, which lets you specify the parameters for the job definition.</p>
+                            </div> </li>
+                    </ul></li>
+                <li>(Optional) Specify optional&nbsp;<a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-SAPDataArchivingProperties" class="conf-macro output-inline" data-hasbody="true">SAP Data Archiving properties</a>.</li>
+                <li>(Optional) Specify&nbsp;<a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/scheduling/schedule-with-ca-wcc/manage-common-job-properties" class="conf-macro output-inline" data-hasbody="true">common properties that apply to all job types</a>.</li>
+                <li>Commit the job.<br>The SAP Data Archiving job is defined.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-SAPDataArchivingJobExamples">SAP Data Archiving Job Examples</h3>
+            <p>The following example describes a sample SAP Data Archiving job.</p>
+            <p><strong>Example: Define an SAP Data Archiving Job</strong></p>
+            <p>This example defines a job that stores information described in the BC_ARCHIVE Archiving Object in an SAP data archive. The archiving object variant is BC_ARCVARIANT.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP Data Archiving job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- SAPDA_job</li>
+                        <li>Send to machine -- sapagent</li>
+                        <li>Owner -- WAAESAP@sapagent</li>
+                        <li>Archiving object name -- BC_ARCHIVE</li>
+                        <li>Archiving object variant -- BC_ARCVARIANT</li>
+                    </ul></li>
+                <li>Click <img alt="edit " data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353575/1/1427800948426/1148411.png" data-hasbody="false"> to open the Print Parameters dialog.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Archiving Mode -- Print</li>
+                        <li>Output Device -- LP01</li>
+                    </ul></li>
+                <li>Save the job.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-SAPDataArchivingProperties">SAP Data Archiving Properties</h3>
+            <p>The SAP Data Archiving category includes the following properties:</p>
+            <p><strong>Agent job class</strong></p>
+            <p>(Optional) Specifies the job class that this job runs under. The agent maintains a list of job classes and the number of initiators assigned to each job class. A job class with more initiators can process a greater number of jobs more quickly. For higher-priority jobs, assign a job class that contains more initiators.</p>
+            <p><strong>Limits:</strong> Up to 32 characters; cannot contain delimiters (such as spaces)</p>
+            <p><strong>JIL attribute:</strong> job_class</p>
+            <p><strong>Archiving object name</strong></p>
+            <p>Specifies the name of the archiving object.</p>
+            <p>Clicking <img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false"> opens the Search Archiving Objects dialog, which lets you locate an archiving object for the job definition.</p>
+            <p><strong>Limits:</strong> Up to 256 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_obj_name</p>
+            <p><strong>Archiving object variant</strong></p>
+            <p>Specifies the name of the archiving object variant.</p>
+            <p><strong>Limits:</strong> Up to 256 characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> Clicking
+                <img alt="Click to search for an object." data-macro-name="sp-image" class="img-responsive" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false"> opens the Browse Archiving Objects Variants dialog, which lets you locate an archiving object variant for the job definition.
+            </div>
+            <p><strong>JIL attribute:</strong> arc_obj_variant</p>
+            <p><strong>Archiving parameters</strong></p>
+            <p>(Optional) Specifies <a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-ArchivingParameters" class="conf-macro output-inline" data-hasbody="true">archiving parameters</a>.</p>
+            <p><strong>Limits:</strong> Up to 4096 characters</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> Clicking
+                <img alt="Click to edit." data-macro-name="sp-image" class="img-responsive" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353579/1/1427800948462/696541.png" data-hasbody="false"> opens the Archiving Parameters dialog, which lets you specify the parameters for the job definition.
+            </div>
+            <p><strong>JIL attribute:</strong> arc_parms</p>
+            <p><strong>Logon Parameters: Client</strong></p>
+            <p>(Optional) Specifies the client within the SAP system. The value corresponds to the General data, Target server field on the Define Background Job dialog.</p>
+            <p><strong>Limits:</strong> Up to three digits</p>
+            <p><strong>JIL attribute:</strong> sap_client</p>
+            <p><strong>Logon Parameters: Language</strong></p>
+            <p>(Optional) Specifies a character code representing a valid language for SAP.</p>
+            <p><strong>Limits:</strong> Up to two characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_lang</p>
+            <p><strong>Logon Parameters: RFC destination</strong></p>
+            <p>(Optional) Indicates the destination specified in the connection properties file during installation.</p>
+            <p><strong>Limits:</strong> Up to 256 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_rfc_dest</p>
+            <p><strong>Print parameters</strong></p>
+            <p>Specifies <a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-PrintParameters" class="conf-macro output-inline" data-hasbody="true">print parameters</a>.</p>
+            <p><strong>Limits:</strong> Up to 4096 characters</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note: </strong>Clicking
+                <img alt="Click to edit." data-macro-name="sp-image" class="img-responsive" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353579/1/1427800948462/696541.png" data-hasbody="false"> opens the Print Parameters dialog, which lets you specify the parameters for the job definition.
+            </div>
+            <p><strong>JIL attribute:</strong> sap_print_parms</p>
+            <p><strong>Target system</strong></p>
+            <p>(Optional) Specifies the host computer within the SAP system architecture that is capable of running SAP system workload.</p>
+            <p>This property supports Global Variable substitution.</p>
+            <p><strong>Limits:</strong> Up to 256 characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false">&nbsp;opens the Browse SAP Target Systems dialog, which lets you locate the host computer.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> sap_target_sys</p>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-PrintParameters">Print Parameters</h3>
+            <p>You can access the Print Parameters dialog by clicking <img alt="Click to edit." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353579/1/1427800948462/696541.png" data-hasbody="false"> to the right of the Print parameters field for an SAP Data Archiving job. The Print Parameters dialog includes the following parameters:</p>
+            <p><strong>Archiving Mode</strong></p>
+            <p>Specifies whether the spool file is printed, archived, or both.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;When Print is selected, the Archiving Parameters dialog is disabled.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> prt_arc_mode</p>
+            <p><strong>Authorization</strong></p>
+            <p>(Optional) Specifies the password for viewing the print spool list.</p>
+            <p><strong>Limits:</strong> Up to 12 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> authorization</p>
+            <p><strong>Dataset Name</strong></p>
+            <p>(Optional) Specifies the print spool data set name.</p>
+            <p><strong>Limits:</strong> Up to six characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> dataset</p>
+            <p><strong>Delete After Output</strong></p>
+            <p>(Optional) Indicates whether the spool request associated with the ABAP is deleted after printing. When selected, the agent deletes the spool request after printing. This parameter corresponds to the SAPGUI Spool options, Delete after output field on the Background Print Parameters dialog.</p>
+            <p><strong>JIL attribute:</strong> release</p>
+            <p><strong>Department</strong></p>
+            <p>(Optional) Specifies the department name to print on the cover page.</p>
+            <p><strong>Limits:</strong> Up to 12 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> dept</p>
+            <p><strong>Format</strong></p>
+            <p>(Optional) Specifies an output format for an SAP report.</p>
+            <p><strong>Limits:</strong> Up to 16 characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="UWCC--UG--Print Parameters--r11.3 (1)--r11.3--ICO" data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353576/1/1427800948434/1207498.png" data-hasbody="false">&nbsp;opens the Search Print Format dialog, which lets you locate the output format for the report.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> format</p>
+            <p><strong>New Spool Request</strong></p>
+            <p>(Optional) Indicates whether to create a new spool request or append the spool request to an existing spool request with similar attributes (if any). When selected, the agent creates a new spool request.</p>
+            <p><strong>JIL attribute:</strong> new_spool</p>
+            <p><strong>Number of Columns</strong></p>
+            <p>(Optional) Specifies the number of columns to be printed on the page.</p>
+            <p><strong>Limits:</strong> 1-255</p>
+            <p><strong>JIL attribute:</strong> num_columns</p>
+            <p><strong>Number of Copies</strong></p>
+            <p>(Optional) Specifies the number of print copies.</p>
+            <p><strong>Limits:</strong> 0-255</p>
+            <p><strong>JIL attribute:</strong> copies</p>
+            <p><strong>Number of Lines</strong></p>
+            <p>(Optional) Specifies the number of lines to be printed on the page.</p>
+            <p><strong>Limits:</strong> 0-486</p>
+            <p><strong>JIL attribute:</strong> num_lines</p>
+            <p><strong>OS Cover Page</strong></p>
+            <p>(Optional) Specifies whether to print a host page, as follows:</p>
+            <ul>
+                <li>Yes -- Prints the host page</li>
+                <li>No -- Does not print the host page</li>
+                <li>Default -- Uses the SAP default</li>
+            </ul>
+            <p><strong>JIL attribute:</strong> host_page</p>
+            <p><strong>Output Device</strong></p>
+            <p>Specifies the output device name. This parameter corresponds to the SAPGUI Output device field on the Background Print Parameters dialog.</p>
+            <p><strong>Limits:</strong> Up to four characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="UWCC--UG--Print Parameters--r11.3 (2)--r11.3--ICO" data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353577/1/1427800948444/1207499.png" data-hasbody="false">&nbsp;opens the Search Output Devices dialog, which lets you locate the output device.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> dest</p>
+            <p><strong>Print Immediately</strong></p>
+            <p>(Optional) Indicates whether to print the job immediately after completion. When selected, the agent prints the job immediately. This parameter corresponds to the SAPGUI Spool options, Print immediately field on the Background Print Parameters dialog.</p>
+            <p><strong>JIL attribute:</strong> print_imm</p>
+            <p><strong>Print Cover Page</strong></p>
+            <p>(Optional) Indicates whether to include an SAP cover page with the report output. When selected, the agent prints the report with a cover page.</p>
+            <p><strong>JIL attribute:</strong> banner_page</p>
+            <p><strong>Print Footer</strong></p>
+            <p>(Optional) Indicates whether to print a footer on an SAP report. When selected, the agent prints a report with a footer.</p>
+            <p><strong>JIL attribute:</strong> footer</p>
+            <p><strong>Print Priority</strong></p>
+            <p>(Optional) Specifies the priority of the SAP spool request. The priority is a number between 1 (highest priority) and 9 (lowest priority).</p>
+            <p><strong>Limits:</strong> 0-9</p>
+            <p><strong>JIL attribute:</strong> print_priority</p>
+            <p><strong>Recipient Name</strong></p>
+            <p>(Optional) Specifies the spool request recipient's name to appear on the SAP cover page, if applicable. This parameter corresponds to the SAPGUI Cover sheets options, Recipient field on the Background Print Parameters dialog.</p>
+            <p><strong>Limits:</strong> Up to 12 characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="UWCC--UG--Print Parameters--r11.3 (2)--r11.3--ICO" data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353577/1/1427800948444/1207499.png" data-hasbody="false">&nbsp;opens the Search SAP Office Users dialog, which lets you locate the spool request recipient name.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> recipient_name</p>
+            <p><strong>Request Type</strong></p>
+            <p>(Optional) Specifies the print request type.</p>
+            <p><strong>Limits:</strong> Up to 12 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> req_type</p>
+            <p><strong>SAP Cover Page</strong></p>
+            <p>(Optional) Indicates whether to include an SAP cover page containing information such as recipient name, department name, and format used, as follows:</p>
+            <ul>
+                <li>Yes -- Prints the SAP cover page</li>
+                <li>No -- Does not print the SAP cover page</li>
+                <li>Default -- Uses the SAP default</li>
+            </ul>
+            <p><strong>JIL attribute:</strong> sap_banner</p>
+            <p><strong>Spool Name</strong></p>
+            <p>(Optional) Specifies the name of the print spool.</p>
+            <p><strong>Limits:</strong> Up to 12 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> spool_name</p>
+            <p><strong>Spool Retention</strong></p>
+            <p>(Optional) Specifies the number of days before the spool request is deleted.</p>
+            <p><strong>Limits:</strong> 0-9</p>
+            <p><strong>JIL attribute:</strong> expiration</p>
+            <p><strong>Title</strong></p>
+            <p>(Optional) Specifies the spool request description.</p>
+            <p><strong>Limits:</strong> Up to 68 characters</p>
+            <p><strong>JIL attribute:</strong> title</p>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-ArchivingParameters">Archiving Parameters</h3>
+            <p>You can access the Archiving Parameters dialog by clicking <img alt="Click to edit." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353579/1/1427800948462/696541.png" data-hasbody="false"> to the right of the Archiving parameters field for an SAP Data Archiving job. The Archiving Parameters dialog includes the following parameters:</p>
+            <p><strong>ArchiveLink Host</strong></p>
+            <p>(Optional) Specifies the SAP archive link RPC host.</p>
+            <p><strong>Limits:</strong> Up to 32 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_host_link</p>
+            <p><strong>ArchiveLink Information</strong></p>
+            <p>(Optional) Specifies the SAP archive link information.</p>
+            <p><strong>Limits:</strong> Up to three characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;This parameter is required if the print parameters Archiving mode is set to Archive or Both.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> arc_info</p>
+            <p><strong>ArchiveLink Object Type</strong></p>
+            <p>(Optional) Specifies the type of external system archive object. This parameter corresponds to the Obj. type field on the Define Background Archive Parameters dialog.</p>
+            <p><strong>Limits:</strong> Up to 10 characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;This parameter is required if the print parameters Archiving mode is set to Archive or Both.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> arc_obj_type</p>
+            <p><strong>Archiving Path</strong></p>
+            <p>(Optional) Specifies the standard archive path.</p>
+            <p><strong>Limits:</strong> Up to 70 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_path</p>
+            <p><strong>Client</strong></p>
+            <p>(Optional) Specifies the SAP archive link client.</p>
+            <p><strong>Limits:</strong> 0-999</p>
+            <p><strong>JIL attribute:</strong> arc_client</p>
+            <p><strong>Connection Name</strong></p>
+            <p>(Optional) Specifies the SAP archive link communication connection.</p>
+            <p><strong>Limits:</strong> Up to 14 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_connect</p>
+            <p><strong>Date</strong></p>
+            <p>(Optional) Specifies the date to do the archiving in YYYYMMDD format, using the SAP agent time zone.</p>
+            <p><strong>Limits:</strong> Up to eight characters</p>
+            <p><strong>JIL attribute:</strong> arc_date</p>
+            <p><strong>Document Class</strong></p>
+            <p>(Optional) Specifies the SAP archive link document class.</p>
+            <p><strong>Limits:</strong> Up to 20 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_doc_class</p>
+            <p><strong>Document Type</strong></p>
+            <p>(Optional) Specifies the name of the document type. This parameter corresponds to the Doc type field on the Define Background Archive Parameters dialog.</p>
+            <p><strong>Limits:</strong> Up to 10 characters; case-sensitive</p>
+            <p><strong>Note:</strong> This parameter is required if the print parameters Archiving mode is set to Archive or Both.</p>
+            <p><strong>JIL attribute:</strong> arc_doc_type</p>
+            <p><strong>Format</strong></p>
+            <p>(Optional) Specifies the SAP archive link output format.</p>
+            <p><strong>Limits:</strong> Up to 16 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_format</p>
+            <p><strong>Printer</strong></p>
+            <p>(Optional) Specifies the SAP archive link target printer.</p>
+            <p><strong>Limits:</strong> Up to four characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_printer</p>
+            <p><strong>Protocol</strong></p>
+            <p>(Optional) Specifies the SAP archive storage connection protocol.</p>
+            <p><strong>Limits:</strong> Up to eight characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_protocol</p>
+            <p><strong>Report</strong></p>
+            <p>(Optional) Specifies the SAP archive link report name.</p>
+            <p><strong>Limits:</strong> Up to 30 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_report</p>
+            <p><strong>Service Destination</strong></p>
+            <p>(Optional) Specifies the SAP archive link RPC service/destination.</p>
+            <p><strong>Limits:</strong> Up to 32 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_service</p>
+            <p><strong>Target Storage System</strong></p>
+            <p>(Optional) Specifies the SAP archive link target storage system.</p>
+            <p><strong>Limits:</strong> Up to two characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_storage</p>
+            <p><strong>Text</strong></p>
+            <p>(Optional) Specifies the SAP archive link Text Information field.</p>
+            <p><strong>Limits:</strong> Up to 30 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_text</p>
+            <p><strong>User</strong></p>
+            <p>(Optional) Specifies the archive data element for the user.</p>
+            <p><strong>Limits:</strong> Up to 12 characters</p>
+            <p><strong>JIL attribute:</strong> arc_userid</p>
+            <p><strong>Version</strong></p>
+            <p>(Optional) Specifies the archive version.</p>
+            <p><strong>Limits:</strong> Up to four characters</p>
+            <p><strong>JIL attribute:</strong> arc_version</p>
+            <h2 class="heading2" id="ManageSAPJobsUsingCAWCC-DefineanSAPEventMonitorJob">Define an SAP Event Monitor Job</h2>
+            <p>You can define an SAP Event Monitor job to schedule workload based on the activity of an SAP event or to trigger an SAP event at the appropriate time in your schedule.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> To run these jobs, your system requires CA WA Agent for UNIX, Linux, or Windows and CA WA Agent for SAP.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP Event Monitor (SAPEVT) job.</li>
+                <li>Specify the following required properties:<br>
+                    <ul>
+                        <li><strong>Name</strong><br>Defines the name of the job that you want to schedule. <br><strong>Limits:</strong> Up to 64 characters; valid characters are a-z, A-Z, 0-9, period (.), underscore (_), hyphen (-), and pound (#); do not include embedded spaces or tabs</li>
+                        <li><strong>Send to machine</strong><br>Specifies the name of the machine on which the job runs.</li>
+                        <li><strong>Event ID</strong></li>
+                    </ul><p>Specifies the name of the SAP event to monitor or trigger.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false">&nbsp;opens the Browse Background Event Identifiers dialog, which lets you locate an SAP event for the job definition.</p>
+                    </div> </li>
+                <li>(Optional) Specify optional <a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-SAPEventMonitorProperties" class="conf-macro output-inline" data-hasbody="true">SAP Event Monitor properties</a>.</li>
+                <li>(Optional) Specify <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/scheduling/schedule-with-ca-wcc/manage-common-job-properties" class="conf-macro output-inline" data-hasbody="true">common properties that apply to all job types</a>.</li>
+                <li>Commit the job.<br>The SAP Event Monitor job is defined.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-SAPEventMonitorJobExamples">SAP Event Monitor Job Examples</h3>
+            <p>The following examples describe sample SAP Event Monitor jobs.</p>
+            <p><strong>Example: Trigger an SAP Event</strong></p>
+            <p>This example defines an SAPEVT job with the Event trigger property selected, so the job triggers the SAP_TEST event by default.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP Event Monitor job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- SAPEVT_job</li>
+                        <li>Send to machine -- sapagent</li>
+                        <li>Owner -- WAAESAP@sapagent</li>
+                        <li>Logon Parameters: RFC destination -- BI1</li>
+                        <li>Event ID -- SAP_TEST</li>
+                        <li>Event trigger -- selected</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <p><strong>Example: Monitor an SAP Event</strong></p>
+            <p>This example defines an SAPEVT job without the Event trigger property selected, so the job monitors the SAP_TEST event and remains in RUNNING status.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP Event Monitor job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- trigger_evt</li>
+                        <li>Send to machine -- localhost</li>
+                        <li>Owner -- WAAESAP@sapagent</li>
+                        <li>Logon Parameters: Client -- 001</li>
+                        <li>Logon Parameters: Language -- EN</li>
+                        <li>Logon Parameters: RFC destination -- BI1</li>
+                        <li>Event ID -- SAP_TEST</li>
+                        <li>Event parameters -- L L</li>
+                        <li>Event trigger -- not selected</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-SAPEventMonitorProperties">SAP Event Monitor Properties</h3>
+            <p>The SAP Event Monitor category includes the following properties:</p>
+            <p><strong>Agent job class</strong></p>
+            <p>(Optional) Specifies the job class that this job runs under. The agent maintains a list of job classes and the number of initiators assigned to each job class. A job class with more initiators can process a greater number of jobs more quickly. For higher-priority jobs, assign a job class that contains more initiators.</p>
+            <p><strong>Limits:</strong> Up to 32 characters; cannot contain delimiters (such as spaces)</p>
+            <p><strong>JIL attribute:</strong> job_class</p>
+            <p><strong>Continuous</strong></p>
+            <p>(Defaulted) Indicates whether to monitor for the conditions continuously. When selected, each time the specified conditions occur, an alert is written to the scheduler log file.</p>
+            <p><strong>Default:</strong> not selected (the job does not monitor for the conditions)</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>To end continuous monitoring, you must complete the job manually.</li>
+                    <li>Either Continuous or Event trigger can be selected, but not both.</li>
+                </ul>
+            </div>
+            <p><strong>JIL attribute:</strong> continuous</p>
+            <p><strong>Event ID</strong></p>
+            <p>Specifies the name of the SAP event to monitor or trigger.</p>
+            <p><strong>Limits:</strong> Up to 32 valid SAP characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false">&nbsp;opens the Browse Background Event Identifiers dialog, which lets you locate an SAP event.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> sap_event_id</p>
+            <p><strong>Event parameter</strong></p>
+            <p>(Optional) Specifies the name of the SAP event parameter.</p>
+            <p><strong>Limits:</strong> Up to 64 characters</p>
+            <p><strong>JIL attribute:</strong> sap_event_parm</p>
+            <p><strong>Event trigger</strong></p>
+            <p>(Defaulted) Indicates whether to trigger or monitor an SAP event. When selected, the agent triggers an SAP event.</p>
+            <p><strong>Default:</strong> not selected (the job monitors for an SAP event)</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> Either Continuous or Event trigger can be selected, but not both.
+            </div>
+            <p><strong>JIL attribute:</strong> sap_is_trigger</p>
+            <p><strong>Logon Parameters: Client</strong></p>
+            <p>(Optional) Specifies the client within the SAP system. The value corresponds to the General data, Target server field on the Define Background Job dialog.</p>
+            <p><strong>Limits:</strong> Up to three digits</p>
+            <p><strong>JIL attribute:</strong> sap_client</p>
+            <p><strong>Logon Parameters: Language</strong></p>
+            <p>(Optional) Specifies a character code representing a valid language for SAP.</p>
+            <p><strong>Limits:</strong> Up to two characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_lang</p>
+            <p><strong>Logon Parameters: RFC destination</strong></p>
+            <p>(Optional) Indicates the destination specified in the connection properties file during installation.</p>
+            <p><strong>Limits:</strong> Up to 256 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_rfc_dest</p>
+            <h2 class="heading2" id="ManageSAPJobsUsingCAWCC-DefineanSAPJobCopyJob">Define an SAP Job Copy Job</h2>
+            <p>You can define an SAP Job Copy job to schedule an existing SAP R/3 job.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> To run these jobs, your system requires CA WA Agent for UNIX, Linux, or Windows and CA WA Agent for SAP.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP Job Copy (SAPJC) job.</li>
+                <li>Specify the following required properties:<br>
+                    <ul>
+                        <li><strong>Name</strong><br>Defines the name of the job that you want to schedule. <br><strong>Limits:</strong> Up to 64 characters; valid characters are a-z, A-Z, 0-9, period (.), underscore (_), hyphen (-), and pound (#); do not include embedded spaces or tabs</li>
+                        <li><strong>Send to machine</strong><br>Specifies the name of the machine on which the job runs.</li>
+                        <li><strong>SAP job name</strong></li>
+                    </ul>Specifies the SAP R/3 job name.<br>
+                    <ul>
+                        <li><strong>SAP job count</strong></li>
+                    </ul>Specifies the ID of the job to be copied.</li>
+                <li>(Optional) Specify optional <a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-SAPJobCopyProperties" class="conf-macro output-inline" data-hasbody="true">SAP Job Copy properties</a>.</li>
+                <li>(Optional) Specify <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/scheduling/schedule-with-ca-wcc/manage-common-job-properties" class="conf-macro output-inline" data-hasbody="true">common properties that apply to all job types</a>.</li>
+                <li>Commit the job.<br>The SAP Job Copy job is defined.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-SAPJobCopyJobExamples">SAP Job Copy Job Examples</h3>
+            <p>The following example describes a sample SAP Job Copy job.</p>
+            <p><strong>Example: Define an SAP Job Copy Job</strong></p>
+            <p>This example defines an SAP Job Copy job that copies the AM job with job count 11331500.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP Job Copy job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- SAPJC_job</li>
+                        <li>Send to machine -- sapagent</li>
+                        <li>Owner -- WAAESAP@sapagent</li>
+                        <li>SAP job count -- 11331500</li>
+                        <li>SAP job name -- AM</li>
+                    </ul></li>
+                <li>Save the job.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-SAPJobCopyProperties">SAP Job Copy Properties</h3>
+            <p>The SAP Job Copy category includes the following properties:</p>
+            <p><strong>Agent job class</strong></p>
+            <p>(Optional) Specifies the job class that this job runs under. The agent maintains a list of job classes and the number of initiators assigned to each job class. A job class with more initiators can process a greater number of jobs more quickly. For higher-priority jobs, assign a job class that contains more initiators.</p>
+            <p><strong>Limits:</strong> Up to 32 characters; cannot contain delimiters (such as spaces)</p>
+            <p><strong>JIL attribute:</strong> job_class</p>
+            <p><strong>Failure message</strong></p>
+            <p>(Optional) Specifies a string that indicates the job failed. If the string is found in the job's spool file, the job is considered failed even if the job succeeds on the SAP system.</p>
+            <p><strong>Limits:</strong> Up to 128 valid SAP characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_fail_msg</p>
+            <p><strong>Logon Parameters: Client</strong></p>
+            <p>(Optional) Specifies the client within the SAP system. The value corresponds to the General data, Target server field on the Define Background Job dialog.</p>
+            <p><strong>Limits:</strong> Up to three digits</p>
+            <p><strong>JIL attribute:</strong> sap_client</p>
+            <p><strong>Logon Parameters: Language</strong></p>
+            <p>(Optional) Specifies a character code representing a valid language for SAP.</p>
+            <p><strong>Limits:</strong> Up to two characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_lang</p>
+            <p><strong>Logon Parameters: RFC destination</strong></p>
+            <p>(Optional) Indicates the destination specified in the connection properties file during installation.</p>
+            <p><strong>Limits:</strong> Up to 256 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_rfc_dest</p>
+            <p><strong>Monitor children</strong></p>
+            <p>(Optional) Indicates whether to monitor a job's children. Children jobs are jobs produced by a parent job. When selected, the agent monitors the job's children.</p>
+            <p><strong>Default:</strong> Not selected (The job does not monitor children jobs.)</p>
+            <p><strong>JIL attribute:</strong> sap_mon_child</p>
+            <p><strong>Release option</strong></p>
+            <p>(Defaulted) Specifies the action to take with an SAP R/3 job after it is defined, as follows:</p>
+            <ul>
+                <li>Immediately -- Releases the job immediately</li>
+                <li>As soon as possible -- Releases the job as soon as possible</li>
+            </ul>
+            <p><strong>Default:</strong> As soon as possible</p>
+            <p><strong>JIL attribute:</strong> sap_release_option</p>
+            <p><strong>SAP job count</strong></p>
+            <p>(Optional) Specifies the ID of the job to be copied.</p>
+            <p><strong>Limits:</strong> Up to eight digits</p>
+            <p><strong>JIL attribute:</strong> sap_job_count</p>
+            <p><strong>SAP job name</strong></p>
+            <p>Specifies the SAP R/3 job name.</p>
+            <p><strong>Limits:</strong> Up to 32 characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false">&nbsp;opens the Search SAP Job Name and Job Count dialog, which lets you locate an SAP job.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> sap_job_name</p>
+            <p><strong>Step number</strong></p>
+            <p>(Optional) Specifies the number of the first step to start copying job data from.</p>
+            <p><strong>Limits:</strong> 0-<em>n</em>, where <em>n</em> is the highest step number</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;If you specify 0 or 1, all steps are copied.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> sap_step_num</p>
+            <p><strong>Success message</strong></p>
+            <p>(Optional) Specifies a string that, when found in the condition output of an SAP job, indicates the success of the job.</p>
+            <p><strong>Limits:</strong> Up to 128 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_success_msg</p>
+            <p><strong>Target job name</strong></p>
+            <p>(Optional) Specifies the name of the target job to copy. If unspecified, the target job will have the same name as the source job.</p>
+            <p><strong>Limits:</strong> Up to 32 characters</p>
+            <p><strong>JIL attribute:</strong> sap_target_jobname</p>
+            <p><strong>Target system</strong></p>
+            <p>(Optional) Specifies the host computer within the SAP system architecture that is capable of running SAP system workload.</p>
+            <p>This property supports Global Variable substitution.</p>
+            <p><strong>Limits:</strong> Up to 256 characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false">&nbsp;opens the Browse SAP Target Systems dialog, which lets you locate the host computer.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> sap_target_sys</p>
+            <h2 class="heading2" id="ManageSAPJobsUsingCAWCC-DefineanSAPProcessMonitorJob">Define an SAP Process Monitor Job</h2>
+            <p>You can define an SAP Process Monitor job to monitor for a specific SAP process status and end after detecting a process. You can also use SAP Process Monitor jobs to set up predecessor or dependent job relationships with other jobs or SAP processes.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> To run these jobs, your system requires CA WA Agent for UNIX, Linux, or Windows and CA WA Agent for SAP.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP Process Monitor (SAPPM) job.</li>
+                <li>Specify the following required properties:
+                    <ul>
+                        <li><strong>Name</strong><br>Defines the name of the job that you want to schedule. <br><strong>Limits:</strong> Up to 64 characters; valid characters are a-z, A-Z, 0-9, period (.), underscore (_), hyphen (-), and pound (#); do not include embedded spaces or tabs</li>
+                        <li><strong>Send to machine</strong><br>Specifies the name of the machine on which the job runs.</li>
+                        <li><strong>Process status</strong><br>Specifies the SAP process status to monitor, as follows:
+                            <ul>
+                                <li>Waiting</li>
+                                <li>Running</li>
+                                <li>Stopped</li>
+                            </ul></li>
+                    </ul></li>
+                <li>(Optional) Specify optional <a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-SAPProcessMonitorProperties" class="conf-macro output-inline" data-hasbody="true">SAP Process Monitor properties</a>.</li>
+                <li>(Optional) Specify <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/scheduling/schedule-with-ca-wcc/manage-common-job-properties" class="conf-macro output-inline" data-hasbody="true">common properties that apply to all job types</a>.</li>
+                <li>Commit the job.<br>The SAP Process Monitor job is defined.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-SAPProcessMonitorJobExamples">SAP Process Monitor Job Examples</h3>
+            <p>The following example describes a sample SAP Process Monitor job.</p>
+            <p><strong>Example: Define an SAP Process Monitor Job</strong></p>
+            <p>This example defines an SAP Process Monitor job that monitors the RUNNING status.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP Process Monitor job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- test_SAPPM</li>
+                        <li>Send to machine -- sapagent</li>
+                        <li>Logon Parameters: RFC destination -- BI1</li>
+                        <li>Process status -- Running</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-SAPProcessMonitorProperties">SAP Process Monitor Properties</h3>
+            <p>The SAP Process Monitor category includes the following properties:</p>
+            <p><strong>ABAP name</strong></p>
+            <p>(Optional) Starts a step definition within the job definition and identifies the ABAP step to be run. This property corresponds to the SAPGUI ABAP program Name field on the Create Step dialog.</p>
+            <p><strong>Limits:</strong> Up to 40 characters</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;This property is not valid if the Process status is set to Waiting.</p>
+            </div>
+            <p><strong>JIL attribute: </strong>sap<strong>_</strong>abap_name</p>
+            <p><strong>Agent job class</strong></p>
+            <p>(Optional) Specifies the job class that this job runs under. The agent maintains a list of job classes and the number of initiators assigned to each job class. A job class with more initiators can process a greater number of jobs more quickly. For higher-priority jobs, assign a job class that contains more initiators.</p>
+            <p><strong>Limits:</strong> Up to 32 characters; cannot contain delimiters (such as spaces)</p>
+            <p><strong>JIL attribute:</strong> job_class</p>
+            <p><strong>Continuous</strong></p>
+            <p>(Optional) Indicates whether to monitor for the conditions continuously. When selected, each time the specified conditions occur, an alert is written to the scheduler log file.</p>
+            <p><strong>Default:</strong> not selected (the job does not monitor for the conditions)</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;To end continuous monitoring, you must complete the job manually.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> continuous</p>
+            <p><strong>Logon Parameters: Client</strong></p>
+            <p>(Optional) Specifies the client within the SAP system. The value corresponds to the General data, Target server field on the Define Background Job dialog.</p>
+            <p><strong>Limits:</strong> Up to three digits</p>
+            <p><strong>JIL attribute:</strong> sap_client</p>
+            <p><strong>Logon Parameters: Language</strong></p>
+            <p>(Optional) Specifies a character code representing a valid language for SAP.</p>
+            <p><strong>Limits:</strong> Up to two characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_lang</p>
+            <p><strong>Logon Parameters: RFC destination</strong></p>
+            <p>(Optional) Indicates the destination specified in the connection properties file during installation.</p>
+            <p><strong>Limits:</strong> Up to 256 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_rfc_dest</p>
+            <p><strong>Process client</strong></p>
+            <p>(Optional) Specifies the client monitored for the process.</p>
+            <p><strong>Limits:</strong> Up to three digits</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;This property is not valid if the Process status is set to Waiting.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> sap_process_client</p>
+            <p><strong>Process status</strong></p>
+            <p>Specifies the SAP process status to monitor.</p>
+            <ul>
+                <li>Running</li>
+                <li>Stopped</li>
+                <li>Waiting</li>
+            </ul>
+            <p><strong>JIL attribute:</strong> sap_process_status</p>
+            <p><strong>Process type</strong></p>
+            <p>(Optional) Specifies the SAP business process type to monitor.BGD -- backgroundDIA -- dialogENQ -- lockSPO -- spoolUPD -- updateUP2 -- update2</p>
+            <p><strong>JIL attribute:</strong> sap_proc_type</p>
+            <p><strong>Process user</strong></p>
+            <p>(Optional) Specifies an SAP user name. When a process matches the specified process status, the job the process runs is checked for a match to this user.</p>
+            <p><strong>Limits:</strong> Up to 12 characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;This property is not valid if the Process status is set to Waiting.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> sap_proc_user</p>
+            <p><strong>Target system</strong></p>
+            <p>(Optional) Specifies the host computer within the SAP system architecture that is capable of running SAP system workload.</p>
+            <p><strong>Limits:</strong> Up to 256 characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false">&nbsp;opens the Browse SAP Target Systems dialog, which lets you locate the host computer.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> sap_target_sys</p>
+            <h2 class="heading2" id="ManageSAPJobsUsingCAWCC-DefineanSAPR/3JobJob">Define an SAP R/3 Job Job</h2>
+            <p>You can define an SAP R/3 job to schedule an SAP R/3 job on your SAP system. This procedure lets you create a job from scratch; however, you can use an SAP filter and copy an existing job from the SAP system to save time.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> To run these jobs, your system requires CA WA Agent for UNIX, Linux, or Windows and CA WA Agent for SAP.
+            </div>
+            <p>To schedule an SAP R/3 job, you must define at least one ABAP (SAP program) in the job definition.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP R/3 (SAP) job.</li>
+                <li>Specify the following required properties:<br>
+                    <ul>
+                        <li><strong>Name</strong><br>Defines the name of the job that you want to schedule. <br><strong>Limits:</strong> Up to 64 characters; valid characters are a-z, A-Z, 0-9, period (.), underscore (_), hyphen (-), and pound (#); do not include embedded spaces or tabs</li>
+                        <li><strong>Send to machine</strong><br>Specifies the name of the machine on which the job runs.</li>
+                        <li><strong>SAP job name</strong></li>
+                    </ul>Specifies the SAP R/3 job name.
+                    <ul>
+                        <li><p><strong>Step parameters</strong><br>Specifies the <a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-StepParameters-CommandProperties" class="conf-macro output-inline" data-hasbody="true">SAP R/3 step specifications</a>.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Note:</strong>&nbsp;We recommend that you limit the number of steps (ABAPs) to one per job. If you run a job and one of the ABAPs fails, the job is marked as failed. If the ABAP fails, you cannot re-run the ABAP without re-running the entire job.</p>
+                            </div> </li>
+                    </ul></li>
+                <li>(Optional) Specify optional <a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-SAPR/3Properties" class="conf-macro output-inline" data-hasbody="true">SAP R/3 properties</a>.</li>
+                <li>(Optional) Specify <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/scheduling/schedule-with-ca-wcc/manage-common-job-properties" class="conf-macro output-inline" data-hasbody="true">common properties that apply to all job types</a>.</li>
+                <li>Commit the job.<br>The SAP R/3 job is defined.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-SAPR/3JobExamples">SAP R/3 Job Examples</h3>
+            <p>The following examples describe sample SAP R/3 jobs.</p>
+            <p><strong>Example: Define an SAP R/3 Job with One Step</strong></p>
+            <p>This example runs the SAP R/3 job named BI_WRITE_PROT_TO_APPLLOG, which in turn runs the SAP program (ABAP) named RSBATCH_WRITE_PROT_TO_APPLLOG.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP R/3 job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- test_SAP</li>
+                        <li>Send to machine -- sapagent</li>
+                        <li>Owner -- WAAESAP@sapagent</li>
+                        <li>SAP job name -- BI_WRITE_PROT_TO_APPLLOG</li>
+                        <li>Logon Parameters: RFC destination -- BI1</li>
+                    </ul></li>
+                <li>Select Add from the Select an Action drop-down list to the right of the Step parameters field, and click Go.</li>
+                <li>Click <img alt="edit " data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353575/1/1427800948426/1148411.png" data-hasbody="false"> to open the Step Parameters dialog.</li>
+                <li>Enter the following properties on the Command tab:
+                    <ul>
+                        <li>ABAP Name -- RSBATCH_WRITE_PROT_TO_APPLLOG</li>
+                        <li>ABAP Language -- EN</li>
+                    </ul></li>
+                <li>Click OK.<br>The step specifications are added to the job definition.</li>
+                <li>Commit the job.</li>
+            </ol>
+            <p><strong>Example: Define an SAP R/3 Job with Multiple Steps</strong></p>
+            <p>This example runs an SAP R/3 job named SAP_2_STEPS, which in turn runs two steps. Each step runs the same ABAP but with different parameters.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create an SAP R/3 job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- test_1</li>
+                        <li>Send to machine -- sapagent</li>
+                        <li>Owner -- WAAESAP@sapagent</li>
+                        <li>SAP job name -- SAP_2_STEPS</li>
+                        <li>Release option -- Immediately</li>
+                    </ul></li>
+                <li>Select Add from the Select an action drop-down list to the right of the Step Parameters field, and click Go.</li>
+                <li>Click <img alt="edit " data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353575/1/1427800948426/1148411.png" data-hasbody="false"> to open the Step Parameters dialog.</li>
+                <li>Enter the following properties on the Command tab:
+                    <ul>
+                        <li>ABAP Name -- BTCTEST</li>
+                        <li>Variant -- test</li>
+                        <li>ABAP Language -- EN</li>
+                    </ul></li>
+                <li>Enter the following properties on the Output tab:
+                    <ul>
+                        <li>Archiving Mode -- archived</li>
+                        <li>Number of Copies -- 2</li>
+                        <li>Number of Columns -- 80</li>
+                        <li>Number of Lines -- 65</li>
+                    </ul></li>
+                <li>Enter the following properties on the Archive tab:
+                    <ul>
+                        <li>Printer -- LP01</li>
+                        <li>ArchiveLink Object Type -- ARCHIVE</li>
+                        <li>Document Type -- ARCHIVE</li>
+                        <li>ArchiveLink Information -- inf,num</li>
+                    </ul></li>
+                <li>Click OK.<br>The step specifications are added to the job definition.</li>
+                <li>Select Add from the Select an Action drop-down list, and click Go.</li>
+                <li>Click <img alt="edit " data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353575/1/1427800948426/1148411.png" data-hasbody="false"> to open the Step Parameters dialog.</li>
+                <li>Enter the following properties on the Command tab:
+                    <ul>
+                        <li>ABAP Name -- BTCTEST</li>
+                        <li>Variant -- test</li>
+                        <li>ABAP Language -- EN</li>
+                    </ul></li>
+                <li>Enter the following properties on the Output tab:
+                    <ul>
+                        <li>Archiving Mode -- archived</li>
+                        <li>Number of Copies -- 1</li>
+                        <li>Number of Columns -- 80</li>
+                        <li>Number of Lines -- 65</li>
+                        <li>SAP Cover Page -- Yes</li>
+                        <li>Print Cover Page -- selected</li>
+                        <li>Recipient Name -- cyber</li>
+                    </ul></li>
+                <li>Enter the following properties on the Archive tab:
+                    <ul>
+                        <li>Printer -- LP01</li>
+                        <li>ArchiveLink Object Type -- ARCHIVE</li>
+                        <li>Document type -- ARCHIVE</li>
+                        <li>ArchiveLink Information -- inf,num</li>
+                    </ul></li>
+                <li>Click OK.<br>The step specifications are added to the job definition.</li>
+                <li>Commit the job.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-SAPR/3Properties">SAP R/3 Properties</h3>
+            <p>The SAP R/3 category includes the following properties:</p>
+            <p><strong>Agent job class</strong></p>
+            <p>(Optional) Specifies the job class that this job runs under. The agent maintains a list of job classes and the number of initiators assigned to each job class. A job class with more initiators can process a greater number of jobs more quickly. For higher-priority jobs, assign a job class that contains more initiators.</p>
+            <p><strong>Limits:</strong> Up to 32 characters; cannot contain delimiters (such as spaces)</p>
+            <p><strong>JIL attribute:</strong> job_class</p>
+            <p><strong>Failure message</strong></p>
+            <p>(Optional) Specifies a string that, when found in the condition output of an SAP job, indicates the failure of the job.</p>
+            <p><strong>Limits:</strong> Up to 128 valid SAP characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_fail_msg</p>
+            <p><strong>Logon Parameters: Client</strong></p>
+            <p>(Optional) Specifies the client within the SAP system. The value corresponds to the General data, Target server field on the Define Background Job dialog.</p>
+            <p><strong>Limits:</strong> Up to three digits</p>
+            <p><strong>JIL attribute:</strong> sap_client</p>
+            <p><strong>Logon Parameters: Language</strong></p>
+            <p>(Optional) Specifies a character code representing a valid language for SAP.</p>
+            <p><strong>Limits:</strong> Up to two characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_lang</p>
+            <p><strong>Logon Parameters: RFC destination</strong></p>
+            <p>(Optional) Indicates the destination specified in the connection properties file during installation.</p>
+            <p><strong>Limits:</strong> Up to 256 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_rfc_dest</p>
+            <p><strong>Monitor children</strong></p>
+            <p>(Optional) Indicates whether to monitor a job's children. Children jobs are jobs spawned by a parent job. When selected, the agent monitors the job's children.</p>
+            <p><strong>Default:</strong> Not selected (The job does not monitor children jobs.)</p>
+            <p><strong>JIL attribute:</strong> sap_mon_child</p>
+            <p><strong>Office output</strong></p>
+            <p>(Optional) Indicates whether to save outgoing documents to the SAPoffice outbox of the SAP user associated with the job. When selected, the agent saves outgoing documents.</p>
+            <p><strong>JIL attribute:</strong> sap_office</p>
+            <p><strong>Release option</strong></p>
+            <p>(Defaulted) Specifies the action to take with a job after it is defined, as follows:</p>
+            <ul>
+                <li>Immediately -- Releases the job immediately</li>
+                <li>As soon as possible -- Releases the job as soon as possible</li>
+            </ul>
+            <p><strong>Default:</strong> As soon as possible</p>
+            <p><strong>JIL attribute:</strong> sap_release_option</p>
+            <p><strong>SAP job class</strong></p>
+            <p>(Optional) Specifies a valid SAP system job class.</p>
+            <p><strong>Limits:</strong> One character</p>
+            <p><strong>JIL attribute:</strong> sap_job_class</p>
+            <p><strong>SAP job name</strong></p>
+            <p>Specifies the SAP R/3 job name.</p>
+            <p><strong>Limits:</strong> Up to 32 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_job_name</p>
+            <p><strong>Spool list recipients</strong></p>
+            <p>(Optional) Specifies the <a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-SpoolListRecipientProperties" class="conf-macro output-inline" data-hasbody="true">recipient properties</a> for the job's output (spool file).</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note: </strong>Selecting Add and clicking Go displays a row below the Spool list recipients field. In that field, clicking
+                <img alt="edit " data-macro-name="sp-image" class="img-responsive" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353575/1/1427800948426/1148411.png" data-hasbody="false"> opens the Spool List Recipient dialog, which lets you specify the recipients.
+            </div>
+            <p><strong>JIL attribute:</strong> sap_recipients</p>
+            <p><strong>Step parameters</strong></p>
+            <p>Specifies the <a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-StepParameters-CommandProperties" class="conf-macro output-inline" data-hasbody="true">SAP R/3 step specifications</a>.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;Selecting Add and clicking Go displays a row below the Step parameter field. In that field, clicking&nbsp;<img alt="edit " data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353575/1/1427800948426/1148411.png" data-hasbody="false">&nbsp;opens the Step Parameters dialog, which lets you specify the parameters for the job definition.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> sap_step_parms</p>
+            <p><strong>Success message</strong></p>
+            <p>(Optional) Specifies a string that, when found in the condition output of an SAP job, indicates the success of the job.</p>
+            <p><strong>Limits:</strong> Up to 128 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> sap_success_msg</p>
+            <p><strong>Target system</strong></p>
+            <p>(Optional) Specifies the host computer within the SAP system architecture that is capable of running SAP system workload.</p>
+            <p><strong>Limits:</strong> Up to 256 characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false">&nbsp;opens the Browse SAP Target Systems dialog, which lets you locate the host computer.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> sap_target_sys</p>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-UsingSuccessandFailureMessageswithinanSAPJob">Using Success and Failure Messages within an SAP Job</h3>
+            <p>You can check the output of an SAP R/3 job for specific text strings to determine whether the job is a success or a failure. You specify the text string in the Success message and Failure message SAP R/3 properties in the job definition. For example, suppose that when you cancel an SAP R/3 job, you want it to complete to release its successor job. You can specify the text string 'Job canceled' as a success message in the job definition. When you cancel the job, the agent checks the job's spool file, finds a match for 'Job canceled', and marks the job as complete.</p>
+            <p>You can also check the output of a step (ABAP) to determine whether the step is a success or failure. You specify the text string in either the Success message property or Failure message property within the Step parameter description on the Step parameters - Command tab.</p>
+            <p>For more flexibility, you can specify regular expressions instead of simple text strings within the Success message and Failure message properties. For example, you can use a regular expression to search for multiple strings at the same time. To compose a regular expression, follow the rules for Java class java.util.regex.Pattern. You can find these rules using an Internet search for java pattern.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> To enable regular expression processing, the agent administrator must configure the agent, setting the sap.useRegularExpressions parameter to true.
+            </div>
+            <p><strong>Examples: Using Regular Expressions</strong></p>
+            <ul>
+                <li><p>The following expression checks for "TEST" in the job's output file:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>(?s).*TEST.*</p></pre>
+                    </div>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> To check multiple lines in the file, you must use (?s). The first .* indicates that any number of characters can precede TEST. The second .* indicates that any number of characters can follow it.
+                    </div> </li>
+                <li><p>The following expression checks whether "not found" or "started" appears in the job's output file:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>&lt;(?s).*[not&nbsp;found|started].*&gt;</p></pre>
+                    </div></li>
+                <li><p>The following expression checks whether "Job canceled" appears in the job's output file:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>(?s).*Job\scanceled.*</p></pre>
+                    </div></li>
+            </ul>
+            <h2 class="heading2" id="ManageSAPJobsUsingCAWCC-DefineRecipientsfortheJob'sOutput">Define Recipients for the Job's Output</h2>
+            <p>In an SAP R/3 or a Batch Input Session job, you can define recipients for the job's output (spool file). The recipient can be an email address, an SAPoffice distribution list, or an SAPoffice user.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Open the SAP R/3 or Batch Input Session job for which you want to define recipients for the job's output.</li>
+                <li>Select Add and click Go in the Spool list recipients field to add a row.</li>
+                <li>Click <img alt="Click to edit." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353579/1/1427800948462/696541.png" data-hasbody="false"> beside the field to open the Spool List Recipient dialog.</li>
+                <li>Select a recipient type, as follows:
+                    <ul>
+                        <li>INT -- Specifies an email address</li>
+                        <li>DLI -- Specifies an SAPOffice distribution list</li>
+                        <li>SU -- Specifies an SAP user</li>
+                    </ul></li>
+                <li>Select whether to send the job's output using the To, cc, or bcc option in the Recipient field.</li>
+                <li>Specify the recipient name in the Recipient field.</li>
+                <li>(Optional) Select one or more of the following SAPoffice options to control delivery of the job output:
+                    <ul>
+                        <li>No forward -- Lets SAPOffice users forward the document.</li>
+                        <li>No print -- Lets SAPOffice users print the document.</li>
+                        <li>Express -- Sends instant messages to recipients if they are logged in to SAP.</li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> These options apply to the DLI and SU recipient types only.
+                    </div> </li>
+                <li>Click OK.<br>The spool list recipients are added to the job definition.</li>
+            </ol>
+            <p><strong>Example: Send a Spool File to a Distribution List</strong></p>
+            <p>This example sends the spool file to the users on the payroll distribution list.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Open the Spool List Recipient dialog.</li>
+                <li>Edit the following properties:
+                    <ul>
+                        <li>Recipient Type -- DLI</li>
+                        <li>Recipient -- To, payroll</li>
+                    </ul></li>
+                <li>Click OK.</li>
+            </ol>
+            <p><strong>Example: Send a Carbon Copy of a Spool File</strong></p>
+            <p>This example sends a carbon copy of a job spool file to the email address jsmith@company1.com.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Open the Spool List Recipient dialog.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Recipient Type -- INT</li>
+                        <li>Recipient -- cc, jsmith@company1.com</li>
+                    </ul></li>
+                <li>Click OK.</li>
+            </ol>
+            <p><strong>Example: Save an Outgoing Document to an SAPOffice Outbox</strong></p>
+            <p>This example saves outgoing documents to the SAPOffice outbox of the SAP user J01Prod.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Open the Spool List Recipient dialog.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Recipient Type -- SU</li>
+                        <li>Recipient -- To, J01PROD</li>
+                    </ul></li>
+                <li>Select SAPOffice Options.</li>
+                <li>Click OK.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-SpoolListRecipientProperties">Spool List Recipient Properties</h3>
+            <p>The Spool List Recipient dialog includes the following properties:</p>
+            <p><strong>Recipient</strong></p>
+            <p>Specifies the target recipient's email address. This property is required if the spool list recipient exists.</p>
+            <p><strong>Limits:</strong> Up to 256 characters</p>
+            <p><strong>JIL attribute:</strong> recipient</p>
+            <p><strong>Recipient Type</strong></p>
+            <p>Specifies the recipient type, as follows:</p>
+            <ul>
+                <li>INT -- Specifies an email address</li>
+                <li>DLI -- Specifies an SAPOffice distribution list</li>
+                <li>SU -- Specifies an SAP user</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>If the Recipient Type is DLI, clicking&nbsp;<img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false">&nbsp;opens the Search Distribution List dialog, which lets you locate a recipient.</li>
+                    <li>If the Recipient Type is Su, clicking&nbsp;<img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false">&nbsp;opens the Search SAP Office Users dialog, which lets you locate the spool request recipient name.</li>
+                </ul>
+            </div>
+            <p><strong>JIL attribute:</strong> rcp_type</p>
+            <p><strong>SAPOffice Options</strong></p>
+            <p>(Optional) Specifies recipient options when the Recipient type is set to DLI or SU, as follows:</p>
+            <ul>
+                <li>Express -- Sends instant messages to recipients if they are logged in to SAP.<br><strong>JIL attribute:</strong> express</li>
+                <li>No forward -- Lets SAPOffice users forward the document.<br><strong>JIL attribute:</strong> no_forward</li>
+                <li>No print -- Lets SAPOffice users print the document.<br><strong>JIL attribute:</strong> no_print</li>
+            </ul>
+            <h2 class="heading2" id="ManageSAPJobsUsingCAWCC-DefinePrintorArchiveParametersforaStep">Define Print or Archive Parameters for a Step</h2>
+            <p>In an SAP R/3 or a Batch Input Session job, you can define print or archive parameters, or both, for a step.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Open the SAP R/3 or Batch Input Session job for which you want to define print or archive parameters.</li>
+                <li>Click <img alt="Click to edit." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353579/1/1427800948462/696541.png" data-hasbody="false"> beside the Step parameters field.</li>
+                <li>Specify the following required property on the Command tab:
+                    <ul>
+                        <li><strong>ABAP Name</strong><br>Defines the valid SAP system ABAP name.</li>
+                    </ul></li>
+                <li>(Optional) Specify optional <a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-StepParameters-CommandProperties" class="conf-macro output-inline" data-hasbody="true">command parameters</a> for the step.</li>
+                <li>Click the Output tab.</li>
+                <li>(Optional) Specify optional for the step.</li>
+                <li><p>Click the Archive tab.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> The Archive tab is only available if Archiving Mode on the Output tab is either Archive or Both.
+                    </div> </li>
+                <li>(Optional) Specify optional <a data-macro-name="sp-plaintextbody-link" href="#ManageSAPJobsUsingCAWCC-Stepparameters-ArchiveProperties" class="conf-macro output-inline" data-hasbody="true">archive parameters</a> for the step.</li>
+                <li>Click OK.<br>The parameters for the step are added to the job definition.</li>
+            </ol>
+            <p><strong>Example: Specify Archive Parameters</strong></p>
+            <p>In this example, the archive target printer is PRT1. The archive mode, document type, and external archive object are Archive. The archive link information is inf and the archive link client is 800.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Open the Step Parameters dialog for the step.</li>
+                <li>Enter the following property on the Output tab:
+                    <ul>
+                        <li>Archive Mode -- Archive</li>
+                    </ul></li>
+                <li>Enter the following properties on the Archive tab:
+                    <ul>
+                        <li>ArchiveLink Object Type -- ARCHIVE</li>
+                        <li>Document Type -- ARCHIVE</li>
+                        <li>ArchiveLink Information -- info</li>
+                        <li>Printer -- PRT1</li>
+                        <li>Client -- 800</li>
+                    </ul></li>
+                <li>Click OK.</li>
+            </ol>
+            <p><strong>Example: Specify Print Parameters</strong></p>
+            <p>In this example, the print destination for the RSPARAM ABAP is LP01. The number of lines per list page is 65 and the line width of the list is 80. One copy of the report associated with the ABAP is printed.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Open the Step Parameters dialog for the step.</li>
+                <li>Enter the following property on the Command tab:
+                    <ul>
+                        <li>ABAP Name -- RSPARAM</li>
+                    </ul></li>
+                <li>Enter the following properties on the Output tab:
+                    <ul>
+                        <li>Archiving Mode -- archived</li>
+                        <li>Number of Copies -- 1</li>
+                        <li>Number of Columns -- 80</li>
+                        <li>Number of Lines -- 65</li>
+                    </ul></li>
+                <li>Enter the following properties on the Archive tab:
+                    <ul>
+                        <li>ArchiveLink Object Type -- Archive</li>
+                        <li>Document Type -- Archive</li>
+                        <li>ArchiveLink Information -- info</li>
+                        <li>Printer -- LP01</li>
+                        <li>Client -- 800</li>
+                    </ul></li>
+                <li>Click OK.</li>
+            </ol>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-StepParameters-CommandProperties">Step Parameters - Command Properties</h3>
+            <p>The Step Parameters dialog includes the following properties on the Command tab, which define the ABAP (step):</p>
+            <p><strong>ABAP Language</strong></p>
+            <p>(Optional) Specifies a language for the ABAP.</p>
+            <p><strong>Limits:</strong> Up to two characters</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;The SAP system default logon language is the default.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> abap_lang</p>
+            <p><strong>ABAP Name</strong></p>
+            <p>Defines the valid SAP system ABAP name. The ABAP name starts a step definition within the job definition and identifies the ABAP step to be run.</p>
+            <p><strong>Limits:</strong> Up to 40 characters</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>This parameter corresponds to the SAPGUI ABAP program name field on the Create Step dialog.</li>
+                    <li>Clicking&nbsp;<img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false">&nbsp;opens the Search ABAP Name dialog, which lets you locate a valid ABAP name.</li>
+                </ul>
+            </div>
+            <p><strong>JIL attribute:</strong> abap_name</p>
+            <p><strong>Failure Message</strong></p>
+            <p>(Optional) Specifies a string that indicates the job failed. If the string is found in the job's spool file, the job is considered failed even if the job succeeds on the SAP system.</p>
+            <p><strong>Limits:</strong> Up to 128 valid SAP characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note: </strong>This keyword does not apply to SAP Batch Input Session (SAPBDC) jobs.
+            </div>
+            <p><strong>JIL attribute:</strong> sap_fail_msg</p>
+            <p><strong>Mail List</strong></p>
+            <p>(Optional) Specifies a comma-separated list of email addresses.</p>
+            <p><strong>Limits: </strong>Up to 2048 total characters; each list can have maximum of 1024</p>
+            <p><strong>JIL attribute:</strong> sap_maillist</p>
+            <p><strong>Step User</strong></p>
+            <p>(Optional) Specifies the SAP R/3 system user under whose authorization the ABAP program runs.</p>
+            <p><strong>Limits:</strong> Up to 12 characters</p>
+            <p><strong>JIL attribute:</strong> step_user</p>
+            <p><strong>Success Message</strong></p>
+            <p>(Optional) Specifies a string that indicates the job completed successfully. If the string is found in the job's spool file, the job is considered successfully completed even if the job fails on the SAP system.</p>
+            <p><strong>Limits:</strong> Up to 128 valid SAP characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> This keyword does not apply to SAP Batch Input Session (SAPBDC) jobs.
+            </div>
+            <p><strong>JIL attribute:</strong> sap_success_msg</p>
+            <p><strong>Variant</strong></p>
+            <p>(Optional) Specifies the variant to pass.</p>
+            <p><strong>Limits:</strong> Up to 14 characters</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note: </strong>Clicking
+                <img alt="Click to search for an object." data-macro-name="sp-image" class="img-responsive" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false"> opens the Browse ABAP Variant dialog, which lets you locate a variant to pass.
+            </div>
+            <p><strong>JIL attribute:</strong> variant</p>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-StepParameters-OutputProperties">Step Parameters - Output Properties</h3>
+            <p>The Step Parameters dialog includes the following properties on the Output tab:</p>
+            <p><strong>Archiving Mode</strong></p>
+            <p>(Optional) Specifies whether the spool file is printed, archived, or both.</p>
+            <p><strong>JIL attribute:</strong> prt_arc_mode</p>
+            <p><strong>Authorization</strong></p>
+            <p>(Optional) Specifies the password for viewing the print spool list.</p>
+            <p><strong>Limits:</strong> Up to 12 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> authorization</p>
+            <p><strong>Dataset Name</strong></p>
+            <p>(Optional) Specifies the print spool data set name.</p>
+            <p><strong>Limits:</strong> Up to six characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> dataset</p>
+            <p><strong>Delete After Output</strong></p>
+            <p>(Optional) Indicates whether to delete the print spool file after output. When selected, the agent deletes the print spool file.</p>
+            <p><strong>JIL attribute:</strong> release</p>
+            <p><strong>Department</strong></p>
+            <p>(Optional) Specifies the department name to print on the cover page.</p>
+            <p><strong>Limits:</strong> Up to 12 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> dept</p>
+            <p><strong>Format</strong></p>
+            <p>(Optional) Specifies an output format for an SAP report.</p>
+            <p><strong>Limits:</strong> Up to 16 characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> Clicking
+                <img alt="Click to search for an object." data-macro-name="sp-image" class="img-responsive" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false"> opens the Search Print Format dialog, which lets you locate an output format.
+            </div>
+            <p><strong>JIL attribute:</strong> format</p>
+            <p><strong>New Spool Request</strong></p>
+            <p>(Optional) Indicates whether to create a new spool request. When selected, the agent creates a new spool request. SAP does not append the spool request to an existing spool request.</p>
+            <p><strong>JIL attribute:</strong> new_spool</p>
+            <p><strong>Number of Columns</strong></p>
+            <p>(Optional) Specifies the number of columns for the SAP report.</p>
+            <p><strong>Limits:</strong> 1-255</p>
+            <p><strong>JIL attribute:</strong> num_columns</p>
+            <p><strong>Number of Copies</strong></p>
+            <p>(Optional) Specifies the number of copies to print of the SAP report.</p>
+            <p><strong>Limits:</strong> 0-255</p>
+            <p><strong>JIL attribute:</strong> copies</p>
+            <p><strong>Number of Lines</strong></p>
+            <p>(Optional) Specifies the number of lines for the SAP report.</p>
+            <p><strong>Limits:</strong> 0-486</p>
+            <p><strong>JIL attribute:</strong> num_lines</p>
+            <p><strong>OS Cover Page</strong></p>
+            <p>(Optional) Specifies whether to print the operating system page, as follows:</p>
+            <ul>
+                <li>No</li>
+                <li>Yes</li>
+                <li>Default</li>
+            </ul>
+            <p><strong>JIL attribute:</strong> host_page</p>
+            <p><strong>Output Device</strong></p>
+            <p>(Optional) Specifies the name of the output device.</p>
+            <p><strong>Limits:</strong> Up to four characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> Clicking
+                <img alt="Click to search for an object." data-macro-name="sp-image" class="img-responsive" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false"> opens the Search Output Devices dialog, which lets you locate the output device.
+            </div>
+            <p><strong>JIL attribute:</strong> dest</p>
+            <p><strong>Print Cover Page</strong></p>
+            <p>(Optional) Indicates whether to print the selection cover page. When selected, the agent prints the selection cover page.</p>
+            <p><strong>JIL attribute:</strong> banner_page</p>
+            <p><strong>Print Footer</strong></p>
+            <p>(Optional) Indicates whether to print a footer on the SAP report. When selected, the agent prints a footer.</p>
+            <p><strong>JIL attribute:</strong> footer</p>
+            <p><strong>Print Immediately</strong></p>
+            <p>(Optional) Indicates whether to print the job immediately after completion. When selected, the agent prints the job immediately.</p>
+            <p><strong>JIL attribute:</strong> print_imm</p>
+            <p><strong>Print Priority</strong></p>
+            <p>(Optional) Specifies the priority number of the print spool request.</p>
+            <p><strong>Limits:</strong> 0-9</p>
+            <p><strong>JIL attribute:</strong> print_priority</p>
+            <p><strong>Recipient Name</strong></p>
+            <p>(Optional) Specifies the recipient on the SAP cover page.</p>
+            <p><strong>Limits:</strong> Up to 12 characters; case-sensitive</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> Clicking
+                <img alt="Click to search for an object." data-macro-name="sp-image" class="img-responsive" src="/ca-workload-automation-ae/11-4-2/en/files/361353573/361353578/1/1427800948452/692501.png" data-hasbody="false"> opens the Search SAP Office Users dialog, which lets you locate the spool request recipient name.
+            </div>
+            <p><strong>JIL attribute:</strong> recipient</p>
+            <p><strong>Request Type</strong></p>
+            <p>(Optional) Specifies the print request type.</p>
+            <p><strong>Limits:</strong> Up to 12 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> req_type</p>
+            <p><strong>SAP Cover Page</strong></p>
+            <p>(Optional) Specifies whether to print the SAP cover page, as follows:</p>
+            <ul>
+                <li>No</li>
+                <li>Yes</li>
+                <li>Default</li>
+            </ul>
+            <p><strong>JIL attribute:</strong> sap_banner</p>
+            <p><strong>Spool Name</strong></p>
+            <p>(Optional) Specifies the spool request name.</p>
+            <p><strong>Limits:</strong> Up to 12 characters</p>
+            <p><strong>JIL attribute:</strong> spool_name</p>
+            <p><strong>Spool Retention</strong></p>
+            <p>(Optional) Specifies the number of days before the spool request expires and is deleted.</p>
+            <p><strong>Limits:</strong> 0-9</p>
+            <p><strong>JIL attribute:</strong> expiration</p>
+            <p><strong>Title</strong></p>
+            <p>(Optional) Specifies the spool request description.</p>
+            <p><strong>Limits:</strong> Up to 68 characters</p>
+            <p><strong>JIL attribute:</strong> title</p>
+            <h3 class="heading3" id="ManageSAPJobsUsingCAWCC-Stepparameters-ArchiveProperties">Step parameters - Archive Properties</h3>
+            <p>The Step Parameters dialog includes the following properties on the Archive tab:</p>
+            <p><strong>ArchiveLink Host</strong></p>
+            <p>(Optional) Specifies the SAP ArchiveLink RPC host.</p>
+            <p><strong>Limits:</strong> Up to 32 characters</p>
+            <p><strong>JIL attribute:</strong> arc_host_link</p>
+            <p><strong>ArchiveLink Information</strong></p>
+            <p>Specifies the SAP ArchiveLink RPC information.</p>
+            <p><strong>Limits:</strong> Up to three characters</p>
+            <p><strong>JIL attribute:</strong> arc_info</p>
+            <p><strong>ArchiveLink Object Type</strong></p>
+            <p>Specifies the SAP ArchiveLink object type.</p>
+            <p><strong>Limits:</strong> Up to 10 characters</p>
+            <p><strong>JIL attribute:</strong> arc_obj_type</p>
+            <p><strong>Archiving Path</strong></p>
+            <p>(Optional) Specifies the standard archive path.</p>
+            <p><strong>Limits:</strong> Up to 70 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_path</p>
+            <p><strong>Client</strong></p>
+            <p>(Optional) Specifies the SAP ArchiveLink client.</p>
+            <p><strong>Limits:</strong> 0-999</p>
+            <p><strong>JIL attribute:</strong> arc_client</p>
+            <p><strong>Connection Name</strong></p>
+            <p>(Optional) Specifies the SAP ArchiveLink communication connection.</p>
+            <p><strong>Limits:</strong> Up to 14 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_connect</p>
+            <p><strong>Date</strong></p>
+            <p>(Optional) Specifies the date to do the archiving in YYYYMMDD format.</p>
+            <p><strong>Limits:</strong> Up to eight characters</p>
+            <p><strong>JIL attribute:</strong> arc_date</p>
+            <p><strong>Document Class</strong></p>
+            <p>(Optional) Specifies the SAP ArchiveLink document class.</p>
+            <p><strong>Limits:</strong> Up to 20 characters</p>
+            <p><strong>JIL attribute:</strong> arc_doc_class</p>
+            <p><strong>Document Type</strong></p>
+            <p>Specifies the SAP ArchiveLink document type.</p>
+            <p><strong>Limits:</strong> Up to 10 characters</p>
+            <p><strong>JIL attribute:</strong> arc_doc_type</p>
+            <p><strong>Format</strong></p>
+            <p>(Optional) Specifies the SAP ArchiveLink output format.</p>
+            <p><strong>Limits:</strong> Up to 16 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_format</p>
+            <p><strong>Printer</strong></p>
+            <p>(Optional) Specifies the SAP ArchiveLink target printer.</p>
+            <p><strong>Limits:</strong> Up to four characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_printer</p>
+            <p><strong>Protocol</strong></p>
+            <p>(Optional) Specifies the archive storage connection protocol.</p>
+            <p><strong>Limits:</strong> Up to eight characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_protocol</p>
+            <p><strong>Report</strong></p>
+            <p>(Optional) Specifies the SAP ArchiveLink report name.</p>
+            <p><strong>Limits:</strong> Up to 30 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_report</p>
+            <p><strong>Service Destination</strong></p>
+            <p>(Optional) Specifies the SAP ArchiveLink RPC service/destination.</p>
+            <p><strong>Limits:</strong> Up to 32 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_service</p>
+            <p><strong>Target Storage System</strong></p>
+            <p>(Optional) Specifies the SAP ArchiveLink target storage system.</p>
+            <p><strong>Limits:</strong> Up to two characters</p>
+            <p><strong>JIL attribute:</strong> arc_storage</p>
+            <p><strong>Text</strong></p>
+            <p>(Optional) Specifies the archiving text.</p>
+            <p><strong>Limits:</strong> Up to 30 characters; case-sensitive</p>
+            <p><strong>JIL attribute:</strong> arc_text</p>
+            <p><strong>User</strong></p>
+            <p>(Optional) Specifies the archive data element for the user.</p>
+            <p><strong>Limits:</strong> Up to 12 characters</p>
+            <p><strong>JIL attribute:</strong> arc_userid</p>
+            <p><strong>Version</strong></p>
+            <p>(Optional) Specifies the archive version.</p>
+            <p><strong>Limits:</strong> Up to four characters</p>
+            <p><strong>JIL attribute:</strong> arc_version</p>
+            <h2 class="heading2" id="ManageSAPJobsUsingCAWCC-SendtheSAPSpoolFilebyEmailonStepCompletionorFailure">Send the SAP Spool File by Email on Step Completion or Failure</h2>
+            <p>In an SAP R/3 or a Batch Input Session job, you can send the SAP spool file by email on step completion or failure.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Specify the ABAPNAME statement to start the step definition within the job definition.</li>
+                <li>Specify the EMAILADDR statement after the ABAPNAME statement. <br>To specify multiple email addresses, separate each address with a comma and enclose the entire list of addresses in apostrophes.</li>
+                <li>(Optional) Specify the following optional statements to determine whether the step is a success or failure based on a text string in the job's output:
+                    <ul>
+                        <li>SUCCESSMSG</li>
+                        <li>FAILUREMSG</li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> This step does not apply to Batch Input Session jobs.
+                    </div> </li>
+            </ol>
+            <p><strong>Example: Email Spool File to Two Addresses</strong></p>
+            <p>This example emails the spool file to jsmith and djones upon completion or failure of the BTCTEST ABAP.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>AGENT&nbsp;SAPHTAGENT</p><p>SAPUSER&nbsp;J01PROD</p><p>ABAPNAME&nbsp;BTCTEST</p><p>&nbsp;&nbsp;&nbsp;VARIANT&nbsp;TEST</p><p>&nbsp;&nbsp;&nbsp;EMAILADDR&nbsp;'jsmith@company1.com,djones@company1.com'</p></pre>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

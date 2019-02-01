@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p>The Configuration Batch Interface lets you export and import these configurations, encrypt command line arguments, run encrypted commands, and change the CA EEM server definition. You can run the Configuration Batch Interface from a Windows command line or UNIX console as an alternative to using the Configuration application.&nbsp;</p>
+            <p>You can use the Configuration Batch Interface to do the following procedures:</p>
+            <ul>
+                <li>Export configurations to a file. After exporting the configurations, you can do the following procedures using a text editor:
+                    <ul>
+                        <li>Add multiple objects to an exported configuration file using the copy and paste feature of your text editor. For example, if you want to add several CA Workload Automation AE servers, you can create one server definition in Configuration. Next, export the appropriate configurations, open the text file, and copy the server properties for it. Paste an instance of them for each new server you want to add, and modify the server names and other properties as necessary.</li>
+                        <li>Modify or delete multiple objects in one export operation. For example, you can export the appropriate configurations, and can change all non-encrypted passwords.</li>
+                    </ul></li>
+                <li><p>Import modified configurations back to the same server or to another CA WCC server.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> The Configuration Batch Interface utility provides access to the same server and application properties that are available within Configuration.
+                    </div> </li>
+                <li>Propagate the configurations from one CA WCC server to other CA WCC servers. For example, you can set up all the CA WCC servers in your environment to run with the same configurations by exporting the configurations on the server that you want the other servers to run with, copying the configurations to the other servers, and then importing the configurations on those servers.</li>
+                <li>Archive configurations by exporting the current configurations and saving the resulting configuration file. The configurations can be imported if you need to run CA WCC with previous configurations.</li>
+                <li>Create a file that contains encrypted wcc_config arguments. The encrypted file can be distributed, and a job or script can be created so that another user with lower security access can run the wcc_config command with the encrypted file at a convenient time. For example, you can create a file to add a new or modified CA Workload Automation AE configuration on a server.</li>
+                <li><p>Display the CA EEM server configuration and update the CA EEM Server definition in CA WCC.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> You cannot update the CA EEM Server definition in CA WCC using Configuration.
+                    </div> </li>
+                <li>Display the CA WCC or Reporting database server information.</li>
+                <li>Specify a different database for CA WCC or for Reporting.</li>
+                <li>Change the CA WCC or Reporting database credentials.</li>
+                <li>Change the event bus port.</li>
+                <li>Change the SSL mode to SSL or non-SSL.</li>
+                <li>Change the Tomcat server port.</li>
+                <li>Change the Tomcat stop port.</li>
+            </ul>
+            <p>The Configuration Batch Interface Help contains procedures and examples that explain the wcc_config command options. Many options for the wcc_config command can be specified using either the short or long form of the option. The syntax for all short forms uses one preceding hyphen, while the syntax for all long forms uses two. For example, the export option can be specified using either of the following formats:</p>
+            <ul>
+                <li>Short form: wcc_config -x</li>
+                <li>Long form: wcc_config --export</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>The Configuration Batch Interface is a batch file (.bat) on Windows and a shell script (.sh) on UNIX.</li>
+                    <li class="listbullet">To use this batch interface, the user that is specified in the command must have rights to the associated application in the CA EEM ApplicationAccess policy.</li>
+                    <li class="listbullet">On UNIX, if CA WCC was installed by the root user, only the root user has permission to run this batch interface.</li>
+                    <li class="listbullet">On UNIX, if CA WCC was installed with the Run As User option, the run as user has permission to run this batch interface. In that case, the root user should not run this batch interface because the run as user cannot then run it successfully. However, if the root user does run the batch interface, change the group and owner of the file and folder in $CA_WCC_INSTALL_LOCATION/log to the run as user.</li>
+                    <li><p>Some options require a list of items. When listing items, they should be separated by a comma only; a space should not follow the comma.</p></li>
+                    <li>Batch Interface command arguments are case-sensitive. You must use the case that is shown in this help for each argument.</li>
+                    <li>The Configuration Batch Interface lets you configure the subset of the enterprise configuration that you can also configure using the Configuration. The Configuration Batch Interface does not let you configure any other aspects of CA WCC.</li>
+                    <li>The wcc_config.sh log file is located in the <span>%CA_WCC_INSTALL_LOCATION%/log/application/cli&nbsp;directory.</span></li>
+                </ul>
+            </div>
+            <p class="heading2"></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H1,H2" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#AdministertheConfigurationBatchInterface-PropagateConfigurationstoOtherServers" class="toc-link">Propagate Configurations to Other Servers</a></span></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#AdministertheConfigurationBatchInterface-UpdateCAEEMonAllHighAvailabilityServers" class="toc-link">Update CA EEM on All High Availability Servers</a></span></li><li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a href="#AdministertheConfigurationBatchInterface-DeleteaUser" class="toc-link">Delete a User</a></span></li><li><span class="toc-item-body" data-outline="4"><span class="toc-outline">4</span><a href="#AdministertheConfigurationBatchInterface-ExportConfigurations" class="toc-link">Export Configurations</a></span></li><li><span class="toc-item-body" data-outline="5"><span class="toc-outline">5</span><a href="#AdministertheConfigurationBatchInterface-ImportConfigurations" class="toc-link">Import Configurations</a></span></li><li><span class="toc-item-body" data-outline="6"><span class="toc-outline">6</span><a href="#AdministertheConfigurationBatchInterface-EncryptCommandLineArguments" class="toc-link">Encrypt Command Line Arguments</a></span></li><li><span class="toc-item-body" data-outline="7"><span class="toc-outline">7</span><a href="#AdministertheConfigurationBatchInterface-Runwcc_configWithEncryptedArguments" class="toc-link">Run wcc_config With Encrypted Arguments</a></span></li><li><span class="toc-item-body" data-outline="8"><span class="toc-outline">8</span><a href="#AdministertheConfigurationBatchInterface-DisplaytheDatabaseServerInformation" class="toc-link">Display the Database Server Information</a></span></li><li><span class="toc-item-body" data-outline="9"><span class="toc-outline">9</span><a href="#AdministertheConfigurationBatchInterface-SpecifyaDifferentDatabase" class="toc-link">Specify a Different Database</a></span></li><li><span class="toc-item-body" data-outline="10"><span class="toc-outline">10</span><a href="#AdministertheConfigurationBatchInterface-ChangetheDatabaseCredentials" class="toc-link">Change the Database Credentials</a></span></li><li><span class="toc-item-body" data-outline="11"><span class="toc-outline">11</span><a href="#AdministertheConfigurationBatchInterface-DisplaytheCAEEMServerConfiguration" class="toc-link">Display the CA EEM Server Configuration</a></span></li><li><span class="toc-item-body" data-outline="12"><span class="toc-outline">12</span><a href="#AdministertheConfigurationBatchInterface-ChangeEiamAdminPasswordUsingtheCAEEMUserInterface" class="toc-link">Change EiamAdmin Password Using the CA EEM User Interface</a></span></li><li><span class="toc-item-body" data-outline="13"><span class="toc-outline">13</span><a href="#AdministertheConfigurationBatchInterface-ResetMissingorForgottenEiamAdminPassword" class="toc-link">Reset Missing or Forgotten EiamAdmin Password</a></span></li><li><span class="toc-item-body" data-outline="14"><span class="toc-outline">14</span><a href="#AdministertheConfigurationBatchInterface-UpdatetheCAEEMServerDefinitioninCAWCC" class="toc-link">Update the CA EEM Server Definition in CA WCC</a></span></li><li><span class="toc-item-body" data-outline="15"><span class="toc-outline">15</span><a href="#AdministertheConfigurationBatchInterface-ChangetheEventBusPortValue" class="toc-link">Change the Event Bus Port Value</a></span></li><li><span class="toc-item-body" data-outline="16"><span class="toc-outline">16</span><a href="#AdministertheConfigurationBatchInterface-ChangetheSSLMode" class="toc-link">Change the SSL Mode</a></span></li><li><span class="toc-item-body" data-outline="17"><span class="toc-outline">17</span><a href="#AdministertheConfigurationBatchInterface-ChangetheTomcatServerPortValue" class="toc-link">Change the Tomcat Server Port Value</a></span></li><li><span class="toc-item-body" data-outline="18"><span class="toc-outline">18</span><a href="#AdministertheConfigurationBatchInterface-ChangetheTomcatStopPortValue" class="toc-link">Change the Tomcat Stop Port Value</a></span></li><li><span class="toc-item-body" data-outline="19"><span class="toc-outline">19</span><a href="#AdministertheConfigurationBatchInterface-DisplayComponentShortNames" class="toc-link">Display Component Short Names</a></span></li><li><span class="toc-item-body" data-outline="20"><span class="toc-outline">20</span><a href="#AdministertheConfigurationBatchInterface-DisplayHelp" class="toc-link">Display Help</a></span></li><li><span class="toc-item-body" data-outline="21"><span class="toc-outline">21</span><a href="#AdministertheConfigurationBatchInterface-ConfigurationShortNames" class="toc-link">Configuration Short Names&nbsp;</a></span></li><li><span class="toc-item-body" data-outline="22"><span class="toc-outline">22</span><a href="#AdministertheConfigurationBatchInterface-ConfigurationProperties" class="toc-link">Configuration Properties</a></span></li><li><span class="toc-item-body" data-outline="23"><span class="toc-outline">23</span><a href="#AdministertheConfigurationBatchInterface-UpdatetheCAEEMServerDefinitioninCAWCC.1" class="toc-link">Update the CA EEM Server Definition in CA WCC</a></span></li></ul></div>
+            <p></p>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-PropagateConfigurationstoOtherServers">Propagate Configurations to Other Servers</h2>
+            <p>After you set up one CA WCC server, you can use the export and import options of the Configuration Batch Interface to set up other CA WCC servers with the same configurations.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> Configurations for all CA WCC instances in a High Availability group share a common database and are automatically synchronized. Therefore, it is not necessary to copy configurations from one CA WCC instance to another instance.
+            </div>
+            <p>The following is the process for propagating configurations from one CA WCC server to other CA WCC servers:</p>
+            <ol>
+                <li>Export all configurations from the CA WCC server that has been configured.</li>
+                <li>Copy the text file created by the export to the CA WCC server that you want to run with the same configurations.</li>
+                <li>Change the server name where it appears in the text file to the name of the server you have copied the file to.</li>
+                <li>Import the text file on the server that you want to run with the same configurations.</li>
+                <li>Repeat Steps 2-4 for each CA WCC server that you want to run with the same configurations.</li>
+            </ol>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-UpdateCAEEMonAllHighAvailabilityServers">Update CA EEM on All High Availability Servers</h2>
+            <p>When you update the CA EEM server defined to one CA WCC instance in a High Availability group, you must also update the definition on the other CA WCC instances in the group. You can do this by distributing the necessary commands in encrypted files to all CA WCC instances in the group, and then the appropriate users can update their CA WCC instances at a convenient time.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> Authorized users can alternatively run wcc_config with the appropriate arguments to update the CA EEM server definition and restart services; however, the following process lets users with lower security access update their CA WCC instance while keeping passwords secure.
+            </div>
+            <p>The following is the process for creating the encrypted files, updating one CA WCC instance, and distributing the files:</p>
+            <ol>
+                <li>Create an encrypted file containing the arguments to update the CA EEM server definition.</li>
+                <li>Create an encrypted file containing the arguments to restart the services CA-wcc and CA-wcc-services.</li>
+                <li>Run wcc_config with the encrypted file to update the CA EEM server definition on one CA WCC instance.</li>
+                <li>Run wcc_config with the encrypted file to restart the services CA-wcc and CA-wcc-services on the same CA WCC instance.</li>
+                <li>Distribute the two encrypted files to the appropriate users.</li>
+            </ol>
+            <p>The appropriate users can perform Steps 3 and 4 on their CA WCC instance during a period of low activity. User name and password arguments are not required when wcc_config is run with an encrypted file.</p>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-DeleteaUser">Delete a User</h2>
+            <p>When you delete a user in CA EEM, you must also delete the user and the templates associated with that user in CA WCC.</p>
+            <p>The following is the process for deleting a user and their templates in CA WCC:</p>
+            <ol>
+                <li><p>Create a new file in your text editor that includes the users to be deleted, using the following format:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>delete_user:&nbsp;<em>user_to_delete</em></p></pre>
+                    </div>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> If you are deleting more than one user, enter the command for each user on a separate line.
+                    </div> </li>
+                <li><p>Import the file in Configuration Batch Interface using the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;<em>user_name</em>&nbsp;-p&nbsp;<em>password</em>&nbsp;-i&nbsp;<em>input_file</em>.txt</p></pre>
+                    </div></li>
+                <li><p>Delete each template associated with each user in Job Template Batch Interface using the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>job_template&nbsp;-u&nbsp;<em>user_name</em>&nbsp;-p&nbsp;<em>password</em>&nbsp;-f&nbsp;<em>deleted_user</em>&nbsp;-r&nbsp;<em>template_name</em></p></pre>
+                    </div>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> You can specify a list of templates to delete.
+                    </div> </li>
+            </ol>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> You can verify that the user has been deleted in an exported configuration.
+            </div>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-ExportConfigurations">Export Configurations</h2>
+            <p>You can export CA WCC configurations from the server to a text file. You can then modify the resulting file using a text editor and then import it back to the server, or copy it to another server and import it on that server to propagate the configurations.</p>
+            <p>To export configurations, use the following command syntax:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;<em>user_name</em>&nbsp;-p&nbsp;<em>password</em>&nbsp;-x&nbsp;<em>output_file</em>&nbsp;[-c&nbsp;<em>config1</em>,<em>config2</em>...]&nbsp;[-plainpwd]&nbsp;[-v]</p></pre>
+            </div>
+            <ul>
+                <li class="normalterm"><strong>-u, --user&nbsp;<em class="italic">user_name</em></strong><p class="normaltermcontinued">Specifies the authorized user name. You can use either the short name (-u) or the long name (--user).</p></li>
+                <li class="normalterm"><strong>-p, --password&nbsp;<em class="italic">password</em></strong><p class="normaltermcontinued">Specifies the password for the authorized user name. You can use either the short name (-p) or the long name (--password).</p></li>
+                <li class="normalterm"><strong>-x, --export&nbsp;<em class="italic">output_file</em></strong><p class="normaltermcontinued">Specifies the fully-qualified file name to which the configurations are exported. The file is created by the export; however, the path must exist. If you do not specify a path, the file will be created in the folder that contains the batch interface utility. You can use either the short name (-x) or the long name (--export).</p></li>
+                <li class="normalterm"><strong>-c, --component&nbsp;<em class="italic">config1,config2...</em></strong><p class="normaltermcontinued">(Optional) Specifies the configurations to export. Configuration names in the list must be separated by a comma; a space should not follow the comma. You can use either the short name (-c) or the long name (--component).&nbsp;<br>Valid values are as follows:</p>
+                    <ul>
+                        <li>APPEDITOR</li>
+                        <li>CONFIG</li>
+                        <li>CREDS</li>
+                        <li>ECLI</li>
+                        <li>MONITOR</li>
+                        <li>FORECAST</li>
+                        <li>QUICKVIEW</li>
+                        <li>QUICKEDIT</li>
+                        <li>REPORTING</li>
+                        <li>RESOURCES</li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Notes:</strong>
+                        <ul>
+                            <li>If you do not specify any configurations, the exported file contains server definitions and preferences for all applications.</li>
+                            <li>If you specify a list of configurations, the exported file contains preferences for the specified applications only.</li>
+                        </ul>
+                    </div> </li>
+                <li><strong>-plainpwd</strong><br>(Optional) Exports passwords as plain text (non-encrypted).</li>
+                <li><strong>-v, --verbose</strong><p>(Optional) Displays debug messages. You can use either the short name (-v) or the long name (--verbose).</p></li>
+            </ul>
+            <p><strong>Example: Export all configurations</strong></p>
+            <p>The following command exports all configurations to the file named output.txt.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;-x&nbsp;output.txt</p></pre>
+            </div>
+            <p><strong>Example: Export selected configurations with non-encrypted passwords</strong></p>
+            <p>The following command exports the CONFIG, and MONITOR configurations to the file named output.txt with no password encryption:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;--export&nbsp;output.txt&nbsp;-c&nbsp;CONFIG,MONITOR&nbsp;-plainpwd</p></pre>
+            </div>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-ImportConfigurations">Import Configurations</h2>
+            <p>You can import the text file that contains the CA WCC configurations you have modified. You can also copy the file to other servers, and then import the file on those servers so that all run with the same configurations.</p>
+            <p>To import a configuration file, use the following command syntax:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;<em>user_name</em>&nbsp;-p&nbsp;<em>password</em>&nbsp;-i&nbsp;<em>input_file</em>&nbsp;[v]</p></pre>
+            </div>
+            <ul>
+                <li><strong>-u, --user&nbsp;<em>user_name</em></strong><p>Specifies the authorized user name. You can use either the short name (-u) or the long name (--user).</p></li>
+                <li><strong>-p, --password&nbsp;<em>password</em></strong><p>Specifies the password for the authorized user name. You can use either the short name (-p) or the long name (--password).</p></li>
+                <li><strong>-i, --import&nbsp;<em>input_file</em></strong><p>Specifies the fully-qualified name of the text file to import. You can use either the short name (-i) or the long name (--import).</p></li>
+                <li><strong>-v, --verbose</strong><p>(Optional) Displays debug messages. You can use either the short name (-v) or the long name (--verbose).</p></li>
+            </ul>
+            <p><strong>Example: Import configurations from the specified file</strong></p>
+            <p>The following command imports configurations in the file named output.txt to the local CA WCC server.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander-i&nbsp;output.txt</p></pre>
+            </div>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-EncryptCommandLineArguments">Encrypt Command Line Arguments</h2>
+            <p>You can create a file that contains encrypted arguments for the wcc_config command. This lets you distribute a file with arguments, such as the user name and password, that cannot be viewed in plain text by the recipient. For example, you can create a job or script so that another user with lower security access can run the wcc_config command with the encrypted file at a convenient time.</p>
+            <p>To encrypt command line arguments, use the following command syntax:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-e&nbsp;<em>encrypted_file&nbsp;</em>-u&nbsp;<em>user_name&nbsp;</em>-p&nbsp;<em>password</em>&nbsp;<em>argument1 argument2...</em></p></pre>
+            </div>
+            <ul>
+                <li><strong>-e, --encrypt&nbsp;<em>encrypted_file</em></strong><p>Specifies the fully-qualified file name to which the arguments should be encrypted and saved. The file is created by the encryption; however, the path must exist. If you do not specify a path, the file will be created in the folder that contains the batch utility. You can use either the short name (-e) or the long name (--encrypt).</p></li>
+                <li><strong>-u, --user&nbsp;<em>user_name</em></strong><p>Specifies the authorized user name. You can use either the short name (-u) or the long name (--user).</p></li>
+                <li><strong>-p, --password&nbsp;<em>password</em></strong><p>Specifies the password for the authorized user name. You can use either the short name (-p) or the long name (--password).</p></li>
+                <li><strong><em>argument1 argument2...</em></strong><p>Specifies the arguments that you would normally use to perform the action.</p></li>
+            </ul>
+            <p><strong>Example: Create a file of encrypted arguments</strong></p>
+            <p>The following command encrypts and stores the user name, password, and import command arguments to a file named arg_file:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-e&nbsp;arg_file&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;-i&nbsp;in_file</p></pre>
+            </div>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-Runwcc_configWithEncryptedArguments">Run wcc_config With Encrypted Arguments</h2>
+            <p>You can run the wcc_config command with a previously created file that contains encrypted arguments, including the user name and password.</p>
+            <p>To run wcc_config with encrypted arguments, use the following command syntax:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;<em>encrypted_file</em></p></pre>
+            </div>
+            <ul>
+                <li><strong><em>encrypted_file</em></strong><p>Specifies the fully-qualified file name that contains the encrypted arguments.</p></li>
+            </ul>
+            <p><strong>Example: Run wcc_config with an encrypted arguments file</strong></p>
+            <p>The following command runs wcc_config and decrypts the arguments in the file named arg_file:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;arg_file</p></pre>
+            </div>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-DisplaytheDatabaseServerInformation">Display the Database Server Information</h2>
+            <p>You can display the following information for the CA WCC or Reporting database server:</p>
+            <ul>
+                <li>Host name</li>
+                <li>Port</li>
+                <li>User</li>
+                <li>Platform</li>
+                <li>Database name</li>
+                <li>Password (You will see only asterisks because the password is encrypted.)</li>
+            </ul>
+            <p>When using the TNS name configuration with an Oracle database, the following information is displayed:</p>
+            <ul>
+                <li>TNS name of the database connection</li>
+                <li>Path to the tnsnames.ora file</li>
+                <li>Platform</li>
+                <li>User</li>
+                <li>Password (You will see only asterisks because the password is encrypted.)</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>The Configuration Batch Interface must be able to connect to the database using the parameters provided.</p>
+            </div>
+            <p>To display the database server information, use the following command syntax:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;<em>user_name</em>&nbsp;-p&nbsp;<em>password</em>&nbsp;--displaydb&nbsp;[--dbapp&nbsp;<em>application</em>]</p></pre>
+            </div>
+            <ul>
+                <li><p><strong>-u, --user&nbsp;<em>user_name</em></strong></p><p>Specifies the authorized user name. You can use either the short name (-u) or the long name (--user).</p></li>
+                <li><p><strong>-p, --password&nbsp;<em>password</em></strong></p><p>Specifies the password for the authorized user name. You can use either the short name (-p) or the long name&nbsp;(–password).</p></li>
+                <li><strong>--dbapp&nbsp;<em>application</em></strong><br>(Optional) Specifies the application that the database server is associated with.<br>Valid values are as follows:
+                    <ul>
+                        <li>REPORTING</li>
+                        <li>WCC</li>
+                    </ul></li>
+            </ul>
+            <p><strong>Example: Display the CA WCC database server information</strong></p>
+            <p>The following command displays the CA WCC database server information:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;--displaydb</p></pre>
+            </div>
+            <p><strong>Example: Display the Reporting database server information</strong></p>
+            <p>The following command displays the server information for the Reporting database:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;--displaydb&nbsp;--dbapp&nbsp;REPORTING&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></pre>
+            </div>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-SpecifyaDifferentDatabase">Specify a Different Database</h2>
+            <p>You can specify a different database for CA WCC or for Reporting after CA WCC is installed and the database is accessible.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul class="listbullet">
+                    <li class="listbullet">The Configuration Batch Interface must be able to connect to the database using the parameters provided.</li>
+                    <li class="listbullet">All CA WCC instances in a High Availability group must reference the same database. When you specify a different database for one CA WCC instance in the High Availability group, you must also specify the same database on the other CA WCC instances in the group.</li>
+                </ul>
+            </div>
+            <p><span>To specify a different database, use the following command syntax:</span></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;<em>user_name</em>&nbsp;-p&nbsp;<em>password</em>&nbsp;--dbplatform&nbsp;<em>db_platform</em>&nbsp;--dbuser&nbsp;<em>db_user</em>&nbsp;--dbpassword&nbsp;<em>db_password</em>&nbsp;--dbhost&nbsp;<em>db_host</em>&nbsp;--dbport&nbsp;<em>db_port</em>&nbsp;--dbname&nbsp;<em>db_name&nbsp;</em>[--dbapp&nbsp;<em>application</em>]&nbsp;[--dbtnsname&nbsp;<em>tns_name</em>]&nbsp;[-&nbsp;-&nbsp;dbtnspath&nbsp;<em>tns_path</em>]</p></pre>
+            </div>
+            <ul>
+                <li><p><strong>-u, --user&nbsp;<em>user_name</em></strong></p><p>Specifies the authorized user name. You can use either the short name (-u) or the long name (--user).</p></li>
+                <li><p><strong>-p, --password&nbsp;<em>password</em></strong></p><p>Specifies the password for the authorized user name. You can use either the short name (-p) or the long name&nbsp;(–password).</p></li>
+                <li><p><strong>--dbplatform&nbsp;<em>db_platform</em></strong></p><p>Specifies the database platform.</p><p>Valid values are as follows:</p>
+                    <ul>
+                        <li>DERBY</li>
+                        <li>MSSQL</li>
+                        <li>ORACLE</li>
+                    </ul></li>
+                <li><p><strong>--dbuser&nbsp;<em>db_user</em></strong></p><p>Specifies the database user name.</p></li>
+                <li><p><strong>--dbpassword&nbsp;<em>db_password</em></strong></p><p>Specifies the password for the database user name.</p></li>
+                <li><p><strong>--dbhost&nbsp;<em>db_host</em></strong></p><p>Specifies the computer that hosts the database.</p></li>
+                <li><p><strong>--dbport&nbsp;<em>db_port</em></strong></p><p>Specifies the database port.</p><p>Default port numbers are as follows:</p>
+                    <ul>
+                        <li>DERBY -- 1543</li>
+                        <li>MSSQL -- 1433</li>
+                        <li>ORACLE -- 1521</li>
+                    </ul></li>
+                <li><p><strong>--dbname&nbsp;<em>db_name</em></strong></p><p>Specifies the database name.</p></li>
+                <li><p><strong>--dbapp&nbsp;<em>application</em></strong></p><p>(Optional) Specifies the application that the database is associated with.<br>Valid values are as follows:</p>
+                    <ul>
+                        <li>REPORTING</li>
+                        <li>WCC&nbsp;</li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> If the dbapp argument is not included in the command string, the CA WCC database is specified by default.
+                    </div> </li>
+                <li><p><strong>--dbtnsname&nbsp;<em>tns_name</em></strong><br>(Optional) Specifies the TNS name of the Oracle database connection.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> This parameter applies to Oracle only.
+                    </div> </li>
+                <li><p><strong>--dbtnspath&nbsp;<em>tns_path</em></strong></p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> This parameter applies to Oracle only.
+                    </div> <p>(Optional) Specifies the Oracle tnsnames.ora file, including its full path.<br><strong>Example:</strong>&nbsp;c:\oracle\tnsnames.ora</p>
+                    <div class="bs-callout bs-callout-warning conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Important!</strong> For the current release CA WCC 11.4 SP3 and upcoming releases, the path needs to be without the file name.</p>
+                        <p><strong>Example:</strong> &nbsp;c:\oracle\</p>
+                    </div> </li>
+                <li><strong>--dbtruststorepath trustStorePath<br></strong>(Optional)&nbsp;Path to the trust store or wallet.<br>&nbsp;</li>
+                <li><p><strong>--dbtruststoretype trustStoreType<br></strong>(Optional)&nbsp;Type of the trust store or wallet [SSO].</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong> SSO is the only value.</p>
+                    </div> </li>
+                <li><strong>--dbserverdnmatch serverDNmatch<br></strong>(Optional) SSL server DN match [true|false].&nbsp;<br>&nbsp;</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>To specify the TNS name and path for Oracle RAC, you must use the --dbtnspath and --dbtnsname parameters.</li>
+                    <li>For Oracle non-RAC, you can specify the --dbtnspath and --dbtnsname parameters, or specify the following parameters and values:
+                        <ul>
+                            <li>--dbhost localhost</li>
+                            <li>--dbport 1521</li>
+                            <li>--dbname XE</li>
+                        </ul></li>
+                </ul>
+            </div>
+            <div class="bs-callout bs-callout-warning conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Important!</strong> After you specify a different CA WCC or Reporting database, you must restart the services CA-wcc and CA-wcc-services on Windows, and the service CA-wcc-services on UNIX. On Windows, you must use the Services tool in the Control Panel to start or stop the services and, on UNIX, you must use the unisrvcntr command to start or stop the services.
+            </div>
+            <p><strong>Example: Specify a different CA WCC database</strong></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;--dbplatform&nbsp;ORACLE&nbsp;--dbuser&nbsp;user_a&nbsp;--dbpassword&nbsp;my_password&nbsp;--dbhost&nbsp;localhost&nbsp;--dbport&nbsp;1521&nbsp;--dbname&nbsp;xe</p></pre>
+            </div>
+            <p><strong>Example: Specify a different Reporting database</strong></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;--dbplatform&nbsp;MSSQL&nbsp;--dbuser&nbsp;user_a&nbsp;--dbpassword&nbsp;my_password&nbsp;--dbhost&nbsp;localhost&nbsp;--dbport&nbsp;3306&nbsp;--dbname&nbsp;xe&nbsp;--dbapp&nbsp;REPORTING</p></pre>
+            </div>
+            <p><strong>Example: Specify a different CA WCC database for Oracle RAC</strong></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;--dbplatform&nbsp;ORACLE&nbsp;--dbuser&nbsp;user_a&nbsp;--dbpassword&nbsp;my_password&nbsp;--dbtnspath&nbsp;c:\oracle\tnsnames.ora&nbsp;--dbtnsname&nbsp;MY_RAC</p></pre>
+            </div>
+            <p><strong>Example: Specify a different Reporting database for Oracle RAC</strong></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;--dbplatform&nbsp;ORACLE&nbsp;--dbuser&nbsp;user_a&nbsp;--dbpassword&nbsp;my_password&nbsp;--dbtnspath&nbsp;/opt/oracle/tnsnames.ora&nbsp;--dbtnsname&nbsp;MY_RAC&nbsp;--dbapp&nbsp;Reporting</p></pre>
+            </div>
+            <p class="heading2"><strong>Example: Specify a CA&nbsp;</strong><strong style="line-height: 1.4285;">WCC database to an Oracle database running on remote server using TNS definition and certificate authentication</strong></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config.sh -u username -p password -dbapp WCC --dbplatform oracle --dbtnspath /opt/CA/WorkloadCC/data/config/tns/ --dbtnsname CNT --dbtruststorepath /opt/CA/WorkloadCC/data/config/wallet/cwallet.sso --dbtruststoretype SSO --dbserverdnmatch false</p></pre>
+            </div>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-ChangetheDatabaseCredentials">Change the Database Credentials</h2>
+            <p>You can change the user name, password, or both for the CA WCC or Reporting database.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note: </strong><span style="color: rgb(0,0,0);">The Configuration Batch Interface must be able to connect to the database using the parameters provided.</span></p>
+            </div>
+            <p>To change the database credentials, use the following command syntax:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;<em>user_name</em>&nbsp;-p&nbsp;<em>password</em>&nbsp;--dbuser&nbsp;<em>db_user</em>&nbsp;--dbpassword&nbsp;<em>db_password</em>&nbsp;[--dbapp&nbsp;<em>application</em>]</p></pre>
+            </div>
+            <ul>
+                <li><p><strong>-u, --user&nbsp;<em>user_name</em></strong></p><p>Specifies the authorized user name. You can use either the short name (-u) or the long name (--user).</p></li>
+                <li><p><strong>-p, --password&nbsp;<em>password</em></strong></p><p>Specifies the password for the authorized user name. You can use either the short name (-p) or the long name&nbsp;(–password).</p></li>
+                <li><strong>--dbuser&nbsp;<em>db_user</em></strong><br>Specifies the new user name for the database.</li>
+                <li><strong>--dbpassword&nbsp;<em>db_password</em></strong><br>Specifies the new password for the database user name.</li>
+                <li><p><strong><span style="color: rgb(0,0,0);">--dbapp&nbsp;</span><em class="italic"><em class="italic">application</em></em><span style="color: rgb(0,0,0);">&nbsp;</span></strong></p><p class="normaltermcontinued">(Optional) Specifies the application that the database is associated with.</p><p class="listnote">Valid values are as follows:</p>
+                    <ul class="listbullet2">
+                        <li class="listbullet2">REPORTING</li>
+                        <li class="listbullet2">WCC</li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> If the dbapp argument is not included in the command string, the specified credentials for the CA WCC database are changed by default.
+                    </div> </li>
+            </ul>
+            <p><strong>Example: Specify a new password for the CA WCC database</strong></p>
+            <p>The following example specifies my_password as the password for the CA WCC database.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;--dbpassword&nbsp;my_password</p></pre>
+            </div>
+            <p><strong>Example: Specify a new user and password for the Reporting database</strong></p>
+            <p>The following example specifies my_password as the password for user_b for the Reporting database.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;--dbuser&nbsp;user_b&nbsp;--dbpassword&nbsp;my_password&nbsp;--dbapp&nbsp;REPORTING</p></pre>
+            </div>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-DisplaytheCAEEMServerConfiguration">Display the CA EEM Server Configuration</h2>
+            <p>You can display the current CA EEM server configuration.</p>
+            <p>To display the CA EEM server configuration, use the following command:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;--displayeem</p></pre>
+            </div>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-ChangeEiamAdminPasswordUsingtheCAEEMUserInterface">Change EiamAdmin Password Using the CA EEM User Interface</h2>
+            <p>You can change the EiamAdmin password, when required, using the CA EEM User Interface (UI).</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Log in to the EEM UI using a browser (https://&lt;EEM_Server_host&gt;:5250/spin/eiam/) as EiamAdmin user and choose the Global application.</li>
+                <li>On the Home (page/tab), click "Change Password" under the Self-Administration menu.</li>
+                <li>Enter "EiamAdmin" in the User field. Enter the old (current) password and new password (twice, to confirm) and click OK.</li>
+                <li>Click Close.</li>
+                <li>Log out and log in again to the EEM UI to ensure the password is changed.</li>
+            </ol>
+            <p>After successfully changing the EiamAdmin password, update the WCC configuration using the <a data-macro-name="sp-nobody-link" href="#AdministertheConfigurationBatchInterface-UpdatetheCAEEMServerDefinitioninCAWCC" class="conf-macro output-inline" data-hasbody="false">Update the CA EEM Server Definition in CA WCC</a> section.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> <span style="color: rgb(39,38,56);">Perform this procedure on each WCC server, if you have multiple WCC HA servers.</span></p>
+            </div>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-ResetMissingorForgottenEiamAdminPassword">Reset Missing or Forgotten EiamAdmin Password</h2>
+            <p>The EiamAdmin user is defined to an internal datastore for EEM, and external to the application itself, so you must reset this password if it is lost or forgotten.</p>
+            <p>Access to the itechpoz DSA is required, so you must modify the current security for this DSA and then restart the itechpoz DSA.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <p><strong>Linux</strong></p>
+            <ol>
+                <li>Open the file /opt/CA/SharedComponents/CADirectory/dxserver/config/access/itechpoz.dxc<br>&nbsp;Change "set access-controls = <strong>false</strong>;" and save the file.</li>
+                <li>Open the file /opt/CA/SharedComponents/CADirectory/dxserver/config/settings/itechpoz.dxc<br>Change "set min-auth =&nbsp;<strong><span style="color: rgb(43,51,67);">none</span></strong><span style="color: rgb(43,51,67);">;"&nbsp;</span>and save the file.</li>
+                <li>Open the file /opt/CA/SharedComponents/CADirectory/dxserver/config/knowledge/itechpoz.dxc<br>Change the following &nbsp;and save the file:<br> "set auth-levels =&nbsp;<span style="color: rgb(43,51,67);">anonymous</span><span style="color: rgb(43,51,67);">"<br></span>"address = ipv4 "&lt;<em style="font-size: 12.0px;color: rgb(43,51,67);font-family: Verdana , sans-serif;">IP address</em><span style="color: rgb(43,51,67);">&gt;" port 509, ipv4 "&lt;</span><em style="font-size: 12.0px;color: rgb(43,51,67);font-family: Verdana , sans-serif;">hostname</em><span style="color: rgb(43,51,67);">&gt;" port 509"</span></li>
+                <li>Reinitialize itechpoz DSA from the command line using su - dsa -c "dxserver init all"</li>
+            </ol>
+            <p><strong>Windows</strong></p>
+            <ol>
+                <li>Open the file&nbsp;C:\Program Files (x86)\CA\Directory\dxserver\config\access\itechpoz.dxc<br>Change "set access-controls =&nbsp;<span style="color: rgb(43,51,67);">false</span><span style="color: rgb(43,51,67);">;"</span>&nbsp;and save the file.</li>
+                <li class="heading2">Open the file&nbsp;C:\Program Files (x86)\CA\Directory\dxserver\config\settings\itechpoz.dxc<br>Change "set min-auth =&nbsp;<span style="color: rgb(43,51,67);">none</span><span style="color: rgb(43,51,67);">;"</span>&nbsp;and save the file.</li>
+                <li class="heading2">Open the file&nbsp;C:\Program Files (x86)\CA\Directory\dxserver\config\knowledge\itechpoz.dxc<br>Change "set auth-levels =&nbsp;<span style="color: rgb(43,51,67);">anonymous</span><span style="color: rgb(43,51,67);">"</span>&nbsp;and save the file.</li>
+                <li class="heading2">Restart the "CA iTechnology iGateway x.x" service and CA Directory Services.</li>
+            </ol>
+            <p class="heading2">Complete the following steps that are common to all platforms:</p>
+            <ol>
+                <li class="heading2">Install and run any LDAP browser on your EEM server. We recommend JXplorer 3.2.2 or higher.</li>
+                <li class="heading2"><p>Connect to the itechpoz DSA using your EEM server information.<br><img data-macro-name="sp-image" class="img-responsive" src="/ca-workload-automation-ae/11-4-2/en/files/361353092/456697796/1/1520032283674/image2017-10-26+12%3A44%3A30.png" data-hasbody="false" height="250"></p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong> If required, you can save the template.</p>
+                    </div> </li>
+                <li class="heading2">Follow the tree down to the EiamAdmin ID.<br><img data-macro-name="sp-image" class="img-responsive" src="/ca-workload-automation-ae/11-4-2/en/files/361353092/456697797/1/1520032283693/image2017-10-26+12%3A47%3A20.png" data-hasbody="false" height="250"></li>
+                <li class="heading2">Double-click on the userPassword value, enter the new password and then re-enter to confirm.</li>
+                <li class="heading2">Click OK and then click Submit.</li>
+            </ol>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-UpdatetheCAEEMServerDefinitioninCAWCC">Update the CA EEM Server Definition in CA WCC</h2>
+            <p>You can update the CA EEM server definition in CA WCC after installation.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> If CA EEM is not configured for failover, all CA WCC instances in a High Availability group must reference the same instance of CA EEM. When you change the CA EEM server definition on one CA WCC instance in the High Availability group and the original CA EEM instance was not configured for failover, you must also change the definition on the other CA WCC instances in the group to reference the new instance of CA EEM.
+            </div>
+            <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                To update the CA EEM server definition in CA WCC, use the following command syntax:
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;<em>user_name</em>&nbsp;-p&nbsp;<em>password</em>&nbsp;--eemhostname&nbsp;<em>eem_host_name</em>&nbsp;--eemadmin&nbsp;<em>eem_administrator</em>&nbsp;--eempassword&nbsp;<em>eem_password</em>&nbsp;[--eemappid&nbsp;<em>eem_application_id</em>]&nbsp;[--eemcertname&nbsp;<em>eem_certificate_name</em>]&nbsp;[--eemcertkey&nbsp;<em>eem_certificate_key</em>]</p></pre>
+                </div>
+                <ul>
+                    <li><span class="conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+      <div class="conf-macro output-block" data-hasbody="false" data-macro-name="include">
+       <strong>-u, --user <em>user_name</em></strong>
+       <p>Specifies the authorized user name. You can use either the short name (-u) or the long name (--user).</p>
+      </div><br><br></span></li>
+                    <li><span class="conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+      <div class="conf-macro output-block" data-hasbody="false" data-macro-name="include">
+       <strong>-p, --password <em>password</em></strong>
+       <p>Specifies the password for the authorized user name. You can use either the short name (-p) or the long name&nbsp;(–password).</p>
+      </div><br><br></span></li>
+                    <li><p><strong>--eemhostname <em>eem_host_name</em>[,<em>eem_host_name2</em>,<em>eem_host_name3</em>…]</strong><br>Specifies the host names of the new CA EEM servers that you want the CA WCC instance to reference. The user name and password are authenticated against this host.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> If CA EEM is configured for failover, you can optionally specify a list of the servers in the failover setup. Server names should be separated by a comma only and listed in the order of reliability.
+                        </div> </li>
+                    <li><strong>--eemadmin <em>eem_administrator</em></strong><br>Specifies the administrator name for the new instance of CA EEM.</li>
+                    <li><strong>--eempassword <em>eem_password</em></strong><br>Specifies the password for the administrator of the new instance of CA EEM.</li>
+                    <li><strong>--eemappid <em>eem_application_id</em></strong><br>(Optional) Specifies the application ID that contains the CA WCC policies, for example, WCC0004.</li>
+                    <li><strong>--eemcertname&nbsp;<em>eem_certificate_name<br></em></strong>(Optional) Specifies the CA EEM certificate file name. This is required only if you are using the EEM certificate. This file is in the following location:<pre class="ca-code-default">$CA_WCC_INSTALL_LOCATION/data/config
+</pre><p><strong>--eemcertkey&nbsp;<em>eem_certificate_key<br></em></strong>(Optional) Specifies the CA EEM certificate key file name. This is required only if you are using the EEM certificate. This file is in the following location:</p><pre class="ca-code-default">$CA_WCC_INSTALL_LOCATION/data/config</pre><p><strong style="line-height: 1.42857;">Important!</strong>&nbsp;After you update the CA EEM server definition, you must restart the services CA-wcc and CA-wcc-services on Windows, or the service CA-wcc-services on UNIX. On Windows, you must use the Services tool in the Control Panel to start or stop the services and, on UNIX, you must use the unisrvcntr command to start or stop the services.</p></li>
+                </ul>
+                <p><strong>Example: Update the CA EEM server definition</strong></p>
+                <p>The following command updates the CA EEM server definition in CA WCC when you use the optional CA EEM certificate name and keyfile:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;--eemhostname&nbsp;EEM_01&nbsp;--eemadmin&nbsp;EiamAdmin&nbsp;--eempassword&nbsp;admin&nbsp;--eemcertname&nbsp;certificate_01.pem&nbsp;--eemcertkey&nbsp;eem_cert_key_01.key&nbsp;&nbsp;-&nbsp;-eemappid&nbsp;WCC0004<br>&nbsp;</p></pre>
+                </div>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Note:</strong> After running the command, restart the services CA-wcc and CA-wcc-services on Windows, and the service CA-wcc-services on Unix.
+                </div>
+            </div>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-ChangetheEventBusPortValue">Change the Event Bus Port Value</h2>
+            <p>You can change the CA WCC event bus port value. Changing the value is necessary when a conflict with the event bus port occurs.</p>
+            <p>To change the event bus port value, use the following command syntax:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;<em>user_name</em>&nbsp;-p&nbsp;<em>password</em>&nbsp;--eventport&nbsp;<em>port_value</em></p></pre>
+            </div>
+            <ul>
+                <li><p><strong>-u, --user&nbsp;<em>user_name</em></strong></p><p>Specifies the authorized user name. You can use either the short name (-u) or the long name (--user).</p></li>
+                <li><p><strong>-p, --password&nbsp;<em>password</em></strong></p><p>Specifies the password for the authorized user name. You can use either the short name (-p) or the long name&nbsp;(–password).</p></li>
+                <li><p><strong>--eventport&nbsp;<em>port_value</em></strong><br>Specifies the event bus port value.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Limits:</strong> 1025-65535
+                    </div> </li>
+            </ul>
+            <p><strong>Example: Change the event bus port value</strong></p>
+            <p>The following example changes the event bus port value to 5064.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;--eventport&nbsp;5064</p></pre>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul class="listbullet">
+                    <li class="listbullet">If the port value you specify in the command is already in use or the value is not within the limits, an error message is displayed. However, only ports assigned to applications that are running or used by CA WCC are detected.</li>
+                    <li class="listbullet">Do not specify the port that is assigned to CA WCC.</li>
+                    <li class="listbullet">The Event Bus port must not be in the dynamic port range of the machine.</li>
+                    <li class="listbullet">After you change the event bus port value, restart CA WCC services.</li>
+                </ul>
+            </div>
+            <p></p>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-ChangetheSSLMode">Change the SSL Mode</h2>
+            <p>You can change the SSL mode of a CA WCC server to SSL or to non-SSL. Changing the SSL mode from SSL to non-SSL is required when you add a CA WCC server to a High Availability group. Changing the SSL mode from non-SSL to SSL is required before users can access CA WCC using a secure URL (https).</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note: </strong><span style="line-height: 1.4285;">All CA WCC servers in a High Availability group must run in either non-SSL mode or SSL mode.</span></p>
+            </div>
+            <p>To change the SSL mode, use the following command syntax:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;<em>user_name</em>&nbsp;-p&nbsp;<em>password</em>&nbsp;--ssl&nbsp;on|off</p></pre>
+            </div>
+            <ul>
+                <li><p><strong>-u, --user&nbsp;<em>user_name</em></strong></p><p>Specifies the authorized user name. You can use either the short name (-u) or the long name (--user).</p></li>
+                <li><p><strong>-p, --password&nbsp;<em>password</em></strong></p><p>Specifies the password for the authorized user name. You can use either the short name (-p) or the long name&nbsp;(–password).</p></li>
+                <li><strong>--ssl on|off</strong><br>Specifies whether the CA WCC server runs in SSL or non-SSL mode. Valid values are as follows:
+                    <ul>
+                        <li>on -- The CA WCC server runs in SSL mode.</li>
+                        <li>off -- The CA WCC server runs in non-SSL mode.</li>
+                    </ul></li>
+            </ul>
+            <p><strong>Example: Change the SSL mode to non-SSL</strong></p>
+            <p>The following example changes the SSL mode of a CA WCC server to non-SSL mode.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;--ssl&nbsp;off</p></pre>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>List of servers and their SSL status is displayed.</li>
+                    <li>When you change the mode to SSL, a self-signed certificate is generated.</li>
+                    <li>If CA WCC is using port number 80 for the Tomcat server, do not change the mode from non-SSL to SSL. You can change the port to a different port as described in&nbsp;<a data-macro-name="sp-plaintextbody-link" href="#AdministertheConfigurationBatchInterface-ChangetheTomcatServerPortValue" class="conf-macro output-inline" data-hasbody="true">Change the Tomcat Server Port Values</a>, and then change the mode to SSL.</li>
+                    <li>If CA WCC is using port number 443 for the Tomcat server, do not change the mode from SSL to non-SSL. You can change the port to a different port as described in&nbsp;<a data-macro-name="sp-plaintextbody-link" href="#AdministertheConfigurationBatchInterface-ChangetheTomcatServerPortValue" class="conf-macro output-inline" data-hasbody="true">Change the Tomcat Server Port Values</a>, and then change the mode to non-SSL.</li>
+                    <li>After you change the SSL mode, restart CA WCC services.</li>
+                </ul>
+            </div>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-ChangetheTomcatServerPortValue">Change the Tomcat Server Port Value</h2>
+            <p>You can change the Tomcat server port value. Changing the value is necessary when a conflict with another port occurs.</p>
+            <p>To change the Tomcat server port value, use the following command syntax:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;<em>user_name</em>&nbsp;-p&nbsp;<em>password</em>&nbsp;--port&nbsp;<em>port_value</em></p></pre>
+            </div>
+            <ul>
+                <li><p><strong>-u, --user&nbsp;<em>user_name</em></strong></p><p>Specifies the authorized user name. You can use either the short name (-u) or the long name (--user).</p></li>
+                <li><p><strong>-p, --password&nbsp;<em>password</em></strong></p><p>Specifies the password for the authorized user name. You can use either the short name (-p) or the long name&nbsp;(–password).</p></li>
+                <li><p><strong>--port&nbsp;<em>port_value</em></strong><br>Specifies the Tomcat server port value.<br><strong>Limits:</strong>&nbsp;80 (non-SSL only), 443 (SSL only), 1025-65535 (SSL or non-SSL)<br><strong>Defaults:</strong>&nbsp;8080 (non-SSL), 8443 (SSL)&nbsp;</p></li>
+            </ul>
+            <p><strong>Example: Change the Tomcat server port value</strong></p>
+            <p>The following example changes the Tomcat server port value to 8090.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;--port&nbsp;8090</p></pre>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul class="listbullet">
+                    <li class="listbullet">If the port value you specify in the command is already in use or the value is not within the limits, an error message is displayed. However, only ports assigned to applications that are running or used by CA WCC are detected.</li>
+                    <li class="listbullet">If CA WCC is running in SSL mode, do not specify port number 80 for the Tomcat server port.</li>
+                    <li class="listbullet">If CA WCC is running in non-SSL mode, do not specify port number 443 for the Tomcat server port.</li>
+                    <li class="listbullet">If a run as (non-root) user was specified during CA WCC installation on UNIX and you intend to specify port 80 or 443, the port must be set up for non-root user access before you change the port value.</li>
+                    <li class="listbullet">After you change the Tomcat server port value, restart CA WCC services.</li>
+                </ul>
+            </div>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-ChangetheTomcatStopPortValue">Change the Tomcat Stop Port Value</h2>
+            <p>You can change the Tomcat stop port value. Changing the value is necessary when a conflict with another port occurs.</p>
+            <p>To change the Tomcat stop port value, use the following command syntax:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;<em>user_name</em>&nbsp;-p&nbsp;<em>password</em>&nbsp;--stopport&nbsp;<em>stop_port_value</em></p></pre>
+            </div>
+            <ul>
+                <li><p><strong>-u, --user&nbsp;<em>user_name</em></strong></p><p>Specifies the authorized user name. You can use either the short name (-u) or the long name (--user).</p></li>
+                <li><p><strong>-p, --password&nbsp;<em>password</em></strong></p><p>Specifies the password for the authorized user name. You can use either the short name (-p) or the long name&nbsp;(–password).</p></li>
+                <li><p><strong>--stopport&nbsp;<em>stop_port_value</em></strong><br>Specifies the Tomcat stop (shutdown) port value.<br><strong>Limits:</strong>&nbsp;1025-65535<br><strong>Default:</strong>&nbsp;8005&nbsp;</p></li>
+            </ul>
+            <p><strong>Example: Change the Tomcat stop port value</strong></p>
+            <p>The following example changes the Tomcat stop port value to 8015.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;--stopport&nbsp;8015</p></pre>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul class="listbullet">
+                    <li class="listbullet">If the port value you specify in the command is already in use or the value is not within the limits, an error message is displayed. However, only ports assigned to applications that are running or used by CA WCC are detected.</li>
+                    <li class="listbullet">After you change the Tomcat stop port value, restart CA WCC services.</li>
+                </ul>
+            </div>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-DisplayComponentShortNames">Display Component Short Names</h2>
+            <p>You can display a list of the short names for configuration components. Short names are used with the -c option, which can be used with the -x option to specify the components to export.</p>
+            <p>To display component short names, use the following command syntax:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-u&nbsp;ejmcommander&nbsp;-p&nbsp;ejmcommander&nbsp;-components</p></pre>
+            </div>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-DisplayHelp">Display Help</h2>
+            <p>You can display the inline help, which describes the options for the wcc_config command.</p>
+            <p>To display help, use one of the following commands:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>wcc_config&nbsp;-?</p><p>wcc_config&nbsp;--help</p></pre>
+            </div>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-ConfigurationShortNames">Configuration Short Names&nbsp;</h2>
+            <p>The following table lists the CA WCC configuration short names and the property settings they contain. Short names are used with the -c option, which can be used with the -x option to specify the configurations to export.</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Configuration Short Name</strong></th>
+                        <th class="confluenceTh"><strong>Contains</strong></th>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd">APPEDITOR</td>
+                        <td colspan="1" class="confluenceTd">Application Editor preferences</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">CONFIG</td>
+                        <td class="confluenceTd">Configuration preferences</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">CREDS</td>
+                        <td class="confluenceTd">Credentials preferences</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">ECLI</td>
+                        <td class="confluenceTd">Enterprise Command Line preferences</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">FORECAST</td>
+                        <td class="confluenceTd">Forecast preferences</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">MONITOR</td>
+                        <td class="confluenceTd">Monitoring preferences</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">QUICKEDIT</td>
+                        <td class="confluenceTd">Quick Edit preferences</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">QUICKVIEW</td>
+                        <td class="confluenceTd">Quick View preferences</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">REPORTING</td>
+                        <td class="confluenceTd">Reporting preferences</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">RESOURCES</td>
+                        <td class="confluenceTd">Resources preferences</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 class="heading2" id="AdministertheConfigurationBatchInterface-ConfigurationProperties">Configuration Properties</h2>
+            <h3 class="heading3" id="AdministertheConfigurationBatchInterface-PreferencesNames">Preferences Names</h3>
+            <p>Tables are provided that map the application preference fields in Configuration to the attributes listed in the file exported by the Configuration Batch Interface.</p>
+            <h4 class="heading4" id="AdministertheConfigurationBatchInterface-ApplicationEditor">Application Editor</h4>
+            <p>The following table maps Application Editor preference categories and fields in Configuration to the attributes in the APPEDITOR configuration file exported by the Configuration Batch Interface. Default values are also listed.</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Preference Category</strong></th>
+                        <th class="confluenceTh"><strong>Preference Field Name</strong></th>
+                        <th class="confluenceTh"><strong>Exported Attribute Name</strong></th>
+                        <th class="confluenceTh"><strong>Default Value</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>User Defaults</strong></td>
+                        <td class="confluenceTd">Rows per Page for SAP Filters</td>
+                        <td class="confluenceTd">appedit_env_sapdnd_filters_rowsperpage</td>
+                        <td class="confluenceTd">20</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Rows per Page for SAP Filter Results</td>
+                        <td class="confluenceTd">appedit_env_sapdnd_results_rowsperpage</td>
+                        <td class="confluenceTd">50</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Rows per Page for Import Jobs Dialog</td>
+                        <td class="confluenceTd">appedit_env_jobimport_rowsperpage</td>
+                        <td class="confluenceTd">50</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Rows per Page for Search Results in Dialog</td>
+                        <td class="confluenceTd">appedit_env_dialog_searchtable_rowsperpage</td>
+                        <td class="confluenceTd">20</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Hide SAP Drag and Drop Panes</td>
+                        <td class="confluenceTd">appedit_env_sapdnd_panel</td>
+                        <td class="confluenceTd">false</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Description Column Length</td>
+                        <td class="confluenceTd">appedit_env_searchtable_descriptionlength</td>
+                        <td class="confluenceTd">500</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Maximum Number of Imported Jobs</td>
+                        <td class="confluenceTd">appedit_env_jobimport_maximumjobs</td>
+                        <td class="confluenceTd">1000</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">New Job Name Default</td>
+                        <td class="confluenceTd">appedit_env_flow_graph_jobnametemplate</td>
+                        <td class="confluenceTd">{1} Job {0}</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Maximum Flow Height</td>
+                        <td class="confluenceTd">appedit_env_flow_graph_maxheight</td>
+                        <td class="confluenceTd">570</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Left Panes Width</td>
+                        <td class="confluenceTd">appedit_env_leftpanels_width</td>
+                        <td class="confluenceTd">250</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>System</strong></td>
+                        <td class="confluenceTd">Owner Field Mandatory</td>
+                        <td class="confluenceTd">appedit_env_owner_mandatory</td>
+                        <td class="confluenceTd">false</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Graph Tooltip Length</td>
+                        <td class="confluenceTd">appedit_env_flow_tooltip_valuelength</td>
+                        <td class="confluenceTd">64</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Import All Button</td>
+                        <td class="confluenceTd">appedit_env_jobimport_importall</td>
+                        <td class="confluenceTd">true</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Commit Threads</td>
+                        <td class="confluenceTd">appedit_env_commit_threads</td>
+                        <td class="confluenceTd">20</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Commit Dialog Refresh Interval</td>
+                        <td class="confluenceTd">appedit_env_commit_refreshrate</td>
+                        <td class="confluenceTd">2000</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Submit Owner on Commit</td>
+                        <td class="confluenceTd">appedit_env_commit_submit_owner</td>
+                        <td class="confluenceTd">true</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Proxy Server Name</td>
+                        <td class="confluenceTd">appedit_env_proxy_server</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Proxy Port</td>
+                        <td class="confluenceTd">appedit_env_proxy_port</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Proxy User Name</td>
+                        <td class="confluenceTd">appedit_env_proxy_user</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Proxy Password</td>
+                        <td class="confluenceTd">appedit_env_proxy_password</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h4 class="heading4" id="AdministertheConfigurationBatchInterface-Configuration">Configuration</h4>
+            <p>The following table maps Configuration preference categories and fields in Configuration to the attributes in the CONFIG configuration file exported by the Configuration Batch Interface. Default values are also listed.</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Preference Category</strong></th>
+                        <th class="confluenceTh"><strong>Preference Field Name</strong></th>
+                        <th class="confluenceTh"><strong>Exported Attribute Name</strong></th>
+                        <th class="confluenceTh"><strong>Default Value</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>EEM</strong></td>
+                        <td class="confluenceTd">EEM Connection Retry Interval</td>
+                        <td class="confluenceTd">config_env_eem_retry_interval</td>
+                        <td class="confluenceTd">1</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Maximum EEM Connection Retries</td>
+                        <td class="confluenceTd">config_env_eem_retry_tries</td>
+                        <td class="confluenceTd">1</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>AE</strong></td>
+                        <td class="confluenceTd">Enable SSL</td>
+                        <td class="confluenceTd">config_env_autosys_enable_ssl</td>
+                        <td class="confluenceTd">false</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Enable PMUX</td>
+                        <td class="confluenceTd">config_env_autosys_enable_pmux</td>
+                        <td class="confluenceTd">true</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Credentials</strong></td>
+                        <td class="confluenceTd">Validation Thread Pool Minimum Size</td>
+                        <td class="confluenceTd">config_env_cred_validation_thread_pool_core_size</td>
+                        <td class="confluenceTd">2</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Validation Thread Pool Maximum Size</td>
+                        <td class="confluenceTd">config_env_cred_validation_thread_pool_max_size</td>
+                        <td class="confluenceTd">4</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Validation Thread Pool Timeout</td>
+                        <td class="confluenceTd">config_env_cred_validation_thread_pool_timeout</td>
+                        <td class="confluenceTd">600</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Persist Default User</td>
+                        <td class="confluenceTd">config_env_cred_persist_default_user</td>
+                        <td class="confluenceTd">false</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Validation Refresh Interval</td>
+                        <td class="confluenceTd">config_env_cred_validation_refresh</td>
+                        <td class="confluenceTd">5000</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Single Sign-On</strong></td>
+                        <td class="confluenceTd">Single Sign-On</td>
+                        <td class="confluenceTd">
+                            <div class="WordSection1">
+                                <p>config_env_single_sign_on</p>
+                            </div></td>
+                        <td class="confluenceTd">none</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Force Kerberos Compatibility</td>
+                        <td class="confluenceTd">
+                            <div class="WordSection1">
+                                <p>config_env_single_sign_on_forcentlm</p>
+                            </div></td>
+                        <td class="confluenceTd">true</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Security</strong></td>
+                        <td class="confluenceTd">Session Timeout</td>
+                        <td class="confluenceTd">config_env_sso_session_timeout</td>
+                        <td class="confluenceTd">30</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd">&nbsp;</td>
+                        <td colspan="1" class="confluenceTd">Auto Refresh prevents session timeout</td>
+                        <td colspan="1" class="confluenceTd"><span>config_env_auto_refresh_prevents_session_timeout</span></td>
+                        <td colspan="1" class="confluenceTd">false</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd">&nbsp;</td>
+                        <td colspan="1" class="confluenceTd"><span>Single Session per User</span></td>
+                        <td colspan="1" class="confluenceTd"><span>config_env_single_session_per_user</span></td>
+                        <td colspan="1" class="confluenceTd"><span>false</span></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">URL Parameters Encryption</td>
+                        <td class="confluenceTd">
+                            <div class="WordSection1">
+                                <p>config_env_encrypt_query_params</p>
+                            </div></td>
+                        <td class="confluenceTd">false</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd">&nbsp;</td>
+                        <td colspan="1" class="confluenceTd">&nbsp;</td>
+                        <td colspan="1" class="confluenceTd">&nbsp;</td>
+                        <td colspan="1" class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd"><strong>Environment</strong></td>
+                        <td colspan="1" class="confluenceTd">Default Time Zone</td>
+                        <td colspan="1" class="confluenceTd">
+                            <div class="WordSection1">
+                                <p>config_user_timezone</p>
+                            </div></td>
+                        <td colspan="1" class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd">&nbsp;</td>
+                        <td colspan="1" class="confluenceTd">&nbsp;</td>
+                        <td colspan="1" class="confluenceTd">&nbsp;</td>
+                        <td colspan="1" class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd"><strong>Integrations</strong></td>
+                        <td colspan="1" class="confluenceTd">AM base URL</td>
+                        <td colspan="1" class="confluenceTd">
+                            <div class="WordSection1">
+                                <p>config_env_integration_cam_base_url</p>
+                            </div></td>
+                        <td colspan="1" class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h5 class="heading5" id="AdministertheConfigurationBatchInterface-OverrideKerberosCompatibility">Override Kerberos Compatibility</h5>
+            <p>In the current release, you can configure single sign-on capability when you are using a Kerberos compatible browser. The Enable NTLM preference in Configuration forces CA WCC to override Kerberos compatibility when NTLM authentication is enabled. By default, NTLM protocol is enabled and CA WCC is configured to override Kerberos in favor of NTLM.</p>
+            <p>CA WCC does not support Kerberos authentication protocol. If single sign-on is active and CA WCC is not configured to override Kerberos, you are required to authenticate your session by entering login credentials.</p>
+            <h4 class="heading4" id="AdministertheConfigurationBatchInterface-EnterpriseCommandLine">Enterprise Command Line</h4>
+            <p>The following table maps Enterprise Command Line preference categories and fields in Configuration to the attributes in the ECLI configuration file exported by the Configuration Batch Interface. Default values are also listed.</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Preference Category</strong></th>
+                        <th class="confluenceTh"><strong>Preference Field Name</strong></th>
+                        <th class="confluenceTh"><strong>Exported Attribute Name</strong></th>
+                        <th class="confluenceTh"><strong>Default Value</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>My Commands Settings</strong></td>
+                        <td class="confluenceTd">Maximum My Commands Saved</td>
+                        <td class="confluenceTd">commandline_env_max_number_mycommands_saved</td>
+                        <td class="confluenceTd">25</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Rows per Page for My Commands</td>
+                        <td class="confluenceTd">commandline_env_table_mycommands_rows</td>
+                        <td class="confluenceTd">10</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Global Commands Settings</strong></td>
+                        <td class="confluenceTd">Maximum Global Commands Saved</td>
+                        <td class="confluenceTd">commandline_env_max_number_global_commands_saved</td>
+                        <td class="confluenceTd">25</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Rows per Page for Global Commands</td>
+                        <td class="confluenceTd">commandline_env_table_globalcommands_rows</td>
+                        <td class="confluenceTd">10</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>General Settings</strong></td>
+                        <td class="confluenceTd">Maximum Number of Servers</td>
+                        <td class="confluenceTd">commandline_env_max_number_server_selection</td>
+                        <td class="confluenceTd">7</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Command Timeout</td>
+                        <td class="confluenceTd">commandline_env_max_command_processing_wait_time</td>
+                        <td class="confluenceTd">300000</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Maximum Auto Complete Items</td>
+                        <td class="confluenceTd">commandline_env_max_number_history</td>
+                        <td class="confluenceTd">10</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Default Export File Name</td>
+                        <td class="confluenceTd">commandline_env_export_default_file_name</td>
+                        <td class="confluenceTd">export.txt</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h4 class="heading4" id="AdministertheConfigurationBatchInterface-Forecast">Forecast</h4>
+            <p>The following table maps Forecast preference categories and fields in Configuration to the attributes in the FORECAST configuration file exported by the Configuration Batch Interface. Default values are also listed.</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Preference Category</strong></th>
+                        <th class="confluenceTh"><strong>Preference Field Name</strong></th>
+                        <th class="confluenceTh"><strong>Exported Attribute Name</strong></th>
+                        <th class="confluenceTh"><strong>Default Value</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>User Interface</strong></td>
+                        <td class="confluenceTd">Rows per Page for Forecast</td>
+                        <td class="confluenceTd">forecast_env_definitions_table_row_count</td>
+                        <td class="confluenceTd">50</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Rows per Page for Table View</td>
+                        <td class="confluenceTd">forecast_env_results_table_row_count</td>
+                        <td class="confluenceTd">50</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Rows per Page for Timeline View</td>
+                        <td class="confluenceTd">forecast_env_results_gantt_row_count</td>
+                        <td class="confluenceTd">50</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Command Parameters</strong></td>
+                        <td class="confluenceTd">Execution Timeout</td>
+                        <td class="confluenceTd">forecast_env_command_execution_timeout</td>
+                        <td class="confluenceTd">300000</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h4 class="heading4" id="AdministertheConfigurationBatchInterface-Monitoring">Monitoring</h4>
+            <p>The following table maps Monitoring preference categories and fields in Configuration to the attributes in the MONITOR configuration file exported by the Configuration Batch Interface. Default values are also listed.</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Preference Category</strong></th>
+                        <th class="confluenceTh"><strong>Preference Field Name</strong></th>
+                        <th class="confluenceTh"><strong>Exported Attribute Name</strong></th>
+                        <th class="confluenceTh"><strong>Default Value</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>UI</strong></td>
+                        <td class="confluenceTd">Auto Refresh Interval</td>
+                        <td class="confluenceTd">monitor_env_viewdetail_auto_refresh_interval</td>
+                        <td class="confluenceTd">15</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Views Table Columns</td>
+                        <td class="confluenceTd">monitor_env_views_table_column_list</td>
+                        <td class="confluenceTd">name,job_status,server_status,alert_severity_status, jobs,collections,status_time</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Servers Table Columns</td>
+                        <td class="confluenceTd">monitor_env_servers_table_column_list</td>
+                        <td class="confluenceTd">name,status,status_time,type,filters</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Jobs Table Columns</td>
+                        <td class="confluenceTd">monitor_env_serverdetail_job_table_column_list</td>
+                        <td class="confluenceTd">job_name,job_type,status,server,run_machine,status_time</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Alerts Table Columns</td>
+                        <td class="confluenceTd">monitor_env_serverdetail_alert_table_column_list</td>
+                        <td class="confluenceTd">alert,severity,status,job,server,create_time,status_time</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Scheduler Log Default Lines</td>
+                        <td class="confluenceTd">monitor_env_scheduler_log_lines_default</td>
+                        <td class="confluenceTd">50</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Scheduler Log Auto Refresh Interval</td>
+                        <td class="confluenceTd">monitor_env_scheduler_log_auto_refresh_interval</td>
+                        <td class="confluenceTd">15</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Job Level Security</strong></td>
+                        <td class="confluenceTd">Use CA Workload Automation AE Security</td>
+                        <td class="confluenceTd">monitor_env_jobLevelSecurity_active</td>
+                        <td class="confluenceTd">Selected</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Back-end Services</strong></td>
+                        <td class="confluenceTd">Collector Mode</td>
+                        <td class="confluenceTd">monitor_env_collectorsentry_mode</td>
+                        <td class="confluenceTd">all</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Job Collector Run Interval</td>
+                        <td class="confluenceTd">monitor_env_job_collector_run_interval</td>
+                        <td class="confluenceTd">5</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Alarm Collector Run Interval</td>
+                        <td class="confluenceTd">monitor_env_alarm_collector_run_interval</td>
+                        <td class="confluenceTd">5</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Alerts Deletion Threshold</td>
+                        <td class="confluenceTd">monitor_env_alertscleaner_stale_alerts_threshold</td>
+                        <td class="confluenceTd">7</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Alert Cleaner Run Interval</td>
+                        <td class="confluenceTd">monitor_env_alertscleaner_run_interval</td>
+                        <td class="confluenceTd">24</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Security Cache Timeout</td>
+                        <td class="confluenceTd">monitor_env_securitycache_timeout</td>
+                        <td class="confluenceTd">60</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">DB Statistics Update Threshold</td>
+                        <td class="confluenceTd">monitor_env_dbstatsupdater_threshold</td>
+                        <td class="confluenceTd">5000</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Flow</strong></td>
+                        <td class="confluenceTd">Flow Threshold Per Flow</td>
+                        <td class="confluenceTd">monitor_env_flow_limit_oneflow</td>
+                        <td class="confluenceTd">5000</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Flow Threshold Collapsed</td>
+                        <td class="confluenceTd">monitor_env_flow_limit_showitem</td>
+                        <td class="confluenceTd">2000</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Flow Expand Box Jobs</td>
+                        <td class="confluenceTd">monitor_env_flow_show_subgraphs_expanded</td>
+                        <td class="confluenceTd">true</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Maximum Flow Height</td>
+                        <td class="confluenceTd">monitor_env_viewflow_nonempty_height</td>
+                        <td class="confluenceTd">500</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Server Status Order</strong></td>
+                        <td class="confluenceTd">Failure</td>
+                        <td class="confluenceTd">monitor_env_status_server_severity_failure</td>
+                        <td class="confluenceTd">0</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Disconnected</td>
+                        <td class="confluenceTd">monitor_env_status_server_severity_disconnected</td>
+                        <td class="confluenceTd">1</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Unknown</td>
+                        <td class="confluenceTd">monitor_env_status_server_severity_unknown</td>
+                        <td class="confluenceTd">2</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Not Configured</td>
+                        <td class="confluenceTd">monitor_env_status_server_severity_not_configured</td>
+                        <td class="confluenceTd">3</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Connected</td>
+                        <td class="confluenceTd">monitor_env_status_server_severity_connected</td>
+                        <td class="confluenceTd">5</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Job Status Order</strong></td>
+                        <td class="confluenceTd">Failure</td>
+                        <td class="confluenceTd">monitor_env_status_job_severity_failure</td>
+                        <td class="confluenceTd">111</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Waiting on Reply</td>
+                        <td class="confluenceTd">monitor_env_status_job_severity_wait_reply</td>
+                        <td class="confluenceTd">112</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Pending Machine</td>
+                        <td class="confluenceTd">monitor_env_status_job_severity_pend_mach</td>
+                        <td class="confluenceTd">113</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Waiting on Resources</td>
+                        <td class="confluenceTd">monitor_env_status_job_severity_reswait</td>
+                        <td class="confluenceTd">114</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Queue Wait</td>
+                        <td class="confluenceTd">monitor_env_status_job_severity_que_wait</td>
+                        <td class="confluenceTd">115</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Restart</td>
+                        <td class="confluenceTd">monitor_env_status_job_severity_restart</td>
+                        <td class="confluenceTd">116</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Terminated</td>
+                        <td class="confluenceTd">monitor_env_status_job_severity_terminated</td>
+                        <td class="confluenceTd">117</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">On Ice</td>
+                        <td class="confluenceTd">monitor_env_status_job_severity_on_ice</td>
+                        <td class="confluenceTd">118</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">On Hold</td>
+                        <td class="confluenceTd">monitor_env_status_job_severity_on_hold</td>
+                        <td class="confluenceTd">119</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Unknown</td>
+                        <td class="confluenceTd">monitor_env_status_job_severity_unknown</td>
+                        <td class="confluenceTd">120</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Success</td>
+                        <td class="confluenceTd">monitor_env_status_job_severity_success</td>
+                        <td class="confluenceTd">121</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Running</td>
+                        <td class="confluenceTd">monitor_env_status_job_severity_running</td>
+                        <td class="confluenceTd">122</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Starting</td>
+                        <td class="confluenceTd">monitor_env_status_job_severity_starting</td>
+                        <td class="confluenceTd">123</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Activated</td>
+                        <td class="confluenceTd">monitor_env_status_job_severity_activated</td>
+                        <td class="confluenceTd">124</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Inactive</td>
+                        <td class="confluenceTd">monitor_env_status_job_severity_inactive</td>
+                        <td class="confluenceTd">125</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">On No Execution</td>
+                        <td class="confluenceTd">monitor_env_status_job_severity_on_no_exec</td>
+                        <td class="confluenceTd">126</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h4 class="heading4" id="AdministertheConfigurationBatchInterface-QuickEdit">Quick Edit</h4>
+            <p>The following table maps Quick Edit preference categories and fields in Configuration to the attributes in the QUICKEDIT configuration file exported by the Configuration Batch Interface. Default values are also listed.</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Preference Category</strong></th>
+                        <th class="confluenceTh"><strong>Preference Field Name</strong></th>
+                        <th class="confluenceTh"><strong>Exported Attribute Name</strong></th>
+                        <th class="confluenceTh"><strong>Default Value</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>User Defaults</strong></td>
+                        <td class="confluenceTd">Rows per Page for Search Results</td>
+                        <td class="confluenceTd">quickedit_env_searchtable_rowsperpage</td>
+                        <td class="confluenceTd">50</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Rows per Page for Search Results in Dialog</td>
+                        <td class="confluenceTd">quickedit_env_dialog_searchtable_rowsperpage</td>
+                        <td class="confluenceTd">20</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Search History Items</td>
+                        <td class="confluenceTd">quickedit_env_searchhistory_maxitems</td>
+                        <td class="confluenceTd">30</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Description Column Length</td>
+                        <td class="confluenceTd">quickedit_env_searchtable_descriptionlength</td>
+                        <td class="confluenceTd">500</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Single Result Redirect</td>
+                        <td class="confluenceTd">quickedit_env_search_singleresultredirect</td>
+                        <td class="confluenceTd">true</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Display Calendar with 24 Months</td>
+                        <td class="confluenceTd">quickedit_env_calendar_numberofmonths</td>
+                        <td class="confluenceTd">false</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>System</strong></td>
+                        <td class="confluenceTd">Owner Field Mandatory</td>
+                        <td class="confluenceTd">quickedit_env_owner_mandatory</td>
+                        <td class="confluenceTd">false</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Copy Job Owner</td>
+                        <td class="confluenceTd">quickedit_env_copy_jobowner</td>
+                        <td class="confluenceTd">true</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">User Defined Job Description Maximum Length</td>
+                        <td class="confluenceTd">quickedit_env_job_userdefined_maxlength_description</td>
+                        <td class="confluenceTd">50</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">User Defined Job Command Maximum Length</td>
+                        <td class="confluenceTd">quickedit_env_job_userdefined_maxlength_command</td>
+                        <td class="confluenceTd">50</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Proxy Server Name</td>
+                        <td class="confluenceTd">quickedit_env_proxy_server</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Proxy Port</td>
+                        <td class="confluenceTd">quickedit_env_proxy_port</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Proxy User Name</td>
+                        <td class="confluenceTd">quickedit_env_proxy_user</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Proxy Password</td>
+                        <td class="confluenceTd">quickedit_env_proxy_password</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h4 class="heading4" id="AdministertheConfigurationBatchInterface-QuickView">Quick View</h4>
+            <p>The following table maps Quick View preference categories and fields in Configuration to the attributes in the QUICKVIEW configuration file exported by the Configuration Batch Interface. Default values are also listed.</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Preference Category</strong></th>
+                        <th class="confluenceTh"><strong>Preference Field Name</strong></th>
+                        <th class="confluenceTh"><strong>Exported Attribute Name</strong></th>
+                        <th class="confluenceTh"><strong>Default Value</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>User Defaults</strong></td>
+                        <td class="confluenceTd">Rows per Page for Search Results</td>
+                        <td class="confluenceTd">quickview_env_pageSize</td>
+                        <td class="confluenceTd">50</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Rows per Page for Reports</td>
+                        <td class="confluenceTd">quickview_env_reports</td>
+                        <td class="confluenceTd">50</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Search History Items</td>
+                        <td class="confluenceTd">quickview_env_searchHistorySize</td>
+                        <td class="confluenceTd">30</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Job Details View</td>
+                        <td class="confluenceTd">quickview_env_showTreeView</td>
+                        <td class="confluenceTd">TREE_VIEW</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Maximum Flow Height</td>
+                        <td class="confluenceTd">quickview_env_flowScreenSize</td>
+                        <td class="confluenceTd">400</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Default Number of Upstream Levels</td>
+                        <td class="confluenceTd">quickview_env_upStreamLevelSize</td>
+                        <td class="confluenceTd">1</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Default Number of Downstream Levels</td>
+                        <td class="confluenceTd">quickview_env_downStreamLevelSize</td>
+                        <td class="confluenceTd">1</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Show Dependent Jobs</td>
+                        <td class="confluenceTd">quickview_env_showDependentJobs</td>
+                        <td class="confluenceTd">true</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Show Starting Conditions</td>
+                        <td class="confluenceTd">quickview_env_showStartingConditions</td>
+                        <td class="confluenceTd">true</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Show Job Runs</td>
+                        <td class="confluenceTd">quickview_env_showJobRuns</td>
+                        <td class="confluenceTd">true</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h4 class="heading4" id="AdministertheConfigurationBatchInterface-Reporting">Reporting</h4>
+            <p>The following table maps Reporting preference categories and fields in Configuration Manager to the attributes in the REPORTING configuration file exported by the Configuration Batch Interface. Default values are also listed.</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Preference Category</strong></th>
+                        <th class="confluenceTh"><strong>Preference Field Name</strong></th>
+                        <th class="confluenceTh"><strong>Exported Attribute Name</strong></th>
+                        <th class="confluenceTh"><strong>Default Value</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Collectors</strong></td>
+                        <td class="confluenceTd">Enable Collector</td>
+                        <td class="confluenceTd">reporting_env_collectors_collectorsActive</td>
+                        <td class="confluenceTd">true</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Collector Run Interval</td>
+                        <td class="confluenceTd">reporting_env_collectors_frequencyCollectorSeconds</td>
+                        <td class="confluenceTd">60</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Database Cleanup</strong></td>
+                        <td class="confluenceTd">Enable Cleanup</td>
+                        <td class="confluenceTd">reporting_env_collectors_cleanupActive</td>
+                        <td class="confluenceTd">true</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Cleanup Interval</td>
+                        <td class="confluenceTd">reporting_env_collectors_frequencyCleanupDays</td>
+                        <td class="confluenceTd">2</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Purge Data</td>
+                        <td class="confluenceTd">reporting_env_collectors_cleanupDataOlderThanDays</td>
+                        <td class="confluenceTd">30</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h4 class="heading4" id="AdministertheConfigurationBatchInterface-Resources">Resources</h4>
+            <p>The following table maps Resources preference categories and fields in Configuration Manager to the attributes in the RESOURCES configuration file exported by the Configuration Batch Interface. Default values are also listed.</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Preference Category</strong></th>
+                        <th class="confluenceTh"><strong>Preference Field Name</strong></th>
+                        <th class="confluenceTh"><strong>Exported Attribute Name</strong></th>
+                        <th class="confluenceTh"><strong>Default Value</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Table Controls</strong></td>
+                        <td class="confluenceTd">Rows per Page for All Tables</td>
+                        <td class="confluenceTd">resources_env_table_row_count</td>
+                        <td class="confluenceTd">50</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Rows per Page for All Dialog Tables</td>
+                        <td class="confluenceTd">resources_env_table_dialog_row_count</td>
+                        <td class="confluenceTd">20</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Search History Controls</strong></td>
+                        <td class="confluenceTd">Search History Items</td>
+                        <td class="confluenceTd">resources_env_searchhistory_maxitems</td>
+                        <td class="confluenceTd">30</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3 class="heading3" id="AdministertheConfigurationBatchInterface-ServerPreferenceNames">Server Preference Names</h3>
+            <p>Tables are provided that map the server preference fields in Configuration Manager to the attributes listed in the file exported by the Configuration Batch Interface.</p>
+            <h4 class="heading4" id="AdministertheConfigurationBatchInterface-CAWorkloadAutomationAEServer">CA Workload Automation AE Server</h4>
+            <p>The following table maps CA Workload Automation AE server preference categories and fields in Configuration to the attributes in the file exported by the Configuration Batch Interface. Default values are also listed.</p>
+            <div class="table-responsive">
+                <table class="wrapped table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Preference Category</strong></th>
+                        <th class="confluenceTh"><strong>Preference Field Name</strong></th>
+                        <th class="confluenceTh"><strong>Exported Attribute Name</strong></th>
+                        <th class="confluenceTh"><strong>Default Value</strong></th>
+                        <th class="confluenceTh"><strong>Required</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>General</strong></td>
+                        <td class="confluenceTd">Server Name</td>
+                        <td class="confluenceTd">&lt;command value&gt;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">yes</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Instance Name</td>
+                        <td class="confluenceTd">instance_name</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">yes</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Cluster Name</td>
+                        <td class="confluenceTd">cluster_name</td>
+                        <td class="confluenceTd">Default</td>
+                        <td class="confluenceTd">yes</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Product Version</td>
+                        <td class="confluenceTd">version</td>
+                        <td class="confluenceTd">11.3</td>
+                        <td class="confluenceTd">no</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Application Server</strong></td>
+                        <td class="confluenceTd">Application Server Host Address</td>
+                        <td class="confluenceTd">host_address</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">yes</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Application Server Host Port</td>
+                        <td class="confluenceTd">port</td>
+                        <td class="confluenceTd">9000</td>
+                        <td class="confluenceTd">yes</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Compatibility</strong></td>
+                        <td class="confluenceTd">Legacy Compatibility Port</td>
+                        <td class="confluenceTd">legacy_compat_port</td>
+                        <td class="confluenceTd">4444</td>
+                        <td class="confluenceTd">yes</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Monitor User</strong></td>
+                        <td class="confluenceTd">Monitor ID</td>
+                        <td class="confluenceTd">monitor_id</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">yes</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Monitor Password</td>
+                        <td class="confluenceTd">monitor_password</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">yes</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Preference</strong></td>
+                        <td class="confluenceTd">EEM Enabled</td>
+                        <td class="confluenceTd">enable_eem</td>
+                        <td class="confluenceTd">true</td>
+                        <td class="confluenceTd">no</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd">&nbsp;</td>
+                        <td colspan="1" class="confluenceTd">Time Zone</td>
+                        <td colspan="1" class="confluenceTd">time_zone_id</td>
+                        <td colspan="1" class="confluenceTd">&nbsp;</td>
+                        <td colspan="1" class="confluenceTd">no</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd"><strong>Encryption</strong></td>
+                        <td class="confluenceTd">Encryption Key</td>
+                        <td class="confluenceTd">encryption_key</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">no</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">Encryption Type</td>
+                        <td class="confluenceTd">encryption_type</td>
+                        <td class="confluenceTd">DEFAULT</td>
+                        <td class="confluenceTd">no</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p></p>
+            <h2 class="heading2" style="margin-top: 30.0px;" id="AdministertheConfigurationBatchInterface-UpdatetheCAEEMServerDefinitioninCAWCC.1">Update the CA EEM Server Definition in CA WCC</h2>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p><strong>Valid on UNIX</strong></p>
+                <p>The eventor command starts the scheduler (also called the event demon) on UNIX. By default, eventor runs in the background and performs the following tasks:</p>
+                <ol>
+                    <li>Confirms that another scheduler of the same instance is not running on the same machine (as determined by the $AUTOSERV variable).</li>
+                    <li>Writes scheduler log information from $AUTOUSER/out/event_demon.$AUTOSERV to standard output using the astail command.</li>
+                </ol>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>eventor&nbsp;[-f]&nbsp;[-q]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-f<br></strong>(Optional) Runs the scheduler in the foreground and sends all its output to the display where the command was issued.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note: </strong>We do not recommend the -f option for production use
+                            <em>. </em>The default behavior is to run the scheduler in the background. All output is written to the $AUTOUSER/out/event_demon.$AUTOSERV file.
+                        </div> </li>
+                    <li><p><strong>-q<br></strong>(Optional) Runs eventor in quiet mode.&nbsp;</p></li>
+                </ul>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Notes:</strong>
+                    <ul>
+                        <li>We recommend that you start the scheduler with no options set. In this situation, CA Workload Automation AE performs all restart checks, sends alarms, and records output in the log file.</li>
+                        <li>Do not try to start the scheduler by invoking the event_demon binary at the command line. Use the eventor command to properly verify and configure the scheduler environment.</li>
+                    </ul>
+                </div>
+                <p><strong>Example: Start the Scheduler</strong></p>
+                <p>This example starts the scheduler in the background and runs the chase and astail commands.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>eventor</p></pre>
+                </div>
+                <h2 class="heading3" id="eventorCommand—StarttheScheduler-LogFiles">Log Files</h2>
+                <p><strong>Valid on UNIX</strong></p>
+                <p>The eventor command starts the scheduler, which writes log information to the file named $AUTOUSER/out/event_demon.$AUTOSERV.</p>
+                <p>By default, eventor runs the astail -f command against the log file. This command is useful for monitoring the scheduler execution, particularly when there are problems with its startup. For example, if shared libraries that are required by the scheduler are missing or cannot be found, the scheduler does not start. In this case, the scheduler writes a message to its log file to indicate the problem. To exit the astail command, use Ctrl+C in the window displaying the scheduler log.</p>
+                <p>The shadow scheduler writes log information to the $AUTOUSER/ out/event_demon.shadow.$AUTOSERV file.</p>
+                <p>The tie-breaker scheduler writes log information to the $AUTOUSER/out/event_demon.tie-breaker.$AUTOSERV file.</p>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

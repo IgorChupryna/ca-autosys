@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p><strong>Valid on UNIX</strong></p>
+                <p>The as_server command is the application server component that runs the application server for a specific instance.</p>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <p><strong>Note: </strong>The application server typically starts in the background using the unisrvcntr command or boot scripts during startup. When CA support helps you resolve a problem, they might ask you to start the application server manually.</p>
+                </div>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>as_server&nbsp;-A&nbsp;<em>instance_name</em>&nbsp;[-?]&nbsp;[-x]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong><em>instance_name</em></strong></p><p>Specifies the instance that is associated with the application server you want to run.</p></li>
+                    <li><strong>-?</strong><br>(Optional) Displays help for the command.</li>
+                    <li><strong>-x&nbsp;</strong><br>(Optional) Displays the version information.</li>
+                </ul>
+                <p><strong>Example: Start the Application Server</strong></p>
+                <p>This example starts the application server for the instance ACE.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>as_server&nbsp;-A&nbsp;ACE</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p>Command jobs let you run workload on UNIX and Windows client computers. On UNIX, you can define jobs to run scripts and commands. On Windows, you can define jobs to run command files and batch files.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> To run these jobs, your system requires one of the following:</p>
+                <ul>
+                    <li>CA WA Agent for UNIX, Linux, or Windows</li>
+                    <li>Legacy agent for Unicenter AutoSys Job Management 4.5.1 through r11</li>
+                </ul>
+            </div>
+            <p>When you define a Command job, you can specify settings including the following:</p>
+            <ul>
+                <li><strong>Starting Conditions</strong><br>Defines conditions (for example, date, time, job state, and machine state) that must be met before a job can start.</li>
+                <li><strong>Disk Space Criteria</strong><br>Defines the amount of free space required before a process can start. If the free space is not available, an alarm is sent and the job is rescheduled.</li>
+                <li><p><strong>Job Profile</strong><br>Specifies a script to be sourced that defines the environment where the command runs.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note: </strong>On Windows, you can define a job profile using the Job Profiles - CA Workload Automation AE Administrator window in the Administrator utility.
+                    </div> </li>
+                <li><strong>Environment Variables</strong><br>Specifies variables that define the local environment where the job runs.</li>
+                <li><strong>User-defined Exit Codes</strong><br>Defines exit codes to indicate job success and job failure. By default, an exit code of 0 (zero) indicates job success and any other code indicates job failure. When the job completes, the exit event (either SUCCESS or FAILURE) and program's exit code are stored in the database.</li>
+                <li><strong>Standard I/O Files</strong><br>Specifies the standard input, output, and error files.</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> To support chained commands (commands are separated by a semicolon) on UNIX, ensure that the oscomponent.wrapper.exec.force parameter in the agentparm.txt file is set to false (the default). For more information about supporting chained commands, see the UNIX Implementation section.
+            </div>
+            <p class="heading2"></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H1,H2" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#ManageCommandJobsUsingCAWCC-DefineaUserDefinedJob" class="toc-link">Define a User Defined Job</a></span></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#ManageCommandJobsUsingCAWCC-VerifyFileSpaceBeforeaJobStarts" class="toc-link">Verify File Space Before a Job Starts</a></span></li><li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a href="#ManageCommandJobsUsingCAWCC-PassPositionalArgumentsinaCommandJob" class="toc-link">Pass Positional Arguments in a Command Job</a></span></li><li><span class="toc-item-body" data-outline="4"><span class="toc-outline">4</span><a href="#ManageCommandJobsUsingCAWCC-UNIXEnvironmentVariables" class="toc-link">UNIX Environment Variables</a></span></li><li><span class="toc-item-body" data-outline="5"><span class="toc-outline">5</span><a href="#ManageCommandJobsUsingCAWCC-DefineAlternativeError,Input,andOutputSourcesandDestinations" class="toc-link">Define Alternative Error, Input, and Output Sources and Destinations</a></span></li></ul></div>
+            <p></p>
+            <h2 class="heading2" id="ManageCommandJobsUsingCAWCC-DefineaUserDefinedJob">Define a User Defined Job</h2>
+            <p>You can define a Command job to run workload on UNIX and Windows computers. The job can run a script, execute a UNIX command, or run a Windows command file.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> To run these jobs, your system requires CA WA Agent for UNIX, Linux, or Windows.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a Command (CMD) job.</li>
+                <li>Specify the following required properties:
+                    <ul>
+                        <li><strong>Name</strong><br>Defines the name of the job that you want to schedule. <br><strong>Limits:</strong> Up to 64 characters; valid characters are a-z, A-Z, 0-9, period (.), underscore (_), hyphen (-), and pound (#); do not include embedded spaces or tabs</li>
+                        <li><p><strong>Send to machine</strong><br>Specifies the name of the machine on which the job runs.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong>Note:</strong> The machine must be already defined to CA Workload Automation AE for the job to be created.
+                            </div> </li>
+                        <li><strong>Command</strong><br>Specifies the command, executable, UNIX shell script, application, or batch file to run when all the starting conditions are met.<br><strong>Limits:</strong> Up to <span style="color: rgb(255,0,0);">1000</span> characters; case-sensitive. <span style="color: rgb(255,0,0);">Up to 512 characters if the CA Workload Automation AE server that is configured in CA WCC is at Release 11.3.6 SP6 or below.</span><br><strong>Note (UNIX only):</strong> When you define a job that runs a script that calls a second script, the fully qualified path of the called script must be provided.</li>
+                    </ul></li>
+                <li>(Optional) Specify optional <a data-macro-name="sp-plaintextbody-link" href="#ManageCommandJobsUsingCAWCC-CommandProperties" class="conf-macro output-inline" data-hasbody="true">Command properties</a>.</li>
+                <li>(Optional) Specify <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/scheduling/schedule-with-ca-wcc/manage-common-job-properties" class="conf-macro output-inline" data-hasbody="true">common properties that apply to all job types</a>.</li>
+                <li>Commit the job.<br>The Command job is defined.</li>
+            </ol>
+            <h3 class="heading3" id="ManageCommandJobsUsingCAWCC-CommandJobExamples(UNIX)">Command Job Examples (UNIX)</h3>
+            <p>The following examples describe sample Command jobs that run UNIX scripts and commands.</p>
+            <p><strong>Example: Run a Command on UNIX</strong></p>
+            <p>This example runs the /bin/touch command on the file named /tmp/test_run.out. The job runs on the UNIX client computer named AGENT.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a Command job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- test_run</li>
+                        <li>Send to machine -- AGENT</li>
+                        <li>Command -- /bin/touch /tmp/test_run.out</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <p><strong>Example: Run a Script that is Located in a Path Set in the PATH Environment Variable</strong></p>
+            <p>Suppose that the job PROCSCRIPT runs a script named procscript.sh. The job runs under jsmith, the user who has the authority to run the script. The path to procscript.sh is set in the PATH system environment variable for jsmith. This job runs on the default agent computer.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a Command job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- PROCSCRIPT</li>
+                        <li>Owner -- jsmith</li>
+                        <li>Send to machine -- AGENT</li>
+                        <li>Command -- procscript.sh</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <p><strong>Example: Run a Script that is Located in a Path Set in a User Environment Variable</strong></p>
+            <p>Suppose that the job MYSCRIPTJOB runs a script named myscript.sh. The job runs under jsmith, the user who has the authority to run the script. The path to myscript.sh is set in the user environment variable $MY_PATH, which is defined in the profile file for jsmith. This job runs on the default agent computer.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a Command job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- MYSCRIPTJOB</li>
+                        <li>Owner -- jsmith</li>
+                        <li>Send to machine -- AGENT</li>
+                        <li>Command -- $MY_PATH/myscript.sh</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <p><strong>Example: Run a Script that Uses the C Shell</strong></p>
+            <p>In the following example, the C shell is used to run the sort script on the UNIX_LA agent computer.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a Command job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- MFGSORT</li>
+                        <li>Send to machine -- UNIX_LA</li>
+                        <li>Command -- /mfg/test/sort</li>
+                        <li>Shell -- /bin/csh</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <p><strong>Example: Send a User-Defined Exit Code</strong></p>
+            <p>The following example shows the first and last lines of the payroll.sh script, which returns the self-defined exit code 100 to the scheduling manager:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>#!/usr/bin/sh</p><p>.</p><p>.</p><p>.</p><p>exit&nbsp;100</p></pre>
+            </div>
+            <p>In this job, the Success exit codes field defines exit code 100 as SUCCESS, indicating successful completion of the script.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a Command job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- SUCCESSJOB</li>
+                        <li>Owner -- jsmith</li>
+                        <li>Send to machine -- SUN_NY</li>
+                        <li>Command -- /home/esp/payroll.sh</li>
+                        <li>Success exit codes -- 0,100</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <h3 class="heading3" id="ManageCommandJobsUsingCAWCC-CommandJobExamples(Windows)">Command Job Examples (Windows)</h3>
+            <p>The following examples describe sample Command jobs that run Windows command files.</p>
+            <p><strong>Example: Run a Command File on Windows</strong></p>
+            <p>This example runs the c:\bin\test.bat command on the Windows client computer named AGENT.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a Command job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- test_run</li>
+                        <li>Send to machine -- AGENT</li>
+                        <li>Command -- "c:\bin\test.bat"</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <p><strong>Example: Access a Windows Network Resource with Universal Naming Convention (UNC) and Share Names</strong></p>
+            <p>Suppose that the path c:\WINNT\Profiles\Visitor\Desktop\ has the share name MyDesktop. The command notify.cmd is in that path on the CYBNT server, and is accessed by the UNC name and share name in the job JOBC, which runs on the agent WINAGENT.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;A share name is an alias for the path in which the resource exists. A UNC name is the name of a file or other resource that begins with two backslashes (\\), indicating that it exists on a remote computer.</p>
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a Command job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- JOBC</li>
+                        <li>Send to machine -- WINAGENT</li>
+                        <li>Command -- \\CYBNT\MyDesktop\notify.cmd</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <p><strong>Example: Use Administrative Authority to Access a Remote Windows Resource that is Not Shared</strong></p>
+            <p>The agent service can log on to a remote Windows server as a user with administrative authority. Using this authority lets the agent access remote resources that are not marked as shared using the share names C$ and ADMIN$. Suppose that drive C is accessed by an administrator over the network through the WINAGENT agent. The agent runs under the System Account option, and it runs the test Application in the c:\working directory on the server CYBNT. The directory c:\working is not a shared resource. The user admin1 is a valid user on both the local and remote computers, and belongs to the Administrators group.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a Command job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- SHAREFILE</li>
+                        <li>Owner -- admin1</li>
+                        <li>Send to machine -- WINAGENT</li>
+                        <li>Command -- \\CYBNT\C$\working\test</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <p><strong>Example: Pass Arguments to a Visual Basic Script</strong></p>
+            <p>Suppose that you want the job VBS to pass three arguments (one, two, and three) to the Visual Basic script located at D:\temp\vbs\params.vbs. To pass arguments to a Visual Basic script, specify the location of the Visual Basic script and its arguments in the Command field. This job runs on the default agent computer.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a Command job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- VBS</li>
+                        <li>Send to machine -- WINAGENT</li>
+                        <li>Command -- c:\winnt\system32\wscript.exe D:\temp\vbs\params.vbs one two three</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <h3 class="heading3" id="ManageCommandJobsUsingCAWCC-CommandProperties">Command Properties</h3>
+            <p>The Command category includes the following properties:</p>
+            <p><strong>Agent job class</strong></p>
+            <p>(Optional) Specifies the job class that this job runs under. The agent maintains a list of job classes and the number of initiators assigned to each job class. A job class with more initiators can process a greater number of jobs more quickly. For higher-priority jobs, assign a job class that contains more initiators.</p>
+            <p><strong>Limits:</strong> Up to 32 characters; cannot contain delimiters (such as spaces)</p>
+            <p><strong>JIL attribute:</strong> job_class</p>
+            <p><strong>Blob input</strong></p>
+            <p>(Optional) Specifies the text to insert for the blob, using the following format:.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>Blob_input:</p><p>&lt;auto_blobt&gt;input&lt;/auto_blobt&gt;</p></pre>
+            </div>
+            <ul>
+                <li><strong><em>input</em></strong><br>Specifies the text to insert for the blob.</li>
+            </ul>
+            <p>Clicking <img alt="Click to edit." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353528/361353529/1/1427479829416/696541.png" data-hasbody="false"> opens the Edit Text dialog, which lets you edit the text for the blob.</p>
+            <p><strong>JIL attribute:</strong> blob_input</p>
+            <p><strong>Command</strong></p>
+            <p>Specifies a command, executable, UNIX shell script, application, or batch file to run on the client using the following format:</p>
+            <p>This property supports Global Variable substitution.</p>
+            <p><em>file</em> <em>argument...</em></p>
+            <ul>
+                <li><strong><em>file</em></strong><br>Specifies the command, executable, UNIX shell script, application, or batch file to run when all the starting conditions are met.</li>
+                <li><strong><em>argument...</em></strong><br>Specifies one or more arguments to pass to the command or script at run time.</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;Separate each argument with a space. You must specify each argument in the order it is expected in the program.</p>
+            </div>
+            <p>Clicking <img alt="Click to edit." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353528/361353529/1/1427479829416/696541.png" data-hasbody="false"> opens the Edit Text dialog, which lets you edit the text for the files and arguments.</p>
+            <p><strong>Limits:</strong> Up to <span style="color: rgb(255,0,0);">1000</span> characters; case-sensitive.&nbsp;<span style="color: rgb(255,0,0);">Up to 512 characters if the CA Workload Automation AE server that is configured in CA WCC is at Release 11.3.6 SP6 or below.</span></p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note (UNIX only):</strong>&nbsp;When you define a job that runs a script that calls a second script, the fully qualified path of the called script must be provided.</p>
+            </div>
+            <p><strong>JIL attribute:</strong> command</p>
+            <p><strong>Heartbeat interval</strong></p>
+            <p>(Defaulted) Defines the frequency (in minutes) with which the job sends a heartbeat. The heartbeat is a signal that helps the scheduling manager monitor the progress of a job.</p>
+            <p><strong>Limits:</strong> 0-2147483647</p>
+            <p><strong>Default:</strong> 0 (the agent does not listen for heartbeats)</p>
+            <p><strong>JIL attribute:</strong> heartbeat_interval</p>
+            <p><strong>Interactive</strong></p>
+            <p>(Optional) Indicates whether the specified command needs to be user interactive.</p>
+            <p><strong>JIL attribute:</strong> interactive</p>
+            <p><strong>Shell</strong></p>
+            <p>(Optional) Specifies the name of the shell used to execute the script or command file. You can specify any of the following UNIX shells:/bin/ksh (Korn shell)/bin/sh (Bourne shell)/bin/bash (Bourne again shell)/bin/csh (C shell)/usr/local/bin/perl (Perl shell)</p>
+            <p><strong>Limits: </strong>Up to 20 characters</p>
+            <p><strong>JIL attribute:</strong> shell</p>
+            <p><strong>Standard error file</strong></p>
+            <p>(Optional) Defines the path and file name where you want to redirect all standard error output.If you are running jobs across platforms, the scheduler of the issuing instance controls the default behavior. The default is to append this file. To append the file, enter <strong>&gt;&gt;</strong> as the first characters in the value. To overwrite the file, enter <strong>&gt;</strong> as the first character in the value.</p>
+            <p>This property supports Global Variable substitution.</p>
+            <p><strong>Limits:</strong> Up to 255 characters; cannot contain spaces between the &gt; or &gt;&gt; characters and the full path or file name</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>The job owner must have write permission to the specified file on the client computer.</li>
+                    <li>When specifying standard input, output, and error file locations, we recommend that you enter absolute paths to the files instead of relative paths or file names alone.</li>
+                    <li>You can use variables exported from the job profile or global variables to specify the file name and location.</li>
+                    <li>Enclose variables referenced in the job profile in braces (for example, “${PATH}”). Use the $$global_name, $$(global_name), or $${global_name} format to reference global variables.Enclose the values that contain a colon or embedded blanks in double quotation marks. Do not use embedded double quotation marks.</li>
+                </ul>
+            </div>
+            <p><strong>UNIX:</strong></p>
+            <ul>
+                <li>This value overrides the instance-wide setting for the AutoInstWideAppend parameter in the configuration file.</li>
+                <li>This value overrides the machine-specific setting for the AutoMachWideAppend parameter in the /etc/auto.profile file.&nbsp;</li>
+            </ul>
+            <p><strong>Windows:</strong></p>
+            <ul>
+                <li>This value overrides the instance-wide setting for the Append stdout/stderr field in the CA Workload Automation AE Administrator utility.</li>
+                <li>When specifying drive letters in job definitions, you must escape the colon with quotation marks or backslashes. For example, C\:\tmp or "C:\tmp" is valid; C:\tmp is not.</li>
+                <li>If the Windows command specified in the job definition does not exist, the job does not run. The standard error file is not created and the job log indicates that the error file is not found.</li>
+            </ul>
+            <p><strong>CA WA Agent Default: </strong>The agent directory (<em>installation_directory</em>/SystemAgent/<em>agent_name</em>/)</p>
+            <p><strong>Legacy Agent Default: </strong>/dev/null (UNIX) or NULL (Windows)</p>
+            <p><strong>JIL attribute:</strong> std_err_file</p>
+            <p><strong>Standard input file</strong></p>
+            <p>(Optional) Specifies the path and file name where you want to redirect standard input from.</p>
+            <p>This property supports Global Variable substitution.</p>
+            <p><strong>Limits:</strong> Up to 255 characters</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>The job owner must have read permission to the specified file on the client computer.</li>
+                    <li>When specifying standard input, output, and error file locations, we recommend that you enter absolute paths to the files instead of relative paths or file names alone.</li>
+                    <li>You can use variables exported from the job profile or global variables to specify the file name and location.</li>
+                    <li>Enclose variables referenced in the job profile in braces (for example, “${PATH}”). Use the $$global_name, $$(global_name), or $${global_name} format to reference global variables.Enclose the values that contain a colon or embedded blanks in double quotation marks. Do not use embedded double quotation marks.</li>
+                </ul>
+            </div>
+            <p><strong>Windows:</strong></p>
+            <ul>
+                <li>If you do not specify a full path name, the path defaults to the job owner's home directory.</li>
+                <li>When specifying drive letters in job definitions, you must escape the colon with quotation marks or backslashes. For example, C\:\tmp or "C:\tmp" is valid; C:\tmp is not.</li>
+            </ul>
+            <p><strong>JIL attribute:</strong> std_in_file</p>
+            <p><strong>Standard output file</strong></p>
+            <p>(Optional) Defines the path and file name where you want to redirect all standard output.If you are running jobs across platforms, the scheduler of the issuing instance controls the default behavior. The default is to append this file. To append the file, enter <strong>&gt;&gt;</strong> as the first characters in the value. To overwrite the file, enter <strong>&gt;</strong> as the first character in the value.</p>
+            <p>This property supports Global Variable substitution.</p>
+            <p><strong>Limits:</strong> Up to 255 characters; cannot contain spaces between the &gt; or &gt;&gt; characters and the full path or file name</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>The job owner must have write permission to the specified file on the client computer.</li>
+                    <li>When specifying standard input, output, and error file locations, we recommend that you enter absolute paths to the files instead of relative paths or file names alone.</li>
+                    <li>You can use variables exported from the job profile or global variables to specify the file name and location.</li>
+                    <li>Enclose variables referenced in the job profile in braces (for example, “${PATH}”). Use the $$global_name, $$(global_name), or $${global_name} format to reference global variables.Enclose the values that contain a colon or embedded blanks in double quotation marks. Do not use embedded double quotation marks.</li>
+                </ul>
+            </div>
+            <p><strong>UNIX:</strong></p>
+            <ul>
+                <li>This value overrides the instance-wide setting for the AutoInstWideAppend parameter in the configuration file.</li>
+                <li>This value overrides the machine-specific setting for the AutoMachWideAppend parameter in the /etc/auto.profile file.</li>
+            </ul>
+            <p><strong>Windows:</strong></p>
+            <ul>
+                <li>This value overrides the instance-wide setting for the Append stdout/stderr field in the CA Workload Automation AE Administrator utility.</li>
+                <li>When specifying drive letters in job definitions, you must escape the colon with quotation marks or backslashes. For example, C\:\tmp or "C:\tmp" is valid; C:\tmp is not.</li>
+            </ul>
+            <p><strong>Default: </strong>/dev/null (UNIX) or NULL (Windows)</p>
+            <p><strong>JIL attribute:</strong> std_out_file</p>
+            <p><strong>Run in elevated mode</strong></p>
+            <p>(Optional) Indicates whether to run the Command job in elevated mode on Microsoft Windows Vista, Microsoft Windows 7, or Microsoft Windows 2008. In elevated mode, the User Account Control (UAC) feature is enabled. UAC improves the security of Microsoft Windows by limiting application software to standard user privileges until an administrator authorizes an elevation.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li><p>This field is valid only for CA Workload Automation AE Release 11.3.5 and later servers.</p></li>
+                    <li><p>If the agent administrator sets the oscomponent.logon.elevated parameter on the CA Workload Automation AE server to true in the agentparm.txt file, the agent runs all Command jobs in elevated mode on Windows, regardless of the elevated attribute. To use the elevated attribute in a job definition, the oscomponent.logon.elevated parameter must be set to false.</p></li>
+                </ul>
+            </div>
+            <p><strong>Default:</strong> Not selected</p>
+            <p><strong>JIL attribute:</strong> elevated</p>
+            <h2 class="heading2" id="ManageCommandJobsUsingCAWCC-VerifyFileSpaceBeforeaJobStarts">Verify File Space Before a Job Starts</h2>
+            <p>By default, jobs do not check the available file space. However, you can define a Command job to check if one or more file systems (UNIX) or drives (Windows) have the required amount of available space. At run time, the agent checks whether the required space is available on the machine where the job runs. If the requirements are met, the job starts. If the requirements are not met, the agent generates an alarm and the job does not start. The system tries to verify the file space again and start the job. The number of tries is determined by the value entered in the Times to restart job after failure field. If no value is specified in the job definition, the number of tries is determined by the default value set in the CA Workload Automation AE server configuration file. If the required space is still not available after all the restart attempts, the job fails.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Define a Command job.</li>
+                <li>Specify the following Environment property in the job definition:
+                    <ul>
+                        <li><strong>File system check</strong><br>Specifies the required amount of space on one or more file systems (UNIX) or drives (Windows) in kilobytes (KB).<br><strong>Limits: </strong>Up to 255 characters</li>
+                    </ul></li>
+                <li>Commit the job.<br>The file space is verified before the job starts.</li>
+            </ol>
+            <p><strong>Example: Verify the Available File Space on UNIX</strong></p>
+            <p>This example checks if the file system named roots has 100 KB of available space. This example also checks if the file system named auxfs1 has 120 KB of available space. The specified file space must be available before the job can start.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a Command job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- unix_chk</li>
+                        <li>Send to machine -- unixagent</li>
+                        <li>Command -- /u1/procrun.sh</li>
+                        <li><p>File system check -- /roots 100 /auxfs1 120</p></li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <p><strong>Example: Verify the Available File Space on Windows</strong></p>
+            <p>This example checks if the C: drive has 100 KB of available space and if the D: drive has 120 KB of available space. The specified file space must be available before the job can start.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a Command job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- win_chk</li>
+                        <li>Send to machine -- winagent</li>
+                        <li>Command -- "C:\Programs\Payroll\pay.exe"</li>
+                        <li>File system check -- "C: 100 D: 120"</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <h2 class="heading2" id="ManageCommandJobsUsingCAWCC-PassPositionalArgumentsinaCommandJob">Pass Positional Arguments in a Command Job</h2>
+            <p>When running workload, you might need to pass data between jobs and across platforms. You can pass positional arguments to a command or script in your job definition. Positional arguments are variables that can be passed to a program at the time the program is invoked. The arguments are assigned in the order they are passed.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Define a Command job.</li>
+                <li><p>Specify the Command property using the following format:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>file&nbsp;argument...</p></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>file</em></strong><br>Specifies the command, executable, UNIX shell script, application, or batch file to run when all the starting conditions are met.</li>
+                        <li><strong><em>argument</em>...</strong><br>Specifies one or more arguments to pass to the command or script at run time.</li>
+                    </ul></li>
+            </ol>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong>&nbsp;Separate each argument with a space. You must specify each argument in the order it is expected in the program.</p>
+            </div>
+            <p>3. Commit the job.<br>The positional arguments are passed to the program when the job runs.</p>
+            <p><strong>Example: Pass Positional Arguments to a UNIX Script</strong></p>
+            <p>This example passes three arguments to the UNIX script addinfo.sh. The first argument passed is "user 1". This argument is enclosed with quotation marks because it contains a space. The second argument passed is 905-555-1212, and the third argument is 749.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a Command job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- cmd_job1</li>
+                        <li>Send to machine -- unixprod</li>
+                        <li>Command -- addinfo.sh "user 1" 905-555-1212 749</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <p><strong>Example: Pass Positional Arguments to a Windows Program</strong></p>
+            <p>This example passes two data files to the Windows program pay.exe. The arguments are enclosed with quotation marks because they contain spaces.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a Command job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- cmd_job2</li>
+                        <li>Send to machine -- winprod</li>
+                        <li>Command -- c:\Programs\Payroll\pay.exe "C:\Pay Data\salary.dat" "C:\Pay Data\benefits.dat"</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <p><strong>Example: Run cmd.exe</strong></p>
+            <p>Suppose that you want the job COPYFILE to use the Windows command prompt (cmd.exe) to copy the file c:\env.txt to the test directory. To pass an argument to cmd.exe, you must enclose the argument in quotation marks and precede the argument with the /C switch.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a Command job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- COPYFILE</li>
+                        <li>Send to machine -- WINAGENT</li>
+                        <li>Command -- c:\Windows\system32\cmd.exe “/C copy c:\env.txt c:\test\env.txt”</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <h2 class="heading2" id="ManageCommandJobsUsingCAWCC-UNIXEnvironmentVariables">UNIX Environment Variables</h2>
+            <p>When a Command job runs under a specific user account on UNIX, the agent can pass the user's environment variables to the script or program. You can also set up a script's running environment by overriding the environment variables in the job definition. For example, you can override the HOME environment variable to run the script under a user’s login directory.</p>
+            <p>You can pass the following UNIX environment variables in a job definition to override the variable values:</p>
+            <ul>
+                <li><p><strong>HOME</strong><br>Identifies the user's login directory. You can override the HOME value to set up a user-specific environment by specifying a different login directory in the job definition.<br><strong>Example:</strong> HOME=/home/guest/bin</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Notes:</strong></p>
+                        <ul>
+                            <li>You can set up the script's running environment in the .profile and .login files.</li>
+                            <li>You must also set the oscomponent.loginshell parameter to true in the agent's agentparm.txt file to run the login scripts located in the HOME directory.</li>
+                        </ul>
+                    </div> </li>
+                <li><p><strong>PATH</strong><br>Provides a list of directories that the shell searches when it needs to find a command. Each directory is separated by a colon. and the shell searches the directories in the order listed. The PATH variable is the most important environment variable. You can override the PATH value to set up a user-specific environment by specifying a different PATH in the job definition.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong>&nbsp;Overriding the default system path can result in the "command not found" error.</p>
+                    </div> </li>
+                <li><p><strong>ENV</strong><br>Contains the name of the initialization file to run when a new Korn shell starts. You can override the ENV value to set up a user-specific environment by specifying a different ENV value in the job definition.<br><strong>Example:</strong> ENV=/home/guest/bin/myenv</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong>&nbsp;The name of the file used to set up the script-running environment must be .profile. The .profile must be the same file used with the HOME variable.</p>
+                    </div> </li>
+                <li><strong>PWD</strong><br>Contains the absolute path name of your current directory.</li>
+            </ul>
+            <h2 class="heading2" id="ManageCommandJobsUsingCAWCC-DefineAlternativeError,Input,andOutputSourcesandDestinations">Define Alternative Error, Input, and Output Sources and Destinations</h2>
+            <p>By default, the standard output and standard error output are redirected to /dev/null (UNIX) or NULL (Windows). You can define alternative error, input, and output sources and destinations in your job definition that override the defaults.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Define a Command job.</li>
+                <li>Add one or more of the following Command properties to the job definition:
+                    <ul>
+                        <li><strong>Standard error file</strong><br>Defines the path and file name where you want to redirect all standard error output.</li>
+                        <li><strong>Standard input file</strong><br>Specifies the path and file name where you want to redirect standard input from.</li>
+                        <li><strong>Standard output file</strong><br>Defines the path and file name where you want to redirect all standard output.</li>
+                    </ul></li>
+                <li>Commit the job.<br>The alternative sources are defined.</li>
+            </ol>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

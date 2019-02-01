@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p><strong>Valid on UNIX</strong></p>
+                <p>The as_info command is a client component utility that returns CA Workload Automation AE installation information to standard output.</p>
+                <p>When you issue as_info with no parameters, the command returns the CA Workload Automation AE components and version installed, installation log locations, configured instances, and status.</p>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>as_info&nbsp;[-a]&nbsp;[-c]&nbsp;[-C]&nbsp;[-d]&nbsp;[-f]&nbsp;[-i]&nbsp;[-l]&nbsp;[-L]&nbsp;[-p]&nbsp;[-s]&nbsp;[-t&nbsp;<em>directory</em>]&nbsp;[-v]&nbsp;[-x]&nbsp;[-z]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-a<br></strong>(Optional) Returns all CA Workload Automation AE installation information, including the current product status. It also collects the scheduler, agent, and event server log files.</p></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-c<br></strong>(Optional) Returns the list of all CA Workload Automation AE components that are installed on the computer from which you issue the command.</p></li>
+                </ul>
+                <ul>
+                    <li><strong>-C<br></strong>(Optional) Returns the configuration information (as displayed in the $AUTOUSER/config.$AUTOSERV file) for all CA Workload Automation AE instances installed on a computer.</li>
+                    <li><p><strong>-d<br></strong>(Optional) Returns information about the CA Workload Automation AE database.</p></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-f<br></strong>(Optional) Returns the custom (or default) CA Workload Automation AE component installation specifications.</p></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-i<br></strong>(Optional) Returns a list of all configured CA Workload Automation AE instances.</p></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-l<br></strong>(Optional) Returns the names and locations of the CA Workload Automation AE installation logs.</p></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-L<br></strong>(Optional) Returns only the latest event server, application server, and agent logs.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> By default, all logs are collected. This option is used with the -x option and is ignored if the -x option is not specified.
+                        </div> </li>
+                </ul>
+                <ul>
+                    <li><p><strong>-p<br></strong>(Optional) Returns a list of the Product Interchange File (PIF) and the RPM packages included as part of this installation.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> This parameter uses the RPM Package Manager and the CA lsm utility to retrieve the list. The process might take a few minutes.
+                        </div> </li>
+                </ul>
+                <ul>
+                    <li><p><strong>-s<br></strong>(Optional) Returns the current status of the CA Workload Automation AE components.</p></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-<strong>-t&nbsp;<em>directory<br></em></strong></strong>Specifies the full path to the collection tar file.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> By default, the collection tar file is created in the /tmp/as_info_dir directory. This option is used with the -a and -x options and is ignored if the -x option is not specified.
+                        </div> </li>
+                </ul>
+                <ul>
+                    <li><p><strong>-v<br></strong>(Optional) Returns the CA Workload Automation AE version, installation date and time, and installation directory.</p></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-x<br></strong>Returns the CA Workload Automation AE log files and configuration files. If the -z option is not specified, it creates the tar file named&nbsp;<em>uajm_file_collection.tar</em>.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Notes:</strong></p>
+                            <ul>
+                                <li>By default, the tar file is created in the /tmp/as_info_dir directory. You can use the -t directory option to specify another directory.</li>
+                            </ul>
+                            <ul>
+                                <li>The as_info command returns the &lt;UAJM&gt; components and version installed, installation log locations, configured instances, and status to the standard output. However, you can obtain additional information by creating and populating the following two files:</li>
+                            </ul>
+                            <ul>
+                                <li style="list-style-type: none;background-image: none;">
+                                    <ul>
+                                        <li>$AUTOSYS/config/as_files—Specifies the fully pathed files to be copied.</li>
+                                    </ul></li>
+                            </ul>
+                            <ul>
+                                <li style="list-style-type: none;background-image: none;">
+                                    <ul>
+                                        <li>$AUTOSYS/config/as_cmds—Specifies the commands to run and collect information.</li>
+                                    </ul></li>
+                            </ul>
+                            <p style="margin-left: 60.0px;"><strong>Note: </strong>The result of the commands that are issued from the as_cmds file is stored in the user_cmds.out file within the uajm_file_collection.tar file.</p>
+                        </div> </li>
+                </ul>
+                <ul>
+                    <li><p><strong>-z<br></strong>Returns the CA Workload Automation AE log files and configuration files, but does not create the tar file. The results are stored in the /tmp/as_info_dir directory.</p></li>
+                </ul>
+                <p><strong>Example: Include /tmp/diag.file in the Collection of Files to be Copied to the Tar File</strong></p>
+                <p>This example includes the /tmp/diag.file file in the collection of files that are copied to the tar file.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>echo&nbsp;"/tmp/diag.file"&nbsp;&gt;&gt;&nbsp;$AUTOSYS/config/as_files</p></pre>
+                </div>
+                <p><strong>Example: Include the Output in the as_cmds File</strong></p>
+                <p>This example includes the output of the ls -l /tmp/rslt command in the as_cmds file.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>echo&nbsp;"ls&nbsp;-l&nbsp;/tmp/rslt"&nbsp;&gt;&gt;&nbsp;$AUTOSYS/config/as_cmds</p></pre>
+                </div>
+                <p><strong>Example: Report Default Installation Information</strong></p>
+                <p>This example returns the CA Workload Automation AE components and version installed, the installation log locations, configured instances, and status to standard output.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>as_info</p></pre>
+                </div>
+                <p><strong>Example: Report Specific Installation Information</strong></p>
+                <p>This example returns the CA Workload Automation AE version, installation date and time, installation directory, current status, and configured instances to standard output.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>as_info&nbsp;-vsi</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

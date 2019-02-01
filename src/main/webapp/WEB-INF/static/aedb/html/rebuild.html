@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 class="article-name" tabindex="0">Rebuild Table Indexes for a CA Workload Automation AE Database</h1>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p><span style="color: rgb(51,51,51);">Over time, the database table indexes can become inefficient while you run jobs and update them. You can rebuild the table indexes of a specified CA Workload Automation AE database to renew the efficiency.</span></p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <span style="color: rgb(51,51,51);"><strong>Note:</strong> We recommend that you run the reindexDB script when the system activity is minimal. Otherwise, CA Workload Automation AE might experience a slow down or time-out condition while performing database transactions.</span>
+            </div>
+            <p><span style="color: rgb(51,51,51);">To rebuild indexes for a CA Workload Automation AE database, you must run the reindexDB script at the UNIX operating system prompt or the Windows instance command prompt.</span></p>
+            <p><span style="color: rgb(51,51,51);"><strong>Example: Rebuild Tables Indexes for a CA Workload Automation AE database on Sybase</strong></span></p>
+            <p><span style="color: rgb(51,51,51);">This example rebuilds table indexes for a CA Workload Automation AE database on Sybase where SYBASESRV is the name of the Sybase server.</span></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p><span style="color: rgb(51,51,51);">perl&nbsp;/opt/CA/WorkloadAutomationAE/autosys/dbobj/reindexDB.pl&nbsp;SYB&nbsp;SYBASESRV&nbsp;sa&nbsp;password&nbsp;AEDB</span></p></pre>
+            </div>
+            <p><span style="color: rgb(51,51,51);"><strong>Example: Rebuild Tables Indexes for a CA Workload Automation AE database on Oracle</strong></span></p>
+            <p><span style="color: rgb(51,51,51);">This example rebuilds table indexes for a CA Workload Automation AE database on Oracle where ORACLESRV is the Oracle System ID.</span></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p><span style="color: rgb(51,51,51);">perl&nbsp;/opt/CA/WorkloadAutomationAE/autosys/dbobj/reindexDB.pl&nbsp;ORA&nbsp;ORACLESRV&nbsp;aedbadmin&nbsp;password</span></p></pre>
+            </div>
+            <h2 class="heading5" id="RebuildTableIndexesforaCAWorkloadAutomationAEDatabase-reindexDBScript--RebuildTableIndexes"><span style="color: rgb(51,51,51);">reindexDB Script -- Rebuild Table Indexes</span></h2>
+            <p><span style="color: rgb(51,51,51);">The reindexDB script rebuilds the table indexes of a specified CA Workload Automation AE database.</span></p>
+            <p><span style="color: rgb(51,51,51);">The reindexDB script is located as follows:</span></p>
+            <ul>
+                <li><span style="color: rgb(51,51,51);">On UNIX -- $AUTOSYS/dbobj</span></li>
+                <li><span style="color: rgb(51,51,51);">On Windows -- %AUTOSYS%\dbobj</span></li>
+            </ul>
+            <p><span style="color: rgb(51,51,51);">This script has the following format:</span></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p><span style="color: rgb(51,51,51);">reindexDB.pl&nbsp;<em>database_type</em>&nbsp;<em>server_name</em>&nbsp;<em>server_userid</em>&nbsp;<em>server_password</em>&nbsp;<em>database_name&nbsp;</em></span></p></pre>
+            </div>
+            <p><span style="color: rgb(51,51,51);">On Sybase, if you are using Kerberos authentication to access the database, this script has the following format:</span></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p><span style="color: rgb(51,51,51);">reindexDB.pl -EXTAUTH SYB<em>&nbsp;<em>server_name database_name SPN</em></em></span></p></pre>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><span style="color: rgb(51,51,51);"><strong>Note:</strong>&nbsp;To use Kerberos authentication, ensure that the logged in OS user running this script is already authenticated with Kerberos and is mapped to a Sybase login with sa_role privileges.</span></p>
+            </div>
+            <p><span style="color: rgb(51,51,51);">On Oracle, if you are using SSL certificate to access the database, this script has the following format:</span></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p><span style="color: rgb(51,51,51);">reindexDB.pl -EXTAUTH ORA<em>&nbsp;<em>server_name aedbadmin_tnsadmin</em></em></span></p></pre>
+            </div>
+            <ul>
+                <li><span style="color: rgb(51,51,51);"><strong><em>database_type</em></strong></span><br><span style="color: rgb(51,51,51);">Specifies the database type. This value can be&nbsp;<em>one</em>&nbsp;of the following:</span>
+                    <ul>
+                        <li><span style="color: rgb(51,51,51);"><strong>ORA</strong></span><br><span style="color: rgb(51,51,51);">Identifies Oracle as the database.</span></li>
+                        <li><span style="color: rgb(51,51,51);"><strong>SYB</strong></span><br><span style="color: rgb(51,51,51);">Identifies Sybase as the database.</span></li>
+                        <li><span style="color: rgb(51,51,51);"><strong>MSQ</strong></span><br><span style="color: rgb(51,51,51);">Identifies Microsoft SQL Server as the database.</span></li>
+                    </ul></li>
+                <li><p><span style="color: rgb(51,51,51);"><strong>EXTAUTH</strong></span><br><span style="color: rgb(51,51,51);">Specifies that an SSL certificate (Oracle) or Kerberos authentication (Sybase) is used to access the database.</span></p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><span style="color: rgb(51,51,51);"><strong>Notes:</strong></span></p>
+                        <ul>
+                            <li><span style="color: rgb(51,51,51);">On Oracle, you can also use the CERTMODE parameter (instead of the EXTAUTH parameter) to specify that SSL certificate is used to access the database.</span></li>
+                            <li><p><span style="color: rgb(51,51,51);">For information about creating Oracle wallets with certificates, see <span style="color: rgb(51,51,51);"><a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation/environment-and-database-connection/oracle-only-switch-the-database-access-mode/create-oracle-wallets-with-certificates" class="conf-macro output-inline" data-hasbody="false">Create Oracle Wallets with Certificates</a></span>.</span></p></li>
+                            <li><p><span style="color: rgb(51,51,51);">For information about configuring MIT Kerberos on CA Workload Automation AE, see <a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation/environment-and-database-connection/sybase-only-switch-the-database-access-mode/configure-mit-kerberos-on-ca-workload-automation-ae" class="conf-macro output-inline" data-hasbody="false">Configure MIT Kerberos on CA Workload Automation AE</a></span></p></li>
+                        </ul>
+                    </div> </li>
+                <li><span style="color: rgb(51,51,51);"><strong><em>aedbadmin_tnsadmin</em></strong></span><br><span style="color: rgb(51,51,51);">Specifies the TNS_ADMIN value for the aedbadmin user.</span></li>
+                <li><span style="color: rgb(51,51,51);"><strong><em>server_name</em></strong></span><br><span style="color: rgb(51,51,51);">Defines the name of the Oracle System ID, Sybase server, or Microsoft SQL Server server.</span></li>
+                <li><p><span style="color: rgb(51,51,51);"><strong><em>server_userid</em></strong></span><br><span style="color: rgb(51,51,51);">Defines the user ID that is used to connect to the Oracle, Sybase, or Microsoft SQL Server server.</span><br><span style="color: rgb(51,51,51);"><strong>Default:&nbsp;</strong>sa (Sybase, Microsoft SQL Server)</span></p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <span style="color: rgb(51,51,51);"><strong>Note:</strong> For Oracle, you must use aedbadmin as the server user ID.</span>
+                    </div> </li>
+                <li><span style="color: rgb(51,51,51);"><strong><em>server_password</em></strong></span><br><span style="color: rgb(51,51,51);">Defines the password that corresponds to the user ID that is used to connect to the Oracle, Sybase, or Microsoft SQL Server server.</span><br><span style="color: rgb(51,51,51);"><strong>Default:</strong>&nbsp;autosys</span></li>
+                <li><p><span style="color: rgb(51,51,51);"><strong><em>database_name</em></strong></span><br><span style="color: rgb(51,51,51);">Defines the name of the Sybase or Microsoft SQL Server database.</span></p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <span style="color: rgb(51,51,51);"><strong>Note: </strong>The database_name parameter does not apply to Oracle.</span>
+                    </div> </li>
+                <li><p><span style="color: rgb(51,51,51);"><strong><em>SPN<br></em></strong>(Optional) Specifies the service principal name to be used for Kerberos authentication.</span></p></li>
+            </ul>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="">
+    <p>When you install CA Workload Automation AE and CA WCC, we recommend that you install the CA Technologies products
+        in the following order:</p>
+    <ul>
+        <li><p>CA EEM</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> CA EEM is optional for CA Workload Automation AE; however, it is required for CA
+                WCC. We recommend that you configure CA Workload Automation AE to use CA EEM for enhanced security. CA
+                EEM is installed using the CA Common Components DVD and must be installed and running before you install
+                CA Workload Automation AE or CA WCC.
+            </div>
+        </li>
+        <li><p>CA Workload Automation AE components</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> When you install CA Workload Automation AE, the Command Sponsor is installed. The
+                Command Sponsor lets you execute CA Workload Automation AE commands (such as autorep, chk_auto_up,
+                autoping) on the CA Workload Automation AE server using the CA WCC user interface.
+            </div>
+        </li>
+        <li>CA WCC</li>
+        <li>CA Workload Automation agents</li>
+        <li><p>Required patches for CA Workload Automation AE, CA WCC, and the agents</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes: </strong></p>
+                <ul>
+                    <li><span style="color: rgb(0,0,0);">If you install CA WCC Release 11.3.6 on a computer where CA Workload Automation AE is installed, CA Workload Automation AE must also be Release 11.3.6.</span>
+                    </li>
+                    <li><p><span style="color: rgb(255,0,0);"><span style="color: rgb(0,0,0);">On UNIX, if you want to install CA Workload Automation AE Release 11.3.6 on a computer where CA WCC Release 11.3.6 is already installed, stop the CA WCC services before you install CA Workload Automation AE Release 11.3.6</span>.</span>
+                    </p></li>
+                    <li>We recommend that you install all operating system patches before installing any of the CA
+                        Technologies products. The CA Technologies patches are available from the CA Technologies
+                        Support web page (<a rel="nofollow" class="external-link" href="http://www.ca.com/support">http://ca.com/support</a>).
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+    <h2 class="heading2" id="InstallingCAWorkloadAutomationAEandCAWCC-(UNIX)ProductDVDsandInstallationFiles">(UNIX)
+        Product DVDs and Installation Files</h2>
+    <p>In a typical&nbsp;environment, you have to run several installation files to set up CA Workload Automation AE and
+        CA WCC.</p>
+    <p>The following table describes the DVDs, installation files, and the sections to refer to when you install the CA
+        Technologies products:</p>
+    <div class="table-responsive">
+        <table class="wrapped table">
+            <tbody>
+            <tr>
+                <th class="confluenceTh"><strong>CA Technologies Product</strong></th>
+                <th class="confluenceTh"><strong>DVD to Use</strong></th>
+                <th class="confluenceTh"><strong>Installation File </strong></th>
+                <th class="confluenceTh"><strong>Section to Refer to</strong></th>
+            </tr>
+            <tr>
+                <td class="confluenceTd">CA Common Components</td>
+                <td class="confluenceTd">
+                    <div class="content-wrapper">
+                        <p>CA Common Components Release 11.3.6 for UNIX</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                             data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note:</strong> You can install the following components using the CA Common
+                                Components DVD:</p>
+                            <ul>
+                                <li>CA EEM</li>
+                                <li>Event Management</li>
+                                <li>CAICCI</li>
+                                <li>Management Command Center</li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+                <td class="confluenceTd">ccc_setup.sh</td>
+                <td class="confluenceTd"><span class="confluence-link"><a data-macro-name="sp-nobody-link"
+                                                                          href="/ca-workload-automation-ae/11-4-2/en/installing/ca-common-components-installation"
+                                                                          class="conf-macro output-inline"
+                                                                          data-hasbody="false">CA Common Components Installation</a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="confluenceTd">CA WCC</td>
+                <td class="confluenceTd">CA WCC Release 11.3.6 for UNIX</td>
+                <td class="confluenceTd">UnixInstaller.sh</td>
+                <td class="confluenceTd"><p><a data-macro-name="sp-nobody-link"
+                                               href="/ca-workload-automation-ae/11-4-2/en/installing/ca-wcc-installation"
+                                               class="conf-macro output-inline" data-hasbody="false">CA WCC
+                    Installation</a></p></td>
+            </tr>
+            <tr>
+                <td class="confluenceTd">CA Workload Automation AE</td>
+                <td class="confluenceTd">CA Workload Automation AE Release 11.3.6 for UNIX</td>
+                <td class="confluenceTd">wa_setup.sh</td>
+                <td class="confluenceTd"><p><a data-macro-name="sp-nobody-link"
+                                               href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation/installing-the-server"
+                                               class="conf-macro output-inline" data-hasbody="false">Installing the
+                    Server</a></p></td>
+            </tr>
+            <tr>
+                <td class="confluenceTd">CA Workload Automation AE client or SDK</td>
+                <td class="confluenceTd">CA Workload Automation AE Release 11.3.6 for UNIX<br><br>Or<br><br>CA Workload
+                    Automation AE Release 11.3.6 Standalone Client or SDK DVD
+                </td>
+                <td class="confluenceTd">wa_setup.sh <br><br>Or<br><br>client_setup.sh or sdk_setup.sh</td>
+                <td class="confluenceTd"><p><a data-macro-name="sp-nobody-link"
+                                               href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation/installing-the-client"
+                                               class="conf-macro output-inline" data-hasbody="false">Installing the
+                    Client</a></p></td>
+            </tr>
+            <tr>
+                <td class="confluenceTd">CA Workload Automation Agent for UNIX, Linux, or Windows</td>
+                <td class="confluenceTd">
+                    <div class="content-wrapper">
+                        <p>CA Workload Automation AE Release 11.3.6 for UNIX <br>Or<br>CA Workload Automation AE Release
+                            11.3.6 Standalone Agent DVD</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                             data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note:</strong> You can also <a rel="nofollow" class="external-link"
+                                                                      href="https://wiki.ca.com/wlaagents">install the
+                                agent</a> using the CA Workload Automation Agent for UNIX, Linux, or Windows DVD.
+                                However, we do not recommend it.</p>
+                        </div>
+                    </div>
+                </td>
+                <td class="confluenceTd"><p>wa_setup.sh</p>
+                    <p>Or<br><br>agent_setup.sh</p></td>
+                <td class="confluenceTd"><p><a data-macro-name="sp-nobody-link"
+                                               href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation/installing-the-agent"
+                                               class="conf-macro output-inline" data-hasbody="false">Installing the
+                    Agent</a><em><br></em></p></td>
+            </tr>
+            <tr>
+                <td class="confluenceTd">Agent plug-ins</td>
+                <td class="confluenceTd">CA Workload Automation Agent for UNIX, Linux, or Windows DVD</td>
+                <td class="confluenceTd">Agent plug-in installation files</td>
+                <td class="confluenceTd">Installing section in <a rel="nofollow" class="external-link"
+                                                                  href="https://wiki.ca.com/wlaagents">CA Workload
+                    Automation Agents</a> for the appropriate agent plug-in
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <h2 class="heading2" id="InstallingCAWorkloadAutomationAEandCAWCC-(Windows)ProductDVDsandInstallationFiles">
+        (Windows) Product DVDs and Installation Files</h2>
+    <p>In a typical environment, you must run several installation files to set up CA Workload Automation AE and CA
+        WCC.</p>
+    <p>The following table describes the DVDs, installation files, and the sections to refer to when installing the CA
+        products:</p>
+    <div class="table-responsive">
+        <table class="wrapped table">
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            <tbody>
+            <tr>
+                <th class="confluenceTh"><strong>CA Product</strong></th>
+                <th class="confluenceTh"><strong>DVD to Use</strong></th>
+                <th class="confluenceTh"><strong>Installation File </strong></th>
+                <th class="confluenceTh"><strong>Section to Refer to</strong></th>
+            </tr>
+            <tr>
+                <td class="confluenceTd">CA Common Components</td>
+                <td class="confluenceTd">
+                    <div class="content-wrapper">
+                        <p>CA Common Components Release 11.3.6 for Windows</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                             data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note:</strong> You can install the following components using the CA Common
+                                Components DVD:</p>
+                            <ul>
+                                <li>CA EEM</li>
+                                <li>Event Management</li>
+                                <li>CAICCI</li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+                <td class="confluenceTd">setup.exe</td>
+                <td class="confluenceTd"><p><a data-macro-name="sp-nobody-link"
+                                               href="/ca-workload-automation-ae/11-4-2/en/installing/ca-common-components-installation"
+                                               class="conf-macro output-inline" data-hasbody="false">CA Common
+                    Components Installation</a></p></td>
+            </tr>
+            <tr>
+                <td class="confluenceTd">CA Workload Automation AE</td>
+                <td class="confluenceTd">CA Workload Automation AE Release 11.3.6 for Windows</td>
+                <td class="confluenceTd">setup.exe</td>
+                <td class="confluenceTd"><a data-macro-name="sp-richtextbody-link"
+                                            href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation/installing-the-server"
+                                            class="conf-macro output-inline" data-hasbody="true"><span
+                        class="confluence-link">Installing the Server</span></a></td>
+            </tr>
+            <tr>
+                <td class="confluenceTd">CA WCC</td>
+                <td class="confluenceTd">CA WCC Release 11.3.6 for Windows</td>
+                <td class="confluenceTd">PE_i386.EXE</td>
+                <td class="confluenceTd"><p><a data-macro-name="sp-plaintextbody-link"
+                                               href="/ca-workload-automation-ae/11-4-2/en/installing/ca-wcc-installation"
+                                               class="conf-macro output-inline" data-hasbody="true">CA WCC
+                    Installation</a><em><br></em></p></td>
+            </tr>
+            <tr>
+                <td class="confluenceTd">CA Workload Automation Agent for UNIX, Linux, or Windows</td>
+                <td class="confluenceTd">
+                    <div class="content-wrapper">
+                        <p>CA Workload Automation AE Release 11.3.6 for Windows</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                             data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note:</strong> You can also <a rel="nofollow" class="external-link"
+                                                                      href="https://wiki.ca.com/wlaagents">install the
+                                agent</a> using the CA Workload Automation Agent for UNIX, Linux, or Windows DVD.
+                                However, we do not recommend it.</p>
+                        </div>
+                    </div>
+                </td>
+                <td class="confluenceTd">setup.exe</td>
+                <td class="confluenceTd"><a data-macro-name="sp-nobody-link"
+                                            href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation/installing-the-agent"
+                                            class="conf-macro output-inline" data-hasbody="false">Installing the
+                    Agent</a></td>
+            </tr>
+            <tr>
+                <td class="confluenceTd">Agent plug-ins</td>
+                <td class="confluenceTd">CA Workload Automation Agent for UNIX, Linux, or Windows DVD</td>
+                <td class="confluenceTd">Agent plug-in installation files</td>
+                <td class="confluenceTd">Installing section in <a rel="nofollow" class="external-link"
+                                                                  href="https://wiki.ca.com/wlaagents">CA Workload
+                    Automation Agents</a><em> </em>for the appropriate agent plug-in
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <h2 class="heading3" id="InstallCAWorkloadAutomationAEandCAWCC-planPlanYourEnvironment"><span
+            class="confluence-anchor-link conf-macro output-inline" id="InstallCAWorkloadAutomationAEandCAWCC-plan"
+            data-hasbody="false" data-macro-name="anchor"> </span>Plan Your Environment</h2>
+    <p>Before you install CA products complete the following tasks:</p>
+    <ul>
+        <li>Ensure that you install environment prerequisites. For more information on prerequisites, see&nbsp;<a
+                data-macro-name="sp-nobody-link"
+                href="/ca-workload-automation-ae/11-4-2/en/release-notes/ae-release-notes/ae-operating-system-and-database-support"
+                class="conf-macro output-inline" data-hasbody="false">AE Operating System and Database Support</a>.
+        </li>
+        <li><a data-macro-name="sp-plaintextbody-link"
+               href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation/installation-preparation#InstallationPreparation-IdentifyComputers"
+               class="conf-macro output-inline" data-hasbody="true">Identify the computers</a>&nbsp;on which you want to
+            install the CA products, and decide which CA product to install on each computer. We recommend that you
+            install the CA Workload Automation AE components, CA EEM, CA WCC, and more agents on separate computers as
+            follows:
+        </li>
+    </ul>
+    <div id="gliffy-container-425376348-260" class="gliffy-container   conf-macro output-inline" data-fullwidth="838"
+         data-ceoid="361352619" data-pageid="361352619" data-islinked="false"
+         data-full="/plugins/gliffy/viewer.action?inline=false&amp;pageId=361352619&amp;attachmentId=425376348&amp;name=ImplementCAWorkloadAutomationAEandCAWCC&amp;lastPage=%2Fpages%2Fviewpage.action%3FpageId%3D361352619"
+         data-attachmentid="425376348" data-version="0" data-filename="ImplementCAWorkloadAutomationAEandCAWCC"
+         data-hasbody="false" data-macro-name="gliffy">
+        <map id="gliffy-map-425376348-4978" name="gliffy-map-425376348-4978"></map>
+        <div class="diagram-content-container ">
+            <div class="gliffy-html5-loading-spinner-container">
+            </div>
+            <iframe class="gliffy-html5-container full-width" id="gliffy-html5-425376348-260"
+                    src="/plugins/gliffy/viewer.action?wmode=opaque" width="100%" height="154" data-id="425376348"
+                    data-version="0" data-scale="1.0" data-html5-enabled="true" frameborder="0"
+                    style="visibility:hidden;position:absolute;left:-9999px;overflow:hidden;background:#FFFFFF;"></iframe>
+            <div class="diagram-image-container ">
+                <img src="/WEB-INF/static/install/image/req_install_1.png"
+                     width="838" alt="ImplementCAWorkloadAutomationAEandCAWCC" data-full-width="838"
+                     data-full-height="154" id="gliffy-image-425376348-260" class="img-responsive"
+                     usemap="#gliffy-map-425376348-4978" height="154">
+            </div>
+            <map id="gliffy-dynamic-map-425376348-260" class="gliffy-dynamic"
+                 name="gliffy-dynamic-map-425376348-260"></map>
+        </div>
+    </div>
+
+    <p></p>
+    <p style="margin-left: 30.0px;"></p>
+    <div id="gliffy-container-425376346-8948" class="gliffy-container   conf-macro output-inline" data-fullwidth="842"
+         data-ceoid="361352619" data-pageid="361352619" data-islinked="false"
+         data-full="/plugins/gliffy/viewer.action?inline=false&amp;pageId=361352619&amp;attachmentId=425376346&amp;name=HA%20implementation%20of%20CA%20Workload%20Automation%20AE%20and%20CA%20WCC&amp;lastPage=%2Fpages%2Fviewpage.action%3FpageId%3D361352619"
+         data-attachmentid="425376346" data-version="0"
+         data-filename="HA implementation of CA Workload Automation AE and CA WCC" data-hasbody="false"
+         data-macro-name="gliffy">
+        <map id="gliffy-map-425376346-7473" name="gliffy-map-425376346-7473"></map>
+        <div class="diagram-content-container ">
+            <div class="gliffy-html5-loading-spinner-container">
+            </div>
+            <iframe class="gliffy-html5-container full-width" id="gliffy-html5-425376346-8948"
+                    src="/plugins/gliffy/viewer.action?wmode=opaque" width="100%" height="398" data-id="425376346"
+                    data-version="0" data-scale="1.0" data-html5-enabled="true" frameborder="0"
+                    style="visibility:hidden;position:absolute;left:-9999px;overflow:hidden;background:#FFFFFF;"></iframe>
+            <div class="diagram-image-container ">
+                <img src="/WEB-INF/static/install/image/req_install_2.png"
+                     width="842" alt="HA implementation of CA Workload Automation AE and CA WCC" data-full-width="842"
+                     data-full-height="398" id="gliffy-image-425376346-8948" class="img-responsive"
+                     usemap="#gliffy-map-425376346-7473" height="398">
+            </div>
+            <map id="gliffy-dynamic-map-425376346-8948" class="gliffy-dynamic"
+                 name="gliffy-dynamic-map-425376346-8948"></map>
+        </div>
+    </div>
+
+    <p></p>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The autoflags command is an agent, client, scheduler, and server component utility that returns information about the CA Workload Automation AE release number, the database being used, and the operating system. You can also use autoflags to verify the proper host name and host ID for license key generation.</p>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autoflags&nbsp;-a&nbsp;|&nbsp;-d&nbsp;|&nbsp;-f&nbsp;|&nbsp;-h&nbsp;|&nbsp;-i&nbsp;|&nbsp;-n&nbsp;|&nbsp;-o&nbsp;|&nbsp;-r&nbsp;|&nbsp;-v&nbsp;|&nbsp;-x&nbsp;|&nbsp;-?</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-a<br></strong>(Optional) Writes all autoflags information to standard output in the following order:</p>
+                        <ul>
+                            <li>Build number</li>
+                            <li>Operating system</li>
+                            <li>Database provider</li>
+                            <li>Release</li>
+                            <li>Version number</li>
+                            <li>Host ID</li>
+                            <li>Host name</li>
+                            <li>Fully qualified host name</li>
+                        </ul></li>
+                    <li><p><strong>-d<br></strong>(Optional) Writes the database type (SYB for Sybase, MSQ for MSSQL, ORA for Oracle, or ANY for a non-server installation) to standard output.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> A non-server installation does not require a database. So, if you use the
+                            <strong>-d</strong> option on a non-server installation, it returns a value of ANY.
+                        </div> </li>
+                    <li><p><strong>-f<br></strong>(Optional) Writes the fully qualified host name to standard output.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> CA Workload Automation AE performs system calls to get the host name of the machine the scheduler runs on when it starts up. The system calls return either the host name or the fully qualified host name. This host name is used to look up a machine definition for jobs that execute on the localhost. If the machine definition is not located or the
+                            <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/administrating/ae-configuration/configure-a-scheduler/localmachinedefinition" class="conf-macro output-inline" data-hasbody="true">LocalMachineDefinition </a>(on UNIX) or Local Machine Definition (on Windows) parameter is not set or does not specify a valid machine, the jobs do not start. The host name that is returned when you execute autoflags - f must be used as the machine name when defining the localhost machine definition.
+                        </div> </li>
+                    <li><p><strong>-h<br>&nbsp;</strong>(Optional) Writes the host ID to standard output.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> The Windows operating system does not employ host IDs; therefore, on a Windows computer, the value that is displayed is 0.
+                        </div> </li>
+                    <li><p><strong>-i<br></strong>(Optional) Writes the build number to standard output.<strong>&nbsp;<br></strong></p></li>
+                    <li><p><strong>-n<br></strong>(Optional) Writes the host name to standard output.<strong>&nbsp;</strong></p></li>
+                    <li><p><strong>-o<br></strong>(Optional) Writes the operating system information to standard output.<strong>&nbsp;</strong></p></li>
+                    <li><p><strong>-r<br></strong>(Optional) Writes the release number to standard output.<strong>&nbsp;</strong></p></li>
+                    <li><p><strong>-v<br></strong>&nbsp;(Optional) Writes the version number to standard output.</p></li>
+                    <li><p><strong>-x<br></strong>(Optional) Writes the product release number to standard output.<strong>&nbsp;</strong></p></li>
+                    <li><p><strong>-?<br></strong>&nbsp;(Optional) Displays help for the command.</p></li>
+                </ul>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Note:</strong> You can specify multiple options at one time.
+                </div>
+                <p><strong>Example: Return System Information from a Server Installation</strong></p>
+                <p>This example returns all CA Workload Automation AE and system configuration information to standard output when executed on a server installation that uses Oracle as the database provider.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autoflags&nbsp;-a</p></pre>
+                </div>
+                <p>On UNIX, the command displays the following information in standard output:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>5&nbsp;AIX&nbsp;ORA&nbsp;&lt;RN&gt;&nbsp;0&nbsp;c0a9e38d&nbsp;venice&nbsp;venice.europe.com</p></pre>
+                </div>
+                <p>On Windows, the command displays the following information in standard output:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>5&nbsp;Windows_NT&nbsp;ORA&nbsp;&lt;RN&gt;&nbsp;0&nbsp;0&nbsp;venice&nbsp;venice.europe.com</p></pre>
+                </div>
+                <p><strong>Example: Return the Fully Qualified Host Name</strong></p>
+                <p>This example returns the fully qualified host name to standard output.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autoflags&nbsp;-f</p></pre>
+                </div>
+                <p>The command displays the following information in standard output:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>venice.europe.com</p></pre>
+                </div>
+                <p><strong>Example: Return the Build Number</strong></p>
+                <p>This example returns the build number to standard output.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autoflags&nbsp;-i</p></pre>
+                </div>
+                <p>The command displays the following information in standard output:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>5</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

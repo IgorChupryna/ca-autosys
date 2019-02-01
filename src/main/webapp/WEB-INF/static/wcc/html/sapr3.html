@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+    <div>
+        <div class="">
+            <p>You can define an SAP R/3 job (SAP) to schedule an SAP R/3 job on your SAP system.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><span><strong>Note:</strong> To run these jobs, your system requires CA WA Agent for UNIX, Linux, or Windows and CA WA Agent for SAP.</span>
+                </p>
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Insert a job and specify the following attributes in the definition:
+                    <ul>
+                        <li><strong><a data-macro-name="sp-plaintextbody-link"
+                                       href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/job_type-attribute-specify-job-type"
+                                       class="conf-macro output-inline" data-hasbody="true">job_type</a>:
+                            SAP</strong><br>Specifies that the job type is SAP R/3.
+                        </li>
+                        <li><p><strong><a data-macro-name="sp-plaintextbody-link"
+                                          href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/machine-attribute-define-the-client-where-a-job-runs"
+                                          class="conf-macro output-inline" data-hasbody="true">machine</a><br></strong>Specifies
+                            the name of the machine on which the job runs.</p></li>
+                        <li><strong><a data-macro-name="sp-plaintextbody-link"
+                                       href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/sap_job_name-attribute-specify-sap-job-name"
+                                       class="conf-macro output-inline"
+                                       data-hasbody="true">sap_job_name</a></strong><br>Specifies the SAP job name that
+                            identifies the workload in the SAP system.
+                        </li>
+                        <li><p><strong><a data-macro-name="sp-plaintextbody-link"
+                                          href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/sap_step_parms-attribute-specify-sap-r-3-step-specifications"
+                                          class="conf-macro output-inline"
+                                          data-hasbody="true">sap_step_parms</a></strong><br>Defines the SAP R/3 step
+                            specifications.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Note:&nbsp;</strong><span>We recommend that you limit the number of steps (ABAPs) to one per job. If you&nbsp;run a job and one of the ABAPs fails, the job is marked as failed. If the ABAP fails, you&nbsp;</span><span>cannot re-run the ABAP without re-running the entire job.</span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>(Optional) Specify optional SAP R/3 attributes:
+                    <ul>
+                        <li><a data-macro-name="sp-plaintextbody-link"
+                               href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/job_class-attribute-assign-a-job-class-to-a-job"
+                               class="conf-macro output-inline" data-hasbody="true">job_class</a></li>
+                        <li><a data-macro-name="sp-plaintextbody-link"
+                               href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/job_terminator-attribute-kill-a-job-if-its-box-fails"
+                               class="conf-macro output-inline" data-hasbody="true">job_terminator</a></li>
+                        <li><a data-macro-name="sp-plaintextbody-link"
+                               href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/sap_client-attribute-specify-sap-client-number"
+                               class="conf-macro output-inline" data-hasbody="true">sap_client</a></li>
+                        <li><a data-macro-name="sp-plaintextbody-link"
+                               href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/sap_fail_msg-attribute-specify-failure-message-for-sap-job"
+                               class="conf-macro output-inline" data-hasbody="true">sap_fail_msg</a></li>
+                        <li><a data-macro-name="sp-plaintextbody-link"
+                               href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/sap_job_class-attribute-specify-sap-job-class"
+                               class="conf-macro output-inline" data-hasbody="true">sap_job_class</a></li>
+                        <li><a data-macro-name="sp-plaintextbody-link"
+                               href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/sap_lang-attribute-specify-sap-language-for-login"
+                               class="conf-macro output-inline" data-hasbody="true">sap_lang</a></li>
+                        <li><a data-macro-name="sp-plaintextbody-link"
+                               href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/sap_mon_child-attribute-enable-monitoring-of-children-jobs"
+                               class="conf-macro output-inline" data-hasbody="true">sap_mon_child</a></li>
+                        <li><a data-macro-name="sp-plaintextbody-link"
+                               href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/sap_office-attribute-save-outgoing-documents-to-sapoffice-outbox"
+                               class="conf-macro output-inline" data-hasbody="true">sap_office</a></li>
+                        <li><a data-macro-name="sp-plaintextbody-link"
+                               href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/sap_recipients-attribute-specify-sap-spool-recipient"
+                               class="conf-macro output-inline" data-hasbody="true">sap_recipients</a></li>
+                        <li><a data-macro-name="sp-plaintextbody-link"
+                               href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/sap_release_option-attribute-specify-release-option-for-a-job"
+                               class="conf-macro output-inline" data-hasbody="true">sap_release_option</a></li>
+                        <li><a data-macro-name="sp-plaintextbody-link"
+                               href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/sap_rfc_dest-attribute-specify-sap-destination"
+                               class="conf-macro output-inline" data-hasbody="true">sap_rfc_dest</a></li>
+                        <li><a data-macro-name="sp-plaintextbody-link"
+                               href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/sap_success_msg-attribute-specify-success-message-for-sap-job"
+                               class="conf-macro output-inline" data-hasbody="true">sap_success_msg</a></li>
+                        <li><a data-macro-name="sp-plaintextbody-link"
+                               href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/sap_target_sys-attribute-specify-sap-application-server"
+                               class="conf-macro output-inline" data-hasbody="true">sap_target_sys</a></li>
+                    </ul>
+                </li>
+                <li>(Optional) Specify common attributes that apply to all job types.<br>The SAP R/3 job is defined.
+                </li>
+            </ol>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>We recommend that you limit the number of steps (ABAPs) to one per job. If you run a job and one
+                        of the ABAPs fails, the job is marked as failed. If the ABAP fails, you cannot re-run the ABAP
+                        without re-running the entire job.
+                    </li>
+                    <li>Attributes that have a default value automatically apply to the job definitions; therefore, they
+                        are optional. For example, jobs with no specified job type are defined as command jobs by
+                        default. Other optional attributes specify information that is not required but affects how or
+                        when a job runs, such as attributes that specify scheduling conditions.
+                    </li>
+                    <li>Some optional attributes are common to all job types but others apply to certain jobs types
+                        only. Optional attributes that apply to all job types are known as&nbsp;<em>common optional
+                            attributes.&nbsp;</em>For more information about common optional attributes and the values
+                        that you can specify for them (including their default values when applicable), see&nbsp;<a
+                                data-macro-name="sp-nobody-link"
+                                href="/ca-workload-automation-ae/11-4-2/en/reference/ae-job-information-language/jil-job-definitions/common-job-attributes"
+                                class="conf-macro output-inline" data-hasbody="false">Common Job Attributes</a>.
+                    </li>
+                    <li class="_mce_tagged_br">You can define jobs interactively, create job definitions in script
+                        files, and import them using the jil command, or use CA WCC to define them. For more information
+                        about the JIL command and JIL syntax, see&nbsp;<a data-macro-name="sp-plaintextbody-link"
+                                                                          href="/ca-workload-automation-ae/11-4-2/en/scheduling/ae-scheduling/manage-jil"
+                                                                          class="conf-macro output-inline"
+                                                                          data-hasbody="true">Manage JIL</a>. For more
+                        information about using CA WCC to define the job, see&nbsp;<a data-macro-name="sp-nobody-link"
+                                                                                      href="/ca-workload-automation-ae/11-4-2/en/scheduling/ca-wcc-scheduling"
+                                                                                      class="conf-macro output-inline"
+                                                                                      data-hasbody="false">CA WCC
+                            Scheduling</a>.
+                    </li>
+                    <li><span style="color: rgb(51,51,51);">The agent parameter file might specify default values for some attribute statements, depending on the parameters that the agent administrator defines during agent configuration. Values that are specified in attribute statements within a job definition override the default values.</span>
+                    </li>
+                </ul>
+            </div>
+            <p><strong>Example: Define an SAP R/3 Job With One Step</strong></p>
+            <p>This example runs the SAP R/3 job named BI_WRITE_PROT_TO_APPLLOG. The job runs the SAP program (ABAP)
+                named RSBATCH_WRITE_PROT_TO_APPLLOG. The owner is defined in CA Workload Automation AE using the
+                autosys_secure command.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>insert_job: test_SAP<br>job_type: SAP<br>machine: sapagent<br>sap_job_name: BI_WRITE_PROT_TO_APPLLOG<br>sap_rfc_dest: BI1<br>sap_step_parms: abap_lang=EN,abap_name=RSBATCH_WRITE_PROT_TO_APPLLOG<br>owner: WAAESAP@sapagent</p></pre>
+            </div>
+            <p><strong>Example: Define an SAP R/3 Job With Multiple Steps</strong></p>
+            <p>This example runs an SAP R/3 job that is named SAP 3 STEPS_@#$. The job runs three steps. Each step runs&nbsp;the
+                same ABAP but with different parameters.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>insert_job: TEST_1<br>job_type: SAP<br>machine: localhost<br>job_class: c<br>sap_job_name: "SAP 3 STEPS_@#$"<br>sap_release_option: I<br>sap_step_parms:abap_name=BTCTEST,variant=test,arc_printer=LP01,copies=2,<br>prt_arc_mode=BOTH,arc_obj_type=ARCHIVE,arc_doc_type=ARCHIVE,arc_info=inf,num_lines=65,<br>num_columns=80<br>sap_step_parms:abap_name=BTCTEST,variant=test2,arc_printer=LP01,copies=3,<br>prt_arc_mode=BOTH,print_imm=N,release=N,sap_banner=Y,banner_page=Y,<br>recipient_name=cyber,num_lines=65,num_columns=80,arc_obj_type=ARCHIVE,<br>arc_doc_type=ARCHIVE,arc_info=inf<br>sap_step_parms:abap_name=BTCTEST,variant=test,arc_printer=LP01,copies=1,<br>prt_arc_mode=BOTH,sap_banner=Y,banner_page=Y,recipient_name=cyber,num_lines=65,<br>num_columns=80,authorization=string2,arc_obj_type=ARCHIVE,arc_doc_type=ARCHIVE,<br>arc_info=inf</p></pre>
+            </div>
+            <p><strong>Example: SAP R/3 Job BQ1 POST_ARRKOM</strong></p>
+            <p>This example runs the SAP R/3 job named POST_ARRKOM. </p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block"><pre class="ca-code"><p>insert_job: Test-D-SAP-ARRKOM    job_type: sap<br>machine: bq1_agt1<br>owner: CA_AUTOSYS<br>max_run_alarm: 0<br>alarm_if_fail: y<br>avg_runtime: 10<br>send_notification: n<br>sap_client: 201<br>sap_lang: EN<br>sap_rfc_dest: bspresrv<br>sap_job_name: ZCML_POST_ARRKOM_P<br>sap_step_parms: abap_name=ZCML_POST_ARRKOM_P, banner_page=n, footer=n, release=n, variant=ARR45, new_spool=y, print_imm=n<br>sap_release_option: A</p></pre>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

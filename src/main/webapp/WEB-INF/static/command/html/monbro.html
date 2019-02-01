@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The monbro command is a client component that runs a pre-defined monitor or report (browser) and returns the results to standard output. The command can connect to any database that the instance is configured to use. To run a monitor or report, connect to the database where the definition of the monitor or report resides.</p>
+                <p>You can configure a monitor to play sound clips when it runs by turning on the sound before you start the configuration process. The monitor uses the sound capabilities of the machine on which runs.</p>
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>On UNIX, the command does not play sound clips unless all the following conditions apply:
+                        <ul>
+                            <li>The sound clips are pre-recorded.</li>
+                            <li>The machine that runs the command has access to the $AUTOUSER/sounds directory.</li>
+                        </ul></li>
+                    <li>You can use this command to run a monitor only when you have read access to the monitored jobs.</li>
+                </ul>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>monbro&nbsp;-N&nbsp;<em>name</em>&nbsp;[-P&nbsp;<em>poll_frequency</em>]&nbsp;[-q]&nbsp;[{-usr&nbsp;<em>username&nbsp;</em>{-pw|pwx}&nbsp;<em>password</em>|-saml&nbsp;<em>auth_artifact</em>}]</p><p>[-x]&nbsp;</p><p>[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-N&nbsp;<em>name<br></em></strong>Defines the monitor or report to run.<br><strong>Limits:</strong>&nbsp;To run all monitors or reports, specify&nbsp;<strong>-N ALL</strong>.<br>You can use the percent (%) character as a wildcard in this value.</p></li>
+                    <li><p><strong>-P&nbsp;<em>poll_frequency<br></em></strong>(Optional) For monitors only,&nbsp;poll_frequency&nbsp;defines the interval (in seconds) at which to poll the database.<br><strong>Default:</strong>&nbsp;10</p></li>
+                    <li><p><strong>-q<br></strong>(Optional) Displays monbro definition in JIL format.<strong>&nbsp;</strong></p></li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                            <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                            <p>(Optional) Specifies external security credentials as follows:</p>
+                            <ul>
+                                <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                                <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                    </div> </li>
+                                <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Notes: </strong></p>
+                                <ul>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                        <ul>
+                                            <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                            <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                            <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                        </ul></li>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                    <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                        <ul>
+                                            <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                            <li>CA Workload Automation AE is operating in native security mode.</li>
+                                        </ul></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                    <li><p>-x<br>(Optional) Returns the command version information to standard output.</p></li>
+                    <li><p>-?</p><p>(Optional) Displays help for the command.</p></li>
+                </ul>
+                <p><strong>Example: Run a Monitor</strong></p>
+                <p>This example runs the monitor Mon1 (which is defined in the default database):</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>monbro&nbsp;-N&nbsp;mon1</p></pre>
+                </div>
+                <p><strong>Example: Run a Monitor and Display Monitor Definitions</strong></p>
+                <p>This example runs the monitor Mon1 (which is defined in the default database) and displays the monitor definitions:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>monbro&nbsp;-N&nbsp;mon1&nbsp;-q</p></pre>
+                </div>
+                <p>The monitor definitions returned resemble the following:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>insert_monbro:&nbsp;xxx</p><p>mode:&nbsp;m</p><p>all_events:&nbsp;Y</p><p>job_filter:&nbsp;a</p><p>sound:&nbsp;N</p><p>alarm_verif:&nbsp;N</p><p>insert_monbro:&nbsp;xxx2</p><p>mode:&nbsp;b</p><p>all_events:&nbsp;N</p><p>alarm:&nbsp;Y</p><p>all_status:&nbsp;N</p><p>running:&nbsp;N</p><p>success:&nbsp;Y</p><p>failure:&nbsp;Y</p><p>terminated:&nbsp;N</p><p>suspended: Y</p><p>starting:&nbsp;N</p><p>restart:&nbsp;N</p><p>job_filter:&nbsp;b</p><p>job_name:&nbsp;box</p><p>currun:&nbsp;N</p><p>after_time:&nbsp;"11/11/2014 12:12"</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

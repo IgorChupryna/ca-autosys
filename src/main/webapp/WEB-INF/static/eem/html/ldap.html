@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+    <div>
+        <div class="">
+            <p>You can reference to a global user or global group from an external LDAP directory. </p>
+            <p>You can perform the following tasks on the Directory Information pane:</p>
+            <ul>
+                <li>Add an external LDAP directory</li>
+                <li>Update an external LDAP directory</li>
+                <li>Delete an external LDAP directory</li>
+            </ul>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+    <h1 class="article-name" tabindex="0">Support for Multiple Active Directory Domains</h1>
+    <div>
+
+
+        <div>
+            <div class="">
+                <p>CA EEM now supports the following LDAP directories configurations:</p>
+                <ul>
+                    <li><strong>Basic LDAP directory</strong><br>Specifies that CA EEM resolves the global users and
+                        global groups within a specified LDAP directory.
+                    </li>
+                    <li><strong>Multiple Microsoft Active Directory Domains</strong></li>
+                </ul>
+                <p>Specifies that CA EEM resolves the global users and global groups across the configured Active
+                    Directory domains or forest. CA EEM supports the following Active Directory configurations:</p>
+                <p>Active Directory Domain</p>
+                <p>Specifies that CA EEM resolves domain-qualified global users and global groups across the
+                    individually configured domains. </p>
+                <li><strong>Active Directory Forest</strong><br>Specified that CA EEM resolves domain-qualified global
+                    users and global groups across all the domains within the configured forest.
+                </li>
+                <p>In a multiple Active Directory domain, verify that you do the following tasks:</p>
+                <ul>
+                    <li>When authenticating and authorizing a user, use a user principal name in the following
+                        format:<br>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true"
+                             data-macro-name="sp-macrooverride-plaintextbody-block">
+     <pre class="code-block prettyprint"><code>domain\username
+</code></pre>
+                        </div>
+                    </li>
+                    <li>When defining access policies, use the principal name of a global user or global group to assign
+                        permissions, and use PrincipalName attribute to define filters.
+                    </li>
+                </ul>
+                <p>You can configure an Active Directory Domain by performing the following steps:</p>
+                <ol>
+                    <li>Select Multiple Microsoft Active Directory from Configuration Type.</li>
+                    <li>Click Add external LDAP directory.</li>
+                    <li>Enter the external LDAP directory details in the LDAP Directory Configuration page.</li>
+                </ol>
+                <p>You can configure an Active Directory Forest by performing the following steps:</p>
+                <ol>
+                    <li>Select Microsoft Active Directory Forest from Configuration Type.</li>
+                    <li>Click Add external LDAP directory.</li>
+                    <li>Enter the external LDAP directory details in the LDAP Directory Configuration page.</li>
+                </ol>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+
+    </div>
+
+    <h1 class="article-name" tabindex="0">Add an External LDAP Directory</h1>
+
+    <div>
+
+
+        <div>
+            <div class="">
+                <p>You can configure CA EEM to refer from a new external LDAP directory. </p>
+                <p><strong>Follow these steps:</strong></p>
+                <ol>
+                    <li>Select Reference from an external LDAP Directory from the Global Users/Global Groups pane of the
+                        Userstore Configuration page.<br>The Directory Information pane appears on the Userstore
+                        Configuration page. By default, Basic LDAP Directory is selected as the Configuration Type.
+                    </li>
+                    <li>Select a Configuration Type, and click Add external LDAP directory from the Directory
+                        Information pane.<br>The LDAP Directory Configuration page appears.
+                    </li>
+                    <li>Complete the following fields:
+                        <ul>
+                            <li><strong>General</strong><br>The following appear under the general section:
+                                <ul>
+                                    <li><strong>Name</strong><br>Specifies a name for the external LDAP directory.</li>
+                                    <li><strong>Attribute Map</strong><br>Specifies the set of rules that define how the
+                                        attributes of the external LDAP directory are mapped to the CA EEM domain. This
+                                        field appears only if you have selected the Type as Custom Mapped Directory.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><strong>Domain Settings</strong><br>The Domain Settings section appears only if you
+                                chose to configure an Active Directory domain or forest. The following appear under the
+                                domain settings section:
+                                <ul>
+                                    <li><strong>Domain</strong><br>Specifies the name of the domain in the Active
+                                        Directory Domain or Active Directory Forest.
+                                    </li>
+                                    <li><strong>Base DN</strong><br>Specifies the Base DN of the domain within a forest.
+                                        This field appears only if you chose to configure an Active Directory
+                                        forest.<br>If you chose to configure an Active Directory Forest, you can add
+                                        more domains by clicking Add Domain Mapping and delete a domain by clicking the
+                                        delete icon of the domain.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><strong>Connection Settings</strong><br>The following appear under the connection
+                                settings section:<br>
+                                <ul>
+                                    <li><strong>Host and Port</strong><br>Specifies a hostname of the external LDAP
+                                        directory, and an LDAP port for CA EEM to communicate with the external LDAP
+                                        directory host. When you enter a hostname and port, click the arrow to add the
+                                        entered details into Selected Hostnames. You can specify multiple host
+                                        configurations, which can act as failover servers. When you specify multiple
+                                        host configurations, you can use the up and down arrows in Selected Hostnames to
+                                        arrange the order of failover servers.
+                                    </li>
+                                    <li><strong>Protocol</strong><br>Specifies an LDAP protocol that is used to connect
+                                        to the external LDAP directory. Select <em>one</em> of the following
+                                        protocols:<br><strong>LDAP</strong><br>Specifies an LDAP connection over an
+                                        unsecured connection.<br><strong>LDAP + TLS</strong><br>Specifies an LDAP
+                                        connection over Transport Layer Security (TLS).<br><strong>LDAPS</strong> <br>Specifies
+                                        an LDAP connection over Secure Sockets Layer.
+                                    </li>
+                                    <li><strong>Base DN</strong><br>Specifies the Distinguished Name of the external
+                                        LDAP directory from where the search for global users and global groups begins.
+                                        Only global users and global groups that are discovered underneath this DN are
+                                        mapped into CA EEM. Enter a value without spaces.
+                                    </li>
+                                    <li><strong>User DN</strong><br>Specifies the Distinguished Name of a user to
+                                        connect to the external LDAP directory. Do not enter a comma in the cn of the
+                                        User DN. For example, if your User DN is cn=firstname,middlename,dc=foo,dc=com,
+                                        prefix the comma with a backslash to make the User DN as
+                                        cn=firstname\,middlename,dc=foo,dc=com.
+                                    </li>
+                                    <li><strong>Password and Confirm Password</strong><br>Specifies the password that is
+                                        associated with the user in User DN.
+                                    </li>
+                                </ul>
+                                The following fields appear on selecting LDAP + TLS or LDAPS as the protocol.
+                                <ul>
+                                    <li><strong>Certificate Path</strong><br>Type the relative location of the
+                                        certificate file that is placed in the CA EEM installation folder.
+                                    </li>
+                                    <li><strong>Key Path</strong><br>Type the relative location of the certificate key
+                                        file that is placed in the CA EEM installation folder.
+                                    </li>
+                                    <li><strong>CA Certificate Path</strong><br>Type the relative location of the
+                                        certificate file that was obtained from the CA and placed in the CA EEM
+                                        installation folder.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><strong>Advanced Configuration</strong><br>The following appear under the advanced
+                                configuration section:
+                                <ul>
+                                    <li><strong>Follow LDAP Referrals</strong><br>Specifies that CA EEM must follow LDAP
+                                        referrals. If you enable this option and search for an object that does not
+                                        exist in the LDAP directory, the LDAP server provides a reference to a location
+                                        that might hold the object.
+                                    </li>
+                                    <li><strong>Max Bind Connections</strong><br>Specifies the maximum number of
+                                        concurrent LDAP connections that CA EEM supports for authenticating users.
+                                    </li>
+                                    <li><strong>Max search connections</strong><br>Specifies the maximum number of
+                                        concurrent LDAP connections that CA EEM supports for search operations.
+                                    </li>
+                                    <li><strong>Connection Timeout</strong><br>Specifies the maximum time in seconds the
+                                        CA EEM Server waits to connect to the LDAP server.
+                                    </li>
+                                    <li><strong>Request Timeout</strong><br>Specifies the maximum time in seconds the CA
+                                        EEM Server waits for the LDAP server to respond to requests.
+                                    </li>
+                                    <li><strong>Search Retry Count</strong><br>Specifies the number of times the CA EEM
+                                        Server tries to reconnect to the LDAP directory after a failed search operation.
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Click Save.<br>The external LDAP directory is added.</li>
+                </ol>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+
+    </div>
+
+</div>
+</body>
+</html>

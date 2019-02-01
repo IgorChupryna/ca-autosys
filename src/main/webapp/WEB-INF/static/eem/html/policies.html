@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 class="article-name" tabindex="0">Policy Overview</h1>
+
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p>CA EEM performs policy evaluation by calling the Safe::Context::authorize method. This method is invoked with the following parameters:</p>
+            <ul>
+                <li>Identity to check</li>
+                <li>Resource class name</li>
+                <li>Resource name</li>
+                <li>Action requested</li>
+                <li>Queue of named attributes</li>
+            </ul>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+<h1 class="article-name" tabindex="0">How Policies Are Evaluated</h1>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p>Policies are evaluated in the following process:</p>
+            <ol>
+                <li>Check for explicit denies:
+                    <ol>
+                        <li>Match for explicit denies. </li>
+                        <li>Evaluate matched policy filters. </li>
+                        <li>In case of explicit deny, stop checking, and return a denied recommendation specifying the policy.</li>
+                    </ol></li>
+                <li>Check for explicit grants:
+                    <ol>
+                        <li>Match for explicit grants policies. </li>
+                        <li>Evaluate matched policy filters.</li>
+                        <li>In case of explicit grants, stop checking, and return a granted recommendation specifying the policy.</li>
+                    </ol></li>
+                <li>Check for delegated authority:
+                    <ol>
+                        <li>Match/evaluate the delegated authority. For each delegator, find a grant with no explicit deny. </li>
+                        <li>For each delegator, repeat step 1and search for explicit grants. </li>
+                        <li>If a grant was returned by delegation, return a granted recommendation specifying the policy and the delegator chain.</li>
+                    </ol></li>
+                <li>Calculate obligations for this access check:
+                    <ol>
+                        <li>Add the following attributes to the ones passed in the authorization call:
+                            <ul>
+                                <li>PolicyName, the name of the obligation policy that caused the response </li>
+                                <li>DelegationChain, the name of the delegation chain returned</li>
+                            </ul></li>
+                        <li>Match and evaluate each SafeObligation as follows:
+                            <ul>
+                                <li>ResourceClass set to SafeObligation. </li>
+                                <li>Resource name set to {action} + "/" + {original resource class} + "/" {original resource name}. </li>
+                                <li>Action set to FulfillOnGrant (if the authorization results in a grant), or FulfillOnDeny (if the authorization results in a deny).</li>
+                            </ul></li>
+                        <li>Do the following for each matching or evaluating SafeObligation policy:
+                            <ul>
+                                <li>Append each obligation to the authorization results. </li>
+                                <li>Calculate the values of the obligation attributes and append them to the authorization results. </li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong>Note: </strong>Applications must handle the obligations returned from an authorization check. The application should not grant or deny access until and unless the obligations could be performed.
+                            </div> </li>
+                    </ol></li>
+                <li>Return a denied recommendation, in case of no matches.</li>
+            </ol>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note: </strong>All the policies are not evaluated for every request. Since CA EEM supports explicit policies (explicit grant or explicit deny), policy evaluation is performed only at the first instance.
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p>This article documents known issues in CA Workload Automation AE Release 11.3.6 (including service packs).</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>For information about agent limitations and known issues, see the Readme or <a rel="nofollow" class="external-link" href="https://wiki.ca.com/wlaagents">Release Information </a>for your agent.</li>
+                    <li>For CA Workload Automation AE patch information, see <a rel="nofollow" class="external-link" href="http://support.ca.com">http://support.ca.com</a>.</li>
+                </ul>
+            </div>
+            <div class="bs-callout bs-callout-warning conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Important!</strong> If you have already applied individual fixes for known issues and you upgrade to CA Workload Automation AE Release 11.3.6 SP3, the upgrade will regress these issues. These issues will be addressed in the upcoming cumulative or incremental patch. For assistance, contact Technical Support at <a rel="nofollow" class="external-link" href="http://support.ca.com">http://support.ca.com</a>.</p>
+            </div>
+            <p><strong>Contents</strong></p>
+            <p></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H1,H2,H3,H4,H5,H6,H7" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#AEKnownIssues-AgentUpgradeFails(UNIXOnly)" class="toc-link">Agent Upgrade Fails (UNIX Only)</a></span></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#AEKnownIssues-ApplicationServerStopsResponding(UNIXOnly)" class="toc-link">Application Server Stops Responding (UNIX Only)</a></span></li><li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a href="#AEKnownIssues-BehaviorofJobswithLoadBalancingandResourceAttributes" class="toc-link">Behavior of Jobs with Load Balancing and Resource Attributes</a></span></li><li><span class="toc-item-body" data-outline="4"><span class="toc-outline">4</span><a href="#AEKnownIssues-CAWorkloadAutomationAEProcessesFailtoStartonRedHatLinuxEnterprise6(UNIXOnly)" class="toc-link">CA Workload Automation AE Processes Fail to Start on Red Hat Linux Enterprise 6 (UNIX Only)</a></span></li><li><span class="toc-item-body" data-outline="5"><span class="toc-outline">5</span><a href="#AEKnownIssues-DatabaseConnectionTestsIssueDuringInstallation(UNIXOnly)" class="toc-link">Database Connection Tests Issue During Installation (UNIX Only)</a></span></li><li><span class="toc-item-body" data-outline="6"><span class="toc-outline">6</span><a href="#AEKnownIssues-DatabaseCreationFailsiftheDatabaseServerResidesonaWindowsComputer(UNIXOnly)" class="toc-link">Database Creation Fails if the Database Server Resides on a Windows Computer (UNIX Only)</a></span></li><li><span class="toc-item-body" data-outline="7"><span class="toc-outline">7</span><a href="#AEKnownIssues-DefaultShellontheAgentMustBeBourne(UNIXOnly)" class="toc-link">Default Shell on the Agent Must Be Bourne (UNIX Only)</a></span></li><li><span class="toc-item-body" data-outline="8"><span class="toc-outline">8</span><a href="#AEKnownIssues-DefinedAliases(UNIXOnly)" class="toc-link">Defined Aliases (UNIX Only)</a></span></li><li><span class="toc-item-body" data-outline="9"><span class="toc-outline">9</span><a href="#AEKnownIssues-ErrorOccursWhenRunningsafexonSuSEandSolaris" class="toc-link">Error Occurs When Running safex on SuSE and Solaris</a></span></li><li><span class="toc-item-body" data-outline="10"><span class="toc-outline">10</span><a href="#AEKnownIssues-InsufficientProcedureCacheDuringInstallation(UNIXOnly)" class="toc-link">Insufficient Procedure Cache During Installation (UNIX Only)</a></span></li><li><span class="toc-item-body" data-outline="11"><span class="toc-outline">11</span><a href="#AEKnownIssues-Upgradingfrom4.5.1totheCurrentReleasewithCCISAInstalled(UNIXOnly)" class="toc-link">Upgrading from 4.5.1 to the Current Release with CCISA Installed (UNIX Only)</a></span></li><li><span class="toc-item-body" data-outline="12"><span class="toc-outline">12</span><a href="#AEKnownIssues-InstallationDoesNotProceedFurtheriftheInstallationPanelsareResized(UNIXOnly)" class="toc-link">Installation Does Not Proceed Further if the Installation Panels are Resized (UNIX Only)</a></span></li><li><span class="toc-item-body" data-outline="13"><span class="toc-outline">13</span><a href="#AEKnownIssues-CAPKIinFIPSMode(LinuxOnly)" class="toc-link">CAPKI in FIPS Mode (Linux Only)</a></span></li><li><span class="toc-item-body" data-outline="14"><span class="toc-outline">14</span><a href="#AEKnownIssues-CAWCCMayNotValidateCAWorkloadAutomationAEUserCredentials(HP-UXOnly)" class="toc-link">CA WCC May Not Validate CA Workload Automation AE User Credentials (HP-UX Only)</a></span></li><li><span class="toc-item-body" data-outline="15"><span class="toc-outline">15</span><a href="#AEKnownIssues-64-bitWindowsAgentCannotCommunicateUsingSSACommunication(WindowsOnly)" class="toc-link">64-bit Windows Agent Cannot Communicate Using SSA Communication (Windows Only)</a></span></li><li><span class="toc-item-body" data-outline="16"><span class="toc-outline">16</span><a href="#AEKnownIssues-ApplicationServerNotStartingAutomatically(WindowsOnly)" class="toc-link">Application Server Not Starting Automatically (Windows Only)</a></span></li><li><span class="toc-item-body" data-outline="17"><span class="toc-outline">17</span><a href="#AEKnownIssues-CAEEMErrorMessageAppearsintheInstallationLog(WindowsOnly)" class="toc-link">CA EEM Error Message Appears in the Installation Log (Windows Only)</a></span></li><li><span class="toc-item-body" data-outline="18"><span class="toc-outline">18</span><a href="#AEKnownIssues-CANSMJMODependentJobsNotRunning(WindowsOnly)" class="toc-link">CA NSM JMO Dependent Jobs Not Running (Windows Only)</a></span></li><li><span class="toc-item-body" data-outline="19"><span class="toc-outline">19</span><a href="#AEKnownIssues-InstallationFails(WindowsOnly)" class="toc-link">Installation Fails (Windows Only)</a></span></li><li><span class="toc-item-body" data-outline="20"><span class="toc-outline">20</span><a href="#AEKnownIssues-InstallingCAWorkloadAutomationAEandCAWCContheSameComputer(WindowsOnly)" class="toc-link">Installing CA Workload Automation AE and CA WCC on the Same Computer (Windows Only)</a></span></li><li><span class="toc-item-body" data-outline="21"><span class="toc-outline">21</span><a href="#AEKnownIssues-InstallationFailsonUACEnabledComputers(WindowsOnly)" class="toc-link">Installation Fails on UAC Enabled Computers (Windows Only)</a></span></li><li><span class="toc-item-body" data-outline="22"><span class="toc-outline">22</span><a href="#AEKnownIssues-InstallerDoesNotSetUpCAWorkloadAutomationAEtoRuninaHigh-AvailableClusterEnvironment(WindowsOnly)" class="toc-link">Installer Does Not Set Up CA Workload Automation AE to Run in a High-Available Cluster Environment (Windows Only)</a></span></li><li><span class="toc-item-body" data-outline="23"><span class="toc-outline">23</span><a href="#AEKnownIssues-MessagesDisplayedWhenInstallingorUpgradingCAWorkloadAutomationAE(Solaris10only)" class="toc-link">Messages Displayed When Installing or Upgrading CA Workload Automation AE (Solaris 10 only)</a></span></li><li><span class="toc-item-body" data-outline="24"><span class="toc-outline">24</span><a href="#AEKnownIssues-RegistertheAgentinCAITClientManager(WindowsOnly)" class="toc-link">Register the Agent in CA IT Client Manager (Windows Only)</a></span></li><li><span class="toc-item-body" data-outline="25"><span class="toc-outline">25</span><a href="#AEKnownIssues-Kuwait,RiyadhTimeZoneMayDisplayasBaghdad(WindowsOnly)" class="toc-link">Kuwait, Riyadh Time Zone May Display as Baghdad (Windows Only)</a></span></li><li><span class="toc-item-body" data-outline="26"><span class="toc-outline">26</span><a href="#AEKnownIssues-testheart.exeMustBeMovedto%AUTOSYS%bin(WindowsOnly)" class="toc-link">testheart.exe Must Be Moved to %AUTOSYS% bin (Windows Only)</a></span></li><li><span class="toc-item-body" data-outline="27"><span class="toc-outline">27</span><a href="#AEKnownIssues-SilentInstallationImageCreationFailure(WindowsOnly)" class="toc-link">Silent Installation Image Creation Failure (Windows Only)</a></span></li><li><span class="toc-item-body" data-outline="28"><span class="toc-outline">28</span><a href="#AEKnownIssues-UpgradeFails(WindowsOnly)" class="toc-link">Upgrade Fails (Windows Only)</a></span></li><li><span class="toc-item-body" data-outline="29"><span class="toc-outline">29</span><a href="#AEKnownIssues-autobcpORAScriptCompletesWithWarningMessage(OracleOnly)" class="toc-link">autobcpORA Script Completes With Warning Message (Oracle Only)</a></span></li><li><span class="toc-item-body" data-outline="30"><span class="toc-outline">30</span><a href="#AEKnownIssues-DatamoverFailstoValidateOracleRealApplicationCluster(RAC)Database(OracleOnly)" class="toc-link">Datamover Fails to Validate Oracle Real Application Cluster (RAC) Database (Oracle Only)</a></span></li><li><span class="toc-item-body" data-outline="31"><span class="toc-outline">31</span><a href="#AEKnownIssues-archive_jobsCommandDoesNotDeleteAllLogicallyDeletedJobs" class="toc-link">archive_jobs Command Does Not Delete All Logically Deleted Jobs</a></span></li><li><span class="toc-item-body" data-outline="32"><span class="toc-outline">32</span><a href="#AEKnownIssues-ApplicationServerisNotAbletoConnecttotheSecondCAEEMHost" class="toc-link">Application Server is Not Able to Connect to the Second CA EEM Host</a></span></li><li><span class="toc-item-body" data-outline="33"><span class="toc-outline">33</span><a href="#AEKnownIssues-ClientUtilitiesTimeOutWhenExternalSecurityisEnabled" class="toc-link">Client Utilities Time Out When External Security is Enabled</a></span></li><li><span class="toc-item-body" data-outline="34"><span class="toc-outline">34</span><a href="#AEKnownIssues-fail_codesAttributeDoesNotWorkProperly" class="toc-link">fail_codes Attribute Does Not Work Properly</a></span></li><li><span class="toc-item-body" data-outline="35"><span class="toc-outline">35</span><a href="#AEKnownIssues-JobsNotTrackedWhentheAgentisDown" class="toc-link">Jobs Not Tracked When the Agent is Down</a></span></li><li><span class="toc-item-body" data-outline="36"><span class="toc-outline">36</span><a href="#AEKnownIssues-LockoutIssueafterInstallingCAWorkloadAutomationAE" class="toc-link">Lockout Issue after Installing CA Workload Automation AE</a></span></li><li><span class="toc-item-body" data-outline="37"><span class="toc-outline">37</span><a href="#AEKnownIssues-OwnerAttributeanduserhostValueMustMatch" class="toc-link">Owner Attribute and user host Value Must Match</a></span></li><li><span class="toc-item-body" data-outline="38"><span class="toc-outline">38</span><a href="#AEKnownIssues-RunningSQLTransactionCannotbeCancelled" class="toc-link">Running SQL Transaction Cannot be Cancelled</a></span></li><li><span class="toc-item-body" data-outline="39"><span class="toc-outline">39</span><a href="#AEKnownIssues-sap_job_countAttribute" class="toc-link">sap_job_count Attribute</a></span></li><li><span class="toc-item-body" data-outline="40"><span class="toc-outline">40</span><a href="#AEKnownIssues-SearchinCAWCCFailsandReturnsDatabaseErrors" class="toc-link">Search in CA WCC Fails and Returns Database Errors</a></span></li><li><span class="toc-item-body" data-outline="41"><span class="toc-outline">41</span><a href="#AEKnownIssues-sendeventCommandFailstotheLightweightApplicationServer" class="toc-link">sendevent Command Fails to the Lightweight Application Server</a></span></li><li><span class="toc-item-body" data-outline="42"><span class="toc-outline">42</span><a href="#AEKnownIssues-UpdateJobFailswithMultipleMachines" class="toc-link">Update Job Fails with Multiple Machines</a></span></li><li><span class="toc-item-body" data-outline="43"><span class="toc-outline">43</span><a href="#AEKnownIssues-WebServicesLoginFailure" class="toc-link">Web Services Login Failure</a></span></li><li><span class="toc-item-body" data-outline="44"><span class="toc-outline">44</span><a href="#AEKnownIssues-(UNIX)SDKVersionDisplayedIncorrectly" class="toc-link">(UNIX) SDK Version Displayed Incorrectly</a></span></li><li><span class="toc-item-body" data-outline="45"><span class="toc-outline">45</span><a href="#AEKnownIssues-(LinuxOnly)Oracle12cClientMemoryLeak" class="toc-link">(Linux Only) Oracle 12c Client Memory Leak</a></span></li><li><span class="toc-item-body" data-outline="46"><span class="toc-outline">46</span><a href="#AEKnownIssues-SilentInstallationRunsIndefinitely(AIXonly)" class="toc-link">Silent Installation Runs Indefinitely (AIX only)</a></span></li><li><span class="toc-item-body" data-outline="47"><span class="toc-outline">47</span><a href="#AEKnownIssues-MachineStatusDisplayedIncorrectly" class="toc-link">Machine Status Displayed Incorrectly</a></span></li><li><span class="toc-item-body" data-outline="48"><span class="toc-outline">48</span><a href="#AEKnownIssues-LegacyAgentFailure" class="toc-link">Legacy Agent Failure</a></span></li><li><span class="toc-item-body" data-outline="49"><span class="toc-outline">49</span><a href="#AEKnownIssues-autorepMachineReportDisplaystheCurrentLoadIncorrectly" class="toc-link">autorep Machine Report Displays the Current Load Incorrectly</a></span></li><li><span class="toc-item-body" data-outline="50"><span class="toc-outline">50</span><a href="#AEKnownIssues-FalseKILLJOBFAILAlarmsonUNIX" class="toc-link">False KILLJOBFAIL Alarms on UNIX</a></span></li><li><span class="toc-item-body" data-outline="51"><span class="toc-outline">51</span><a href="#AEKnownIssues-WebServicesJobsFail" class="toc-link">Web Services Jobs Fail</a></span></li><li><span class="toc-item-body" data-outline="52"><span class="toc-outline">52</span><a href="#AEKnownIssues-CommandSponsorKnownIssues" class="toc-link">Command Sponsor Known Issues</a></span><ul style=""><li><span class="toc-item-body" data-outline="52.1"><span class="toc-outline">52.1</span><a href="#AEKnownIssues-JRENotRemovedDuringCommandSponsorUninstallation(HP-UXOnly)" class="toc-link">JRE Not Removed During Command Sponsor Uninstallation (HP-UX Only)</a></span></li><li><span class="toc-item-body" data-outline="52.2"><span class="toc-outline">52.2</span><a href="#AEKnownIssues-CannotExecuteCAWorkloadAutomationAECommandsfromCAWCC(HP-UXOnly)" class="toc-link">Cannot Execute CA Workload Automation AE Commands from CA WCC (HP-UX Only)</a></span></li><li><span class="toc-item-body" data-outline="52.3"><span class="toc-outline">52.3</span><a href="#AEKnownIssues-CommandSponsorFailstoInstallonMicrosoftWindows(64-bit)OperatingSystems" class="toc-link">Command Sponsor Fails to Install on Microsoft Windows (64-bit) Operating Systems</a></span></li><li><span class="toc-item-body" data-outline="52.4"><span class="toc-outline">52.4</span><a href="#AEKnownIssues-AttempttoGetJobLogFails" class="toc-link">Attempt to Get Job Log Fails</a></span></li><li><span class="toc-item-body" data-outline="52.5"><span class="toc-outline">52.5</span><a href="#AEKnownIssues-CannotUseCAWorkloadAutomationAEShellAlias" class="toc-link">Cannot Use CA Workload Automation AE Shell Alias</a></span></li><li><span class="toc-item-body" data-outline="52.6"><span class="toc-outline">52.6</span><a href="#AEKnownIssues-CannotImportFileUsingCAWCCEnterpriseCommandLine" class="toc-link">Cannot Import File Using CA WCC Enterprise Command Line</a></span></li></ul></li></ul></div>
+            <p></p>
+            <h2 class="heading2" id="AEKnownIssues-AgentUpgradeFails(UNIXOnly)">Agent Upgrade Fails (UNIX Only)</h2>
+            <p>If you are installing an agent using the wa_setup.sh script on a computer where the r11.3 agent is already installed, a message similar to the following is displayed:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>There&nbsp;is&nbsp;already&nbsp;an&nbsp;agent&nbsp;installed&nbsp;with&nbsp;the&nbsp;name&nbsp;you&nbsp;specified.&nbsp;To</p><p>use&nbsp;the&nbsp;existing&nbsp;agent&nbsp;for&nbsp;this&nbsp;install,&nbsp;select&nbsp;Use&nbsp;an&nbsp;Existing&nbsp;</p><p>Agent.&nbsp;Otherwise,&nbsp;specify&nbsp;another&nbsp;agent&nbsp;name.</p><p>[&nbsp;OK&nbsp;]&nbsp;[&nbsp;Abort&nbsp;installation&nbsp;]</p></pre>
+            </div>
+            <p>When you try to upgrade the agent from r11.3 to the current release using the wa_setup.sh script, the upgrade fails if the r11.3 agent was installed using the agent_setup.sh script. This happens because the Product Interchange Format (PIF) considers the agent_setup.sh and wa_setup.sh scripts as two different components.</p>
+            <p>To upgrade the agent from r11.3 to the current release successfully, you must use the same script that you used to install the r11.3 agent. For example, if you used the agent_setup.sh script to install the r11.3 agent, you must use the agent_setup.sh script to upgrade the agent from r11.3 to the current release.</p>
+            <h2 class="heading2" id="AEKnownIssues-ApplicationServerStopsResponding(UNIXOnly)">Application Server Stops Responding (UNIX Only)</h2>
+            <p>If you installed CA Workload Automation AE on a UNIX computer, the application server may stop responding if the /etc/hosts file contains the ::1 entry (IPv6 loop back entry) that includes the host name. To resolve this issue, remove the host name from the ::1 entry in the /etc/hosts file.</p>
+            <h2 id="AEKnownIssues-BehaviorofJobswithLoadBalancingandResourceAttributes">Behavior of Jobs with Load Balancing and Resource Attributes</h2>
+            <p>CA Workload Automation AE Release 11.3.6 SP5 introduced an unintended change in the scheduling behavior for jobs having a job_load of 0 (zero) that specify both a priority and a virtual resource dependency. Due to the strict priority enforcement, jobs with resource requirements and no load can now delay or even block lower priority jobs having load units that are scheduled to the same machine, although these jobs do not utilize virtual resources.</p>
+            <h2 class="heading2" id="AEKnownIssues-CAWorkloadAutomationAEProcessesFailtoStartonRedHatLinuxEnterprise6(UNIXOnly)">CA Workload Automation AE Processes Fail to Start on Red Hat Linux Enterprise 6 (UNIX Only)</h2>
+            <p>CA Workload Automation AE processes exit with Signal SEGV error if the CA Workload Automation AE user does not have read and execute permissions to the $ORACLE_HOME directory. The CA Workload Automation AE processes exit without displaying any error messages.</p>
+            <p>As a workaround, the CA Workload Automation AE user must be granted read and execute permissions to the $ORACLE_HOME directory.</p>
+            <h2 class="heading2" id="AEKnownIssues-DatabaseConnectionTestsIssueDuringInstallation(UNIXOnly)">Database Connection Tests Issue During Installation (UNIX Only)</h2>
+            <p>During the CA Workload Automation AE installation, if the database connection tests take more than 90 seconds, the following message is displayed:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>No&nbsp;further&nbsp;dialog&nbsp;defined&nbsp;&nbsp;-&nbsp;&nbsp;script&nbsp;returned&nbsp;no&nbsp;result.</p></pre>
+            </div>
+            <p>To fix this issue, tune the network or the database such that the database connection test is performed within 90 seconds.</p>
+            <h2 class="heading2" id="AEKnownIssues-DatabaseCreationFailsiftheDatabaseServerResidesonaWindowsComputer(UNIXOnly)">Database Creation Fails if the Database Server Resides on a Windows Computer (UNIX Only)</h2>
+            <p><strong>Symptom:</strong></p>
+            <p>The CA Workload Automation AE installation fails to create the database if the database server resides on a Windows Computer, and the data file path contains special characters like \n, \t, and so on. For example, if you specify the data file path as C:\newdata, C:\tabdata, and so on.</p>
+            <p><strong>Solution:</strong></p>
+            <p>This problem occurs due to the UNIX/Linux shell interpretation of strings containing special characters.</p>
+            <p>To resolve this issue, do one of the following:</p>
+            <ul>
+                <li>Do not use special characters in the data file path.</li>
+                <li>Specify the data file path as c://newdata, c://tabdata, and so on.</li>
+            </ul>
+            <h2 class="heading2" id="AEKnownIssues-DefaultShellontheAgentMustBeBourne(UNIXOnly)">Default Shell on the Agent Must Be Bourne (UNIX Only)</h2>
+            <p>When a job is submitted on a UNIX computer, the CA Workload Automation agent first processes the /etc/auto.profile file. This file is a Bourne shell script and is located on the agent computer. It sets the system environment variables for the job, including required variable definitions such as AUTOSYS.</p>
+            <p>Therefore, if you define jobs that run under an owner whose default login shell cannot run Bourne shell scripts (for example, the C shell), you must configure the default shell on the agent. Otherwise, you will get errors when the agent tries to run the /etc/auto.profile file, and your jobs will fail. By configuring the default shell, the agent overrides the login shell and runs the /etc/auto.profile file under the Bourne shell instead.</p>
+            <p>To configure the default shell on the agent, do the following:</p>
+            <ol>
+                <li>On the UNIX computer where you want to run the job, change to the agent installation directory.</li>
+                <li>Stop the agent.</li>
+                <li>Open the agentparm.txt file.</li>
+                <li><p>Set the following parameters:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>oscomponent.defaultshell=/bin/sh</p><p>oscomponent.defaultshell.force=true</p></pre>
+                    </div></li>
+                <li>Save and close the agentparm.txt file.</li>
+                <li>Start the agent.<br>The agent uses the Bourne shell by default. When a job is submitted, the agent always runs the /etc/auto.profile under the Bourne shell to source the environment for the job.</li>
+            </ol>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>You can invoke any shell to run the script specified in the command attribute in a Command job. You can specify the shell in the first line of the script or you can add the shell attribute to the job definition. The agent invokes this shell after it runs the /etc/auto.profile file under the default Bourne shell.</li>
+                    <li>For more information about the oscomponent.defaultshell and oscomponent.defaultshell.force parameters, see the&nbsp;<a rel="nofollow" class="external-link" href="https://wiki.ca.com/wlaagents">CA Workload Automation Agents</a>.</li>
+                </ul>
+            </div>
+            <h2 class="heading2" id="AEKnownIssues-DefinedAliases(UNIXOnly)">Defined Aliases (UNIX Only)</h2>
+            <p>Defined aliases that change the native behavior of operating system commands can cause installation problems. Remove all defined aliases before installing CA Workload Automation AE.</p>
+            <h2 class="heading2" id="AEKnownIssues-ErrorOccursWhenRunningsafexonSuSEandSolaris">Error Occurs When Running safex on SuSE and Solaris</h2>
+            <p>An error can occur when you run the safex utility on SuSE (Linux) and Solaris (UNIX). To resolve this issue, verify or modify the following items in your configuration:</p>
+            <ul>
+                <li><p>On SuSE, include the following line in the LD_LIBRARY_PATH:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p><em>CA_EEM_installation_location</em>/lib</p></pre>
+                    </div>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note: </strong>The default CA EEM installation location is /opt/CA/SharedComponents/EmbeddedEntitlementsManager.
+                    </div> </li>
+                <li><p>On Solaris, set the following environment variable:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>CAPKIHOME=<em>CAPKI_installation_location</em></p></pre>
+                    </div>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> The default CAPKI installation location is /opt/CA/SharedComponents/CAPKI.
+                    </div> </li>
+            </ul>
+            <h2 class="heading2" id="AEKnownIssues-InsufficientProcedureCacheDuringInstallation(UNIXOnly)">Insufficient Procedure Cache During Installation (UNIX Only)</h2>
+            <p>The CA Workload Automation AE installation program may display warnings about insufficient procedure cache while creating a database. This problem occurs on UNIX platforms using a Sybase database. To prevent this problem, increase the procedure cache to 10000 KB before starting the CA Workload Automation AE installation.</p>
+            <h2 class="heading2" id="AEKnownIssues-Upgradingfrom4.5.1totheCurrentReleasewithCCISAInstalled(UNIXOnly)">Upgrading from 4.5.1 to the Current Release with CCISA Installed (UNIX Only)</h2>
+            <p>If you are upgrading from Unicenter AutoSys JM 4.5.1 to the current release and you have CCISA installed, you must specify the installation location of the CCISA component in the CA Shared Components input field during the CA Workload Automation AE Release 11.3.6 upgrade interview process. Otherwise, the upgrade will fail with the following errors:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>ERROR:&nbsp;ca-cs-utils&nbsp;should&nbsp;be&nbsp;installed&nbsp;in&nbsp;/opt/CA/CCISA</p><p>Exiting..</p><p>!!&nbsp;&nbsp;Script&nbsp;executed&nbsp;with&nbsp;error:&nbsp;1</p><p>Script&nbsp;or&nbsp;command&nbsp;"csutils/scripts/prein_csutils.sh"&nbsp;failed&nbsp;with&nbsp;exit&nbsp;code&nbsp;1.</p><p>Reason:&nbsp;&nbsp;The&nbsp;script&nbsp;or&nbsp;command&nbsp;encountered&nbsp;a&nbsp;problem.</p><p>Action:&nbsp;&nbsp;Find&nbsp;further&nbsp;details&nbsp;in&nbsp;the&nbsp;installation&nbsp;log&nbsp;file.</p></pre>
+            </div>
+            <p><strong>To determine the install location of the CCISA component</strong></p>
+            <ol>
+                <li>Locate the CCISA install directory, which is found in the /opt/CA/.CCISAprodloc file. The default CCISA install location is /opt/CA/CCISA.</li>
+                <li>When you run the CA Workload Automation AE installation program to upgrade from 4.5.1, do the following:
+                    <ol>
+                        <li>Select a Custom install.</li>
+                        <li>On the Installation Path panel, override the Shared Components directory default of /opt/CA/SharedComponents with the CCISA install directory located in Step 1.</li>
+                    </ol></li>
+            </ol>
+            <h2 class="heading2" id="AEKnownIssues-InstallationDoesNotProceedFurtheriftheInstallationPanelsareResized(UNIXOnly)">Installation Does Not Proceed Further if the Installation Panels are Resized (UNIX Only)</h2>
+            <p>The CA Workload Automation AE installation does not proceed further if you resize the installation panels during the interview phase or during the installation. The installer displays an error message to abort the installation.</p>
+            <h2 class="heading2" id="AEKnownIssues-CAPKIinFIPSMode(LinuxOnly)">CAPKI in FIPS Mode (Linux Only)</h2>
+            <p>If you enable Security-Enhanced Linux (SELinux) feature on your computer, CAPKI cannot run in FIPS mode. To enable CAPKI to run in FIPS mode, you must disable the SELinux feature.</p>
+            <h2 class="heading2" id="AEKnownIssues-CAWCCMayNotValidateCAWorkloadAutomationAEUserCredentials(HP-UXOnly)">CA WCC May Not Validate CA Workload Automation AE User Credentials (HP-UX Only)</h2>
+            <p>On HP-UX, CA WCC may not be able to validate CA Workload Automation AE user credentials. To verify if this problem exists on your computer, run the following command from the agent installation directory:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>chkusr&nbsp;root&nbsp;059EA442581E1E7E8B0A</p></pre>
+            </div>
+            <p>If a communication problem exists, the following error message appears:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>chkusr&nbsp;root&nbsp;059EA442581E1E7E8B0A</p><p>Unable&nbsp;to&nbsp;load&nbsp;pam&nbsp;library:&nbsp;Unable&nbsp;to&nbsp;find&nbsp;library&nbsp;'libpam.sl'.</p></pre>
+            </div>
+            <p>To resolve this problem, do the following:</p>
+            <ol>
+                <li><p>(HPUX Itanium only) Create a symbolic link to the library named libpam:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>ln&nbsp;&nbsp;-&nbsp;s&nbsp;/usr/lib/hpux64/libpam.so&nbsp;/usr/lib/hpux64/libpam.sl&nbsp;</p></pre>
+                    </div></li>
+                <li>Set the library path:
+                    <ul>
+                        <li><p>On HP-UX PA-RISC, run the following commands:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <pre class="ca-code"><p>SHLIB_PATH=/usr/lib:$SHLIB_PATH&nbsp;</p><p>export&nbsp;SHLIB_PATH</p></pre>
+                            </div></li>
+                        <li><p>On HP-UX Itanium, run the following commands:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <pre class="ca-code"><p>SHLIB_PATH=/usr/lib/hpux64:$SHLIB_PATH</p><p>export&nbsp;SHLIB_PATH</p></pre>
+                            </div></li>
+                    </ul></li>
+                <li><p>Enter the following command at the operating system prompt:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>unisrvcntr&nbsp;restart&nbsp;waae_agent-<em>WA_AGENT</em></p></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>WA_AGENT</em></strong><br>Defines the name of the agent to restart.</li>
+                    </ul>The agent restarts.</li>
+                <li><p>Run the following command from the agent installation directory:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>chkusr&nbsp;root&nbsp;059EA442581E1E7E8B0A</p></pre>
+                    </div><p>If the communication is successful, the following message appears:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>chkusr&nbsp;root&nbsp;059EA442581E1E7E8B0A</p><p>User&nbsp;and&nbsp;Password&nbsp;okay</p></pre>
+                    </div></li>
+            </ol>
+            <h2 class="heading2" id="AEKnownIssues-64-bitWindowsAgentCannotCommunicateUsingSSACommunication(WindowsOnly)">64-bit Windows Agent Cannot Communicate Using SSA Communication (Windows Only)</h2>
+            <p>If you install the agent on a Windows 64-bit computer using the CA Workload Automation Agent DVD and configure it to communicate using CA Secure Socket Adapter (SSA) communication, an error similar to the following is displayed when you start the agent:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>-&nbsp;java.lang.UnsatisfiedLinkError:&nbsp;C:\Program&nbsp;Files&nbsp;(x86)\CA\SC\Csam\SockAdap&nbsp;</p><p>ter\bin\casocket_jni.dll:&nbsp;Can't&nbsp;load&nbsp;IA&nbsp;32-bit&nbsp;.dll&nbsp;on&nbsp;a&nbsp;AMD&nbsp;64-bit&nbsp;platform&nbsp;</p></pre>
+            </div>
+            <p>This error occurs because SSA is a 32-bit application and the 64-bit Windows agent cannot communicate with a 32-bit SSA application.</p>
+            <p>To resolve this issue, you must reconfigure the agent to communicate using plain socket ports by setting the following parameters in the agentparm.txt file as follows:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>communication.receiver.socket.main=plain</p><p>communication.inputport=<em>port_number</em>&nbsp;</p></pre>
+            </div>
+            <ul>
+                <li><strong><em>port_number</em></strong><br>Specifies the non-SSA port number the agent uses to listen for incoming messages from CA Workload Automation AE.</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> CA Workload Automation AE does not support blobs or globs in job definitions because the agent invokes the CA Workload Automation AE SDK, which uses SSA communication, to get the blob or glob information through the Application Server.
+            </div>
+            <h2 class="heading2" id="AEKnownIssues-ApplicationServerNotStartingAutomatically(WindowsOnly)">Application Server Not Starting Automatically (Windows Only)</h2>
+            <p>Even though the service is set to start automatically, the application server is not starting automatically after the product installation or server reboot. This happened only if the Oracle database listener was not up when the application server started.</p>
+            <p>As a workaround, restart the application server after the Oracle database listener is available and the normal operation is resumed.</p>
+            <h2 class="heading2" id="AEKnownIssues-CAEEMErrorMessageAppearsintheInstallationLog(WindowsOnly)">CA EEM Error Message Appears in the Installation Log (Windows Only)</h2>
+            <p>The following two sets of error messages appear in the installation log when you install CA Workload Automation AE and create CA EEM security policies for the instance:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>CAUAJM_I_60318&nbsp;Attempting&nbsp;connection&nbsp;to&nbsp;CA&nbsp;EEM&nbsp;Backend&nbsp;Server:&nbsp;xyz</p><p>CAUAJM_I_60231&nbsp;Connection&nbsp;successful:&nbsp;xyz&nbsp;&nbsp;User:&nbsp;EiamAdmin&nbsp;Application:&nbsp;Global</p><p>ERROR&nbsp;PozFactory&nbsp;-&nbsp;PozFactory::attachPoz&nbsp;-&nbsp;Error&nbsp;invoking&nbsp;iPoz::ClientAttach&nbsp;on&nbsp;host&nbsp;xyz</p><p>ERROR&nbsp;PozFactory&nbsp;-&nbsp;PozFactory::attachPoz&nbsp;Error:&nbsp;Could&nbsp;not&nbsp;match&nbsp;proxy&nbsp;to&nbsp;product&nbsp;instance</p><p></p><p>ConfigReader::readFileContent&nbsp;-&nbsp;unable&nbsp;to&nbsp;open&nbsp;eiam&nbsp;configuration&nbsp;file,&nbsp;config&nbsp;file&nbsp;path=[C:\Program&nbsp;Files\CA\Workload&nbsp;Automation&nbsp;AE\autouser.ACE\eiam.client.config],&nbsp;error&nbsp;message=[No&nbsp;such&nbsp;file&nbsp;or&nbsp;directory]</p><p>Safe::Configurator::init_internal&nbsp;:&nbsp;-&nbsp;error&nbsp;-&nbsp;unable&nbsp;to&nbsp;load&nbsp;configuration</p><p>ERROR:&nbsp;Safe::Configurator::term&nbsp;called&nbsp;without&nbsp;init</p><p>CAUAJM_I_60318&nbsp;Attempting&nbsp;connection&nbsp;to&nbsp;CA&nbsp;EEM&nbsp;Backend&nbsp;Server:&nbsp;xyz</p></pre>
+            </div>
+            <p>These messages result from the server trying to connect to an application instance on CA EEM that does not exist. The messages do not affect the working of the installation.</p>
+            <h2 class="heading2" id="AEKnownIssues-CANSMJMODependentJobsNotRunning(WindowsOnly)">CA NSM JMO Dependent Jobs Not Running (Windows Only)</h2>
+            <p>If a CA NSM JMO (CA Network and Systems Management Job Management Option) job name contains fewer than eight characters, CA NSM JMO does not send the RUNNING and SUCCESS job status to the CA Workload Automation AE instance. Therefore, the CA Workload Automation AE job that is dependent on the CA NSM JMO job does not run even if the CA NSM JMO job completes successfully.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> If you encounter this problem, contact CA Technical Support at
+                <a rel="nofollow" class="external-link" href="http://www.ca.com/support">http://ca.com/support</a> for the latest patch.
+            </div>
+            <h2 class="heading2" id="AEKnownIssues-InstallationFails(WindowsOnly)">Installation Fails (Windows Only)</h2>
+            <p><strong>Symptom:</strong></p>
+            <p>When I install CA Workload Automation AE on a computer where a CA Workload Automation AE instance is already installed from a mounted ISO drive or the DVD drive, the installation fails.</p>
+            <p><strong>Solution:</strong></p>
+            <p>Follow these steps:</p>
+            <ol>
+                <li><p>Open regedit and browse for the following registry key:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>HKLM\Software\Classes\Installer\Products\D79FA0A0F351D8644BC9E030C2D3B00D\SourceList\Media</p></pre>
+                    </div></li>
+                <li>Add the MediaPackage string and set its value to EWA\AutoSys.</li>
+                <li>Install CA Workload Automation AE.</li>
+            </ol>
+            <p><strong>Note: </strong>For more information about this solution, refer to the Microsoft Knowledge Base article 299803.</p>
+            <h2 class="heading2" id="AEKnownIssues-InstallingCAWorkloadAutomationAEandCAWCContheSameComputer(WindowsOnly)">Installing CA Workload Automation AE and CA WCC on the Same Computer (Windows Only)</h2>
+            <p>To install CA Workload Automation AE and CA WCC successfully on the same computer, you must install CA Workload Automation AE first and then install CA WCC. If you install CA Workload Automation AE on a computer where CA WCC is already installed, the installation fails.</p>
+            <p>To resolve this issue:</p>
+            <ol>
+                <li><p>Locate the following registry entry:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-18\Products\D79FA0A0F351D8644BC9E030C2D3B00D\InstallProperties</p></pre>
+                    </div></li>
+                <li>Edit the InstallSource key value by entering the CA Workload Automation AE installation msi path.<br>Example: C:\WAAE114\EWA\AutoSys</li>
+                <li>Install CA Workload Automation AE.</li>
+            </ol>
+            <h2 class="heading2" id="AEKnownIssues-InstallationFailsonUACEnabledComputers(WindowsOnly)">Installation Fails on UAC Enabled Computers (Windows Only)</h2>
+            <p>CA Workload Automation AE fails to install on User Account Control (UAC) enabled computers. This happens because of UAC restrictions; a standard user from an administrator group does not have full privileges to install CA Workload Automation AE.</p>
+            <p>To install CA Workload Automation AE, follow these steps:</p>
+            <ol>
+                <li>Right-click setup.exe.</li>
+                <li>Select "run as administrator" option.</li>
+                <li>Install CA Workload Automation AE.</li>
+            </ol>
+            <h2 class="heading2" id="AEKnownIssues-InstallerDoesNotSetUpCAWorkloadAutomationAEtoRuninaHigh-AvailableClusterEnvironment(WindowsOnly)">Installer Does Not Set Up CA Workload Automation AE to Run in a High-Available Cluster Environment (Windows Only)</h2>
+            <p>When you install CA Workload Automation AE on Windows 2008 in a cluster environment, the installer is not able to set up CA Workload Automation AE to run in a highly-available cluster environment.</p>
+            <p>To set up CA Workload Automation AE to run in a highly-available cluster environment, do the following:</p>
+            <ol>
+                <li>During the CA Workload Automation AE installation, clear the Configure this instance for a highly-available clustered environment check box on the Application Server Properties page, and continue with the installation. <br>CA Workload Automation AE is installed without registering the instance for use in a cluster environment.</li>
+                <li>After you install CA Workload Automation AE, configure the application server and scheduler manually for use in a cluster environment.<br>CA Workload Automation AE is set up to run in a highly-available cluster environment.</li>
+            </ol>
+            <h2 class="heading2" id="AEKnownIssues-MessagesDisplayedWhenInstallingorUpgradingCAWorkloadAutomationAE(Solaris10only)">Messages Displayed When Installing or Upgrading CA Workload Automation AE (Solaris 10 only)</h2>
+            <p>When you install or upgrade CA Workload Automation AE, the installation or upgrade log may include messages similar to the following:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>12:05:36 ++ Call script "/bin/sh Csam/deinstall.sh"<br>Csam/deinstall.sh started<br>/app/CA/SharedComponents/Csam/deinstall.sh: syntax error at line 15: `version=$' unexpected<br>12:05:36 !! Script executed with error: 2<br>Script or command "Csam/deinstall.sh" failed with exit code 2.</p></pre>
+            </div>
+            <p>You can ignore these messages because they do not affect the installation or upgrade.</p>
+            <h2 class="heading2" id="AEKnownIssues-RegistertheAgentinCAITClientManager(WindowsOnly)">Register the Agent in CA IT Client Manager (Windows Only)</h2>
+            <p>The itemproc.dat procedures file located at SDO\agent\reginfo is used to register procedures in the Software Delivery Manager component of CA IT Client Manager. Currently, this procedures file registers the CA Workload Automation AE agent in the Software Delivery Manager component of CA IT Client Manager.</p>
+            <p>As a workaround, when you install additional CA Workload Automation AE agents using the Software Delivery Manager component of CA IT Client Manager, you must modify the itemproc.dat procedures file to call the command as Setup.exe /s /f1”agent.iss”.</p>
+            <p>For example, you can modify the following keywords in the itemproc.dat procedures file as follows:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>Parameters&nbsp;=&nbsp;"/s&nbsp;/f1”C:\EWA\AutoSys\agent.iss”"</p><p>ProcToRun&nbsp;=&nbsp;setup.exe</p></pre>
+            </div>
+            <p>Set the Parameters keyword value to the path where the agent.iss file is located on the computer where the Software Delivery Manager component of CA IT Client Manager is installed.</p>
+            <h2 class="heading2" id="AEKnownIssues-Kuwait,RiyadhTimeZoneMayDisplayasBaghdad(WindowsOnly)">Kuwait, Riyadh Time Zone May Display as Baghdad (Windows Only)</h2>
+            <p>If you change the time zone on Windows to GMT +3:00 Kuwait, Riyadh and restart the CA Workload Automation AE scheduler, the scheduler log file shows the incorrect city as follows:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>CAUAJM_I_40246&nbsp;CA&nbsp;WAAE&nbsp;Scheduler&nbsp;startup&nbsp;complete&nbsp;</p><p>CAUAJM_I_40211&nbsp;Using&nbsp;TZ&nbsp;=&nbsp;BAGHDAD&nbsp;</p></pre>
+            </div>
+            <p>The scheduler displays the incorrect city because the Kuwait, Riyadh, and Baghdad time zones have the same Bias, Standard, and Daylight dates. The scheduler compares the time zone entries in the time zone .cfg file in the %AUTOSYS% directory with the TIME_ZONE_INFORMATION returned by the Windows API, GetTimeZoneInformation. Because the time zones have the same information, the scheduler reads the time zone that occurs first and displays it.</p>
+            <p>The information returned by the Windows API does not have any other information that identifies the city the Windows time zone is set to. Therefore, to work around this issue, do the following:</p>
+            <ol>
+                <li>Open the time zone .cfg file in the %AUTOSYS% directory.</li>
+                <li>Move the &lt;TZ="KUWAIT, RIYADH"&gt;...&lt;/TZ&gt; entry to the beginning of the file.</li>
+                <li>Save the file.</li>
+                <li>Restart the scheduler.</li>
+            </ol>
+            <p>The correct time zone is displayed.</p>
+            <h2 class="heading2" id="AEKnownIssues-testheart.exeMustBeMovedto%AUTOSYS%bin(WindowsOnly)">testheart.exe Must Be Moved to %AUTOSYS% bin (Windows Only)</h2>
+            <p>A testheart.exe file is stored in the %AUTOSYS%\test\bin directory. Before running any jobs that may use the testheart.exe file, you must move testheart.exe to the %AUTOSYS%\bin directory. This is because CA Workload Automation AE Release 11.3.6 requires access to the Microsoft runtime manifest files located in %AUTOSYS%\bin.</p>
+            <h2 class="heading2" id="AEKnownIssues-SilentInstallationImageCreationFailure(WindowsOnly)">Silent Installation Image Creation Failure (Windows Only)</h2>
+            <p>When you try to create the silent installation image of the agent, SDK, or the Oracle database scripts using the CA Workload Automation AE Product Explorer window from a shared network drive, the image creation fails.</p>
+            <p>To create the silent installation images of the agent, SDK, or the Oracle database scripts successfully, launch the CA Workload Automation AE Product Explorer window from a mapped drive or a local disk.</p>
+            <h2 class="heading2" id="AEKnownIssues-UpgradeFails(WindowsOnly)">Upgrade Fails (Windows Only)</h2>
+            <p><strong>Symptom:</strong></p>
+            <p>When I upgrade CA Workload Automation AE r11.3 to the current release from a mounted ISO drive or the DVD drive, the upgrade fails.</p>
+            <p><strong>Solution:</strong></p>
+            <p>If you copy the installer from the mounted ISO drive to the local hard disk and perform the upgrade, the upgrade is successful. However, if you cannot copy the mounted ISO drive to the local hard disk or you upgrade using the DVD drive, follow these steps:</p>
+            <ol>
+                <li><p>Open regedit and browse for the following registry key:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>HKLM\Software\Classes\Installer\Products\D79FA0A0F351D8644BC9E030C2D3B00D\SourceList\Media</p></pre>
+                    </div></li>
+                <li>Add the MediaPackage string and set its value to EWA\AutoSys.</li>
+                <li>Upgrade CA Workload Automation AE r11.3 to the current release.</li>
+            </ol>
+            <p><strong>Note: </strong>For more information about this solution, refer to the Microsoft Knowledge Base article 299803.</p>
+            <h2 class="heading2" id="AEKnownIssues-autobcpORAScriptCompletesWithWarningMessage(OracleOnly)">autobcpORA Script Completes With Warning Message (Oracle Only)</h2>
+            <p>On Oracle 11g Release 2, when you run the autobcpORA.pl script, the following warning message is displayed for all tables in the source database that do not have a single row inserted from the time they were created:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>EXP-00011:&nbsp;AEDBADMIN.&lt;Table&nbsp;Name&gt;&nbsp;does&nbsp;not&nbsp;exist</p></pre>
+            </div>
+            <p>This is the expected behavior and the autobcpORA script completes successfully.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> The warning message is displayed because the deferred_segment_creation parameter on the source database is enabled by default.
+            </div>
+            <h2 class="heading2" id="AEKnownIssues-DatamoverFailstoValidateOracleRealApplicationCluster(RAC)Database(OracleOnly)">Datamover Fails to Validate Oracle Real Application Cluster (RAC) Database (Oracle Only)</h2>
+            <p>When you migrate data to an Oracle RAC database, the datamover utility fails to validate the database. This happens because you cannot connect to the Oracle RAC database using the JDBC thin client drivers.</p>
+            <p>As a workaround, you must run the datamover utility on individual nodes of the Oracle RAC database.</p>
+            <h2 class="heading2" id="AEKnownIssues-archive_jobsCommandDoesNotDeleteAllLogicallyDeletedJobs">archive_jobs Command Does Not Delete All Logically Deleted Jobs</h2>
+            <p>The archive_jobs command does not remove all jobs marked for deletion that meet the obsolete criteria as expected. In addition, the optional audit report produced using the -A option in the command may contain incomplete information or the message “CAUAJM_E_10257 Potential corruption of job data for joid &lt;nnn&gt;”. The database is not corrupted; the CAUAJM_E_10257 message is a symptom of the jobs that were not completely deleted.</p>
+            <h2 class="heading2" id="AEKnownIssues-ApplicationServerisNotAbletoConnecttotheSecondCAEEMHost">Application Server is Not Able to Connect to the Second CA EEM Host</h2>
+            <p>If you configure CA Workload Automation AE to work with CA EEM that is running in high availability mode, the client utilities like forecast, autoaggr, or DBMaint fail if the itechpoz-router service on the primary CA EEM host is down and an error message similar to the following is displayed:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>log4cxx:&nbsp;No&nbsp;appender&nbsp;could&nbsp;be&nbsp;found&nbsp;for&nbsp;logger&nbsp;(PozFactory).</p><p>log4cxx:&nbsp;Please&nbsp;initialize&nbsp;the&nbsp;log4cxx&nbsp;system&nbsp;properly.</p><p>CAUAJM_E_10436&nbsp;Security&nbsp;server&nbsp;unreachable&nbsp;or&nbsp;invalid&nbsp;authentication&nbsp;certificate&nbsp;file.</p><p>CAUAJM_E_10434&nbsp;Error&nbsp;initiating&nbsp;security&nbsp;session.</p><p>CAUAJM_E_10437&nbsp;Detailed&nbsp;Error&nbsp;Information:</p><p>[EE_NOTALLOWED&nbsp;Operation&nbsp;not&nbsp;allowed]</p><p>[attach&nbsp;to&nbsp;application&nbsp;instance&nbsp;not&nbsp;allowed]</p><p>CAUAJM_E_10433&nbsp;Could&nbsp;not&nbsp;obtain&nbsp;security&nbsp;server&nbsp;from&nbsp;the&nbsp;database.</p><p>CAUAJM_E_10434&nbsp;Error&nbsp;initiating&nbsp;security&nbsp;session.&nbsp;</p></pre>
+            </div>
+            <p>This happens because CA EEM does not fail over to the second CA EEM host and the application server is not able to connect to the second CA EEM host.</p>
+            <p>As a workaround, you can do <em>one</em> of the following:</p>
+            <ul>
+                <li>Allow CA EEM failover to take place by either shutting down the primary CA EEM host (that is, the iGateway service is shut down) or taking the primary CA EEM host completely offline.</li>
+                <li>Restart the primary CA EEM host.</li>
+            </ul>
+            <h2 class="heading2" id="AEKnownIssues-ClientUtilitiesTimeOutWhenExternalSecurityisEnabled">Client Utilities Time Out When External Security is Enabled</h2>
+            <p>When external security is enabled, client utilities (such as autorep) can time out. These timeouts happen when there are a large number of jobs to process and restrictive policies are specified in the as-job resource class.</p>
+            <h2 class="heading2" id="AEKnownIssues-fail_codesAttributeDoesNotWorkProperly">fail_codes Attribute Does Not Work Properly</h2>
+            <p>Currently fail_codes and success_codes attributes are mutually exclusive attributes; you cannot specify both attributes within a job definition. All non-zero exit codes are currently considered as a failure. To specify a non-zero exit code as a success, you must use the success_code attribute.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> These attributes only apply to Command and i5/OS job types.
+            </div>
+            <h2 class="heading2" id="AEKnownIssues-JobsNotTrackedWhentheAgentisDown">Jobs Not Tracked When the Agent is Down</h2>
+            <p>When CA Workload Automation Agent for UNIX, Linux, or Windows is down, the jobs that are currently running are not tracked. Therefore, when the agent restarts, CA Workload Automation AE cannot identify the state of the jobs that were running when the agent went down.</p>
+            <p>This issue only applies to jobs that are supported by the agent plug-ins, such as database, SAP, and PeopleSoft jobs. This issue does <em>not </em>apply to the following jobs:</p>
+            <ul>
+                <li>Command jobs</li>
+                <li>File Trigger and File Watcher jobs</li>
+                <li>FTP and Secure Copy jobs</li>
+                <li>Monitoring Jobs</li>
+            </ul>
+            <h2 class="heading2" id="AEKnownIssues-LockoutIssueafterInstallingCAWorkloadAutomationAE">Lockout Issue after Installing CA Workload Automation AE</h2>
+            <p>Installing CA Workload Automation AE on a computer where the autosys user account is not defined to the computer, but exists as a non-local account in an external user repository, may result in all users being locked out.</p>
+            <p>To prevent this problem, we recommend the following steps:</p>
+            <ol>
+                <li>Install CA Workload Automation AE on machines where the autosys user account is defined locally.</li>
+                <li>If you install CA Workload Automation AE and you are locked out of autosys_secure, do <em>one</em> of the following:
+                    <ul>
+                        <li>Create a local account for “autosys” if you have the ability to add users to the computer. Logging onto the computer as the local “autosys” account should allow you to run autosys_secure as a super EDIT/EXEC user where you can add “autosys@host.networkdomain” as a EDIT/EXEC superuser. You can delete the local “autosys” account after completing this step.</li>
+                        <li>Recreate the database by running the createnewdb Perl script located in %AUTOSYS%/dbobj or by running the CA Workload Automation AE installation. When the database is recreated, all the existing data in the database is lost.</li>
+                    </ul></li>
+            </ol>
+            <h2 class="heading2" id="AEKnownIssues-OwnerAttributeanduserhostValueMustMatch">Owner Attribute and user host Value Must Match</h2>
+            <p><span>The owner attribute and the user ID (user@host) defined in the database using autosys_secure are case-sensitive. When specifying the owner attribute in a job definition, the owner value must match the user@host value exactly, including case. Otherwise, the password associated with the owner cannot be retrieved.</span></p>
+            <h2 class="heading2" id="AEKnownIssues-RunningSQLTransactionCannotbeCancelled">Running SQL Transaction Cannot be Cancelled</h2>
+            <p>If the transaction submitted by an SQL job is already running on the database server, the sendevent -E KILLJOB command does not cancel the transaction. CA Workload Automation Agent for UNIX, Linux, or Windows sends a confirmation to CA Workload Automation AE that the cancel request was submitted to the database server, but the transaction continues to run. The job goes to a SUCCESS state when the transaction is complete.</p>
+            <h2 class="heading2" id="AEKnownIssues-sap_job_countAttribute">sap_job_count Attribute</h2>
+            <p>If you run a job without specifying the sap_job_count attribute on an r11.3 SAP agent plug-in, the job fails. This happens because the sap_job_count attribute is required when you run a SAP Job Copy job on an agent with an r11.3 SAP agent plug-in.</p>
+            <h2 class="heading2" id="AEKnownIssues-SearchinCAWCCFailsandReturnsDatabaseErrors">Search in CA WCC Fails and Returns Database Errors</h2>
+            <p>If you search non-object attributes (for example, job description) in CA WCC using the exclamation point character (!), the search fails and the CA Workload Automation AE API returns database errors.</p>
+            <h2 class="heading2" id="AEKnownIssues-sendeventCommandFailstotheLightweightApplicationServer">sendevent Command Fails to the Lightweight Application Server</h2>
+            <p>When you issue the sendevent command to the lightweight application server using the - S option, the command fails and an error message is displayed.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes: </strong></p>
+                <ul>
+                    <li>The - S option instructs the sendevent command to send an event to another instance other than the current instance. If the configuration for the other instance exists on the computer where the sendevent command is executed, the sendevent command contacts the application server corresponding to that instance.</li>
+                    <li>When you install an Release 11.3.6 application server and connect it to the event server used by an external 4.5.1 instance, that application server is named&nbsp;<em>lightweight application server</em>. The lightweight application server detects the presence of 4.5.1 event server data and runs with limited functionality. It processes external dependency and sendevent requests from the local Release 11.3.6 instance and writes job events directly into the 4.5.1 event server.</li>
+                </ul>
+            </div>
+            <h2 class="heading2" id="AEKnownIssues-UpdateJobFailswithMultipleMachines">Update Job Fails with Multiple Machines</h2>
+            <p>If you specify multiple machines in a job definition by separating each machine with a comma (,), the jil command fails to update the job with resource dependencies.</p>
+            <h2 class="heading2" id="AEKnownIssues-WebServicesLoginFailure">Web Services Login Failure</h2>
+            <p>The web services experience login failures if the reverse DNS lookup returns the host name of the web services server with a different case than the hostname command. This problem occurs because CA EEM uses the host name as part of the encryption algorithm. For example, if the hostname command returns the host name as host.example.com with an IP address of 192.168.100.200 and nslookup 192.168.100.200 returns HOST.example.com, you experience this problem.</p>
+            <p>To solve this problem, ensure that the host name returned by the hostname command and the nslookup command using the IP address match exactly.</p>
+            <h2 id="AEKnownIssues-(UNIX)SDKVersionDisplayedIncorrectly">(UNIX) SDK Version Displayed Incorrectly</h2>
+            <p>If you installed the CA Workload Automation AE server and the SDK (using the standalone SDK DVD) on the same computer and you upgrade the server, the SDK is upgraded successfully but the version is displayed incorrectly when you issue the following command:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>lsm -l -O pif |grep CAWorkloadAutomationAE-SDK</p></pre>
+            </div>
+            <p>This happens because the SDK is not upgraded using the standalone SDK DVD.</p>
+            <h2 id="AEKnownIssues-(LinuxOnly)Oracle12cClientMemoryLeak">(Linux Only) Oracle 12c Client Memory Leak</h2>
+            <p>Oracle 12c client libraries have a known memory leak when the glibc version on the machine is below 2.13. The root cause of the memory leak is due to a bug in GNU glibc that is related to a multi-thread program that uses dlopen() to load the libraries.</p>
+            <p>To resolve this issue, apply glibc 2.14 or higher.&nbsp;<span style="color: rgb(51,51,51);">Contact your Linux vendor to get the GNU glibc compatible patch for bug&nbsp;<span style="color: rgb(51,51,51);"><a rel="nofollow" class="external-link" href="https://sourceware.org/bugzilla/show_bug.cgi?id=12650">12650</a></span>&nbsp;based on your Linux operating environment.</span></p>
+            <h2 id="AEKnownIssues-SilentInstallationRunsIndefinitely(AIXonly)">Silent Installation Runs Indefinitely (AIX only)</h2>
+            <p>When you install CA Workload Automation AE silently in the background and it includes the agent, the installer continues to run indefinitely.</p>
+            <p>As a workaround, use the following command to run the silent installation in the background:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>/bin/sh <em>install_script</em> -s -r <em>response_file</em> &gt; <em>file_name</em> 2&gt;&amp;1</p></pre>
+            </div>
+            <ul>
+                <li><em><strong>install_script</strong></em><br>Specifies the install script that you use to install CA Workload Automation AE silently. For example, wa_setup.sh or agent_setup.sh.</li>
+                <li><em><strong>response_file</strong></em><br>Specifies the name of an existing response file. You must include the full path.</li>
+                <li><em><strong>file_name</strong></em><br>Specifies the name of the file to which the standard output and standard error is redirected.</li>
+            </ul>
+            <h2 id="AEKnownIssues-MachineStatusDisplayedIncorrectly">Machine Status Displayed Incorrectly</h2>
+            <p>When a critical disk threshold breach occurs, the agent shuts itself down. If you try to restart the agent without freeing up enough disk space, the machine status may not match with the actual status of the agent.</p>
+            <h2 id="AEKnownIssues-LegacyAgentFailure">Legacy Agent Failure</h2>
+            <p>When you install and run the r11.0 SP5 legacy agent on a file system partition of greater than 50 MB of space allocated, the legacy agent fails to determine the available free space in the file system and the agent log file displays the following error message:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>CAUAJM_E_20403 ERROR: Unable to determine available disk space. Dropping this request</p></pre>
+            </div>
+            <p>This error occurs because the application uses statfs() system call instead of statfs64() and the file system partition is too large for the agent to function.</p>
+            <h2 class="heading3" id="AEKnownIssues-autorepMachineReportDisplaystheCurrentLoadIncorrectly">autorep Machine Report Displays the Current Load Incorrectly</h2>
+            <p>When you define multiple virtual machines that specify the same machine and their own max load values and then run jobs with loads on those machines, the autorep -m ALL -d&nbsp;command displays the current load on the machine incorrectly. The detailed machine report might show a load value that exceeds the maximum load that is defined on the machine and this gives a false impression that the scheduler is not honoring the load balancing attributes of jobs and machines.</p>
+            <h2 id="AEKnownIssues-FalseKILLJOBFAILAlarmsonUNIX">False KILLJOBFAIL Alarms on UNIX</h2>
+            <p>When you send a comma separated list of kill signals to a job, the agent successfully sends the first signal and this terminates the process. As the process no longer exists, the second signal fails and the agent notifies the scheduler of the failure. As a result, the scheduler generates the KILLJOBFAIL alarm. The scheduler might receive a failure notification for each additional signal that follows. Shortly after that, the agent informs the scheduler that the job was successfully terminated and so the previous failure notifications were false. The false KILLJOBFAIL alarms might be confusing as the job process was successfully killed.</p>
+            <h2 id="AEKnownIssues-WebServicesJobsFail">Web Services Jobs Fail</h2>
+            <p>If CA WA Agent for Web Services is installed on your computer and you are upgrading CA Workload Automation Agent for UNIX, Linux, or Windows to 11.3 SP5 or 11.3 SP6 or CA Workload Automation AE to Release 11.3.6 SP5, the web services jobs fail. For the web services jobs to run, rerun the CA WA Agent for Web Services installer immediately after the upgrade.</p>
+            <h2 class="heading2" id="AEKnownIssues-CommandSponsorKnownIssues">Command Sponsor Known Issues</h2>
+            <p>This section contains known issues with the Command Sponsor.</p>
+            <h3 class="heading3" id="AEKnownIssues-JRENotRemovedDuringCommandSponsorUninstallation(HP-UXOnly)">JRE Not Removed During Command Sponsor Uninstallation (HP-UX Only)</h3>
+            <p>When uninstalling the Command Sponsor on HP-UX, the JRE installed by the Command Sponsor is not completely removed. You can encounter problems reinstalling the Command Sponsor if the JRE is not removed.</p>
+            <p>The JRE must be removed manually by typing the following command in a console window:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>"rm&nbsp;-rf&nbsp;$IGW_LOC/jre1.6.0_cs"</p></pre>
+            </div>
+            <h3 class="heading3" id="AEKnownIssues-CannotExecuteCAWorkloadAutomationAECommandsfromCAWCC(HP-UXOnly)">Cannot Execute CA Workload Automation AE Commands from CA WCC (HP-UX Only)</h3>
+            <p>On HP-UX, if you install the Command Sponsor component during the CA Workload Automation AE installation and configure CA WCC to work with CA Workload Automation AE, you cannot run some CA Workload Automation AE commands, such as chk_auto_up, from CA WCC.</p>
+            <p>An error similar to the following is displayed:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>internal&nbsp;error&nbsp;has&nbsp;occurred</p><p>The&nbsp;command&nbsp;could&nbsp;not&nbsp;be&nbsp;executed.&nbsp;Command&nbsp;processing&nbsp;exception&nbsp;encountered.</p></pre>
+            </div>
+            <p>As a workaround, you can do the following:</p>
+            <ol>
+                <li><p>Comment the following line in the /etc/profile.igw file, as follows:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>#_JAVA_OPTIONS=-d32;&nbsp;export&nbsp;_JAVA_OPTIONS&nbsp;</p></pre>
+                    </div></li>
+                <li><p>Issue the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>$IGW_LOC/S99igateway&nbsp;stop</p></pre>
+                    </div><p>The iGateway service stops.</p></li>
+                <li><p>Issue the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>$IGW_LOC/S99igateway&nbsp;start</p></pre>
+                    </div><p>The iGateway service starts.</p></li>
+            </ol>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> The /etc/profile.igw file is created during CA EEM installation. Therefore, this problem only occurs if you install CA EEM after you install the Command Sponsor component.
+            </div>
+            <h3 class="heading3" id="AEKnownIssues-CommandSponsorFailstoInstallonMicrosoftWindows(64-bit)OperatingSystems">Command Sponsor Fails to Install on Microsoft Windows (64-bit) Operating Systems</h3>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><span style="color: rgb(51,51,51);"><strong>Note:</strong> This known issue applies to CA Workload Automation AE Release 11.3.6 SP5 or a previous release.&nbsp;</span></p>
+            </div>
+            <p>On all supported Microsoft Windows 64-bit operating systems, if you install the Command Sponsor on a computer on which the 64-bit version of iGateway is already installed using the CA Workload Automation AE DVD, a message similar to the following is displayed and the installation does not proceed further:</p>
+            <p>Command Sponsor supports only 32 bit version of iTechnology iGateway. The installation has detected a 64 bit version of iTechnology iGateway and therefore cannot continue. Exclude the Command Sponsor component to continue or uninstall the 64 bit version of iTechnology iGateway.</p>
+            <p>To resolve this issue, uninstall the 64-bit version of iGateway and then install the Command Sponsor using the CA Workload Automation AE DVD.</p>
+            <div class="bs-callout bs-callout-warning conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><span style="color: rgb(51,51,51);font-family: Arial , sans-serif;font-size: 14.0px;white-space: normal;"><strong>Important!</strong> Verify that iGateway is not required by other installed software before you remove the 64-bit version</span></p>
+            </div>
+            <h3 class="heading3" id="AEKnownIssues-AttempttoGetJobLogFails">Attempt to Get Job Log Fails</h3>
+            <p>When checking the logs across the network using CA WCC, the following error message is displayed:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>Failed&nbsp;to&nbsp;get&nbsp;the&nbsp;job&nbsp;log:&nbsp;CAUAJM_E_10673.&nbsp;The&nbsp;requested&nbsp;server&nbsp;operation&nbsp;failed.&nbsp;Operation&nbsp;ID&nbsp;=&nbsp;315</p></pre>
+            </div>
+            <p>The Command Sponsor, which enables Enterprise Command Line and Reports functionality, runs on top of iGateway.</p>
+            <p>The following points apply to the iGateway port:</p>
+            <ul>
+                <li>The default port for iGateway 4.7.x is 5250. If you have configured iGateway to use a different port, verify that the port is open bidirectionally.</li>
+                <li>If you are using iGateway with port 5250 and have restricted the port (for example, if you are using a firewall), verify that port 5250 is open bidirectionally.</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> For information about configuring the iGateway port, see the iTech Development documentation.
+            </div>
+            <h3 class="heading3" id="AEKnownIssues-CannotUseCAWorkloadAutomationAEShellAlias">Cannot Use CA Workload Automation AE Shell Alias</h3>
+            <p>You cannot use a CA Workload Automation AE shell alias. For example, in Enterprise Command Line on UNIX, you cannot use se instead of sendevent.</p>
+            <p>The symptom is that the Command Sponsor does not work at all. When debugging, the igateway.log (in folder $IGW_LOC) contains an error that it could not load the JVM. This should occur only if the JRE referenced in igateway.conf in the &lt;javahome&gt; element is a 64-bit JRE. This can happen on AIX if the recommendation regarding the architecture of the JRE was not followed.</p>
+            <p>To resolve this issue, change the &lt;javahome&gt; element so that it points to a 32-bit JRE.</p>
+            <h3 class="heading3" id="AEKnownIssues-CannotImportFileUsingCAWCCEnterpriseCommandLine">Cannot Import File Using CA WCC Enterprise Command Line</h3>
+            <p>On UNIX, a file import using Enterprise Command Line can fail because of an incorrect umask value in an environment setting.</p>
+            <p>To set the correct value, follow these steps:</p>
+            <ol>
+                <li>Run the following command:<br>$IGW_LOC/S99igateway stop</li>
+                <li>Open the file at the following location:<br>$IGW_LOC/S99igateway</li>
+                <li>Insert the following command on the line preceding the line that contains ./igateway - b:<br>umask 022</li>
+                <li>Insert the following command on the line preceding the line that contains ./igateway - d:<br>umask 022</li>
+                <li>Save the file.</li>
+                <li><p>Run the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>$IGW_LOC/S99igateway&nbsp;start</p></pre>
+                    </div></li>
+            </ol>
+            <p class="MsoNormal" style="margin-top: 22.5pt;"><strong><span style="font-size: 12.0pt;color: black;">Command Sponsor Fails to Install on Microsoft Windows (64-bit) Operating Systems</span></strong></p>
+            <p class="MsoNormal" style="margin-top: 7.5pt;"><span style="font-size: 10.5pt;">On all supported Microsoft Windows 64-bit operating systems, if you install the Command Sponsor on a computer on which the 64-bit version of iGateway is already installed using the CA Workload Automation AE DVD, a message similar to the following is displayed and the installation does not proceed further:</span></p>
+            <p class="MsoNormal" style="margin-top: 7.5pt;margin-right: 0.0in;margin-bottom: 7.5pt;margin-left: 0.0in;"><span style="font-size: 9.0pt;font-family: &quot;Courier New&quot;;color: black;">Command&nbsp;Sponsor&nbsp;supports&nbsp;only&nbsp;32&nbsp;bit&nbsp;version&nbsp;of&nbsp;iTechnology&nbsp;iGateway.&nbsp;The&nbsp;installation&nbsp;has&nbsp;detected&nbsp;a&nbsp;64&nbsp;bit&nbsp;version&nbsp;of&nbsp;iTechnology&nbsp;iGateway&nbsp;and&nbsp;therefore&nbsp;cannot&nbsp;continue.&nbsp;Exclude&nbsp;the&nbsp;Command&nbsp;Sponsor&nbsp;component&nbsp;to&nbsp;continue&nbsp;or&nbsp;uninstall&nbsp;the&nbsp;64&nbsp;bit&nbsp;version&nbsp;of&nbsp;iTechnology&nbsp;iGateway.</span></p>
+            <p class="MsoNormal" style="margin-top: 7.5pt;"><span style="font-size: 10.5pt;">To resolve this issue, uninstall the 64-bit version of iGateway and then install the Command Sponsor using the CA Workload Automation AE DVD.</span></p>
+            <p><strong>Important!</strong><span style="font-size: 10.5pt;">&nbsp;Verify that iGateway is not required by other installed software before you remove the 64-bit version</span></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <h1 class="article-name" tabindex="0">Set Up Security between the Agent and the Scheduling Manager</h1>
+
+
+    <div>
+        <div class="col-xs-12 col-md-8 col-lg-8">
+            <p>Encryption is a mandatory security feature that safeguards communication between the agent and the scheduling manager. Your scheduling manager administrator must complete configuration tasks so that the agent and the scheduling manager can communicate with message encryption.</p>
+            <p>To set up security between the agent and the scheduling manager, follow these steps:</p>
+            <ol>
+                <li><a data-macro-name="sp-plaintextbody-link" href="#SetUpSecuritybetweentheAgentandtheSchedulingManager-SecurityPermissionsontheSchedulingManager" class="conf-macro output-inline" data-hasbody="true">Set up security permissions on the scheduling manager</a>.</li>
+                <li><a data-macro-name="sp-plaintextbody-link" href="#SetUpSecuritybetweentheAgentandtheSchedulingManager-SettheEncryptionontheAgentUsingtheKeygenUtility" class="conf-macro output-inline" data-hasbody="true">Set the encryption on the agent</a>.</li>
+                <li><a data-macro-name="sp-plaintextbody-link" href="#SetUpSecuritybetweentheAgentandtheSchedulingManager-SettheEncryptionKeyontheSchedulingManager" class="conf-macro output-inline" data-hasbody="true">Set the encryption key on the scheduling manager</a>.</li>
+                <li><a data-macro-name="sp-plaintextbody-link" href="#SetUpSecuritybetweentheAgentandtheSchedulingManager-RestarttheAgent" class="conf-macro output-inline" data-hasbody="true">Restart the agent</a>.</li>
+                <li>Test the security by running a test job.<br>For detailed instructions to run a test job, see the documentation for your scheduling manager.</li>
+            </ol>
+            <h2 id="SetUpSecuritybetweentheAgentandtheSchedulingManager-SecurityPermissionsontheSchedulingManager">Security Permissions on the Scheduling Manager</h2>
+            <p>Your scheduling manager administrator must set up the following security permissions on the scheduling manager to control agent access:</p>
+            <ul>
+                <li>Permission to run work on the agent</li>
+                <li>Permission to run a job on the agent under a user ID</li>
+                <li>Permission for the agent to issue control commands</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> For more information about security permissions, see the documentation for your scheduling manager.
+            </div>
+            <h2 id="SetUpSecuritybetweentheAgentandtheSchedulingManager-SettheEncryptionontheAgentUsingtheKeygenUtility">Set the Encryption on the Agent Using the Keygen Utility</h2>
+            <p>You can install the agent with one of four types of encryption: AES, Blowfish, DES, or DESEDE. The encryption key is specified during the agent installation, but you can change it any time using this procedure.</p>
+            <p>The keygen utility that is provided with the agent lets you encrypt a key. By default, the encryption key is stored in the cryptkey.txt file, which is located in the agent installation directory. You can replace the encryption key in this file or can specify a different file to store it.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> Make a note of the encryption key, and set the same value on the scheduling manager.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>(iSeries systems only) <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-system-agent/11-4/en/configuring/control-the-agent/open-a-pase-terminal-session-on-iseries" class="conf-macro output-inline" data-hasbody="true">Open a PASE terminal session</a>.</li>
+                <li>Change to the agent installation directory.</li>
+                <li><p>Enter the following command at the command prompt:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>keygen 0x<em>key</em> <em>cipher</em> <em>destination</em></p></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>key</em></strong><br>Defines the encryption key the agent uses to communicate with the scheduling manager. The encryption key must be prefixed with 0x and followed by the number of characters that are required for the chosen cipher algorithm:<br>
+                            <ul>
+                                <li>AES -- 32- or 64-character hexadecimal encryption key.<br><strong>Note:</strong> AES 256-bit encryption requires a 64-character hexadecimal key.</li>
+                                <li>Blowfish -- 32 to 64 even-numbered character hexadecimal encryption key</li>
+                                <li>DES -- 16-character hexadecimal encryption key</li>
+                                <li>DESEDE -- 48-character hexadecimal encryption key</li>
+                            </ul><p><strong>Limits:</strong> 16-64 alphanumeric characters (any digits and letters A-F only)</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong><strong>Notes:<br></strong></strong>
+                                <ul>
+                                    <li>CA Workload Automation AE and CA Workload Automation CA 7 Edition support only AES encryption. To determine which encryption types are supported, consult the documentation for your scheduling manager.</li>
+                                    <li>If you omit the 0x prefix, the keygen utility interprets the inputted value as a 16-character passphrase and not as a hexadecimal number. If you enter fewer than 16 characters, the keygen utility appends the passphrase with spaces for the missing number of characters. The keygen utility internally encodes the 16-character passphrase into a 32-character hexadecimal character AES encryption key.</li>
+                                </ul>
+                            </div> </li>
+                        <li><strong><em>cipher</em></strong><br>Specifies the type of cipher algorithm the agent uses to encrypt and decrypt messages that are sent to the scheduling manager. The agent supports the following types:<br>
+                            <ul>
+                                <li>AES -- Advanced Encryption Standard that uses a 32- or 64-character encryption key. AES is the algorithm that U.S. Government organizations require to protect sensitive (unclassified) information (FIPS-140-2 compliance).</li>
+                                <li>BLOWFISH -- A license-free encryption algorithm that uses an encryption key of 32 to 64 even-numbered characters.</li>
+                                <li>DES -- Data Encryption Standard that uses a 16-character encryption key.</li>
+                                <li>DESEDE -- Triple Data Encryption Algorithm that applies the DES algorithm three times to each data block.</li>
+                            </ul><p><strong>Default:</strong> DES</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong>Note:</strong> CA Workload Automation AE and CA Workload Automation CA 7 Edition support only AES encryption. To determine which encryption types are supported, consult the documentation for your scheduling manager.
+                            </div> </li>
+                        <li><p><strong><em>destination</em></strong><br>(Optional) Specifies the name of a text file that stores the encryption key.<br><strong>Default:</strong> cryptkey.txt</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong>Note:</strong> If you specify a new text file, update the security.cryptkey parameter in the agentparm.txt file.
+                            </div> </li>
+                    </ul>The keygen utility encrypts the key.</li>
+            </ol>
+            <p><strong>Example: Encrypt a Key</strong></p>
+            <p>This example encrypts the key 0x1020304050607080 for 16-character (DES) encryption:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>keygen 0x1020304050607080 DES
+</code></pre>
+            </div>
+            <h2 id="SetUpSecuritybetweentheAgentandtheSchedulingManager-SettheEncryptionKeyontheSchedulingManager">Set the Encryption Key on the Scheduling Manager</h2>
+            <p>The scheduling manager and the agent must have the same encryption key to communicate. The encryption key for the agent is stored in a text file. The security.cyrptkey parameter in the agentparm.txt file sets the path to the text file. After you set the encryption key on the agent, set the same key on the scheduling manager. If the keys are different, the agent and scheduling manager cannot communicate. An AGENTDOWN state occurs when you try to run workload.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> For detailed instructions to set the encryption key on the scheduling manager, see the documentation for your scheduling manager.
+            </div>
+            <h2 id="SetUpSecuritybetweentheAgentandtheSchedulingManager-RestarttheAgent">Restart the Agent</h2>
+            <p>After you have set up encryption on the agent, restart the agent to complete the configuration.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>(iSeries systems only) <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-system-agent/11-4/en/configuring/control-the-agent/open-a-pase-terminal-session-on-iseries" class="conf-macro output-inline" data-hasbody="true">Open a PASE terminal session</a>.</li>
+                <li>Ensure that you are in the agent installation directory.</li>
+                <li>Stop the agent using one of the following commands:
+                    <ul>
+                        <li><p>On UNIX:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>./cybAgent -s
+</code></pre>
+                            </div> </li>
+                        <li><p>On Windows:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>cybAgent -s
+</code></pre>
+                            </div> </li>
+                        <li><p>On iSeries:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <pre class="ca-code"><p>./cybAgent -s</p></pre>
+                            </div></li>
+                    </ul></li>
+                <li>(iSeries systems only) <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-system-agent/11-4/en/configuring/control-the-agent/start-the-subsystem-that-runs-the-agent-on-iseries" class="conf-macro output-inline" data-hasbody="true">Start the subsystem that runs the agent if it has stopped</a>.</li>
+                <li>Start the agent using one of the following commands:
+                    <ul>
+                        <li><p>On UNIX:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>./cybAgent &amp;
+</code></pre>
+                            </div> </li>
+                        <li><p>On Windows:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+       <pre class="code-block prettyprint"><code>cybAgent -a
+</code></pre>
+                            </div> </li>
+                        <li><p>On iSeries:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <pre class="ca-code"><p>./cybAgent</p></pre>
+                            </div></li>
+                    </ul></li>
+            </ol>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-4">
+            <p></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p>All activity controlled by CA Workload Automation AE is based on jobs. For example, a <em>job </em>is any single command or executable, UNIX shell script, or Windows batch file. Other objects, such as monitors, reports, and the Job Status Console, track job progress. A job is the foundation for the entire operations cycle.</p>
+            <p>You define jobs to CA Workload Automation AE by creating job definitions that specify the job's properties and behavior. For example, you can specify conditions that determine when and where a job runs.</p>
+            <p>When you create a job definition, you must specify the job type. Job types define the type of work to be scheduled. For example, you can create a Command job to run a Windows command file, an FTP job to download a file from a server, or an SAP Event Monitor job to monitor for the triggering of an SAP event. You can also define Box jobs, which are containers that hold other jobs or Box jobs. You can define your own job type with a User Defined job.</p>
+            <p>Each job type has required and optional properties that define the job. The job types have many common properties and CA Workload Automation AE treats them all similarly. The primary differences between them are the actions taken when the jobs run.</p>
+            <p>You can define jobs using the CA WCC Quick Edit application. The job definition and properties in Quick Edit is always stored in the database. You can also modify and delete existing job definitions.</p>
+            <p></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H1,H2" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#ManageJobsandJobFlowsUsingCAWCC-SchedulingJobsandJobDependencies" class="toc-link">Scheduling Jobs and Job Dependencies</a></span></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#ManageJobsandJobFlowsUsingCAWCC-DefineaJobinQuickEdit" class="toc-link">Define a Job in Quick Edit</a></span></li><li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a href="#ManageJobsandJobFlowsUsingCAWCC-DefineaGlobalVariableinQuickEdit" class="toc-link">Define a Global Variable in Quick Edit</a></span></li><li><span class="toc-item-body" data-outline="4"><span class="toc-outline">4</span><a href="#ManageJobsandJobFlowsUsingCAWCC-CommitChangesinQuickEdit" class="toc-link">Commit Changes in Quick Edit</a></span></li></ul></div>
+            <p></p>
+            <h2 class="heading2" id="ManageJobsandJobFlowsUsingCAWCC-SchedulingJobsandJobDependencies">Scheduling Jobs and Job Dependencies</h2>
+            <p>CA WCC lets you interactively set the properties that describe when, where, and how a job should run. In addition, CA WCC lets you define calendars, global variables, and box jobs, and monitor and manage jobs. The fields in CA WCC correspond to CA Workload Automation AE JIL subcommands and attributes.</p>
+            <p>You can define job properties to do the following:</p>
+            <ul>
+                <li>Specify starting conditions for jobs within your job definitions.</li>
+                <li>Set date and time dependencies for a job so that it runs automatically on specific days and at specific times.</li>
+                <li>Base job-starting conditions on a calendar event (basic time/day or custom calendar), job dependency status, or file arrival.</li>
+                <li>Specify resource dependencies so that a job will not start execution until the required resources are available.</li>
+            </ul>
+            <p>Additionally, you can specify job termination conditions within your job definitions. For example, you can specify exit codes that determine the success or failure of a job or the number of minutes to wait before terminating the job.</p>
+            <h2 class="heading2" id="ManageJobsandJobFlowsUsingCAWCC-DefineaJobinQuickEdit">Define a Job in Quick Edit</h2>
+            <p>You can create jobs to manage and schedule workload in your enterprise.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Open Quick Edit.</li>
+                <li>Click Create.</li>
+                <li>Select the server on which you want to create a job from the Server drop-down list.</li>
+                <li><p>Click the link for the type of job you want to create.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note: </strong>You can select a specific job type or, if available, use a job template containing pre-defined properties to create a new job.
+                    </div> </li>
+                <li>Perform the following actions to define your job:
+                    <ol>
+                        <li>Enter a name for the new job in the Name field.</li>
+                        <li>Complete the fields in each category as appropriate.</li>
+                    </ol></li>
+                <li>Click Commit.<br>The job is saved in the scheduler database.</li>
+            </ol>
+            <h2 class="heading2" id="ManageJobsandJobFlowsUsingCAWCC-DefineaGlobalVariableinQuickEdit">Define a Global Variable in Quick Edit</h2>
+            <p>You can use Quick Edit to define and store global variables in the CA Workload Automation AE database. You can then use the global variable within a job definition to set up a dependency condition.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Open Quick Edit.</li>
+                <li>Click Create.</li>
+                <li>Select the server on which you want to create a job from the Server drop-down list.</li>
+                <li>Click the Global Variable link.</li>
+                <li>Specify the following properties:
+                    <ul>
+                        <li><p><strong>Name</strong><br>Specifies a name for the global variable.<br><strong>Limits:</strong><span> Up to 64 characters</span>&nbsp;</p></li>
+                        <li><p><strong>Value</strong><br>(Optional) Specifies a value for the global variable.<br><strong>Limits: </strong><span>Up to 100 characters</span>&nbsp;</p></li>
+                    </ul></li>
+                <li>Click Commit.<br>The global variable is saved in the scheduler database.</li>
+            </ol>
+            <h2 class="heading2" id="ManageJobsandJobFlowsUsingCAWCC-CommitChangesinQuickEdit">Commit Changes in Quick Edit</h2>
+            <p>You must commit job property and job flow changes to the appropriate CA Workload Automation AE server to make the changes permanent on that server.</p>
+            <p>To commit changes in Quick Edit, make the required changes to the job properties, and click Commit.</p>
+            <p>A confirmation message appears.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> If you save a job to the CA Workload Automation AE server, and a patch has not been applied for that job type, unsupported attributes are ignored.
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

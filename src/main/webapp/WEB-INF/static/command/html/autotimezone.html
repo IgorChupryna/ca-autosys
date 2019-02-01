@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The autotimezone command is a client component utility that lets you query, add, and delete entries in the ujo_timezones table. The ujo_timezones table maps cities and common aliases to valid POSIX TZ environment variables. The table contains entries for all common time zones recognized by most operating systems, and for many cities.</p>
+                <p>You can use the timezone attribute to specify entries from the ujo_timezones table in a job definition.</p>
+                <p>The ujo_timezones table has three entry types: Zone, Alias, and City, as shown in the following excerpt from the ujo_timezones table:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>Entry&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type&nbsp;&nbsp;&nbsp;Zone</p><p>----------------------&nbsp;------&nbsp;----------------</p><p>US/Pacific&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zone&nbsp;&nbsp;&nbsp;PST8PDT</p><p>US/Samoa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alias&nbsp;&nbsp;Pacific/Samoa</p><p>UTC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alias&nbsp;&nbsp;GMT+0</p><p>Vancouver&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;City&nbsp;&nbsp;&nbsp;Canada/Pacific</p></pre>
+                </div>
+                <p>All “Alias” and “City” types are eventually resolve to “Zone” types. The “Zone” types resolved to TZ variables (in the Zone column) that correspond to those recognized by the operating system for the machine on which the event server is running.</p>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p><em>autotimezone</em>&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-a&nbsp;<em>alias</em>&nbsp;<em>zone</em>]&nbsp;[-c&nbsp;<em>city</em>&nbsp;<em>zone</em>]&nbsp;[-t&nbsp;<em>timezone</em>]&nbsp;[-d&nbsp;<em>alias</em>|<em>city</em>]&nbsp;[-q&nbsp;<em>alias</em>|<em>city</em>|<em>timezone</em>|<em>pattern</em>]&nbsp;[-l][{-usr&nbsp;<em>username&nbsp;</em>{-pw|pwx}&nbsp;<em>password</em>|-saml&nbsp;<em>auth_artifact</em>}]&nbsp;</p><p>&nbsp; &nbsp;[-x]&nbsp;</p><p>&nbsp; &nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-a&nbsp;<em>alias</em>&nbsp;<em>zone<br></em></strong>(Optional) Associates a name (<em>alias</em>) with a time zone (<em>zone</em>) and adds it to the ujo_timezones table as an alias entry.<br><strong>Limits:</strong>&nbsp;The&nbsp;<em>alias</em>&nbsp;value can be up to 50 alphanumeric characters and can include slash (/), hyphen (-), and underscore (_) characters.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Notes:</strong></p>
+                            <ul>
+                                <li>The&nbsp;<em>zone</em>&nbsp;value must be a time zone recognized by the operating system.</li>
+                                <li>Separate the&nbsp;<em>alias&nbsp;</em>and&nbsp;<em>zone&nbsp;</em>values with a space.</li>
+                            </ul>
+                        </div> </li>
+                    <li><p><strong>-c&nbsp;<em>city</em>&nbsp;<em>zone<br></em></strong>(Optional) Associates a city (<em>city</em>) with a time zone (<em>zone</em>) and adds it to the ujo_timezones table as a city entry. Entries added to the table with the&nbsp;<strong>-c</strong>&nbsp;parameter display as type “City” in a listing of the ujo_timezones table.<br><strong>Limits:</strong>&nbsp;The&nbsp;<em>city&nbsp;</em>value can be up to 50 alphanumeric characters and can include slash (/), hyphen (-), and underscore (_) characters.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Notes:</strong></p>
+                            <ul>
+                                <li>The&nbsp;<em>zone&nbsp;</em>value must be a time zone recognized by the operating system.</li>
+                                <li>Separate the&nbsp;<em>city&nbsp;</em>and&nbsp;<em>zone&nbsp;</em>values with a space.</li>
+                            </ul>
+                        </div> </li>
+                    <li><p><strong>-t&nbsp;<em>timezone<br></em></strong>(Optional) Adds a time zone entry to the ujo_timezones table.<br><strong>Limits:</strong>&nbsp;A time zone entry must be formatted as a valid POSIX standard timezone (TZ) environment variable.</p></li>
+                    <li><p><strong>-d&nbsp;<em>alias</em>|<em>city<br></em></strong>(Optional) Deletes the entry associated with the specified alias or city from the ujo_timezones table.</p></li>
+                    <li><p><strong>-q&nbsp;<em>alias</em>|<em>city</em>|<em>timezone</em>|<em>pattern<br></em></strong>(Optional) Queries the ujo_timezones table for the settings of the specified alias, city, time zone, or pattern.<br><strong>Limits:&nbsp;</strong>This value allows wildcard characters.</p></li>
+                    <li><p><strong>-l<br></strong>(Optional) Lists all entries in the ujo_timezones table.</p></li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                            <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                            <p>(Optional) Specifies external security credentials as follows:</p>
+                            <ul>
+                                <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                                <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                    </div> </li>
+                                <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Notes: </strong></p>
+                                <ul>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                        <ul>
+                                            <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                            <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                            <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                        </ul></li>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                    <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                        <ul>
+                                            <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                            <li>CA Workload Automation AE is operating in native security mode.</li>
+                                        </ul></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                    <li><p>-x<br>(Optional) Returns the command version information to standard output.</p></li>
+                    <li><p>-?<br>(Optional) Displays help for the command</p></li>
+                </ul>
+                <p><strong>Example: Add a City to the ujo_timezones Table</strong></p>
+                <p>This example adds a city San-Jose in the US/Pacific time zone to the ujo_timezones table.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autotimezone&nbsp;&nbsp;-&nbsp;c&nbsp;San-Jose&nbsp;US/Pacific</p></pre>
+                </div>
+                <p><strong>Example: Delete a City from the ujo_timezones Table</strong></p>
+                <p>This example deletes the city San-Jose from the ujo_timezones table.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autotimezone&nbsp;&nbsp;-&nbsp;d&nbsp;San-Jose</p></pre>
+                </div>
+                <p><strong>Example: Query the ujo_timezones Table</strong></p>
+                <p>This example queries the ujo_timezones table for all entries beginning with the letter “d”.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autotimezone&nbsp;&nbsp;-&nbsp;q&nbsp;d%</p></pre>
+                </div>
+                <p>The output from this command resembles the following:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>Entry&nbsp;&nbsp;&nbsp;Type&nbsp;Zone</p><p>------------------------------------</p><p>Dallas&nbsp;&nbsp;City&nbsp;US/Central</p><p>Denver&nbsp;&nbsp;City&nbsp;US/Mountain</p><p>Detroit&nbsp;City&nbsp;US/Eastern</p></pre>
+                </div>
+                <h2 class="heading3" id="autotimezoneCommand—Managetheujo_timezonesTable-TZVariableSyntax">TZ Variable Syntax</h2>
+                <div class="bs-callout bs-callout-warning conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Important! </strong>The ujo_timezones table is complete and accurate and does not need modification. If you change the ujo_timezones table, you must not change or delete entries that are used by pre-existing STARTJOB and other events that were scheduled using the old ujo_timezones table.
+                </div>
+                <p>The TZ variable has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>std&nbsp;<em>offset</em>&nbsp;[dst&nbsp;[<em>offset</em>]&nbsp;[,<em>start</em>&nbsp;[/<em>time</em>]&nbsp;,<em>end</em>&nbsp;[/<em>time</em>]&nbsp;]]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>std&nbsp;<em>offset<br></em></strong>Defines standard time for the time zone, where&nbsp;<em>offset&nbsp;</em>indicates the amount of time to add to or subtract from the local time to arrive at GMT.<br><strong>Limits:</strong>&nbsp;This value is required.<br>The&nbsp;<em>offset&nbsp;</em>value has the following format:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>[-|+]hh[:mm[:ss]]</p></pre>
+                        </div>
+                        <ul>
+                            <li><strong>-|+</strong><br>(Optional) Defines whether the offset value represents a time zone west or east of GMT.<br><strong>Limits:</strong>&nbsp;A + or no prefix indicates that the value represents a time zone west of GMT. A - prefix indicates that the value represents a time zone east of GMT.</li>
+                            <li><strong>hh</strong><br>Defines the number of hours offset from GMT.<br><strong>Limits:</strong>&nbsp;This value is required. This value can be a number in the range 0 through&nbsp;24.</li>
+                            <li><strong>mm</strong><br>(Optional) Defines the number of minutes offset from GMT.<br><strong>Limits:</strong>&nbsp;This value can be a number in the range 0 through&nbsp;59.</li>
+                            <li><strong>ss&nbsp;</strong><br>(Optional) Defines the number of seconds offset from GMT.<br><strong>Limits:</strong>&nbsp;This value can be a number in the range 0 through&nbsp;59.</li>
+                        </ul></li>
+                    <li><p><strong>dst&nbsp;<em>offset<br></em></strong>(Optional) Defines daylight saving time for the time zone, where&nbsp;<em>offset</em>&nbsp;indicates the amount of time to add to the local time to arrive at GMT.<br><strong>Default:</strong>&nbsp;When you do not specify dst, the product assumes that the time zone does not observe daylight saving time.<br>When you specify dst without an offset value, the product assumes that daylight saving time is one hour ahead of standard time.<br><strong>Limits:&nbsp;</strong>The&nbsp;<em>offset&nbsp;</em>value has the following format:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>[-|+]hh[:mm[:ss]]</p></pre>
+                        </div>
+                        <ul>
+                            <li><strong>-|+</strong><br>(Optional) Defines whether the offset value represents a time zone west or east of GMT.<br><strong>Limits:</strong>&nbsp;A + or no prefix indicates that the value represents a time zone west of GMT. A - prefix indicates that the value represents a time zone east of GMT.</li>
+                            <li><strong>hh</strong><br>Defines the number of hours offset from GMT.<br><strong>Limits:</strong>&nbsp;This value is required. This value can be a number in the range 0 through&nbsp;24.</li>
+                            <li><strong>mm</strong><br>(Optional) Defines the number of minutes offset from GMT.<br><strong>Limits:</strong>&nbsp;This value can be a number in the range 0 through&nbsp;59.</li>
+                            <li><strong>ss&nbsp;</strong><br>(Optional) Defines the number of seconds offset from GMT.<br><strong>Limits:</strong>&nbsp;This value can be a number in the range 0 through&nbsp;59.</li>
+                        </ul></li>
+                    <li><p><strong><em>start<br></em></strong>(Optional) Defines the day on which to change to daylight saving time from standard time.<br><strong>Limits:</strong>&nbsp;This value can be one of the following:</p>
+                        <ul>
+                            <li><strong>j<em>n<br></em></strong>Defines the Julian day&nbsp;n, where&nbsp;n&nbsp;can be a number in the range 1 through&nbsp;365. The product ignores leap days, meaning that December 31 is always day 365 and you cannot specify February 29.<strong><em><br></em></strong></li>
+                            <li><strong><em>n</em></strong><br>Defines the Julian day&nbsp;<em>n</em>, where&nbsp;<em>n</em>&nbsp;can be a number in the range 0 through&nbsp;365. In this case, the product counts leap days.&nbsp;</li>
+                            <li><strong><em>mm</em>.<em>n</em>.</strong><em><strong>d</strong><br></em>Defines that the time change occurs on the&nbsp;nth occurrence of a particular day in a specific month, where:&nbsp;<br>
+                                <ul>
+                                    <li><em><em>mm</em>&nbsp;</em>can be a number in the range 1 through&nbsp;12. January is month 1.</li>
+                                    <li><em>n</em>&nbsp;can be a number in the range 0 through&nbsp;5. Sunday is day 0. When&nbsp;<em>n</em>&nbsp;is 5, it means the last occurrence of the specified day in month&nbsp;<em>mm</em>.</li>
+                                    <li><em>d</em>&nbsp;can be a number in the range 0 through&nbsp;6.</li>
+                                </ul><p>For example, to specify that the time change should occur on the first Sunday in April, you would specify 4.1.0.</p>
+                                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <p><strong>Note:</strong>&nbsp;If you do not specify&nbsp;<em>start</em>&nbsp;and&nbsp;<em>end</em>, United States daylight saving time defaults are used. That is,&nbsp;<em>start</em>&nbsp;is the second Sunday in March and&nbsp;<em>end</em>&nbsp;is the first Sunday in November.</p>
+                                </div> </li>
+                        </ul></li>
+                    <li><p><strong><em>end<br></em></strong>Defines the day on which to change to standard time from daylight saving time.<br><strong>Limits:</strong>&nbsp;This value can be one of the following:</p>
+                        <ul>
+                            <li><strong>j<em>n<br></em></strong>Defines the Julian day&nbsp;n, where&nbsp;n&nbsp;can be a number in the range 1 through 365. The product ignores leap days, meaning that December 31 is always day 365 and you cannot specify February 29.<strong><em><br></em></strong></li>
+                            <li><strong><em>n</em></strong><br>Defines the Julian day&nbsp;<em>n</em>, where&nbsp;<em>n</em>&nbsp;can be a number in the range 0 through&nbsp;365. In this case, the product counts leap days.&nbsp;</li>
+                            <li><strong><em>mm</em>.<em>n</em>.</strong><em><strong>d</strong><br></em>Defines that the time change occurs on the&nbsp;nth occurrence of a particular day in a specific month, where:&nbsp;<br>
+                                <ul>
+                                    <li><em><em>mm</em>&nbsp;</em>can be a number in the range 1 through&nbsp;12. January is month 1.</li>
+                                    <li><em>n</em>&nbsp;can be a number in the range 0 through&nbsp;5. Sunday is day 0. When&nbsp;<em>n</em>&nbsp;is 5, it means the last occurrence of the specified day in month&nbsp;<em>mm</em>.</li>
+                                    <li><em>d</em>&nbsp;can be a number in the range 0 through&nbsp;6.</li>
+                                </ul><p>For example, to specify that the time change should occur on the first Sunday in April, you would specify 4.1.0.</p>
+                                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <p><strong>Note:</strong>&nbsp;If you do not specify&nbsp;<em>start</em>&nbsp;and&nbsp;<em>end</em>, United States daylight saving time defaults are used. That is,&nbsp;<em>start</em>&nbsp;is the second Sunday in March and&nbsp;<em>end</em>&nbsp;is the first Sunday in November.</p>
+                                </div> </li>
+                        </ul></li>
+                    <li><p><strong><em>time<br></em></strong>Defines the time of day at which the change to daylight saving or standard time occurs.<br><strong>Limits:</strong>&nbsp;This value has the following format:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>hh[:mm[:ss]]</p></pre>
+                        </div>
+                        <ul>
+                            <li><p><strong><em>hh<br></em></strong>Defines the hour at which the change occurs.<br><strong>Limits:</strong>&nbsp;This value can be a number in the range 0 through 23.<br>This value is required.</p></li>
+                            <li><p><strong><em>mm<br></em></strong>(Optional) Defines the minute at which the change occurs.<br><strong>Limits:</strong>&nbsp;This value can be a number in the range 0 through&nbsp;59.</p></li>
+                            <li><strong><em>ss<br></em></strong>Defines the seconds at which the change occurs.<br><strong>Default:</strong>&nbsp;02:00:00 (2:00 a.m.)<br><strong>Limits:</strong>&nbsp;This value can be a number in the range 0 through&nbsp;59.</li>
+                        </ul>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note:</strong>&nbsp;Do not enter spaces between any of the components of the TZ variable.</p>
+                        </div> </li>
+                </ul>
+                <p><strong>UNIX Note:</strong></p>
+                <p>For more information about the format of the TZ variable, see your system time, timezone, or environ man page.</p>
+                <p>When processing a job definition that includes a time zone, CA Workload Automation AE tries to resolve the specified time zone with the zones known to the operating system. If it is not found there, CA Workload Automation AE looks up the zone in the ujo_timezones table. If the time zone specification is not a TZ variable, the product reads the ujo_timezones table repeatedly until the specification resolves to a TZ variable. For example, assume that a job definition included the following attribute:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>timezone:Berlin.&nbsp;</p></pre>
+                </div>
+                <p><span style="color: rgb(55,55,55);">The product resolves Berlin to Europe/Berlin the first time it reads the table. The second time the product reads the table that it resolves Europe/Berlin to METS-1METD, which is a TZ variable. If a time zone is not resolved after five tries, the product considers it invalid and the job specifying the time zone fails.</span></p>
+                <p><strong>Windows Note:</strong></p>
+                <p>TZ variable syntax is compatible with Windows NT TZ variables, but has been extended to allow full control over the day and time on which daylight saving time changes occur. If the time zone specification in a job definition is not a TZ variable, the product reads the ujo_timezones table repeatedly until the specification resolves to a TZ variable. For example, assume that a job definition included the following attribute:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>timezone:Berlin&nbsp;</p></pre>
+                </div>
+                <p><span style="color: rgb(55,55,55);">The product resolves Berlin to Europe/Berlin the first time it reads the table. The second time the product reads the table, it resolves Europe/Berlin to MET, which is a TZ variable. If a time zone is not resolved after five tries, the product considers it invalid and the job specifying the time zone fails.</span></p>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

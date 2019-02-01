@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p><strong>Valid on UNIX</strong></p>
+            <p>The astail command displays the last ten lines of the file specified in the command.</p>
+            <p><strong>Syntax</strong></p>
+            <p>This command has the following format:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>astail&nbsp;[-f&nbsp;<em>filename</em>]&nbsp;[-x]</p></pre>
+            </div>
+            <ul>
+                <li><strong>-f&nbsp;<em>filename</em></strong><br>(Optional) Defines the name of the file to display.</li>
+                <li><strong>-x</strong><br>(Optional) Returns the version number of the astail command to standard output.</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> To terminate the command, press Ctrl+C.
+            </div>
+            <p><strong>Example: Display the Last ten Lines of the Scheduler Log File</strong></p>
+            <p>This example displays the last ten lines of the scheduler log file where&nbsp;<em>instance_name</em>&nbsp;is the unique 3-character identifier chosen for this installation.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>astail&nbsp;&nbsp;-&nbsp;f&nbsp;&nbsp;$AUTOUSER/out/event_demon.<em>instance_name</em></p></pre>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

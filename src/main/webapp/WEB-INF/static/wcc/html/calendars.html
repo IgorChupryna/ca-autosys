@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p>Calendars are used for scheduling jobs to identify the days when jobs should or should not process. You can define a custom calendar to include any number of dates. You can then associate any calendar with one or more jobs. A custom calendar can be created using a standard calendar or an extended calendar.</p>
+            <p>A<em> standard calendar</em> is a set of manually selected, user-specified dates. There are two types of standard calendars: run and exclude. A <em>run calendar</em> specifies the days on which a job should run, such as the first weekday of every month. Conversely, an <em>exclude calendar</em> specifies the days on which a job should not run. For example, to help ensure that a job never runs on any corporate holiday, you could create a calendar named Holidays that has each corporate holiday selected.</p>
+            <p>An <em>extended calendar</em> is a dynamic calendar that is generated automatically based on a combination of holiday calendars, cycles, and conditions defined.</p>
+            <p>Each calendar is stored in the database as a separate object with a unique name.</p>
+            <p>Cycles are used as processing periods in an extended calendar definition. These user-defined date ranges make it easy to define rules for non-standard processing periods, such as business cycles, quarters, and accounting periods. Cycles can be set to repeat every year.</p>
+            <p></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H1,H2" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#ManageCalendarsUsingCAWCC-DefineaStandardCalendar" class="toc-link">Define a Standard Calendar</a></span></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#ManageCalendarsUsingCAWCC-DefineaCycle" class="toc-link">Define a Cycle</a></span></li><li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a href="#ManageCalendarsUsingCAWCC-DefineanExtendedCalendar" class="toc-link">Define an Extended Calendar</a></span></li></ul></div>
+            <p></p>
+            <h2 class="heading2" id="ManageCalendarsUsingCAWCC-DefineaStandardCalendar">Define a Standard Calendar</h2>
+            <p>You can create a standard calendar to define specified dates on which jobs should run.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Open Quick Edit.</li>
+                <li>Click Create.</li>
+                <li>Select the server where you want to store the calendar from the Server drop-down list.</li>
+                <li>Click the Calendar link.</li>
+                <li>Specify the following required property:
+                    <ul>
+                        <li><p><strong>Name</strong><br>Specifies a name for the calendar.<br><strong>Limits:</strong> Up to 30 characters</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Note:</strong> If using only CA AE 11.3.6 SP2 (and any later versions), the limit of up to 64 characters applies.</p>
+                            </div> </li>
+                    </ul></li>
+                <li>(Optional) Specify when the calendar starts.
+                    <ol>
+                        <li>Select the starting month.</li>
+                        <li>Select the starting year.</li>
+                        <li>Click Go.</li>
+                    </ol></li>
+                <li>Perform one of the following options:
+                    <ul>
+                        <li>Click individual days in the calendar to set the processing days.</li>
+                        <li>Define rules in the Generate Days section for determining processing and blocked days in the calendar and for rescheduling processing when schedule conflicts arise.</li>
+                    </ul></li>
+                <li>(Optional) Provide a description<br>
+                    <ul>
+                        <li><p><strong>Description</strong><br>A non-manditory description that contains any text.<br><strong>Limits:</strong> Up to 1024 characters.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Note:</strong> The description is available only if AE 11.3.6 SP2 (and any later versions) is used.</p>
+                            </div> </li>
+                    </ul></li>
+                <li>Click Commit.<br>The standard calendar is defined.</li>
+            </ol>
+            <h3 class="heading3" id="ManageCalendarsUsingCAWCC-StandardCalendarProperties">Standard Calendar Properties</h3>
+            <p>The Calendar Properties section for standard calendars includes the following properties:</p>
+            <p><strong>Calendar</strong></p>
+            <p>Defines days on which jobs associated with the calendar can or cannot run. You can select a specific year and month, and then click the appropriate days to select or clear them.</p>
+            <p><strong>Name</strong></p>
+            <p>Specifies the name of the calendar.</p>
+            <p><strong>Limits:</strong> Up to 30 alphanumeric characters; valid characters are a-z, A-Z, 0-9, period (.), underscore (_), pound (#), and hyphen (-)</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong><span> If using only CA AE 11.3.6 SP2 (and any later versions), the limit of up to 64 characters applies.</span></p>
+            </div>
+            <p><strong>Description</strong></p>
+            <p>(Optional) A non-manditory description that contains any text.</p>
+            <p><strong>Limits:</strong>&nbsp;Up to 1024 characters.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> The description is available only if AE 11.3.6 SP2 (and any later versions) is used.</p>
+            </div>
+            <p><strong>Starting Month</strong></p>
+            <p>(Optional) Specifies the starting month for the selected year.</p>
+            <p><strong>Default:</strong> Either the current month or the month specified</p>
+            <p><strong>Starting Year</strong></p>
+            <p>(Optional) Specifies the year for the selected Starting Month.</p>
+            <p><strong>Default:</strong> Either the current year or the year specified</p>
+            <h3 class="heading3" id="ManageCalendarsUsingCAWCC-GenerateDaysProperties">Generate Days Properties</h3>
+            <p>You can use the Generate Days section to define and apply rules that more specifically control processing calendars.</p>
+            <p>The Primary, Recurrence Pattern, and Reschedule Rule categories include the following properties:</p>
+            <p><strong>Action</strong></p>
+            <p>(Optional) Specifies whether the generation rule you are creating defines set, unset, or blocked dates on the calendar.</p>
+            <p>The following options are available:</p>
+            <ul>
+                <li><strong>Set Processing days</strong></li>
+            </ul>
+            <p>Indicates that the current settings should be used to set processing days on the calendar.</p>
+            <ul>
+                <li><strong>Set Blocked days</strong></li>
+            </ul>
+            <p>Indicates that the current settings should be used to clear processing days on the calendar. Unset days may be used for processing, for example, when a rescheduling rule is used to reschedule processing in the event of a conflict.</p>
+            <ul>
+                <li><strong>Clear Processing days</strong></li>
+            </ul>
+            <p>Indicates that the current settings should be used to clear processing days on the calendar. Unset days may be used for processing, for example, when a rescheduling rule is used to reschedule processing in the event of a conflict.</p>
+            <ul>
+                <li><strong>Clear Blocked days</strong></li>
+            </ul>
+            <p>Indicates that the current settings should be used to clear blocked days on the calendar.</p>
+            <ul>
+                <li><strong>Default:</strong> Set Processing days</li>
+            </ul>
+            <p><strong>Days</strong></p>
+            <p>(Optional) Specifies the days on which the rule applies, based on your selections for Occurrence and Periods.</p>
+            <p>The following options are available:</p>
+            <ul>
+                <li>Any day</li>
+                <li>Weekday</li>
+                <li>Specific day</li>
+            </ul>
+            <p>The name of the associated field changes to reflect your selection, letting you select one or more specific days if Specific day is selected.</p>
+            <ul>
+                <li><strong>Default:</strong> Any day</li>
+            </ul>
+            <p><strong>Date range</strong></p>
+            <p>(Optional) Specifies whether the rule applies to the specified year or to a specified date range.</p>
+            <p>The following options are available:</p>
+            <ul>
+                <li><strong>All days in year</strong><br>Indicates that the rule applies to the year you select from the associated drop-down list.</li>
+                <li><strong>All days in range</strong><br>Indicates that the rule applies to the interval between the dates you specify in the associated Start and End fields.</li>
+            </ul>
+            <p>The name of the associated field changes to reflect your selection, letting you enter the range or select a year as appropriate.</p>
+            <ul>
+                <li><strong>Default:</strong> All days in year, with the current year selected from the associated list</li>
+            </ul>
+            <p><strong>Occurrence</strong></p>
+            <p>(Optional) Specifies the occurrences of the value selected for Days on which to apply the rule for the duration selected for Periods.</p>
+            <p>The following check boxes are available:</p>
+            <ul>
+                <li>First</li>
+                <li>Second</li>
+                <li>Third</li>
+                <li>Fourth</li>
+                <li>Every</li>
+                <li>Next to last</li>
+                <li>Last</li>
+            </ul>
+            <p>You can make multiple selections.</p>
+            <p>The following fields are also available:</p>
+            <ul>
+                <li><strong>Nth</strong><br>Specifies a numeric value to set a one-time occurrence, such as 5 to indicate on the 5th occurrence.</li>
+                <li><strong>Every Nth</strong><br>Specifies a numeric value to set a repeating occurrence, such as 6 to indicate every 6th occurrence.</li>
+            </ul>
+            <p><strong>Periods</strong></p>
+            <p>(Optional) Specifies the interval to which the rule applies.</p>
+            <p>The following options are available:</p>
+            <ul>
+                <li>No period</li>
+                <li>Monthly</li>
+                <li>Quarterly</li>
+                <li>Number of weeks -- Specifies the number of weeks between 1 and 99 to which this rule will apply.</li>
+                <li>In calendar -- Specifies the name of the calendar to which this rule will apply.</li>
+            </ul>
+            <p><strong>Default:</strong> No period</p>
+            <p>The name of the associated field changes to reflect your selection, letting you enter a number or name as appropriate.</p>
+            <p><strong>Example:</strong> To define a rule to run a job on the first Monday of each quarter, select First for Occurrence, Specific day and Monday for Days, and Quarterly for Periods.</p>
+            <p><strong>Reschedule</strong></p>
+            <p>(Optional) Specifies whether to use the settings in this category. To apply rescheduling modifications, this check box should be selected.</p>
+            <p><strong>Default:</strong> not selected</p>
+            <p><strong>Reschedule Day Type</strong></p>
+            <p>(Optional) Specifies the period to which to move processing (in the direction specified by the Reschedule direction value) when a conflict occurs.</p>
+            <p>The following options are available:</p>
+            <ul>
+                <li><strong>Any day</strong></li>
+            </ul>
+            <p>Moves processing to the first non-blocked day.</p>
+            <ul>
+                <li><strong>Weekday</strong></li>
+            </ul>
+            <p>Moves processing to the first non-blocked weekday.</p>
+            <ul>
+                <li><strong>Day in calendar</strong></li>
+            </ul>
+            <p>Moves processing to the first processing day in the calendar selected from the In calendar list.</p>
+            <ul>
+                <li><strong>Day not in calendar</strong></li>
+            </ul>
+            <p>Moves processing to the first non-processing day that is in the calendar selected from the Not in calendar list.</p>
+            <ul>
+                <li><strong>Default:</strong> Any day (when Apply rescheduling rule is selected)</li>
+            </ul>
+            <p>The name of the associated field changes to reflect your selection, letting you select a day as appropriate.</p>
+            <p><strong>Reschedule direction</strong></p>
+            <p>(Optional) Specifies the direction in which to move processing days to reschedule processing in the event of a conflict.</p>
+            <p>The following options are available:</p>
+            <ul>
+                <li><strong>Previous</strong></li>
+            </ul>
+            <p>Moves processing to the previous period (as determined by the Reschedule Day Type value) when a conflict occurs.</p>
+            <ul>
+                <li><strong>Next</strong></li>
+            </ul>
+            <p>Moves processing to the next period (as determined by the Reschedule Day Type value) when a conflict occurs.</p>
+            <ul>
+                <li><strong>Default:</strong> Previous (when Reschedule is selected)</li>
+            </ul>
+            <h4 class="heading4" id="ManageCalendarsUsingCAWCC-GenerateDaysDialog">Generate Days Dialog</h4>
+            <p>The Generate Days dialog opens when you click Apply Rules, located in the Generate Days section for a standard calendar. You can use the Generate Days dialog to view and apply the rules set in the Generate Days section, or to edit and define additional processing or blocked days.</p>
+            <p>This dialog contains the following properties:</p>
+            <p><strong>Calendar</strong></p>
+            <p>(Optional) Defines days on which jobs associated with the calendar can or cannot run. You can select a specific year and month, and then click the appropriate days to select or clear them. Clicking the Processing Days button lets you select days on which a job should run; clicking the Blocked Days button lets you select days on which a job should not run.</p>
+            <p><strong>Clear Days</strong></p>
+            <p>(Optional) Specifies whether you want to clear processing or blocked days from the calendar.</p>
+            <p>The following options are available:</p>
+            <ul>
+                <li><strong>Clear all days</strong><br>Removes all processing and blocked days in the calendar.</li>
+                <li><strong>Clear processing days</strong><br>Removes all processing days selected in the calendar.</li>
+                <li><strong>Clear blocked days</strong><br>Removes all blocked days from the calendar, making them available as potential processing days.</li>
+            </ul>
+            <p><strong>Starting Month</strong></p>
+            <p>(Optional) Specifies the first month to display in the calendar.</p>
+            <p><strong>Starting Year</strong></p>
+            <p>(Optional) Specifies the year for the selected Starting Month.</p>
+            <h2 class="heading2" id="ManageCalendarsUsingCAWCC-DefineaCycle">Define a Cycle</h2>
+            <p>You can create a cycle to define date ranges to be used as input to an extended calendar.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Open Quick Edit.</li>
+                <li>Click Create.</li>
+                <li>Select the server where you want to store the cycle from the Server drop-down list.</li>
+                <li>Click the Cycle link.</li>
+                <li>Specify the following required properties:
+                    <ul>
+                        <li><p><strong>Name</strong><br>Specifies the name for a cycle.<br><strong>Limits:</strong> Up to 30 characters</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Note:</strong><span> If using only CA AE 11.3.6 SP2 (and any later versions), the limit of up to 64 characters applies.</span></p>
+                            </div> </li>
+                    </ul></li>
+                <li>(Optional) Select the Repeat every year check box to repeat the cycle every year.</li>
+                <li>Add one or more periods to the cycle, as follows:<br>
+                    <ol>
+                        <li>Select Add in the Periods field.</li>
+                        <li>Click Go.</li>
+                        <li><p>Specify a Start and End date for the period. You can click <img alt="Click to select a date." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353518/361353521/1/1432026325018/797536.png" data-hasbody="false"> to select the period dates.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong>&nbsp;Note:</strong> You must add at least one period, but you cannot exceed 30 periods per cycle.
+                            </div> </li>
+                    </ol></li>
+                <li><p>(Optional)&nbsp;<span>Provide a description</span></p>
+                    <ul>
+                        <li><p><strong>Description</strong><br>A non-manditory description that contains any text.<br><strong>Limits:</strong>&nbsp;Up to 1024 characters.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Note:</strong> The description is available only if AE 11.3.6 SP2 (and any later versions) is used.</p>
+                            </div> </li>
+                    </ul></li>
+                <li><p>Click Commit.<br>The cycle is defined.</p><p style="display: inline;">&nbsp;</p></li>
+            </ol>
+            <p><strong>Example: Create a Cycle and Associate it with an Extended Calendar</strong></p>
+            <p>To associate a cycle with an extended calendar, you first create the cycle with the periods defined. Then, when you create the extended calendar with which you want to associate it, enter CYCLE in the Conditions field, enter the name of the cycle calendar in the Cycle name field, and click Generate Preview to view the processing dates selected. You can also click Date Picker icon to the right of the Cycle name field to select a cycle from the Search Cycle dialog.</p>
+            <h3 class="heading3" id="ManageCalendarsUsingCAWCC-CycleProperties">Cycle Properties</h3>
+            <p><strong>Name</strong></p>
+            <p>Defines the name of the cycle.</p>
+            <p><strong>Limits: </strong>30 or fewer characters</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong><span> If using only CA AE 11.3.6 SP2 (and any later versions), the limit of up to 64 characters applies.</span></p>
+            </div>
+            <p><strong>Description</strong></p>
+            <p>(Optional) A non-manditory description that contains any text.</p>
+            <p><strong>Limits:</strong>&nbsp;Up to 1024 characters.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> The description is available only if AE 11.3.6 SP2 (and any later versions) is used.</p>
+            </div>
+            <p><strong>Periods</strong></p>
+            <p>(Optional) Specifies the start and end dates for each period in the cycle. The periods in a cycle cannot overlap.</p>
+            <p>The following fields are available:</p>
+            <ul>
+                <li>Start</li>
+                <li><p>End</p></li>
+            </ul>
+            <p><strong>Default:</strong> The current month and day</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li><p>One cycle has a maximum of 30 periods.</p></li>
+                    <li><p>The following options are available from the Select an action drop-down list: Add, Add Before, Move Up, Move Down, and Delete.</p></li>
+                </ul>
+            </div>
+            <p><strong>Repeat every year</strong></p>
+            <p>(Optional) Specifies whether the cycle should run every year.</p>
+            <h2 class="heading2" id="ManageCalendarsUsingCAWCC-DefineanExtendedCalendar">Define an Extended Calendar</h2>
+            <p>You can create an extended calendar to define processing days, using a combination of a holiday calendar, cycle, and conditions, for scheduled jobs.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Open Quick Edit.</li>
+                <li>Click Create.</li>
+                <li>Select the server where you want to store the calendar from the Server drop-down list.</li>
+                <li>Click the Extended Calendar link.</li>
+                <li>Specify the following required properties:
+                    <ul>
+                        <li><p><strong>Name</strong><br>Specifies the name for an extended calendar.<br><strong>Limits:</strong><span> Up to 30 characters<br></span></p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Note:</strong><span> If using only CA AE 11.3.6 SP2 (and any later versions), the limit of up to 64 characters applies.</span></p>
+                            </div> <p><span>&nbsp;</span></p></li>
+                        <li><strong>Adjustment</strong><br>Specifies an integer by which to adjust the days generated by the other criteria. This lets you include days that are the specified number of days before or after the generated days instead.</li>
+                    </ul></li>
+                <li>(Optional) Specify any of the following properties in the Primary section:
+                    <ul>
+                        <li><p><strong>Conditions</strong><br>Specifies date conditions for the extended calendar.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="Click to edit." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353518/361353520/1/1432026325008/696541.png" data-hasbody="false">&nbsp;opens an Edit Text dialog, which lets you specify the date conditions..</p>
+                            </div> <p><strong>Examples:</strong></p>
+                            <ul>
+                                <li>DAILY - Selects all dates after the current date</li>
+                                <li>MON - Selects all Mondays after the current date</li>
+                                <li>FOMWEEK - Selects the first weekday of each month after the current date</li>
+                                <li>EOMWEEK - Selects the last weekday of each month after the current date</li>
+                                <li>XFOM - Selects all days except the first day of each month after the current date</li>
+                            </ul></li>
+                        <li><p><strong>Cycle name</strong><br>Specifies the name of an existing cycle.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353518/361353519/1/1432026324991/692501.png" data-hasbody="false">&nbsp;opens the Search Cycle dialog, which lets you search for a cycle.</p>
+                            </div> </li>
+                    </ul></li>
+                <li>(Optional) Specify the following properties in the Holiday Action section:
+                    <ul>
+                        <li><strong>Reschedule rule</strong><br>Specifies a rule for holidays, as follows:
+                            <ul>
+                                <li>Do not schedule the job on holidays</li>
+                                <li>Schedule only on a holiday</li>
+                                <li>Schedule anyway, ignoring holidays</li>
+                                <li>Schedule on the next day</li>
+                                <li>Schedule on the next workday</li>
+                                <li>Schedule on the previous workday</li>
+                            </ul></li>
+                        <li><p><strong>Calendar</strong><br>Specifies the name of a standard calendar that defines the holidays.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Note:</strong>&nbsp;Clicking&nbsp;<img alt="Click to search for an object." data-macro-name="sp-image" class="confluence-embedded-image conf-macro output-inline" src="/ca-workload-automation-ae/11-4-2/en/files/361353518/361353519/1/1432026324991/692501.png" data-hasbody="false">&nbsp;opens the Search Calendar dialog, which lets you search for a calendar.</p>
+                            </div> </li>
+                    </ul></li>
+                <li>(Optional) Specify any of the following properties in the Non Workday Action section:
+                    <ul>
+                        <li><strong>Non-workday action</strong><br>Specifies a rule for non-workdays, as follows:
+                            <ul>
+                                <li>Schedule anyway, ignoring workdays</li>
+                                <li>Schedule only on non-workdays</li>
+                                <li>Schedule only on workdays</li>
+                                <li>Schedule on the next workday</li>
+                                <li>Schedule on the previous workday</li>
+                            </ul></li>
+                        <li><strong>Workdays</strong><br>Specifies the workdays.</li>
+                    </ul></li>
+                <li>(Optional) Click Generate Preview to open the Extended Calendar Preview dialog so you can preview the dates generated by the rules in the extended calendar.</li>
+                <li><p><span>(Optional) Provide a description</span></p>
+                    <ul>
+                        <li><p><strong>Description</strong><br>A non-manditory description that contains any text.<br><strong>Limits:</strong>&nbsp;Up to 1024 characters.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Note:</strong> The description is available only if AE 11.3.6 SP2 (and any later versions) is used.</p>
+                            </div> </li>
+                    </ul></li>
+                <li><p>Click Commit.<br>The extended calendar is defined.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> If you create an extended calendar by entering a value in the Name field only and saving it, all days are selected from the current day forward, for a total of 366 days.
+                    </div> </li>
+            </ol>
+            <p><strong>Example: Create an Extended Calendar Based on Field Adjustment</strong></p>
+            <p>To create an extended calendar that processes associated jobs one day after each holiday, you would first create a calendar defining the holidays for the year, then create an extended calendar with the following options selected:</p>
+            <ul>
+                <li>Your holidays calendar in the Calendar field</li>
+                <li>Schedule only on a holiday in the Holiday Action list</li>
+                <li>1 in the Adjustment field</li>
+            </ul>
+            <h3 class="heading3" id="ManageCalendarsUsingCAWCC-ExtendedCalendarProperties">Extended Calendar Properties</h3>
+            <p>The Primary, Holiday Action, and Non-Workday Action categories for extended calendars include the following properties:</p>
+            <p><strong>Adjustment</strong></p>
+            <p>Defines the number of days before (negative number) or after (positive number) the other properties to run an associated job. You can use adjustments if the other properties do not define the necessary days. The CA WCC default is 0, signifying no adjustment</p>
+            <p><strong>Limits:</strong> -100 - 100, including 0</p>
+            <p><strong>Example:</strong> To run a job one day before the calendar settings specify, enter -1 in the Adjustment field.</p>
+            <p><strong>Calendar</strong></p>
+            <p>(Optional) Defines the calendar name to use for holiday dates.</p>
+            <p><strong>Limits:</strong> Up to 30 characters</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong><span> If using only CA AE 11.3.6 SP2 (and any later versions), the limit of up to 64 characters applies.</span></p>
+            </div>
+            <p><strong>Conditions</strong></p>
+            <p>(Optional) Defines when to use the holiday calendar and cycle.</p>
+            <p><strong>Limits:</strong> Up to 255 characters</p>
+            <p><strong>Example:</strong> DAILY uses the calendar or cycle every day</p>
+            <p><strong>Cycle name</strong></p>
+            <p>(Optional) Defines the cycle name to use and is only valid when the cycle keyword appears in the Conditions field.</p>
+            <p><strong>Limits:</strong> Up to 30 characters</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong><span> If using only CA AE 11.3.6 SP2 (and any later versions), the limit of up to 64 characters applies.</span></p>
+            </div>
+            <p><strong>Name</strong></p>
+            <p>Specifies the extended calendar name.</p>
+            <p><strong>Limits:</strong> Up to 30 characters</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong><span> If using only CA AE 11.3.6 SP2 (and any later versions), the limit of up to 64 characters applies.</span></p>
+            </div>
+            <p><strong>Description</strong></p>
+            <p>(Optional) A non-manditory description that contains any text.</p>
+            <p><strong>Limits:</strong>&nbsp;Up to 1024 characters.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> The description is available only if AE 11.3.6 SP2 (and any later versions) is used.</p>
+            </div>
+            <p><strong>Non-workday action</strong></p>
+            <p>(Optional) Indicates the action to take when the selected day falls on a non-workday, as follows:</p>
+            <ul>
+                <li>Schedule anyway, ignoring workdays</li>
+                <li>Schedule only on non-workdays</li>
+                <li>Schedule only on workdays</li>
+                <li>Schedule on the next workday</li>
+                <li>Schedule on the previous workday</li>
+            </ul>
+            <p><strong>Reschedule rule</strong></p>
+            <p>(Optional) Indicates the action to take if the selected day is a holiday, as follows:</p>
+            <ul>
+                <li>Do not schedule the job on holidays</li>
+                <li>Schedule only on a holiday</li>
+                <li>Schedule anyway, ignoring holidays</li>
+                <li>Schedule on the next day</li>
+                <li>Schedule on the next workday</li>
+                <li>Schedule on the previous workday</li>
+            </ul>
+            <p><strong>Workdays</strong></p>
+            <p>(Optional) Specifies whether the days of the week are workdays. The checkboxes for Mo, Tu, We, Th, and Fr are selected by default.</p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

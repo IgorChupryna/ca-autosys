@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>This section describes installation and configuration tasks you must perform to enable CA Workload Control Center (CA
+    WCC) to function in your enterprise. It is intended for system administrators.</p>
+
+<p>This section provides information about the following:</p>
+<ul>
+    <li>Typical deployment scenarios</li>
+    <li>Installing and configuring a CA WCC server on Windows</li>
+    <li>Installing and configuring a CA WCC server on UNIX</li>
+    <li><p>Upgrading a CA WCC server on Windows</p></li>
+    <li><p>Upgrading a CA WCC server on UNIX</p></li>
+</ul>
+<hr>
+<p></p>
+<h2 class="heading2" id="CAWCCInstallation-CAWCCDependencies">CA WCC Dependencies</h2>
+
+<p>The CA WCC environment has the following dependencies:</p>
+<ul>
+    <li>CA WCC must have access to an instance of CA EEM.</li>
+    <li>Install the Command Sponsor on CA Workload Automation AE servers to enable CA WCC Enterprise Command Line and
+        Forecast functionality. The Command Sponsor is installed using the CA Workload Automation AE DVD.
+    </li>
+</ul>
+<div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+     data-macro-name="sp-macrooverride-richtextbody-block">
+    <strong>Note:</strong> The CA Workload Automation AE SDK (SDK) is installed on the CA WCC server when you install CA
+    WCC. The SDK enables CA WCC to communicate with the CA Workload Automation AE database. The SDK installer also
+    installs CA Secure Socket Adapter (SSA), that lets CA Technologies components use a single communications
+    multiplexing port to ease firewall administration and minimize conflicts with other applications.
+</div>
+<h3 class="heading3" id="CAWCCInstallation-HighAvailability">High Availability</h3>
+<p>CA WCC can be installed in High Availability mode. High Availability includes load balancing, which is implemented
+    using Apache HTTPD Server. Apache HTTPD Server can be installed on any server that has access to the CA WCC servers
+    in a High Availability group, including a server on which CA WCC is installed.</p>
+<p>CA WCC instances in a High Availability group share the CA WCC and Reporting databases, and use a common instance of
+    CA EEM. CA WCC configurations are stored in the common database, and changes to the configurations are available to
+    all CA WCC instances in the High Availability group.</p>
+
+<h3 class="heading3" id="CAWCCInstallation-DeploymentExamplewithHighAvailability">Deployment Example with High
+    Availability</h3>
+
+<p>The following diagram shows the deployment of CA WCC in a High Availability environment. Users access CA WCC using
+    the URL for Apache HTTPD Server.</p>
+
+<div id="gliffy-container-361352864-1320" class="gliffy-container   conf-macro output-inline" data-fullwidth="700"
+     data-ceoid="361352862" data-pageid="361352862" data-islinked="false"
+     data-full="/plugins/gliffy/viewer.action?inline=false&amp;pageId=361352862&amp;attachmentId=361352864&amp;name=Typical%20Deployment%20in%20an%20HA%20group&amp;lastPage=%2Fpages%2Fviewpage.action%3FpageId%3D361352862"
+     data-attachmentid="361352864" data-version="0" data-filename="Typical Deployment in an HA group"
+     data-hasbody="false" data-macro-name="gliffy">
+    <map id="gliffy-map-361352864-7422" name="gliffy-map-361352864-7422"></map>
+    <div class="diagram-content-container ">
+        <div class="gliffy-html5-loading-spinner-container">
+        </div>
+        <iframe class="gliffy-html5-container full-width" id="gliffy-html5-361352864-1320"
+                src="/plugins/gliffy/viewer.action?wmode=opaque" width="100%" height="830" data-id="361352864"
+                data-version="0" data-scale="1.0" data-html5-enabled="true" frameborder="0"
+                style="visibility:hidden;position:absolute;left:-9999px;overflow:hidden;background:#FFFFFF;"></iframe>
+        <div class="diagram-image-container ">
+            <img src="/WEB-INF/static/install/image/ha.png"
+                 width="700" alt="Typical Deployment in an HA group" data-full-width="700" data-full-height="830"
+                 id="gliffy-image-361352864-1320" class="img-responsive" usemap="#gliffy-map-361352864-7422"
+                 height="830">
+        </div>
+        <map id="gliffy-dynamic-map-361352864-1320" class="gliffy-dynamic"
+             name="gliffy-dynamic-map-361352864-1320"></map>
+    </div>
+</div>
+
+
+
+
+
+</body>
+</html>

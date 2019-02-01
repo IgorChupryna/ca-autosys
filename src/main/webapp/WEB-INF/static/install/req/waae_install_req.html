@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2 class="heading2" id="AESystemRequirements-SystemRequirementsforUNIXandLinux">System Requirements for UNIX and Linux</h2>
+<div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+    <p><strong>Note: </strong>As the number of users and the workload increases, you may see a performance benefit from adding additional memory and/or additional processing power. Additional processing power can be added either by using a faster CPU or by adding additional CPUs.</p>
+</div>
+<p>To install and run the CA Workload Automation AE server in a UNIX or Linux environment, the minimum recommended requirements are as follows:</p>
+<ul>
+    <li>Processor: 1 GHz, 2CPU</li>
+    <li>Physical memory: 4 GB RAM</li>
+    <li>Swap space: 2 GB</li>
+    <li>Hard disk free space: 5 GB</li>
+    <li><p>fsize: The file size ulimit must be set to unlimited. To determine the current setting, issue the following command:</p>
+        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+            <pre class="ca-code"><p>ulimit&nbsp;-f</p></pre>
+        </div><p>If the value is not unlimited, change this ulimit value by issuing the following command:</p>
+        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+            <pre class="ca-code"><p>ulimit&nbsp;-f&nbsp;unlimited</p></pre>
+        </div></li>
+    <li>Disk space requirements for CA Workload Automation AE:
+        <ul>
+            <li>Full product: 700 MB</li>
+            <li>Application Server, Client, Command Sponsor: 520 MB</li>
+            <li>Scheduler, Client, Agent: 430 MB</li>
+            <li>Application Server, Web Server: 360 MB</li>
+            <li>Application Server only: 300 MB</li>
+            <li>Agent only: 420 MB</li>
+            <li>Client only: 300 MB</li>
+            <li>SDK only: 250 MB</li>
+            <li>Documentation only: 250 MB</li>
+        </ul>
+        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+            <strong><strong>Notes:</strong></strong>
+            <ul>
+                <li>The system temporary directory (/tmp or $TMPDIR) requires a minimum of 400 MB disk space for the installation.</li>
+                <li>The installer creates a directory to store control files. By default, the /opt/CA/installer directory is created. The file system that the installer directory belongs to requires a minimum of 10 MB disk space. For more information about the /opt/CA/installer directory, see <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation/installation-preparation" class="conf-macro output-inline" data-hasbody="true">(UNIX) Changes to System Files and Directories</a>.</li>
+            </ul>
+        </div> </li>
+    <li>SDK runtime environment: 250 MB</li>
+    <li>Disk space for the database (to support default installation values):
+        <ul>
+            <li>Oracle: Data—800 MB, Index—80 MB</li>
+            <li>Sybase: Data—800 MB, Log—100 MB, tempdb—500 MB, tempdb log—50 MB</li>
+        </ul>
+        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+            <p><strong>Note: </strong>For more information about the database requirements, see the appropriate database documentation or consult your database administrator. For information about tuning the database, see <a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/administrating/ae-configuration/maintain-the-event-server" class="conf-macro output-inline" data-hasbody="false">Maintain the Event Server</a>.</p>
+        </div> </li>
+</ul>
+
+
+
+</body>
+</html>

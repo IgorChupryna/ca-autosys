@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+    <div>
+        <div class="">
+            <p>The following services are installed with the CA EEM Server:</p>
+            <ul>
+                <li><strong>Windows</strong></li>
+                <li>CA Directory - itechpoz -- Embedded CA Directory DSA (directory service agent) for the CA EEM LDAP
+                    repository.
+                </li>
+                <li>CA iTechnology iGateway 4.7 -- iTechnology iGateway service that handles the requests coming from CA
+                    EEM clients, processes the requests, and sends responses to the clients.
+                </li>
+                <li><strong>UNIX</strong></li>
+                <li>For CA Directory:
+                    <ul>
+                        <li>dxserver start itechpoz</li>
+                    </ul>
+                </li>
+                <li>For iGateway:
+                    <ul>
+                        <li>./igateway - b</li>
+                        <li>/bin/sh ./WDigateway.sh</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+
+    <div>
+        <div class="">
+            <p>The CA EEM Server uses the following default ports:</p>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Service</strong></th>
+                        <th class="confluenceTh"><strong>Port Number</strong></th>
+                        <th class="confluenceTh"><strong>Configurable</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Administration Port</td>
+                        <td class="confluenceTd">5250</td>
+                        <td class="confluenceTd">No</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Data DSA (itechpoz) Port</td>
+                        <td class="confluenceTd">509</td>
+                        <td class="confluenceTd">Yes. Edit the DXHOME/config/knowledge/itechpoz.dxc file</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+
+</div>
+</body>
+</html>

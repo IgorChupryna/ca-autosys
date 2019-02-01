@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class>
+    <p>This article documents the system requirements for the following common components:</p>
+    <ul>
+        <li>SSA</li>
+        <li>Event Management</li>
+        <li>CAICCI</li>
+        <li>EEM<br><br></li>
+    </ul>
+    <p><strong>Contents</strong></p>
+    <p></p>
+    <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline"
+         data-headerelements="H1,H2,H3,H4,H5,H6,H7" data-hasbody="false" data-macro-name="toc">
+        <ul style="">
+            <li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a
+                    href="#CACommonComponentsSystemRequirements-HardwareRequirements" class="toc-link">Hardware Requirements</a></span>
+            </li>
+            <li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a
+                    href="#CACommonComponentsSystemRequirements-SoftwareRequirements" class="toc-link">Software Requirements</a></span>
+            </li>
+
+            <li><span class="toc-item-body" data-outline="4"><span class="toc-outline">3</span><a
+                    href="#CACommonComponentsSystemRequirements-DatabaseRequirements-UNIX" class="toc-link">Database Requirements - UNIX</a></span>
+            </li>
+            <li><span class="toc-item-body" data-outline="5"><span class="toc-outline">4</span><a
+                    href="#CACommonComponentsSystemRequirements-suCommandonUNIX" class="toc-link">su Command on UNIX</a></span>
+            </li>
+            <li><span class="toc-item-body" data-outline="6"><span class="toc-outline">5</span><a
+                    href="#CACommonComponentsSystemRequirements-InstallationPrerequisitesEEM" class="toc-link">Installation Prerequisites EEM</a></span>
+            </li>
+        </ul>
+    </div>
+    <p></p>
+    <h2 id="CACommonComponentsSystemRequirements-HardwareRequirements">Hardware Requirements</h2>
+    <p><strong>Linux</strong></p>
+    <ul>
+        <li>Intel P4 1.6 GHz</li>
+        <li>Physical Memory: 1 GB (minimum) 4 GB (recommended)</li>
+        <li>Swap Space: 2 GB</li>
+        <li>Disk Space: At least 1 GB of free space</li>
+    </ul>
+
+    <h2 class="heading3" id="CACommonComponentsSystemRequirements-SoftwareRequirements">Software Requirements</h2>
+    <p>Depending on your operating environment, the following prerequisite software must be installed for the common
+        components to install and run correctly:</p>
+    <p><strong>Linux</strong></p>
+    <ul>
+        <li>compat-libstdc++-296 or higher for Red Hat Enterprise Linux 4.0</li>
+        <li>compat-libstdc++-33 or higher for Red Hat Enterprise Linux 5.0</li>
+        <li>compat for SuSE Linux</li>
+        <li>ncurses (32-bit) version 5 or higher on Linux (64-bit)</li>
+        <li>GTK+ 1.2</li>
+    </ul>
+    <h2 class="heading3" id="CACommonComponentsSystemRequirements-DatabaseRequirements-UNIX">Database Requirements -
+        UNIX</h2>
+    <div class="wiki-content">
+        <p>CA EEM uses DxGrid as its data store. The DxGrid data store is installed when you install CA EEM. The
+            installer performs a pre-installation check to determine if an Ingres database exists. If an Ingres database
+            exists, the data in the Ingres database is migrated to the DxGrid data store.</p>
+    </div>
+    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+         data-macro-name="sp-macrooverride-richtextbody-block">
+        <p><strong>Note: </strong>eTrust IAM r8.3 use an Ingres database.</p>
+    </div>
+    <p>Event Management requires PostgreSQL 9.5.2. PostgreSQL is automatically installed if you select the Event Manager
+        component during installation. The installer performs a pre-installation check to determine if an Ingres
+        database with the MDB or any CA database exists. If an Ingres database with the MDB or any CA database exists,
+        the installer displays the option to migrate the database data to the PostgreSQL database. If you select the
+        option to migrate the data, the post installation process performs the database data migration.</p>
+    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+         data-macro-name="sp-macrooverride-richtextbody-block">
+        <p><strong>Note: </strong>The migration may take a considerable amount of time depending on the data to be
+            migrated. If you do not select the option to migrate the data, you can migrate the database data manually at
+            a later time. <span>For more information, see the </span><a data-macro-name="sp-nobody-link"
+                                                                        href="/ca-workload-automation-ae/11-4-2/en/installing/ae-installation"
+                                                                        class="conf-macro output-inline"
+                                                                        data-hasbody="false">AE
+                Installation</a><span>.</span></p>
+    </div>
+    <h2 class="heading3" id="CACommonComponentsSystemRequirements-suCommandonUNIX">su Command on UNIX</h2>
+    <p>On UNIX, the CA Common Components Event Management installation process must be allowed to run the following
+        command with no user response or interaction:</p>
+    <p>The installer embeds other installation packages that are executed by running the su command.</p>
+
+    <h2 class="heading3" id="CACommonComponentsSystemRequirements-InstallationPrerequisitesEEM">Installation Prerequisites EEM</h2>
+
+    <div id="wiki-content">
+
+        <div>
+            <div class="">
+                <p>Verify that the computer that hosts the CA EEM Server meets the minimum operating system and system requirements.</p>
+                <ul>
+                    <li>Gather the required information about the installation options for the CA EEM Server.</li>
+                    <li>Verify that the following do not contain non-english letters in the names:
+                        <ul>
+                            <li>Host name of the computer where you want to install CA EEM server</li>
+                            <li>CA EEM installation folders</li>
+                            <li>The temporary folder path</li>
+                        </ul></li>
+                </ul>
+                <div class="bs-callout bs-callout-warning conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Important!</strong> If not installed already, install the 32-bit libuuid package before running 32-bit CA EEM r12.5 on RHEL x64.
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+
+    </div>
+
+
+
+
+
+</div>
+
+</body>
+</html>

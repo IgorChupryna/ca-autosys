@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The job_depends command is a client component that provides detailed reports about a job's dependencies and conditions. You can use this command to determine the current state of a job, its job dependencies. For a box job, you can use this command to determine the nested hierarchies specified in the definition. This command can generate a report of what jobs run during a given interval.</p>
+                <p>When you invoke job_depends, CA Workload Automation AE verifies that you have read access to the jobs that you are requesting information for.</p>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>job_depends&nbsp;</p><p>&nbsp;&nbsp;&nbsp;-c&nbsp;|&nbsp;-d&nbsp;|&nbsp;-r&nbsp;|&nbsp;-t&nbsp;</p><p>&nbsp; &nbsp;[-B&nbsp;<em>group</em>]&nbsp;[-F&nbsp;<em>from_datetime</em>]&nbsp;[-I&nbsp;<em>application</em>]&nbsp;[-J&nbsp;<em>job_name</em>]&nbsp;[-L&nbsp;<em>print_level</em>]&nbsp;[-e]&nbsp;[-s]&nbsp;[-T&nbsp;<em>to_datetime</em>]&nbsp;[-w][{-usr&nbsp;<em>username&nbsp;</em>{-pw|pwx}&nbsp;<em>password</em>|-saml&nbsp;<em>auth_artifact</em>}]&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-x]&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-?]</p></pre>
+                </div>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Note:</strong> The -c, -d, -r, and -t parameters are mutually exclusive. You must specify one of these parameters.
+                </div>
+                <ul>
+                    <li><p><strong>-B&nbsp;<em>group</em></strong><br>(Optional) Defines the group to generate a report for.<br><strong>Limits:</strong>&nbsp;When&nbsp;<strong>-I&nbsp;</strong><em>application</em>&nbsp;is also defined, the command generates the report only for jobs that match both<strong>&nbsp;-I&nbsp;</strong><em>application</em>&nbsp;and&nbsp;<strong>-B&nbsp;</strong><em>group</em>. A null group value might&nbsp;be specified as&nbsp;<strong>-B</strong>&nbsp;"".</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Notes:</strong>&nbsp;</p>
+                            <ul>
+                                <li>The -J <em>job_name</em> and -B <em>group</em> are mutually exclusive. You cannot specify the -J <em>job_name</em> with -B <em>group</em>.</li>
+                                <li>This value allows wildcard characters.</li>
+                            </ul>
+                        </div> </li>
+                    <li><p><strong>-c</strong></p><p>(Optional) Returns the current state of the job and the names of any jobs that depend on it.</p></li>
+                    <li><p><strong>-d</strong></p><p>(Optional) Returns the starting conditions for the job but includes no indication of its current status. This option displays jobs in a box hierarchically (use the -L parameter to set how many levels of nesting to display).</p></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-r</strong><br>(Optional) Returns a job's virtual resource dependencies, the amount of resource required, and whether the requirements are met. The job is specified using -J&nbsp;<em>job_name</em>&nbsp;option.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> If you integrate CA Workload Automation AE to work with CA Automation Suite for Data Centers, this option also returns real resource dependencies, the amount of real resource required, and whether the requirements are met.
+                        </div> </li>
+                    <li><p><strong>-t</strong></p><p>(Optional) Returns the starting conditions for a job; however, the top level of jobs (or boxes) reported is limited to those that start during the interval specified by the job or box’s date conditions. When a box satisfies those date conditions, all the jobs in the box are also returned (use the -L parameter to set how many levels of nesting to display).</p><p>When you set this parameter, job_depends does not calculate all complex job dependencies when reporting on the jobs and boxes that are scheduled to run. For example, JobB might&nbsp;have a date condition and depend on JobA. The date conditions for JobB might&nbsp;be met for a given day, while those for JobA are not. As a result, JobA does not run, nor does JobB. However, JobB appears on the job_depends report. Therefore, the starting conditions are also printed. For example, the following condition is reported for JobB:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>success(JobA)</p></pre>
+                        </div></li>
+                    <li><p><strong>-F&nbsp;<em>from_datetime</em></strong></p><p>(Optional) Defines the date and time that starts the interval about which to report.</p><p><strong>Limits:</strong>&nbsp;This value can be in “<em>MM/dd/[yy]yy hh:mm</em>” format, as follows:</p>
+                        <ul>
+                            <li><strong><em>MM</em></strong><br>This value can be a number in the range 01 through 12 specifying the month in which to begin the reporting interval.</li>
+                            <li><strong><em>dd</em></strong><br>This value can be a number in the range 01 through&nbsp;31 specifying the day on which to begin the reporting interval.</li>
+                            <li><strong><em>yyyy</em></strong><br>This value can be a number in the range 00 through&nbsp;99 or 1900 through&nbsp;2100 specifying the year in which to begin the reporting interval. When you enter a two-digit year, CA Workload Automation AE saves the setting to the database as a four-digit year. If you enter 79 or less, the product precedes your entry with 20; if you enter 80 or greater, the product precedes your entry with 19.</li>
+                            <li><strong><em>hh</em></strong><br>This value can be a number in the range 00 through&nbsp;23 specifying the hour in which to begin the reporting interval.</li>
+                            <li><strong><em>mm</em></strong><br>This value can be a number in the range 00 through&nbsp;59 specifying the minute in which to begin the reporting interval.</li>
+                        </ul></li>
+                    <li><p><strong>-I&nbsp;<em>application</em></strong><br>(Optional) Defines the application for which to generate a report.<br><strong>Limits:</strong>&nbsp;When -<strong>B</strong>&nbsp;<em>group</em>&nbsp;is also defined, the command generates the report only for jobs that match both&nbsp;<strong>-I&nbsp;</strong><em>application</em>&nbsp;and&nbsp;<strong>-B&nbsp;</strong><em>group</em>. A null application value might&nbsp;be specified as&nbsp;<strong>-I</strong>&nbsp;"".</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Notes:</strong>&nbsp;</p>
+                            <ul>
+                                <li>-J <em>job_name</em> and -I <em>application</em> are mutually exclusive. You cannot specify -J <em>job_name</em> with -I <em>application</em>.</li>
+                                <li>This value allows wildcard characters.</li>
+                            </ul>
+                        </div> </li>
+                    <li><p><strong>-J&nbsp;<em>job_name</em></strong><br>(Optional) Identifies the job about which to report.<br><strong>Limits:</strong>&nbsp;To report on all jobs, enter -J ALL.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Notes:</strong>&nbsp;</p>
+                            <ul>
+                                <li><strong>- J</strong>&nbsp;<em>job_name</em>&nbsp;is mutually exclusive with&nbsp;<strong>- B</strong>&nbsp;<em>group&nbsp;</em>and&nbsp;<strong>- I</strong>&nbsp;<em>application</em>. You cannot specify&nbsp;<strong>- J</strong>&nbsp;<em>job_name</em>&nbsp;with either&nbsp;<strong>- B</strong>&nbsp;<em>group</em>&nbsp;or&nbsp;<strong>- I</strong>&nbsp;<em>application</em>.&nbsp;</li>
+                                <li>This value allows wildcard characters.</li>
+                                <li>You do not need to precede the job name that contains a colon with a backslash.</li>
+                            </ul>
+                        </div> </li>
+                    <li><p><strong>-L&nbsp;<em>print_level</em></strong></p><p>(Optional) Specifies the number of levels into the box job hierarchy about which to report. For example, when you specify -L 2, the report contains data for the specified job (a box) and the top two levels of jobs in the box. This value can be any number.</p><p><strong>Default:</strong>&nbsp;-L (report about all levels in the box)</p><p><strong>Limits:</strong>&nbsp;To report about only the topmost level (that is, the box); set this value to -L 0.</p><p>To report about all levels in the box, omit the print_level value.</p><p>This parameter is valid only when you define the -d or -t parameters.</p></li>
+                    <li><strong>-e</strong><br>Generates all start times between the dates and times specified in the -F and -T options.<br><strong>Limits:</strong>&nbsp;This parameter is only valid with the -t parameter.</li>
+                    <li><p><strong>-s</strong></p><p>(Optional) Sorts the jobs in an order based on their next start time.</p><p><strong>Limits:</strong>&nbsp;This parameter is only valid with the -t parameter.</p></li>
+                    <li><p><strong>-T&nbsp;<em>to_datetime</em></strong><br>(Optional) Defines the date and time that ends the interval about which to report.</p><p><strong>Limits:</strong>&nbsp;This value can be in “<em>MM/dd/[yy]yy hh:mm</em>” format, as follows:</p>
+                        <ul>
+                            <li><strong><em>MM</em></strong><br>This value can be a number in the range 01 through&nbsp;12 specifying the month in which to end the reporting interval.</li>
+                            <li><strong><em>dd</em></strong><br>This value can be a number in the range 01 through&nbsp;31 specifying the day on which to end the reporting interval.</li>
+                            <li><strong><em>yyyy</em></strong><br>This value can be a number in the range 00 through&nbsp;99 or 1900 through&nbsp;2100 specifying the year in which to end the reporting interval. When you enter a two-digit year, CA Workload Automation AE saves the setting to the database as a four-digit year. If you enter 79 or less, the product precedes your entry with 20; if you enter 80 or greater, the product precedes your entry with 19.</li>
+                            <li><strong><em>hh</em></strong><br>This value can be a number in the range 00 through&nbsp;23 specifying the hour in which to end the reporting interval.</li>
+                            <li><strong><em>mm</em></strong><br>This value can be a number in the range 00 through&nbsp;59 specifying the minute in which to end the reporting interval.</li>
+                        </ul></li>
+                    <li><p><strong>-w</strong></p><p>(Optional) Displays all output columns in widened format.</p></li>
+                    <li>
+                        <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                            <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                            <p>(Optional) Specifies external security credentials as follows:</p>
+                            <ul>
+                                <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                                <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                    </div> </li>
+                                <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Notes: </strong></p>
+                                <ul>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                        <ul>
+                                            <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                            <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                            <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                        </ul></li>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                    <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                        <ul>
+                                            <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                            <li>CA Workload Automation AE is operating in native security mode.</li>
+                                        </ul></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                    <li><strong>-x</strong><p>(Optional) Returns the command version information to standard output.</p></li>
+                    <li><p><strong>-?</strong></p><p>(Optional) Displays help for the command.</p></li>
+                </ul>
+                <p><strong>Example: Report About Jobs Scheduled to Run on a Specific Day</strong></p>
+                <p>This example lists the jobs that are scheduled to run on Christmas day, 2007.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>job_depends&nbsp;-t&nbsp;-J&nbsp;ALL&nbsp;-F&nbsp;"12/25/2007&nbsp;00:00"&nbsp;-T&nbsp;"12/26/2007&nbsp;00:00"</p></pre>
+                </div>
+                <p><strong>Example: Report the Current Condition Status of a Specific Job</strong></p>
+                <p>This example generates a report about the current condition status of the JobX job.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>job_depends&nbsp;-c&nbsp;-J&nbsp;JobX</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

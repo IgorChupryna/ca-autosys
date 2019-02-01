@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 class="article-name" tabindex="0">Tune the Oracle Server</h1>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p>If you run a large number of jobs every day in your enterprise, you must tune the Oracle database to prevent database errors and improve the performance.</p>
+            <p>To tune the Oracle database, do the following:</p>
+            <ol>
+                <li><a data-macro-name="sp-plaintextbody-link" href="#TunetheOracleServer-ConfiguretheOracleDatabase" class="conf-macro output-inline" data-hasbody="true">Configure the Oracle database</a>.</li>
+                <li><a data-macro-name="sp-plaintextbody-link" href="#TunetheOracleServer-TunetheOracleDatabase" class="conf-macro output-inline" data-hasbody="true">Tune the Oracle database</a>.</li>
+            </ol>
+            <h2 class="heading5" id="TunetheOracleServer-ConfiguretheOracleDatabase">Configure the Oracle Database</h2>
+            <p>When you install CA Workload Automation AE, you must configure the database size, data file size, and index file size based on the number of jobs that run every day. For example, if you run 50,000 jobs every day, you must set the following values:</p>
+            <ul>
+                <li>Database size -- 2000 MB</li>
+                <li>Data file size (AEDB_DATA) -- 2000 MB</li>
+                <li>Index file size (AEDB_INDEX) -- 200 MB</li>
+            </ul>
+            <h2 class="heading5" id="TunetheOracleServer-TunetheOracleDatabase">Tune the Oracle Database</h2>
+            <p>To tune the Oracle database to run a large number of jobs every day, you must increase the default value of the processes parameter that is installed with Oracle.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note: </strong>The processes parameter specifies the maximum number of operating system processes that can be connected to the Oracle database concurrently. For more information about the processes parameter that is installed with Oracle, see the Oracle documentation.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li><p>Issue the following commands:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>#&nbsp;sqlplus&nbsp;/nolog</p><p>SQL&gt;&nbsp;connect&nbsp;sys/<em>sys_password</em>&nbsp;as&nbsp;sysdba</p><p>SQL&gt;&nbsp;shutdown</p><p>SQL&gt;&nbsp;exit</p></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>sys_password</em></strong><br>Defines the password that corresponds to the Oracle system user ID.</li>
+                    </ul>The Oracle database stops.</li>
+                <li><p>Issue the following commands:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>#&nbsp;cd&nbsp;$ORACLE_HOME/dbs</p><p>#&nbsp;cp&nbsp;-rfp&nbsp;spfile<em>ORACLE_SID</em>.ora&nbsp;spfile<em>ORACLE_SID</em>.ora.orig</p></pre>
+                    </div><p>A backup of the SPFILE binary file is created.</p></li>
+                <li><p>Issue the following commands:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>#&nbsp;sqlplus&nbsp;/nolog</p><p>SQL&gt;&nbsp;connect&nbsp;sys/<em>sys_password</em>&nbsp;as&nbsp;sysdba</p><p>SQL&gt;&nbsp;create&nbsp;pfile&nbsp;from&nbsp;spfile;</p><p>SQL&gt;&nbsp;exit</p></pre>
+                    </div><p>The PFILE text file is created from the SPFILE binary file.</p></li>
+                <li><p>Issue the following commands:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>#&nbsp;cd&nbsp;$ORACLE_HOME/dbs</p><p>#&nbsp;cp&nbsp;-rfp&nbsp;init<em>ORACLE_SID</em>.ora&nbsp;init<em>ORACLE_SID</em>.ora.orig</p></pre>
+                    </div><p>A backup of the init<em>ORACLE_SID</em>.ora text file is created.</p></li>
+                <li><p>Edit the init<em>ORACLE_SID</em>.ora file to make the following changes, and save the file:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>#&nbsp;vi&nbsp;init<em>ORACLE_SID</em>.ora</p><p>*.processes=value</p></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>value</em></strong><br>Defines the number of processes. The recommended value is 300.</li>
+                    </ul></li>
+                <li><p>Issue the following commands:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>#&nbsp;sqlplus&nbsp;/nolog&nbsp;</p><p>SQL&gt;&nbsp;connect&nbsp;sys/<em>sys_password</em>&nbsp;as&nbsp;sysdba&nbsp;</p><p>SQL&gt;&nbsp;create&nbsp;spfile&nbsp;from&nbsp;pfile;&nbsp;</p></pre>
+                    </div><p>The SPFILE binary file is created from the PFILE text file.</p></li>
+                <li><p>Issue the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>SQL&gt;&nbsp;startup</p></pre>
+                    </div><p>The database starts. The default value for the processes parameter is increased to 300.</p></li>
+                <li><p>Issue the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>SQL&gt;&nbsp;show&nbsp;parameter&nbsp;processes;</p></pre>
+                    </div><p>An output similar to the following is displayed:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VALUE</p><p>------------------------------------&nbsp;-----------&nbsp;------</p><p>aq_tm_processes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;integer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0</p><p>db_writer_processes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;integer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p><p>gcs_server_processes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;integer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0</p><p>job_queue_processes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;integer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10</p><p>log_archive_max_processes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;integer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2</p><p>processes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;integer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;300</p></pre>
+                    </div><p>You can verify the number of processes has been changed to 300.</p></li>
+            </ol>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

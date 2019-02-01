@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+    <div>
+        <div class="">
+            <p>CA Workload Automation AE runs the following services:</p>
+            <ul>
+                <li>Agent</li>
+                <li>Application server</li>
+                <li>Scheduler</li>
+                <li>Web server</li>
+            </ul>
+            <p>You can start, stop, restart, or pause and resume a CA Workload Automation AE service. You can also
+                verify the status of a CA Workload Automation AE service.</p>
+            <p>During the installation, if the appropriate check boxes are selected on the corresponding installation
+                panels, the services start automatically on system startup. After you installed CA Workload Automation
+                AE, you stop and start a service, restart a service, or pause and resume a service for the configuration
+                changes to take effect.</p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+
+    <div>
+        <div class="">
+            <p class="heading2"><span style="color: rgb(51,51,51);">Use the unisrvcntr command to start, stop, restart, or verify the status of a service on UNIX.</span>
+            </p>
+            <p>To control a service, log in as the root user and enter the following command at the operating system
+                command prompt:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>unisrvcntr&nbsp;start|stop|restart|status&nbsp;<em>service_name</em></p></pre>
+            </div>
+            <ul>
+                <li><strong>start</strong><br>Starts a service.</li>
+                <li><strong>stop</strong><br>Stops a service.</li>
+                <li><strong>restart</strong><br>Restarts a service.</li>
+                <li><strong>status</strong><br>Verifies the status of a service.</li>
+                <li><strong><em>service_name</em></strong><br>Specifies the name of the service. Specify the following
+                    values as appropriate based on the service you want to control:
+                    <ul>
+                        <li>waae_agent-WA_AGENT -- Controls the agent. WA_AGENT specifies the name of the agent.</li>
+                        <li>waae_server.<em>instance_name</em>&nbsp;-- Controls the application server that is
+                            associated with the CA Workload Automation AE instance.
+                        </li>
+                        <li>waae_sched.<em>instance_name</em>&nbsp;-- Controls the scheduler that is associated with the
+                            CA Workload Automation AE instance.
+                        </li>
+                        <li>waae_webserver.<em>instance_name</em>&nbsp;-- Controls the web server that is associated
+                            with the CA Workload Automation AE instance.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <p>You can also use the sendevent command to stop the scheduler or application server as follows:</p>
+            <ul>
+                <li><p>(scheduler only) Using the sendevent command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>sendevent&nbsp;-E&nbsp;STOP_DEMON</p></pre>
+                    </div>
+                    <p>The STOP_DEMON event is sent to the database. The scheduler reads the STOP_DEMON event, enters an
+                        orderly shutdown cycle by completing any processing&nbsp;it&nbsp;is&nbsp;performing, and
+                        stops.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong> There might be a delay between when you send the STOP_DEMON event and
+                            when the scheduler reads it and it shuts down. If the scheduler does not stop immediately,
+                            do not send another STOP_DEMON event because the scheduler will process that event the next
+                            time it starts and promptly shuts down. To assign a high priority to the sendevent command,
+                            include the -P 1 option as follows:</p>
+                        <div class="code-panel conf-macro output-block" data-hasbody="true"
+                             data-macro-name="sp-macrooverride-richtextbody-block">
+                            <pre class="ca-code"><p>sendevent&nbsp;-E&nbsp;STOP_DEMON&nbsp;-P&nbsp;1</p></pre>
+                        </div>
+                    </div>
+                </li>
+                <li><p>Using the sendevent -E STOP_DEMON -v option:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>sendevent&nbsp;-E&nbsp;STOP_DEMON&nbsp;-v&nbsp;ROLE=value</p></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>ROLE=value</em></strong><br>Stops the application server or the scheduler
+                            according to the role or combination of roles specified. Specify the values as follows:
+                            <ul>
+                                <li><strong>A</strong><br>Stops the application server.</li>
+                                <li><strong>P</strong><br>Stops the primary scheduler.</li>
+                                <li><strong>S</strong><br>Stops the shadow scheduler.</li>
+                                <li><strong>T</strong><br>Stops the tie-breaker scheduler.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note: </strong>You can specify any combination of roles. For example, if you specify
+                        ROLE=PST, the primary, shadow, and tie-breaker scheduler are shut down.
+                    </div>
+                </li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>You can also start the scheduler using the eventor command.</li>
+                    <li>The event server must be available, running, and properly identified before you can start the
+                        scheduler or application server.
+                    </li>
+                    <li>Jobs that are processing when you stop the agent continue to run, but the agent cannot track the
+                        process of those jobs.
+                    </li>
+                    <li>Stopping the scheduler does not affect jobs that are already running. They continue to run to
+                        completion, when their exit events are stored until the scheduler is restarted. When you stop
+                        the scheduler, jobs dependent on the events that are processed at the time of shutdown are
+                        scheduled but are not run until you start the scheduler.
+                    </li>
+                    <li>Do not attempt to stop the scheduler by terminating the process. This method stops the scheduler
+                        immediately, even if it is processing an event. Also, if you are using dual event servers and
+                        you terminate the process in any way other than issuing the sendevent command, the databases can
+                        lose synchronization.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+
+    <div>
+        <div class="">
+            <p>You can pause and resume the scheduler or the application server to read the modified values of the
+                following parameters in the configuration file at runtime:</p>
+            <ul>
+                <li>CrossPlatformScheduling</li>
+                <li>GlobalPendMachDelay</li>
+                <li>GlobalPendMachStatus</li>
+                <li>GlobalPendMachInterval</li>
+                <li>AggregatorStatistics</li>
+                <li>EnableIPCaching</li>
+                <li>ISDBGACTIV</li>
+                <li>LOGROLLOVER</li>
+                <li>NotifyMethod</li>
+                <li>NotifySMTPHost</li>
+                <li>UnicenterEvents</li>
+                <li>ServiceDeskUser</li>
+                <li>ServiceDeskCust</li>
+                <li>ServiceDeskURL</li>
+                <li>DCAUser</li>
+                <li>DCAURL</li>
+                <li>UseSMTPAuthentication</li>
+                <li>NotifySMTPUser</li>
+                <li>NotifySMTPFromAddress</li>
+                <li>SetJobAttributeEnvironmentals</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> The scheduler and application server also refresh the internal components
+                responsible for managing real resources.
+            </div>
+            <p class="heading2"><strong style="line-height: 1.42857;">(UNIX) Follow these steps:</strong></p>
+            <ol>
+                <li>Run the shell that is sourced to use CA Workload Automation AE.<br>The operating system command
+                    prompt appears.
+                </li>
+                <li><p>Enter the following commands at the operating system prompt:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>unisrvcntr&nbsp;status&nbsp;waae_sched.$AUTOSERV</p><p>unisrvcntr&nbsp;status&nbsp;waae_server.$AUTOSERV</p></pre>
+                    </div>
+                    <p>The scheduler and application server process IDs are displayed as follows:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CA&nbsp;Services&nbsp;Status&nbsp;Report</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Component&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status&nbsp;&nbsp;&nbsp;&nbsp;</p><p>------------------------------------&nbsp;&nbsp;-------&nbsp;&nbsp;--------------</p><p>WAAE&nbsp;Scheduler&nbsp;(ACE)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;32220&nbsp;&nbsp;running</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CA&nbsp;Services&nbsp;Status&nbsp;Report</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Component&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status&nbsp;&nbsp;&nbsp;&nbsp;</p><p>------------------------------------&nbsp;&nbsp;-------&nbsp;&nbsp;--------------</p><p>WAAE&nbsp;Application&nbsp;Server&nbsp;(ACE)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;33330&nbsp;&nbsp;running</p></pre>
+                    </div>
+                </li>
+                <li><p>Enter the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>kill&nbsp;-HUP&nbsp;{scheduler_pid|applicationserver_pid}</p></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>scheduler_pid</em></strong><br>Defines the process ID of the scheduler that you
+                            want to pause and resume.
+                        </li>
+                        <li><strong><em>applicationserver_pid</em></strong><br>Defines the process ID of the application
+                            server that you want to pause and resume.
+                        </li>
+                    </ul>
+                    The scheduler or application server pause and resume.
+                </li>
+            </ol>
+            <p><strong>(Windows) Follow these steps:</strong></p>
+            <ol>
+                <li><p>Log in as a user with Windows Administrators group privileges.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> If you are not an administrator, launch the Administrator utility using
+                        the
+                        <em>Run as administrator</em> option.
+                    </div>
+                </li>
+                <li>Click Start, Programs, CA, Workload Automation AE, Administrator.</li>
+                <li>Select an instance from the Instance drop-down list in the Settings pane and click Apply.</li>
+                <li>Click the Services icon on the toolbar.</li>
+                <li>Right-click the service, and click Pause.<br>The selected service pauses. The Status column
+                    indicates the status.
+                </li>
+                <li>Right-click the service, and click Resume.<br>The selected service resumes.</li>
+            </ol>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+
+</div>
+</body>
+</html>

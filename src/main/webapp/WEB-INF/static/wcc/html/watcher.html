@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p>A&nbsp;File Watcher job is similar to a Command job. However, instead of starting a user-specified command on a client computer, a File Watcher job starts a process that monitors for the existence and size of a specific operating system file. When that file reaches the specified minimum size and is no longer growing in size, the File Watcher job completes successfully, indicating that the file has arrived.</p>
+            <p>Using File Watcher jobs provides a means of integrating events that are external to CA Workload Automation AE into the processing conditions of jobs. For example, assume a file must be downloaded from a mainframe, and it is expected to arrive after 2:00 a.m. After it arrives, a batch job is run to process it, possibly even starting a whole sequence of jobs.</p>
+            <p>You could set up a File Watcher job to start at 2:00 a.m., wait for the arrival of the specified file, and exit. You could also set up the batch job so that the completion of the File Watcher job is its only starting condition.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> Difference between File Watcher and File Trigger Jobs on Windows<br>On Windows, File Watcher and File Trigger jobs produce different results when the dot (.) character is used as a literal. The pattern "*.*" is treated differently depending on which job is used:</p>
+                <ul>
+                    <li>File Trigger jobs treat a dot character (.) as a literal. To be considered a match, a file must contain a dot and characters on either side of it. For example, if two files exist in the same directory, one named "abc" and the other "abc.txt," only "abc.txt" is considered a match.</li>
+                    <li>File Watcher jobs use Windows native APIs, which assume the dot character can be implicit. For example, File Watcher jobs consider "abc" to be the same as "abc." So, in this case, either "abc" or "abc.txt" is a match.</li>
+                </ul>
+            </div>
+            <h2 class="heading2" id="ManageFileWatcherJobsUsingCAWCC-DefineaFileWatcherJob">Define a File Watcher Job</h2>
+            <p>You can define a File Watcher job to start a process that monitors for the existence and size of a specific operating system file. When that file reaches the specified minimum size and is no longer growing in size, the File Watcher job completes successfully, indicating that the file has arrived.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> To run these jobs, your system requires CA WA Agent for UNIX, Linux, or Windows.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a File Watcher (FW) job.</li>
+                <li>Specify the following required properties:
+                    <ul>
+                        <li><strong>Name</strong><br>Defines the name of the job that you want to schedule. <br><strong>Limits:</strong> Up to 64 characters; valid characters are a-z, A-Z, 0-9, period (.), underscore (_), hyphen (-), and pound (#); do not include embedded spaces or tabs</li>
+                        <li><strong>Send to machine</strong><br>Specifies the name of the machine on which the job runs.</li>
+                        <li><strong>File(s) to watch</strong><br>Specifies the path to and name of one or more files to monitor.</li>
+                    </ul></li>
+                <li>(Optional) Specify optional <a data-macro-name="sp-plaintextbody-link" href="#ManageFileWatcherJobsUsingCAWCC-FileWatcherProperties" class="conf-macro output-inline" data-hasbody="true">File Watcher job properties</a>.</li>
+                <li>(Optional) Specify <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/scheduling/schedule-with-ca-wcc/manage-common-job-properties" class="conf-macro output-inline" data-hasbody="true">common properties that apply to all job types</a>.</li>
+                <li>Commit the job.<br>The File Watcher job is defined.</li>
+            </ol>
+            <h3 class="heading3" id="ManageFileWatcherJobsUsingCAWCC-FileWatcherJobExamples">File Watcher Job Examples</h3>
+            <p>The following example describes a sample File Watcher job that monitors file activity.</p>
+            <p><strong>Example: Creating a File Watcher Job</strong></p>
+            <p>This example creates a File Watcher job named EOD_watch. The job watches every 60 seconds for a file named EodTransFile, located in the /tmp directory. When the watched file reaches the specified minimum size and does not change between check intervals, it is considered complete. When this occurs, the File Watcher job ends with a SUCCESS status.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Create a File Watcher job.</li>
+                <li>Enter the following properties:
+                    <ul>
+                        <li>Name -- EOD_watch</li>
+                        <li>Send to machine -- SYSAGENT</li>
+                        <li>File(s) to watch -- /tmp/EodTransFile</li>
+                        <li>Minimum file size -- 50000</li>
+                        <li>Watch interval -- 60</li>
+                    </ul></li>
+                <li>Commit the job.</li>
+            </ol>
+            <h3 class="heading3" id="ManageFileWatcherJobsUsingCAWCC-FileWatcherProperties">File Watcher Properties</h3>
+            <p>The File Watcher category includes the following properties:</p>
+            <p><strong>Agent job class</strong></p>
+            <p>(Optional) Specifies the job class that this job runs under. The agent maintains a list of job classes and the number of initiators assigned to each job class. A job class with more initiators can process a greater number of jobs more quickly. For higher-priority jobs, assign a job class that contains more initiators.</p>
+            <p><strong>Limits:</strong> Up to 32 characters; cannot contain delimiters (such as spaces)</p>
+            <p><strong>JIL attribute:</strong> job_class</p>
+            <p><strong>File(s) to watch</strong></p>
+            <p>Specifies the path to and name of one or more files to monitor. To specify multiple files, use the asterisk (*) and question mark (?) wildcard characters. Use * for any number of characters and ? for any single character. Do not use the * and ? in the path.</p>
+            <p>This property supports Global Variable substitution.</p>
+            <p><strong>Limits:</strong> Up to 255 characters; case-sensitive</p>
+            <p><strong>UNIX Notes:</strong></p>
+            <ul>
+                <li>You can specify variables exported from the profile script or global variables in the name.</li>
+                <li>Wildcard characters are expanded according to the wildcard expansion rules of the Bourne Shell.</li>
+                <li>You can specify system environment variables, job profile environment variables, or global variables in the name. If the variable is referenced in the job profile, we recommend that you enclose the variable in braces (for example, ${PATH}). Use the $$global_name, $$(global_name), or $${global_name} format to reference global variables.</li>
+            </ul>
+            <p><strong>Windows Notes:</strong></p>
+            <ul>
+                <li>You can specify system environment variables, job profile environment variables, or global variables in the name. If the variable is referenced in the job profile, we recommend that you enclose the variable in braces (for example, %{PATH}%). Use the $$global_name, $$(global_name), or $${global_name} format to reference global variables.</li>
+                <li>When specifying drive letters in job definitions, you must escape the colon with quotation marks or backslashes. For example, C\:\tmp or "C:\tmp" is valid; C:\tmp is not.</li>
+            </ul>
+            <p><strong>Example:</strong> /tmp/a*.data</p>
+            <p><strong>JIL attribute:</strong> watch_file</p>
+            <p><strong>Minimum file size</strong></p>
+            <p>(Defaulted) Specifies the minimum file size (in bytes) that must be reached to cause this job to complete.</p>
+            <p><strong>Default: </strong>0- 9223372036854775807</p>
+            <p><strong>JIL attribute:</strong> watch_file_min_size</p>
+            <p><strong>Watch interval</strong></p>
+            <p>(Defaulted) Specifies the frequency (in seconds) the File Watcher job checks for the existence and size of the watched file.</p>
+            <p><strong>Limits: </strong>0-2147483647</p>
+            <p><strong>Default:</strong> 60</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes: </strong></p>
+                <ul>
+                    <li>The job is considered complete when the watched file reaches the minimum size and remains in a steady state (has not grown or shrunk ) during the specified interval. We recommend that you specify a reasonable interval to help ensure that the file does not appear to be in a steady state when it is still being modified over a longer period of time.</li>
+                    <li>If you are monitoring for the existence of a file (not the size) and the file already exists when the job runs, the job completes immediately. The value in the Watch interval field is ignored.</li>
+                    <li>On CA Workload Automation Agent, if you do not specify this attribute, the job checks the file every 30 seconds (or the time specified in the agent's filemonplugin.sleepperiod parameter). Additionally, if the file was created or updated between polls, the job checks whether the file remained in a steady state (did not grow) for 60 seconds (the default watch_interval value).</li>
+                </ul>
+            </div>
+            <p><strong>JIL attribute:</strong> watch_interval</p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

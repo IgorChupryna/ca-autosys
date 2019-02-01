@@ -19,6 +19,14 @@ public class Download {
     @Column
     private String path;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Column
     private String name;
 

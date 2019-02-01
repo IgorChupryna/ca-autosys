@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>You can use the chase command to verify that jobs are running and to evaluate the health of the agent running a job. The chase command does the following:</p>
+                <ol>
+                    <li>Obtains a list of jobs from the database that have been in the STARTING state for more than 120 seconds</li>
+                    <li>Obtains a list of jobs from the database that are in the RUNNING state</li>
+                    <li>Passes the list of jobs that are in the RUNNING state to the associated agents</li>
+                </ol>
+                <p>Each agent then verifies that the jobs are running and returns the process status to the chase command. If the chase command detects errors, it can be instructed to send an alarm or send an event to change the status of the job to FAILURE.</p>
+                <p>You can run the chase command at regular intervals to track network problems. For example, if a computer is unreachable while running a job, the chase command detects that the computer is down and can send an alarm to alert you about the problem.</p>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Note: </strong>The database must be available and both the scheduler and the application server must be running.
+                </div>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>chase&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-A]&nbsp;[-E]&nbsp;[{-usr&nbsp;<em>username&nbsp;</em>{-pw|pwx}&nbsp;<em>password</em>|-saml&nbsp;<em>auth_artifact</em>}]</p><p>&nbsp;&nbsp;&nbsp;[-x]&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-A<br></strong>(Optional) Sends an alarm when any job is stuck in the STARTING or RUNNING states.</p></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-E<br></strong>(Optional) Puts a job in FAILURE status when the job and its agent are not running on the client but the database indicates they should be. In this case, the job restarts if the job definition includes the n_retrys attribute. The scheduler must be running for chase to automatically restart jobs.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> When chase cannot connect to an agent computer, it cannot determine the reason. To prevent jobs from being restarted when they might already have run, chase does not change the status of jobs in this case, even when you run it with the -E parameter.
+                        </div> </li>
+                    <li>
+                        <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                            <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                            <p>(Optional) Specifies external security credentials as follows:</p>
+                            <ul>
+                                <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                                <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                    </div> </li>
+                                <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Notes: </strong></p>
+                                <ul>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                        <ul>
+                                            <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                            <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                            <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                        </ul></li>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                    <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                        <ul>
+                                            <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                            <li>CA Workload Automation AE is operating in native security mode.</li>
+                                        </ul></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                    <li><p>-x<br>(Optional) Returns the command version information to standard output.</p></li>
+                    <li><p>-?<br>(Optional) Displays help for the command.</p></li>
+                </ul>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <p><strong>Notes:</strong></p>
+                    <ul>
+                        <li>When chase detects errors, the client sends them to standard output. You can use the optional -A and -E parameters with chase to further define the actions to take for error conditions.</li>
+                        <li>When you run chase with no options, CA Workload Automation AE performs all chase activities and writes the results to standard output, but sends no alarms or job restart events.</li>
+                        <li>Running the chase command does not result in the automatic restart of jobs that are stuck in the STARTING state. Instead, chase writes a message to standard output that manual intervention might be required. Jobs that are stuck in the STARTING state are not be automatically restarted -- it is possible (for example, due to network problems) that the job might already have run, and its state was not yet communicated to the database. Verify the actual status of these jobs before you manually restart them.</li>
+                        <li><p>You can reduce the alarms that are generated by the chase utility by setting the following environment variables on the computer where you are running the chase command:<br><strong>CHASE_SLEEP<br></strong>Specifies the time (in seconds) that the chase utility pauses:</p>
+                            <ul>
+                                <li><p>Between successive sends of chase data to an agent following a connection failure.&nbsp;<br><strong>Default:</strong> 5<br><strong>Limits:</strong> 1 or higher; increasing this value might delay recovery during a network failure. Decreasing this value might result in premature chase failures.</p></li>
+                                <li><p>Before raising the CHASE_ALARM alarm. During periods of network load or high workload activity, you can set this variable to let the chase utility extend the time that it waits for the scheduler to receive delayed job statuses from the agent; thus preventing the chase utility from raising false alarms.<br><strong>Default:</strong> 10</p></li>
+                            </ul><p><strong>CHASE_STARTING_WAIT_INTERVAL<br></strong>Specifies the minimum time (in minutes) that the chase utility allows jobs to remain in the STARTING state before raising the CHASE_ALARM alarm. During periods of network load or high workload activity, it might take more than the default two minutes for the agent to notify the scheduler that a job is executing. Setting this environment variable helps reduce the number of alarms that the chase utility generates during this time.&nbsp;<br><strong>Default:</strong> 2<br><strong>Limits:</strong> 1 to 35791394</p></li>
+                        <li><p>The chase command does not always work in an environment with agents installed in a load-balancing cluster. In that case, the chase command works only when the cluster name is configured to point to the same node where the job ran. For example, suppose that you have installed agents in a 3-node cluster that is named CLUSTERNODE that is configured to point to either NODE1, NODE2, or NODE3. Also, suppose that you create a machine definition that specifies CLUSTERNODE as the node_name attribute value. If the cluster name, CLUSTERNODE, points to NODE1 when you start the job and you configure it to point to NODE2 after the job completes, then all chase requests are directed at NODE2. The chase command does not verify jobs running on NODE1 until you configure the cluster name to point back to NODE1.</p></li>
+                    </ul>
+                </div>
+                <p>The following notes apply only to UNIX legacy agents (types r, L, and l machines):</p>
+                <ul>
+                    <li>For Command jobs, the legacy agent checks for the parent process ID of the UNIX process executing the command. The legacy agent also verifies that the agent has a lock on the job agent log file.</li>
+                    <li>If you disable file locking on the client, the legacy agent cannot verify that a job is running. Therefore, ensure that the directory specified by the AutoRemoteDir parameter in the configuration file is on a file system that has file locking enabled.</li>
+                </ul>
+                <p><strong>Example: Verify that a Job is Running, Generate an Alarm, and Restart the Job</strong></p>
+                <p>This example verifies whether the job is running, generates an alarm if there is an inconsistency, and restarts the job if necessary.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>chase&nbsp;-A&nbsp;-E</p></pre>
+                </div>
+                <h2 class="heading3" id="chaseCommand—VerifyJobSTARTINGorRUNNINGStatus-RunningChaseAutomatically">Running Chase Automatically</h2>
+                <p>We recommend that you run chase automatically at regular intervals to track problems on the network. For example, if a computer becomes unreachable while running a job, chase detects that the computer is down and sends an alarm. If a user has a monitor running, they are also alerted to the problem.</p>
+                <p>On UNIX, you can run chase automatically by using CA Workload Automation AE to run it as a job. The $AUTOSYS/install/data/chase.jil file contains the job that instructs CA Workload Automation AE to run chase every 10 minutes on the computer running the scheduler (“charley,” in the following example). You can change the specific parameters in this script to suit your own environment, and submit it to the jil command by running:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>jil&nbsp;&lt;&nbsp;$AUTOSYS/install/data/chase.jil</p></pre>
+                </div>
+                <p><strong>Example: Run chase Automatically</strong></p>
+                <p>This example defines a job for automatically running chase:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>#&nbsp;chase&nbsp;function</p><p>#</p><p>insert_job:&nbsp;chase</p><p>machine:&nbsp;charley</p><p>command:&nbsp;$AUTOSYS/bin/chase&nbsp;-A&nbsp;-E</p><p>date_conditions:&nbsp;yes</p><p>days_of_week:&nbsp;all</p><p>start_mins:&nbsp;05,15,25,35,45,55</p><p>max_run_alarm:&nbsp;5&nbsp;/*&nbsp;Change&nbsp;if&nbsp;many&nbsp;jobs&nbsp;are&nbsp;running&nbsp;*/</p><p>term_run_time:&nbsp;10&nbsp;/*&nbsp;Change&nbsp;if&nbsp;many&nbsp;jobs&nbsp;are&nbsp;running&nbsp;*/</p><p>#&nbsp;These&nbsp;output&nbsp;files&nbsp;can&nbsp;be&nbsp;changed</p><p>std_out_file:&nbsp;$AUTOUSER/out/chase.out</p><p>std_err_file:&nbsp;$AUTOUSER/out/chase.err</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

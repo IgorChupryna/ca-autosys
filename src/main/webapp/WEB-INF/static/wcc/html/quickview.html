@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p></p>
+            <p>Quick View can be used as a diagnostic tool to monitor critical aspects of jobs that you run from CA Workload Automation AE, as an alternative to searching through a command line report for the job status information you want. If needed, you can print the visible portion of the job flow or save an image of the entire job flow. You can access Quick View by clicking the Quick View tab on the main CA WCC page.</p>
+            <p>For added convenience, from within Quick View, you can access Quick Edit to edit the properties of the selected job, or access the Send Event dialog to send an event to one or more selected jobs.</p>
+            <p></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H1,H2" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#CAWCCQuickViewApplication-QuickView" class="toc-link">Quick View</a></span></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#CAWCCQuickViewApplication-QuickViewNavigation" class="toc-link">Quick View Navigation</a></span></li><li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a href="#CAWCCQuickViewApplication-DisplayPreferences" class="toc-link">Display Preferences</a></span></li><li><span class="toc-item-body" data-outline="4"><span class="toc-outline">4</span><a href="#CAWCCQuickViewApplication-Security" class="toc-link">Security</a></span></li><li><span class="toc-item-body" data-outline="5"><span class="toc-outline">5</span><a href="#CAWCCQuickViewApplication-PriorJobRunLogs" class="toc-link">Prior Job Run Logs</a></span></li></ul></div>
+            <p></p>
+            <h2 class="heading2" id="CAWCCQuickViewApplication-QuickView">Quick View</h2>
+            <p>Quick View lets you access consolidated job detail information for CA Workload Automation AE servers. Whenever you search for a job, Quick View accesses the CA Workload Automation AE API, then parses the resulting information for display.</p>
+            <p>For the selected CA Workload Automation AE job, Quick View displays the job details, job execution flow, dependencies, starting conditions, prior job run logs, and prior job run events. Job details include specific job properties such as job type, start and end time, and priority. Only run time properties (Start time, End time, Status, Run, Priority, Exit Code) and the properties for which values have been entered in the job definition are displayed.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> You cannot edit job properties directly in Quick View; however, if you are authorized to use Quick Edit, clicking Quick Edit in the Job Details section opens a new window that contains a subset of the functionality of the Quick Edit application. If you need the full functionality of Quick Edit, you can access the application by clicking the QEDIT tab. For more information, see
+                <em>Quick Edit Help</em>.
+            </div>
+            <p>All upstream and downstream levels are displayed by default in the graphical Job Flow. Job dependencies are additional jobs that can run only if a condition placed on the selected job is satisfied, similar to successors. For example, if the selected job runs successfully, one dependent job runs; if it fails, a different dependent job runs. Starting conditions are conditions that must be satisfied for the selected job to start. Each starting condition listed in the table represents one clause in a string, separated by AND or OR logic. The selected job can start only if the entire string evaluates to true. Resource dependencies are resources that the selected job needs in order to run. Details of prior job runs can be displayed, and you can also view the Standard Out log, Standard Error log, or Agent Log for a prior run of the selected CA Workload Automation AE command or user defined job. Additionally, logs can be displayed for the job types that support agent logs. Events that occurred during prior job runs can be displayed with their associated event details, and resulting alarms, if any.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes: </strong></p>
+                <ul>
+                    <li><p>Because the data displayed in Quick View is retrieved from three different sources (CA Workload Automation AE server requests, the CA WCC DB, and the Flow Model), job details, dependencies, and job status information can display different results. For example, a job created in Quick Edit and retrieved in Quick View can be displayed in the Search Results section but its details may not be displayed if the job collector run is not completed. Additionally, job status in the Job Details section can indicate running while the latest job status in the Job Run section can indicate success, due to timing differences resulting from the way the requests are handled by the CA Workload Automation AE server.</p></li>
+                    <li><p>Performing a Refresh updates the information displayed on the page. The Job Collector Run Interval specifies the interval at which data is obtained from the CA Workload Automation AE servers and server changes are synchronized. This value is set in the Monitoring Preferences section in Configuration Manager. For more information, see&nbsp;<em>Configuration Manager Help</em>.</p></li>
+                </ul>
+            </div>
+            <h2 class="heading2" id="CAWCCQuickViewApplication-QuickViewNavigation">Quick View Navigation</h2>
+            <p>When you start a Quick View session, the initial page displays the Search section. You can then specify a server and search for a specific job, list of multiple jobs separated by a comma, spaces, new line separators, or find jobs with names that contain the characters you specify. All of these job combinations support wildcards.&nbsp;</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> New line separators in job name are supported by Chrome, Firefox, and Safari.</p>
+            </div>
+            <h3 class="heading3" id="CAWCCQuickViewApplication-CAWorkloadAutomationAEJobInformation">CA Workload Automation AE Job Information</h3>
+            <p>Quick View displays the following information for the CA Workload Automation AE job you specify:</p>
+            <ul>
+                <li><p>Job Details -- Displays job properties such as job name, job type, start and end times, status, and machine.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong>&nbsp;Only the run time properties (Start time, End time, Status, Run, Priority, Exit Code) and properties for which values have been specified are displayed in Quick View.</p>
+                    </div> </li>
+                <li>Job Flow -- Graphically displays the flow of the selected job or box job, including its upstream (predecessor) and downstream (successor) jobs or box jobs. If applicable, job resource and global variable dependencies are also displayed. Additionally, jobs on other CA WCC servers that are dependencies of the selected job (cross-reference job dependencies) are displayed with the status and job name. However, if the data for the cross-referenced job is not collected in CA WCC (for example, a CA Workload Automation CA 7 Edition job) and the job is a predecessor to a job in the view, the dependency is displayed with an unknown job icon, and the job and instance names. Cross-reference dependency links are displayed with a dashed line.</li>
+                <li>Dependent Jobs -- Lists the additional jobs that can run only if a condition placed on the selected job is satisfied, similar to successors. For example, if the selected job runs successfully, one dependent job runs; if it fails, a different dependent job runs.</li>
+                <li>Starting Conditions -- Displays the conditions that must be satisfied for the selected job to start, similar to predecessors.
+                    <ul>
+                        <li><p>Job Dependencies -- Lists dependencies and their details, including atomic condition, expected value, current status, and whether the condition was satisfied.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong>Note:</strong> Quick View displays each job or global variable in the condition string, enabling you to pinpoint which specific starting conditions were met.
+                            </div> </li>
+                        <li>Job Resource Dependencies -- Lists the resources that the selected job is dependent on. Resource details are also displayed.</li>
+                    </ul></li>
+                <li>Job Runs -- Lists the details of prior job runs such as start and end times, status, run, exit code, and machine.
+                    <ul>
+                        <li>Events -- Lists each event for a prior job run, including event status, event text, the time the event was sent, number of retries, event state, the time the event was processed, the name of the machine that the job was run on, and any related alarms.</li>
+                        <li><p>Logs -- Displays the log type you select for a prior job run. For a command or user defined job, one of the following can be selected: Standard Out, Standard Error, or Agent Log. Additionally, logs can be displayed for the job types that support agent logs.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong>Note:</strong> For some job types, no log is available.
+                            </div> </li>
+                    </ul></li>
+            </ul>
+            <h2 class="heading2" id="CAWCCQuickViewApplication-DisplayPreferences">Display Preferences</h2>
+            <p>You can customize your Quick View display by selecting the following options:</p>
+            <ul>
+                <li>The number of rows per page to display in the Search Results table.</li>
+                <li>The number of rows per page to display in a report table.</li>
+                <li>The number of search history items to display.</li>
+                <li>The job details default format (tree or JIL).</li>
+                <li>The maximum height of the Job Flow section.</li>
+                <li>The report types to display.</li>
+            </ul>
+            <p>Three report types are available for the selected job: Dependent Jobs, Starting Conditions, which includes job resource dependencies, and Job Runs, which includes job run events. Initially, reports of all types are displayed, but you can specify the report types that you want to be displayed for your jobs using the Customize dialog. For example, if you plan to use Quick View to determine why a job has not started or whether a job will run, you can select the Dependent Jobs and Starting Conditions report types. If you plan to use Quick View to determine why a job has failed or to view past performance, you can select the Job Runs report type.</p>
+            <h2 class="heading2" id="CAWCCQuickViewApplication-Security">Security</h2>
+            <p>Depending on the CA EEM security rights assigned to you by your administrator, you may not have access to all functionality in Quick View. For example, if you do not have send event rights, the send event functionality is not available in the Search Results and Job Flow sections.</p>
+            <h2 class="heading2" id="CAWCCQuickViewApplication-PriorJobRunLogs">Prior Job Run Logs</h2>
+            <p>You can display a prior job run log in the Job Runs section. The following table contains the job types that support logging and the logs that you can display:</p>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Job Type</strong></th>
+                        <th class="confluenceTh"><strong>Available Logs</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Command (CMD)</td>
+                        <td class="confluenceTd">Standard Output, Error Output, Agent Log</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Database Monitor (DBMON)</td>
+                        <td class="confluenceTd">Spool File</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Database Stored Procedure (DBPROC)</td>
+                        <td class="confluenceTd">Spool File</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">File Watcher (FW)</td>
+                        <td class="confluenceTd">Agent Log</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">FTP (FTP)</td>
+                        <td class="confluenceTd">Spool File</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd">HDFS (HDFS)</td>
+                        <td colspan="1" class="confluenceTd">Spool File</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd">Hive (HIVE)</td>
+                        <td colspan="1" class="confluenceTd">Spool File</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">i5/OS (I5)</td>
+                        <td class="confluenceTd">Spool File</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Micro Focus (MICROFOCUS)</td>
+                        <td class="confluenceTd">Spool file, JES file</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Oracle E-Business Suite Copy Single Request (OACOPY)</td>
+                        <td class="confluenceTd">View Log, View Output, View Completion Details</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Oracle E-Business Suite Request Set (OASET)</td>
+                        <td class="confluenceTd">View Log, View Output, View Completion Details</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Oracle E-Business Suite Single Request (OASG)</td>
+                        <td class="confluenceTd">View Log, View Output, View Completion Details</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd">Oozie (OOZIE)</td>
+                        <td colspan="1" class="confluenceTd"><span>Spool File</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd">Pig (PIG)</td>
+                        <td colspan="1" class="confluenceTd">Spool File</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Process Automation Process Execution (PAPROC)</td>
+                        <td class="confluenceTd">Spool File</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Process Automation Start Request Form (PAREQ)</td>
+                        <td class="confluenceTd">Spool File</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">PeopleSoft (PS)</td>
+                        <td class="confluenceTd">Trace File, Log File</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Remote Execution (PROXY)</td>
+                        <td class="confluenceTd">Spool file, Remote Spool File, Remote Spool File Reference</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">SAP Batch Input Session (SAPBDC)</td>
+                        <td class="confluenceTd">Spool File</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">SAP BW InfoPackage (SAPBWIP)</td>
+                        <td class="confluenceTd">Spool File</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">SAP BW Process Chain (SAPBWPC)</td>
+                        <td class="confluenceTd">Spool File, Get Chain Process Log, Get Chain Log</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">SAP Data Archiving (SAPDA)</td>
+                        <td class="confluenceTd">Spool File</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">SAP Job Copy (SAPJC)</td>
+                        <td class="confluenceTd">Spool File, Job Log Read, Job Get Spool List</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">SAP R/3 (SAP)</td>
+                        <td class="confluenceTd">Spool File, Job Log Read, Job Get Spool List</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Secure Copy (SCP)</td>
+                        <td class="confluenceTd">Spool File</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">SQL (SQL)</td>
+                        <td class="confluenceTd">Spool File</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="confluenceTd">Sqoop (SQOOP)</td>
+                        <td colspan="1" class="confluenceTd"><span>Spool File</span></td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">User Defined</td>
+                        <td class="confluenceTd">Standard Output, Error Output, Agent Log</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Web Service Document/Literal (WSDOC)</td>
+                        <td class="confluenceTd">Spool File</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">z/OS Regular (ZOS)</td>
+                        <td class="confluenceTd">Spool File</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> Prior job run logs are not available for the following job types:
+            </div>
+            <ul>
+                <li>Box (BOX)</li>
+                <li>CPU Monitoring (OMCPU)</li>
+                <li>Database Trigger (DBTRIG)</li>
+                <li>Disk Monitoring (OMD)</li>
+                <li>Entity Bean (ENTYBEAN)</li>
+                <li>File Trigger (FT)</li>
+                <li>HTTP (HTTP)</li>
+                <li>IP Monitoring (OMIP)</li>
+                <li>JMS Publish (JMSPUB)</li>
+                <li>JMS Subscribe (JMSSUB)</li>
+                <li>JMX-MBean Attribute Get (JMXMAG)</li>
+                <li>JMX-MBean Attribute Set (JMXMAS)</li>
+                <li>JMX-MBean Create Instance (JMXMC)</li>
+                <li>JMX-MBean Operation (JMXMOP)</li>
+                <li>JMX-MBean Remove Instance (JMXMREM)</li>
+                <li>JMX-MBean Subscribe (JMXSUB)</li>
+                <li>POJO (POJO)</li>
+                <li>Process Monitoring (OMP)</li>
+                <li>RMI (JAVARMI)</li>
+                <li>SAP Event Monitor (SAPEVT)</li>
+                <li>SAP Process Monitor (SAPPM)</li>
+                <li>Session Bean (SESSBEAN)</li>
+                <li>SNMP Value Get (SNMPGet)</li>
+                <li>SNMP Value Set (SNMPSet)</li>
+                <li>Text File Reading and Monitoring (OMTF)</li>
+                <li>Web Service (WBSVC)</li>
+                <li>Windows Event Log Monitoring (OMEL)</li>
+                <li>Windows Service Monitoring (OMS)</li>
+                <li>Wake on LAN (WOL)</li>
+                <li>z/OS Data Set Trigger (ZOSDST)</li>
+                <li>z/OS Manual (ZOSM)</li>
+            </ul>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

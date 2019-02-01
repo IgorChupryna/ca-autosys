@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The auto_svcdesk command lets you open CA Service Desk helpdesk tickets that are related to jobs or other actions that might&nbsp;occur in the CA Workload Automation AE environment. This command supplements the existing CA Service Desk integration provided by the CA Workload Automation AE scheduler component.</p>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>auto_svcdesk&nbsp;{-G|-J&nbsp;<em>JobName</em>}</p><p>&nbsp;&nbsp;&nbsp;[-a&nbsp;<em>Attribute/Value pair</em>]&nbsp;[-d&nbsp;<em>Description</em>]&nbsp;[-i&nbsp;<em>Impact</em>]&nbsp;[-p&nbsp;<em>Priority</em>]&nbsp;[-s&nbsp;<em>Severity</em>]&nbsp;[-y&nbsp;<em>Summary</em>]&nbsp;[-L&nbsp;<em>Url</em>]&nbsp;[-U&nbsp;<em>Username</em>&nbsp;-P&nbsp;<em>Password</em>]&nbsp;[-C&nbsp;<em>Customer</em>]&nbsp;[{-usr&nbsp;<em>username&nbsp;</em>{-pw|pwx}&nbsp;<em>password</em>|-saml&nbsp;<em>auth_artifact</em>}]&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-x]</p><p>&nbsp;&nbsp;&nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-G<br></strong>Opens a generic CA Service Desk ticket request on behalf of CA Workload Automation AE.</p></li>
+                    <li><p><strong>-J&nbsp;<em>JobName<br></em></strong>Opens a CA Service Desk ticket request on behalf of a specific job defined to CA Workload Automation AE. The jobname that is specified in this option must exist in the database. The current attributes of the job do not need to employ its Service Desk attributes to send a request using this command. The various options of this command can be used to set description, impact, priority, and severity. If these options are not specified, they are set based on a pre-defined template that exists for CA Workload Automation AE in CA Service Desk.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note: </strong>Options -G and -J are mutually exclusive.
+                        </div> </li>
+                    <li><p><strong>-a&nbsp;<em>Attribute/Value pair</em></strong><br>(Optional) Defines CA Service Desk request attributes and handles values to be set in the CA Service Desk request. This flag is the behavioral equivalent of the svcdesk_attr job attribute.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> If this flag is specified for a jobname CA Service Desk request, its value overrides the svcdesk_attr attribute value of the job in the database.
+                        </div> <p>Use of this option requires advanced knowledge of CA Service Desk. Contact your CA Service Desk administrator for assistance.</p></li>
+                    <li><p><strong>-d&nbsp;<em>Description<br></em></strong>(Optional) Defines the message or string to be set as the description field in the CA Service Desk request. This flag is the behavioral equivalent of the svcdesk_desc job attribute.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> If this flag is specified for a jobname CA Service Desk request, its value overrides the svcdesk_desc attribute value of the job in the database.
+                        </div> </li>
+                    <li><p><strong>-i&nbsp;<em>Impact<br></em></strong>(Optional) Specifies the impact level to assign to the CA Service Desk request. This flag is the behavioral equivalent of the svcdesk_imp job attribute.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> If this flag is specified for a jobname CA Service Desk request, its value overrides the svcdesk_imp attribute value of the job in the database.
+                        </div> </li>
+                    <li><p><strong>-p&nbsp;<em>Priority<br></em></strong>(Optional) Specifies the priority level to assign to the CA Service Desk request. This flag is the behavioral equivalent of the svcdesk_pri job attribute.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> If this flag is specified for a jobname CA Service Desk request, its value overrides the svcdesk_pri attribute value of the job in the database.
+                        </div> </li>
+                    <li><p><strong>-s&nbsp;<em>Severity<br></em></strong>(Optional) Specifies the severity level to assign to the CA Service Desk request. This flag is the behavioral equivalent of the svcdesk_sev job attribute.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> If this flag is specified for a jobname CA Service Desk request, its value overrides the svcdesk_sev attribute value of the job in the database.
+                        </div> </li>
+                    <li><p><strong>-y&nbsp;<em>Summary<br></em></strong>(Optional) Defines the message or string to be set as the summary field in the CA Service Desk request. There is no job CA Service Desk attribute behavioral equivalent. The scheduler component when interfacing with CA Service Desk has a pre-defined summary, which it passes as part of the request.</p></li>
+                    <li><p><strong>-L&nbsp;<em>Url<br></em></strong>(Optional) Specifies the URL of the CA Service Desk web server. If this option is not specified, the URL is obtained from the CA Workload Automation AE environment (derived from the current CA Workload Automation AE integration settings).</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> For more information about CA Workload Automation AE integration settings, see
+                            <a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/administrating/ae-configuration/configure-ca-workload-automation-ae-to-work-with-other-ca-technologies-products" class="conf-macro output-inline" data-hasbody="false">Configure CA Workload Automation AE to Work with Other CA Technologies Products</a>.
+                        </div> </li>
+                    <li><p><strong>-U&nbsp;<em>username<br></em></strong>(Optional) Specifies a valid login identifier to access the CA Service Desk web server.</p></li>
+                    <li><p><strong>-p <em>password<br></em></strong>Specifies the user's password.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Notes:</strong>
+                            <ul>
+                                <li>If you specify an incorrect credential or if you do not specify a password, the utility cannot access the CA Service Desk web server.</li>
+                                <li>If you do not specify this option, the utility uses the login credentials that are specified in the integration settings to access the CA Service Desk web server.</li>
+                                <li>Use this option to specify user credentials that grant access to the service desk. To authenticate the command with external security, use the -usr parameter.&nbsp;</li>
+                            </ul>
+                        </div> </li>
+                    <li><p><strong>-C&nbsp;<em>Customer<br></em></strong>(Optional) Specifies a valid customer identifier to access the CA Service Desk web server. If this option is not specified, the customer identifier is obtained from the CA Workload Automation AE environment (derived from the current CA Workload Automation AE integration settings).<strong><em>&nbsp;</em></strong></p></li>
+                    <li>
+                        <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                            <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                            <p>(Optional) Specifies external security credentials as follows:</p>
+                            <ul>
+                                <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                                <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                    </div> </li>
+                                <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Notes: </strong></p>
+                                <ul>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                        <ul>
+                                            <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                            <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                            <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                        </ul></li>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                    <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                        <ul>
+                                            <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                            <li>CA Workload Automation AE is operating in native security mode.</li>
+                                        </ul></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                    <li><strong>-x</strong><br>(Optional) Displays the version number.</li>
+                    <li><strong>-?</strong><br>(Optional) Displays help for the command.</li>
+                </ul>
+                <p><strong>Example: Open a CA Service Desk Ticket</strong></p>
+                <p>This example opens a CA Service Desk ticket for a job that is named ‘svcdesk_test’.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>auto_svcdesk&nbsp;-J&nbsp;svcdesk_test&nbsp;&nbsp;</p></pre>
+                </div>
+                <p><strong>Example: Open a CA Service Desk Ticket and Set the Priority and Impact Levels</strong></p>
+                <p>This example opens a CA Service Desk ticket for a job&nbsp;named ‘svcdesk_test’ and sets the priority level to a value of 1 and the impact level to a value of 4:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>auto_svcdesk&nbsp;-J&nbsp;svcdesk_test&nbsp;-p&nbsp;1&nbsp;-i&nbsp;4</p></pre>
+                </div>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Note:</strong> This command overrides the jobs current priority and impact, if set in the database.
+                </div>
+                <p><strong>Example: Open a CA Service Desk Ticket and Set the Description</strong></p>
+                <p>This example opens a CA Service Desk ticket for a job that is named ‘svcdesk_test’ and sets the description to ‘This is a test’ and the urgency to a value of 5:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>auto_svcdesk&nbsp;-J&nbsp;svcdesk_test&nbsp;-d&nbsp;“This&nbsp;is&nbsp;a&nbsp;test”&nbsp;-a&nbsp;“urgency/urg:1104”</p></pre>
+                </div>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Note:</strong> This command overrides the jobs current description and impact, if set in the database.
+                </div>
+                <p><strong>Example: Open a CA Service Desk Ticket and Direct it to a Specific Web Server</strong></p>
+                <p>This example opens a CA Service Desk ticket for a job that is named ‘svcdesk_test’ and directs it to a specific CA Service Web Server named 'unisvcdesk':</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>auto_svcdesk&nbsp;-J&nbsp;svcdesk_test&nbsp;-L&nbsp;&nbsp;<span class="nolink">http://unisvcdesk:8080/axis/services/USD_R11_WebService</span></p></pre>
+                </div>
+                <p><strong>Example: Open a CA Service Desk Ticket to Identify a Problem</strong></p>
+                <p>This example opens a generic CA Service Desk ticket to identify a problem with a database rollover, where the priority is 1:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>auto_svcdesk&nbsp;-G&nbsp;-y&nbsp;“&lt;UAJM&gt;&nbsp;DB_ROLLOVER”&nbsp;-d&nbsp;“Database&nbsp;rollover&nbsp;has&nbsp;occurred.&nbsp;Product&nbsp;currently&nbsp;running&nbsp;off&nbsp;secondary&nbsp;database.&nbsp;Primary&nbsp;needs&nbsp;to&nbsp;be&nbsp;investigated.”&nbsp;-p&nbsp;1</p></pre>
+                </div>
+                <p>This request can be initiated from an ALARM message that is forwarded to CA NSM Event Management, where the message action to be executed is the auto_svcdesk command.</p>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

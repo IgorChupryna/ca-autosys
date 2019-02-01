@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+    <div>
+        <div class="">
+            <p>You can self-administer the accounts of global users that are stored in the CA internal user store and
+                can perform the following tasks:</p>
+            <ul>
+                <li>Reset EiamAdmin Password</li>
+                <li>Change passwords</li>
+                <li>Unlock the accounts</li>
+            </ul>
+            <p>For more information about Changing passwords and Unlocking accounts, see <em>Online Help</em>.</p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+    <div>
+        <div class="">
+            <p>CA EEM lets you reset the password for EiamAdmin user when the password is lost.</p>
+            <p>To reset the password in CA EEM Release 8.4, perform the following steps:</p>
+            <ol>
+                <li><p>In the command prompt, go to the iTechnology folder and run the following safex command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>safex.exe -munge &lt;newpassword&gt;</p></pre>
+                    </div>
+                    <p>The password is displayed in an encrypted format.</p></li>
+                <li><p>Run the following command to stop the iGateway <strong>service:</strong><br><br><strong>Linux and
+                    UNIX:</strong></p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>$IGW_LOC/S99igateway stop</p></pre>
+                    </div>
+                    <p><strong>Windows:</strong></p>
+                    <ol>
+                        <li><p>Click Start, Run, and enter the following command:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-richtextbody-block">
+                                <pre class="ca-code"><p>services.msc</p></pre>
+                            </div>
+                        </li>
+                        <li>The Services panel appears.</li>
+                        <li>Select CA iTechnology iGateway 4.7 service in the right pane of the Services panel,
+                            right-click, and select Stop.
+                        </li>
+                        <li>The iGateway service is stopped.</li>
+                    </ol>
+                </li>
+                <li><p>Open the iPoz.conf file and add the encrypted password that is generated in Step 2 to the
+                    following tag:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>&lt;EiamAdminPassword&gt;&lt;Newpassword&gt;&lt;/EiamAdminPassword&gt;</p></pre>
+                    </div>
+                </li>
+                <li><p>Save the iPoz.conf file.</p></li>
+                <li><p>Start the iGateway <strong>service.</strong><br><strong>Windows:</strong></p>
+                    <ol>
+                        <li><p>Click Start, Run, and enter the following command:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-richtextbody-block">
+                                <pre class="ca-code"><p>services.msc</p></pre>
+                            </div>
+                        </li>
+                        <li>The Services panel appears.</li>
+                        <li>Select CA iTechnology iGateway 4.7 service in the right pane of the Services panel,
+                            right-click, and select Start.
+                        </li>
+                        <li><p>The iGateway service is started.</p></li>
+                    </ol>
+                </li>
+            </ol>
+            <p style="margin-left: 30.0px;"><strong>Linux and UNIX:</strong></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>$IGW_LOC/S99igateway start</p></pre>
+            </div>
+            <p style="margin-left: 30.0px;">Use the new password to login as EiamAdmin user.</p>
+            <p><strong><br></strong>To reset the password in CA EEM Release 12.x, perform the following steps:</p>
+            <ol>
+                <li><p>Open the itechpoz.dxc file that is&nbsp;located in the following location from the command
+                    prompt:</p>
+                    <p><strong>Windows: </strong>%DXHOME%/config/access</p>
+                    <p><strong>UNIX</strong>: $DXHOME/config/access</p></li>
+                <li><p>Configure the value of access-controls to <strong>false</strong> as shown in the following line:
+                </p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>set access-controls = false;</p></pre>
+                    </div>
+                </li>
+                <li><p>Save the file and reinitialize the itechpoz DSA.</p></li>
+                <li>Install and run the LDAP browser on the CA EEM Server (we recommend JXplorer 3.2.2 or higher).</li>
+                <li><p>Connect to the itechpoz DSA using your CA EEM server information.</p></li>
+                <li><p>(Optional) Save the template for future use.</p></li>
+                <li><p>Navigate through World, itechpoz, Entities, Admins, and&nbsp;EiamAdmin in the&nbsp;JXplorer
+                    path.</p></li>
+                <li><p>Double-click the userPassword value, enter the new password, and re-enter to confirm.</p></li>
+                <li><p>Click OK&nbsp;and click Submit.</p></li>
+                <li><p>Verify that the password in the CA EEM UI for the EiamAdmin account works.</p></li>
+                <li><p>Undo the change that is made in the itechpoz.dxc file in Step 1 to restore the access controls to
+                    the itechpoz DSA.</p></li>
+                <li><p>Reinitialize itechpoz DSA.</p></li>
+            </ol>
+            <h2 id="ResetEiamAdminPassword-ReceivingUnabletoListcn=iTechPozError">Receiving&nbsp;Unable to List
+                cn=iTechPoz Error</h2>
+            <p><strong>Symptom:</strong></p>
+            <p>Error occurs while attempting to connect as 'anonymous' to reset the password with&nbsp;<strong>min-auth=clear-password</strong>.
+            </p>
+            <p><strong>Solution:</strong></p>
+            <p>Follow these steps:</p>
+            <ol>
+                <li>Open the itechpoz.dxc file that is located in the following location to verify the default
+                    setting:<br><br><strong>set
+                        min-auth</strong>:&nbsp;%DXHOME%\config\settings\itechpoz.dxc<br><br><strong>auth-levels</strong>:&nbsp;%DXHOME%\config\knowledge\itechpoz.dxc
+                </li>
+                <li><p>Configure the value of set min-auth to&nbsp;<strong>none</strong>&nbsp;as shown in the following
+                    line:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>set min-auth = none</p></pre>
+                    </div>
+                </li>
+                <li>Change the auth-levels value to&nbsp;<strong>anonymous.</strong></li>
+                <li>Restart the itechpoz service for the changes to take effect.</li>
+            </ol>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

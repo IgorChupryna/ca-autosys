@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p>The autoaggr command is a client component utility that generates reports based on the aggregated job, alarm, and scheduler statistics retrieved from the database.</p>
+            <p><strong>Syntax</strong></p>
+            <p>This command has the following format:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>autoaggr&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-d|-h|-m|-w]&nbsp;[-A]&nbsp;[-J]&nbsp;[-S]&nbsp;[-F&nbsp;f<em>rom_date_time</em>]&nbsp;[-T&nbsp;<em>to_date_time</em>]&nbsp;[-o&nbsp;<em>filename</em>]&nbsp;[-c]&nbsp;[{-usr&nbsp;<em>username&nbsp;</em>{-pw|pwx}&nbsp;<em>password</em>|-saml&nbsp;<em>auth_artifact</em>}]&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-x]&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[?]</p></pre>
+            </div>
+            <ul>
+                <li><strong>-d</strong><br>(Optional) Generates a report on daily aggregated statistics.</li>
+                <li><strong>-h</strong><br>(Optional) Generates a report on hourly aggregated statistics.</li>
+                <li><strong>-m</strong><br>(Optional) Generates a report on monthly aggregated statistics.</li>
+                <li><strong>-w</strong><br>(Optional) Generates a report on weekly aggregated statistics.</li>
+                <li><strong>-A</strong><br>(Optional) Generates a report only on alarm statistics.</li>
+                <li><strong>-J</strong><br>(Optional) Generates a report only on job statistics.</li>
+                <li><strong>-S</strong><br>(Optional) Generates a report only on scheduler statistics.</li>
+                <li><p><strong>-F "<em>from_date_time"</em></strong><br>(Optional) Specifies the aggregation start date and time in "<em>MM/dd/yyyy hh:mm</em>" format. The report displays the aggregated statistics starting from this specified date and time.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Notes:</strong></p>
+                        <ul>
+                            <li>If you do not specify the&nbsp;<strong>- F&nbsp;</strong><em>from_date_time</em><strong>&nbsp;</strong>parameter, it defaults to the oldest processed event in the database.</li>
+                            <li>Enclose the start date and time in double quotation marks.</li>
+                        </ul>
+                    </div> </li>
+                <li><p><strong>-T "<em>to_date_time"</em></strong><br>(Optional) Specifies the aggregation end date and time in "<em>MM/dd/yyyy hh:mm</em>" format. The report displays the aggregated statistics up to this specified date and time.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Notes:</strong>
+                        <ul>
+                            <li><p>If you do not specify the –T to_date_time parameter, it defaults to the current time.&nbsp;</p></li>
+                            <li><p>Enclose the end date and time in double quotation marks.</p></li>
+                        </ul>
+                    </div> </li>
+                <li><p><strong>-o "<em>filename"</em></strong><br>(Optional) Defines the path and file name where you want to direct all standard output.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Notes:</strong>
+                        <ul>
+                            <li>You can specify only the file name in this option. If you specify only the file name, the file is written to the current directory.</li>
+                            <li>For readability purposes, we recommend that you direct the output to a file by using either the - o parameter or the command shell redirection command (“&gt;” or “&gt;&gt;”).</li>
+                            <li>Enclose the file name in double quotation marks.</li>
+                        </ul>
+                    </div> </li>
+                <li><strong>-c</strong><br>(Optional) Generates the output in a comma-separated format.</li>
+                <li>
+                    <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                        <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                        <p>(Optional) Specifies external security credentials as follows:</p>
+                        <ul>
+                            <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                            <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                </div> </li>
+                            <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                        </ul>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Notes: </strong></p>
+                            <ul>
+                                <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                    <ul>
+                                        <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                        <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                        <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                        <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                        <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                    </ul></li>
+                                <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                    <ul>
+                                        <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                        <li>CA Workload Automation AE is operating in native security mode.</li>
+                                    </ul></li>
+                            </ul>
+                        </div>
+                    </div></li>
+                <li><p><strong>-x<br></strong>(Optional) Returns the command version information to standard output.&nbsp;</p></li>
+                <li><p><strong>-?</strong></p><p>(Optional) Displays help for the command.</p></li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Notes:</strong>
+                <ul>
+                    <li>The&nbsp;<strong>-d</strong>,&nbsp;<strong>-h</strong>,&nbsp;<strong>-m</strong>, and&nbsp;<strong>-w&nbsp;</strong>options are mutually exclusive. You must specify&nbsp;<em>one</em>&nbsp;of these options.</li>
+                    <li>The&nbsp;<strong>-A</strong>,&nbsp;<strong>-J</strong>, and&nbsp;<strong>-S</strong>&nbsp;options can be specified in any combination. If you do not specify the&nbsp;<strong>-A,</strong>&nbsp;<strong>-J</strong>, or&nbsp;<strong>-S</strong>&nbsp;options, the report includes the job, alarm, and scheduler statistics.</li>
+                    <li>Verify that you issue the autoaggr command after the time range (specified using the&nbsp;<strong>-F</strong>&nbsp;and&nbsp;<strong>-T</strong>&nbsp;parameters) in which you want to generate a report has passed. For example, to generate a report on aggregated hourly statistics from 10/13/2011 16:00 to 10/13/2011 16:59:59, issue the autoaggr command after 17:00 on 10/13/2011.</li>
+                </ul>
+            </div>
+            <p><strong>Example: Generate a Report for Hourly Statistics on Windows</strong></p>
+            <p>This example generates a report that displays the hourly job, alarm, and scheduler statistics from 09/26/2011 00:00 to 10/03/2011 00:00. The output is directed to the c:\all.out file.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>autoaggr&nbsp;-h&nbsp;-o&nbsp;"c:\all.out"&nbsp;-F&nbsp;"09/26/2011&nbsp;00:00"&nbsp;-T&nbsp;"10/03/2011&nbsp;00:00"</p></pre>
+            </div>
+            <p><strong>Example: Generate a Report for Hourly Statistics in Comma-separated Format on Windows</strong></p>
+            <p>This example generates a report that displays the hourly job, alarm, and scheduler statistics in a comma-separated format from 09/26/2011 00:00 to 10/03/2011 00:00. The output is directed to the c:\all.csv file.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>autoaggr&nbsp;-h&nbsp;-c&nbsp;-o&nbsp;"c:\all.csv"&nbsp;-F&nbsp;"09/26/2011&nbsp;00:00"&nbsp;-T&nbsp;"10/03/2011&nbsp;00:00"</p></pre>
+            </div>
+            <p><strong>Example: Generate a Report for Hourly Job Statistics on UNIX</strong></p>
+            <p>This example generates a report that displays the hourly job statistics from 09/26/2011 00:00 to 10/03/2011 00:00. The output is directed to the /tmp/job.out file.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>autoaggr&nbsp;-h&nbsp;-J&nbsp;-o&nbsp;"/tmp/job.out"&nbsp;-F&nbsp;"09/26/2011&nbsp;00:00"&nbsp;-T&nbsp;"10/03/2011&nbsp;00:00"</p></pre>
+            </div>
+            <p><strong>Example: Generate a Report for Hourly Job Statistics in Comma-separated Format on UNIX</strong></p>
+            <p>This example generates a report that displays the hourly job statistics in a comma-separated format from 09/26/2011 00:00 to 10/03/2011 00:00. The output is directed to the /tmp/job.csv file.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>autoaggr&nbsp;-h&nbsp;-c&nbsp;-J&nbsp;-o&nbsp;"/tmp/job.csv"&nbsp;-F&nbsp;"09/26/2011&nbsp;00:00"&nbsp;-T&nbsp;"10/03/2011&nbsp;00:00"</p></pre>
+            </div>
+            <p><strong>Example: Generate a Report for Daily Alarm Statistics on Windows</strong></p>
+            <p>This example generates a report that displays the daily alarm statistics from 09/26/2011 00:00 to 09/29/2011 00:00. The output is directed to the c:\alarm.out file.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>autoaggr&nbsp;-d&nbsp;-A&nbsp;-o&nbsp;"c:\alarm.out"&nbsp;-F&nbsp;"09/26/2011&nbsp;00:00"&nbsp;-T&nbsp;"09/29/2011&nbsp;00:00"</p></pre>
+            </div>
+            <h2 id="autoaggrCommand--ReportAggregatedStatistics-StatisticsReportedbytheautoaggrCommand"><span style="color: rgb(0,51,102);">Statistics Reported by the autoaggr Command</span></h2>
+            <p>The autoaggr command generates reports on the aggregated job, alarm, and scheduler statistics.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Notes:</strong>
+                <ul>
+                    <li>The time column in the report represents the hourly time after the time hack. For example, if the reported time is 10:00:00, it represents the aggregated statistics generated from the activity that occurred from 10:00:00 to 10:59:59.</li>
+                    <li>You can also aggregate statistics using the Compliance Application, but this application collects only certain job run statistics.</li>
+                </ul>
+            </div>
+            <p>The reports display job statistics that show the total number of jobs in STARTING, RUNNING, SUCCESS, BYPASS, FAILURE, TERMINATED, ON_HOLD, OFF_HOLD, ON_ICE, OFF_ICE, ON_NOEXEC, OFF_NOEXEC, INACTIVE, and RESTART status.</p>
+            <p>The reports display the following alarm statistics:</p>
+            <ul>
+                <li><strong>AVERAGE RESPONSE TIME</strong><br>Displays the average time&nbsp;that is taken to respond to an alarm.</li>
+                <li><p><strong>TOTAL ALARMS&nbsp;</strong><br>Displays the total number of alarms irrespective of alarm status.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note: </strong>The statistics that are displayed in the report includes the count of all the alarms that CA Workload Automation AE generates.
+                    </div> </li>
+                <li><p><strong>UNANSWERED<br></strong>Displays the total number of alarms that are open. This does not include alarms that are acknowledged or closed.</p></li>
+                <li><span style="color: rgb(51,51,51);"><strong>JOB FAILURE</strong></span><br><span style="color: rgb(51,51,51);">Displays the total number of JOBFAILURE alarms due to jobs that are in the FAILURE state.</span></li>
+                <li><span style="color: rgb(51,51,51);"><strong>JOB TERMINATED</strong></span><br><span style="color: rgb(51,51,51);">Displays the total number of JOBTERMINATED&nbsp;alarms due to jobs that are in the TERMINATED state.</span></li>
+                <li><strong>START FAILURE</strong><br>Displays the total number of STARTJOBFAIL alarms.</li>
+                <li><strong>MAX RETRY</strong><br>Displays the total number of MAX_RETRY alarms.</li>
+                <li><strong>MAX RUNTIME</strong><br>Displays the total number of MAXRUNALARM alarms.</li>
+                <li><strong>MIN RUNTIME</strong><br>Displays the total number of MINRUNALARM alarms.</li>
+                <li><strong>DATABASE ROLLOVER</strong><br>Displays the total number of DB_ROLLOVER alarms.</li>
+                <li><strong>SCHEDULER FAILOVER</strong><br>Displays the total number of EP_ROLLOVER alarms.</li>
+                <li><strong>SCHEDULER SHUTDOWN</strong><br>Displays the total number of EP_SHUTDOWN alarms.</li>
+            </ul>
+            <p>The reports display the following scheduler statistics:</p>
+            <ul>
+                <li><strong>JOB RUNS</strong><br>Displays the total number of job runs.</li>
+                <li><strong>JOB FAILURES</strong><br>Displays the total number of jobs that are in FAILURE or TERMINATED status.</li>
+                <li><strong>JOB FORCE START</strong><br>Displays the total number of jobs that were force started.</li>
+                <li><strong>KILL JOB</strong><br>Displays the total number of jobs that are killed using the KILLJOB event.</li>
+                <li><strong>SERVICE DESK REQUESTS</strong><br>Displays the total number of jobs for which service desk issues were opened.</li>
+                <li><strong>TOTAL EVENTS</strong><br>Displays the total number of events (including internal events) that CA Workload Automation AE generates.</li>
+                <li><strong>AVERAGE LATENCY</strong><br>Displays the average latency (in seconds) in processing events, which is the average processing time that is required for all the events. The latency for an event is calculated by subtracting the time that the event was inserted into the database from the time it was picked up and processed by the scheduler. The average latency value is calculated by adding all the event latencies and then dividing the total latency by the number of events.</li>
+                <li><strong>MAX LATENCY</strong><br>Displays the highest latency (in seconds) for processed events within a given time range. The latency for an event is calculated by subtracting the time that the event was inserted into the database from the time it was picked up and processed by the scheduler.</li>
+                <li><strong>AVERAGE LAG TIME</strong><br>Displays the average lag time (in seconds) in processing events, which is the average processing time that is required for all the events. The lag time for an event is calculated by subtracting the time that the internal processing starts for the event from the time the scheduler completes processing it. Unlike average latency, the average lag time does not include the time that is required to fetch the event from the database. The average lag time value is calculated by adding all the event lag times and then dividing the total lag time by the number of events.</li>
+                <li><strong>MAX LAG TIME</strong><br>Displays the highest lag time (in seconds) for processed events within a given time range. The lag time for an event is calculated by subtracting the time that the internal processing starts for the event from the time the scheduler completes processing it. Unlike max latency, the max lag time does not include the time that is required to fetch the event from the database.</li>
+            </ul>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

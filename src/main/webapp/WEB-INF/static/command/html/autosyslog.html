@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The autosyslog command is a client component utility that displays the scheduler, application server, or agent log file, or the spool file for a job. The scheduler, application server, and agent write diagnostic messages to their respective logs as part of their normal operations and in response to detected error conditions. This utility is useful for diagnosing job failures.</p>
+                <p>The command displays information for supported job types only. The information that the command displays depends on the job type.</p>
+                <p>The command does not support the following job types:</p>
+                <ul>
+                    <li>CPU Monitor (OMCPU)</li>
+                    <li>Disk Monitor (OMD)</li>
+                    <li>Entity Bean (ENTYBEAN)</li>
+                    <li>File Trigger (FT)</li>
+                    <li>IP Monitor (OMIP)</li>
+                    <li>JMS Publish (JMSPUB)</li>
+                    <li>JMX MBean Attribute Get (JMXMAG)</li>
+                    <li>JMX MBean Attribute Set (JMXMAS)</li>
+                    <li>JMX MBean Create Instance (JMXMC)</li>
+                    <li>JMX MBean Operation (JMXMOP)</li>
+                    <li>JMX MBean Remove Instance (JMXMREM)</li>
+                    <li>JMX MBean Subscribe (JMXSUB)</li>
+                    <li>Oracle E-Business Suite Copy Single Request (OACOPY)</li>
+                    <li>Oracle E-Business Suite Request Set (OASET)</li>
+                    <li>Oracle E-Business Suite Single Request (OASG)</li>
+                    <li>Process Monitoring (OMP)</li>
+                    <li>PeopleSoft (PS)</li>
+                    <li>RMI (RMI)</li>
+                    <li>Secure Copy (SCP)</li>
+                    <li>SNMP Value Get (SNMPGET)</li>
+                    <li>SNMP Value Set (SNMPSET)</li>
+                    <li>Text File Reading and Monitoring (OMTF)</li>
+                    <li>Windows Event Log Monitoring (OMEL)</li>
+                    <li>Windows Service Monitoring (OMS)</li>
+                    <li>Wake on LAN (WOL)</li>
+                </ul>
+                <p>The command displays job log files for the following job types:</p>
+                <ul>
+                    <li><p>File Watcher (FW)</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> The command also displays the spool file log for these jobs.
+                        </div> </li>
+                    <li><p><span style="color: rgb(51,51,51);">Informatica (INFORMATICA)</span></p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><span style="color: rgb(51,51,51);"><strong>Note:</strong> The command displays the log of task name which is of type session for these jobs.</span></p>
+                        </div> </li>
+                    <li><p><span style="color: rgb(51,51,51);">SQL Server Agent (SQLAGENT)</span></p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><span style="color: rgb(51,51,51);"><strong>Note:</strong> The command displays the step log file for these jobs.</span></p>
+                        </div> </li>
+                    <li>Web Service Documentation Literal (WSDOC)</li>
+                    <li><p>z/OS Regular (ZOS)</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> The command displays associated job log files for these jobs depending on the data set name.
+                        </div> </li>
+                </ul>
+                <p>The command displays spool file logs for the following job types:</p>
+                <ul>
+                    <li>Database Monitor (DBMON)</li>
+                    <li>Database Stored Procedure (DBPROC)</li>
+                    <li>Database Trigger (DBTRIG)</li>
+                    <li><p>File Watcher (FW)</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> The command also displays job log files for these jobs.
+                        </div> </li>
+                    <li>FTP (FTP)</li>
+                    <li>HTTP (HTTP)</li>
+                    <li>i5/OS (I5)</li>
+                    <li><span style="color: rgb(51,51,51);">Informatica (INFORMATICA)</span></li>
+                    <li>JMS Subscribe (JMSSUB)</li>
+                    <li>Micro Focus (MICROFOCUS)</li>
+                    <li>POJO (POJO)</li>
+                    <li>Process Automation Process Execution (PAPROC)</li>
+                    <li>Process Automation Start Request Form (PAREQ)</li>
+                    <li>Remote Execution (PROXY)</li>
+                    <li>SAP Batch Input Session (SAPBDC)</li>
+                    <li>SAP BW InfoPackage (SAPBWIP)</li>
+                    <li>SAP BW Process Chain (SAPBWPC)</li>
+                    <li>SAP Data Archiving (SAPDA)</li>
+                    <li>SAP Job Copy (SAPJC)</li>
+                    <li>SAP Process Monitor (SAPPM)</li>
+                    <li>SAP R/3 (SAP)</li>
+                    <li>Session Bean (SESSBEAN)</li>
+                    <li>SQL (SQL)</li>
+                    <li>Web Service RPC/Encoded (WBSVC)</li>
+                </ul>
+                <p>The command displays standard output, error output, and a job log for command jobs and user defined jobs.</p>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <p><strong>Note: </strong>On Windows, you can issue this command only when all the following conditions apply:</p>
+                    <ul>
+                        <li>You are a member of the administrative user group</li>
+                        <li>The user account control for the administrative user group is set to zero</li>
+                    </ul>
+                    <p><span style="color: rgb(55,55,55);">CA Workload Automation AE issues an error message if you issue this command when at least one of the required conditions does not apply.</span></p>
+                </div>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p><span style="color: rgb(51,51,51);">autosyslog [-e [-l <em>num_lines</em>|-p <em>regex</em>]]</span></p><p><span style="color: rgb(51,51,51);">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[-s]</span></p><p><span style="color: rgb(51,51,51);">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[-j <em>job_name</em> [-d <em>dataset_name</em>|<em>FileName:Num</em> | -r <em>run_num</em> | -n <em>retry_num</em> | -t [A|P|O|E|S|L [-i <em>StepId</em>|-o <em>StepName</em>|<em>TaskName</em>] ] | -z]]</span></p><p><span style="color: rgb(51,51,51);">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[{-usr <em>username</em> {-pw|pwx} <em>password</em>|-saml <em>auth_artifact</em>}]</span></p><p><span style="color: rgb(51,51,51);">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[-x]</span></p><p><span style="color: rgb(51,51,51);">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[-?]</span></p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-e<br></strong>(Optional) Monitors the scheduler log and displays the log file. The scheduler continually updates the log file as processing occurs. To terminate the command, press Ctrl+C.<br><strong>Limits:&nbsp;</strong>This parameter is only valid when you<strong>&nbsp;</strong>run the command on the machine that runs the scheduler or on a machine with access to the same $AUTOUSER (UNIX) or %AUTOSERVER% (Windows) file system.</p>
+                        <ul>
+                            <li><p><strong>-l&nbsp;<em>num_lines</em></strong><br>(Optional) Specifies the maximum number of lines to display from the specified log file.<br><strong>Default:</strong>&nbsp;If you do not specify this option, the command displays the last ten lines of the specified log file by default.</p></li>
+                            <li><strong>-p&nbsp;<em>regex</em></strong><br>(Optional) Specifies a regular expression. The command displays the lines in the scheduler log file containing that expression. The interpretation of the regular expression depends on the operating system.</li>
+                        </ul>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Notes:</strong></p>
+                            <ul>
+                                <li><p>On UNIX, using autosyslog to view the scheduler log is the same as issuing the following command:</p>
+                                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <pre class="ca-code"><p>tail&nbsp;-f&nbsp;$AUTOUSER/out/event_demon.$AUTOSERV.</p></pre>
+                                    </div></li>
+                                <li>Only a power user or Administrator can view the scheduler log file on Windows 2003 and previous versions of Windows. On more recent versions of Windows, any user can issue this command.</li>
+                            </ul>
+                        </div> </li>
+                    <li><p><strong>-s<br></strong>(Optional) Monitors the application server log and displays the log file. To terminate the command, press Ctrl + C.<br><strong>Limits:&nbsp;</strong>This parameter is only valid when you run the command on the machine that runs the application server or on a machine with access to the same $AUTOUSER (UNIX) or %AUTOSERVER% (Windows) file system.</p></li>
+                    <li><p><strong>-j&nbsp;<em>job_name<br></em></strong>Displays the agent log for the specified job.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Notes:</strong></p>
+                            <ul>
+                                <li><p><span style="color: rgb(55,55,55);">You do not need to precede the job name that contains a colon with a backslash.</span></p></li>
+                                <li><p><span style="color: rgb(55,55,55);"><span style="color: rgb(55,55,55);">The -e, -s and the -j options are mutually exclusive.</span></span></p></li>
+                            </ul>
+                        </div> </li>
+                </ul>
+                <ul>
+                    <li><p><strong>-d&nbsp;<em>data<span style="color: rgb(51,51,51);">set_name|<em>FileName:Num</em></span></em></strong><br><span style="color: rgb(51,51,51);">Displays the contents of a z/OS job log dataset or i5/OS job log file.</span></p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note: </strong>To obtain a list of dataset names for a job, use the
+                            <strong>-j </strong>parameter with the
+                            <strong>-Z</strong> option.
+                        </div> </li>
+                    <li><strong>-r&nbsp;<em>run_num</em>&nbsp;</strong><br>(Optional) Displays the agent log for the specified run number of the job.<br><strong>Default:&nbsp;</strong>0. If you do not specify this option, the system displays the log for the most recent run.<br><strong>Limits:</strong>&nbsp;This option is only valid when you also use the&nbsp;<strong>-j</strong>&nbsp;parameter.</li>
+                    <li><strong>-n&nbsp;<em>retry_num</em></strong><br>(Optional) Displays the agent log for the specified retry of the job run.<br><strong>Default:&nbsp;</strong>0. If you do not specify this option, the system displays the log for the last retry.<br><strong>Limits:</strong>&nbsp;Specify a positive integer for this value. This option is only valid when you also use the<strong>&nbsp;-r</strong>&nbsp;option with the&nbsp;<strong>-j</strong>&nbsp;parameter.</li>
+                    <li><strong>-t</strong><br>(Optional) Specifies the type of log file to display.&nbsp;<br><strong>Limits:&nbsp;</strong>When you use this parameter, you must a<span style="color: rgb(51,51,51);">lso specify the&nbsp;<strong>A</strong>,<strong>&nbsp;P</strong>,&nbsp;<strong>O</strong>,&nbsp;<strong>E</strong>, <strong>S, or L</strong>&nbsp;option.</span>
+                        <ul>
+                            <li><span style="color: rgb(51,51,51);"><strong>A</strong></span><br><span style="color: rgb(51,51,51);">(Default) Displays the agent log file for the job.</span></li>
+                            <li><span style="color: rgb(51,51,51);"><strong>P</strong></span><br><span style="color: rgb(51,51,51);">Displays the agent environment profile log file for the job. This option only applies to the legacy agents.</span></li>
+                            <li><span style="color: rgb(51,51,51);"><strong>O</strong></span><br><span style="color: rgb(51,51,51);">Displays the standard output file for the job.</span></li>
+                            <li><span style="color: rgb(51,51,51);"><strong>E</strong></span><br><span style="color: rgb(51,51,51);">Displays the standard error file for the job.</span></li>
+                            <li><p><span style="color: rgb(51,51,51);"><strong>S</strong></span><br><span style="color: rgb(51,51,51);">Displays the spool file for the job.</span></p>
+                                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <p><span style="color: rgb(51,51,51);"><strong>Note: </strong>When you configure<strong> </strong>CA Workload Automation AE to clean temporary files, the system deletes the agent log file upon successful completion of the job. This configuration option is only valid for legacy agent log files. For more information about this configuration option, see <a data-macro-name="sp-richtextbody-link" href="/ca-workload-automation-ae/11-4-2/en/administrating/ae-configuration/configure-a-legacy-agent/cleantmpfiles" class="conf-macro output-inline" data-hasbody="true"><span style="color: rgb(51,51,51);">CleanTempFiles</span></a>. For more information about agent log file maintenance, see <a rel="nofollow" class="external-link" href="https://wiki.ca.com/wlaagents"><span style="color: rgb(51,51,51);">CA Workload Automation Agents</span></a>.</span></p>
+                                </div> </li>
+                            <li><span style="color: rgb(51,51,51);"><strong>L&nbsp;</strong></span><br><span style="color: rgb(51,51,51);">Displays&nbsp;the step log file or task name log file for the job. When you use this option, you must also specify the -i <em>StepId&nbsp;</em>or -o <em>StepName</em>|<em>TaskName</em>&nbsp;option.</span>
+                                <ul>
+                                    <li><span style="color: rgb(51,51,51);"><strong>-i <em>StepId</em></strong><em>&nbsp;</em></span><br><span style="color: rgb(51,51,51);">Displays the step log file for the specified SQL Server Agent job identification number. This option is only applicable for SQL Server Agent jobs.</span></li>
+                                    <li><span style="color: rgb(51,51,51);"><strong>-o <em>StepName</em>|<em>TaskName</em><br></strong>Displays&nbsp;the log file for the specified SQL Server Agent job step name or Informatica job task name. This option is only applicable for SQL Server Agent jobs and Informatica jobs.</span></li>
+                                </ul></li>
+                        </ul></li>
+                    <li><p><span style="color: rgb(51,51,51);"><strong>-z</strong></span><br><span style="color: rgb(51,51,51);">Displays a list of available z/OS job log types and dataset names or i5/OS job log file names.</span></p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note:</strong> Use the -z option first to retrieve all the available log datasets or file names followed by the -d <em>DatasetName|FileName:Num</em> option to retrieve the contents of an individual log dataset or file where the i5/OS file is specified with both name and number.</p>
+                        </div> </li>
+                    <li>
+                        <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                            <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                            <p>(Optional) Specifies external security credentials as follows:</p>
+                            <ul>
+                                <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                                <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                    </div> </li>
+                                <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Notes: </strong></p>
+                                <ul>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                        <ul>
+                                            <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                            <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                            <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                        </ul></li>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                    <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                        <ul>
+                                            <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                            <li>CA Workload Automation AE is operating in native security mode.</li>
+                                        </ul></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                    <li><p><strong>-x<br></strong>(Optional) Returns the command version information to standard output.</p></li>
+                    <li><p><strong>-?<br></strong>(Optional) Displays help for the command.</p></li>
+                </ul>
+                <p><strong>Example: View the Scheduler Log</strong></p>
+                <p>This example displays the scheduler log when entered on the command line of the system where the scheduler is running, or where it ran last:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autosyslog&nbsp;&nbsp;-&nbsp;e</p></pre>
+                </div>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <p><strong>Note:&nbsp;</strong>You can enter this command on any machine that can access the same file system (typically $AUTOUSER on UNIX or %AUTOUSER% on Windows) as the scheduler.</p>
+                </div>
+                <p><strong>Example: View the Agent Log for a Job</strong></p>
+                <p>This example displays the agent log of the last run of the test_install job.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autosyslog&nbsp;&nbsp;-&nbsp;J&nbsp;test_install</p></pre>
+                </div>
+                <p><strong>Example: Append Profile Information to Log File on UNIX</strong></p>
+                <p>This example appends profile information to the log file for the test_install job.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autosyslog&nbsp;&nbsp;-&nbsp;j&nbsp;test_install&nbsp;&nbsp;-&nbsp;tP</p></pre>
+                </div>
+                <p><strong>Example: View the Agent Log for a Previous Run of a Job</strong></p>
+                <p>This example displays the agent log for a previous run of the test_install job.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autosyslog&nbsp;&nbsp;-&nbsp;J&nbsp;test_install&nbsp;&nbsp;-&nbsp;r&nbsp;-1&nbsp;</p></pre>
+                </div>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Note:</strong> Specifying a value of -1 for the -r parameter displays the agent log for the run immediately prior to the current run. To view the agent log any other previous run, specify the actual run number using the -r parameter.
+                </div>
+                <p><strong>Example: View the Agent Spool File for a Job</strong></p>
+                <p>This example displays the agent spool file for the last run of the test_install job.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autosyslog&nbsp;&nbsp;-&nbsp;J&nbsp;test_install&nbsp;&nbsp;-&nbsp;T&nbsp;S</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

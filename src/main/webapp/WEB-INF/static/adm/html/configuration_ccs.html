@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+    <div>
+        <div class="">
+            <p>CA common components are software components that are used by different CA Technologies products.&nbsp;You
+                can use the CA Common Components DVD to install the following common components:</p>
+            <ul>
+                <li><p><strong>CA Embedded Entitlements Manager (CA EEM)</strong><br>Enables you to secure objects such
+                    as jobs, calendars, cycles, global variables, machines, and resources, and delegate role-based
+                    access to the users in your enterprise.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <p><strong>Note:</strong> <span style="color: rgb(55,55,55);">For more information about CA EEM, see </span><a
+                                rel="nofollow" class="external-link" href="https://wiki.ca.com/eem">CA EEM
+                            documentation</a><span style="color: rgb(55,55,55);">.</span></p>
+                    </div>
+                </li>
+                <li><strong>CA Secure Socket Adapter (SSA)</strong><br>Lets CA components use a single multiplexed
+                    communication port to ease firewall administration and minimize conflicts with other applications.
+                    SSA uses port 7163.
+                </li>
+                <li><strong>Management Command Center</strong><br>Integrates all enterprise and network monitoring
+                    functionality into a single console. Using the Management Command Center, you can do the following:
+                    <ul>
+                        <li>Create customized views of data</li>
+                        <li>Apply filters to data</li>
+                        <li>Create class-based queries</li>
+                        <li>View alerts and event consoles</li>
+                        <li>Create reports</li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Notes:</strong>
+                        <ul>
+                            <li><span>You must install Event Management Provider to manage and monitor Event Management from the Management Command Center.</span>
+                            </li>
+                            <li><span>On Windows, you cannot install Management Command Center using the CA Common Components DVD.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li><strong>CA, Inc. Common Communications Interface (CAICCI)</strong><br>Enables communication with
+                    mainframe products, legacy agents for mainframe systems, and Event Management.
+                </li>
+                <li><p><strong>Event Management</strong></p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> Event Management can either be installed on a dedicated server
+                        (recommended) or on the server where the CA Technologies product is installed.
+                    </div>
+                    <p>Routes workload automation messages to a consolidated event console. A typical deployment of
+                        Event Management is composed of an Event Manager and an Event Agent. However, if you want to
+                        manage and monitor Event Management from the Management Command Center, you must install
+                        Enterprise Management Provider on the same computers where the Event Managers are installed.</p>
+                </li>
+                <li><p><strong>CAPKI</strong><br>Implements Information Security services in products.</p></li>
+            </ul>
+            <p>The CA Technologies products that use the common components are CA Workload Automation AE and CA WCC.
+                During installation, you select the components that you want to install depending on whether each is
+                required or optional for the CA Technologies product that you use.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> We recommend that you install the common components before you install the CA
+                    Technologies product.</p>
+            </div>
+            <p>The following table lists the required and optional common components for CA Workload Automation AE and
+                CA WCC:</p>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Common Component</strong></th>
+                        <th class="confluenceTh"><strong>CA Workload Automation AE </strong></th>
+                        <th class="confluenceTh"><strong>CA WCC</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">CA EEM</td>
+                        <td class="confluenceTd">Optional</td>
+                        <td class="confluenceTd">Required</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">SSA</td>
+                        <td class="confluenceTd">Required<br><strong>Note:</strong> SSA is automatically installed when
+                            you install CA Workload Automation AE.
+                        </td>
+                        <td class="confluenceTd">Required<br><strong>Note: </strong>SSA is automatically installed when
+                            you install CA WCC.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Event Management</td>
+                        <td class="confluenceTd">Optional</td>
+                        <td class="confluenceTd">Optional</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">CAICCI</td>
+                        <td class="confluenceTd">Required if cross-platform scheduling is enabled or CA Workload
+                            Automation AE communicates with any of the following products or agent: CA Workload
+                            Automation SE, CA Jobtrac JM, or CA Scheduler JM on the mainframe, Event Management,
+                            Notification Services component of CA NSM, or CA UJMA agent; optional otherwise
+                        </td>
+                        <td class="confluenceTd">Required if Event Management is installed on the CA WCC server;
+                            optional otherwise
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Management Command Center</td>
+                        <td class="confluenceTd">Optional</td>
+                        <td class="confluenceTd">Optional</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note: </strong>SSA installs a default certificate that can be used to install and run SSL
+                    without any additional configuration. This certificate is the same on all installations and does not
+                    provide any level of authentication. To authenticate this certificate, you must replace it with a
+                    valid certificate that is issued and signed by your own Certificate Authority (CA). For information
+                    about configuring SSA to use valid certificates, see <a data-macro-name="sp-nobody-link"
+                                                                            href="/ca-workload-automation-ae/11-4-2/en/securing/configure-ssa-to-use-a-valid-certificate"
+                                                                            class="conf-macro output-inline"
+                                                                            data-hasbody="false">Configure SSA to Use a
+                        Valid Certificate</a>.</p>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+
+    <h3 id="t2159641" class="heading3">Remove CA iTechnology iGateway</h3>
+    <p class="bodytext">CA iTechnology iGateway, which is installed with CA EEM, is a shared component that various CA
+        Technologies products use. CA iTechnology iGateway is a web server that sends requests and receives replies
+        using the http protocol.</p>
+    <p class="bodytext">CA iTechnology iGateway can be installed with other products also. If CA iTechnology iGateway
+        exists on the computer where you are installing CA EEM, determine if it is 32-bit or 64-bit. If CA iTechnology
+        iGateway and your CA EEM 12.51 server are both 32-bit or both 64-bit, no action is necessary. However, if the
+        two products do not match (for example, one is 32-bit and the other is 64-bit), remove CA iTechnology iGateway.
+        Then start the CA EEM installation. The correct version of CA iTechnology iGateway is installed when you
+        complete the CA EEM installation.</p>
+    <p class="note"><strong>Note:</strong> Various CA Technologies products or components install the 64-bit version of
+        CA iTechnology iGateway, including the 64-bit CA Technologies eTrustITM agent.</p>
+
+
+    <h3 class="heading3"></h3>
+
+
+    <h2 class="heading5" id="ApplicationServerTroubleshooting-ApplicationServerStarts,ClientonRemoteMachineTimesout">
+        Application Server Starts, Client on Remote Machine Times out</h2>
+    <p><strong>Symptom:</strong></p>
+    <p>When I issue the chk_auto_up command from a remote machine, a message similar to the following is displayed:</p>
+    <div class="code-panel conf-macro output-block" data-hasbody="true"
+         data-macro-name="sp-macrooverride-richtextbody-block">
+        <pre class="ca-code"><p>CAUAJM_E_50033&nbsp;Error&nbsp;initializing&nbsp;tx&nbsp;subsystem:&nbsp;CAUAJM_E_10527&nbsp;Timed&nbsp;out&nbsp;waiting&nbsp;for&nbsp;response&nbsp;from&nbsp;the&nbsp;Unicenter&nbsp;AutoSys&nbsp;JM&nbsp;Application&nbsp;Server.</p><p>CAUAJM_E_10062&nbsp;Failed&nbsp;to&nbsp;get&nbsp;initial&nbsp;configuration from Unicenter&nbsp;AutoSys&nbsp;JM&nbsp;Application&nbsp;Server:&nbsp;[&lt;<em>application server machine</em>&gt;:9,000]</p></pre>
+    </div>
+    <p><strong>Solution:</strong></p>
+    <p>You must ensure that network problems are not preventing communication between the client and the application
+        server computers through the Operating System ping command.</p>
+    <p><strong>Follow these steps:</strong></p>
+    <ol>
+        <li><p>On the client computer, change to the $CSAM_SOCKADAPTER/bin (UNIX) or %CSAM_SOCKADAPTER/bin (Windows)&nbsp;directory
+            and enter the following command at the UNIX operating system prompt or the Windows instance command
+            prompt:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>csamconfigedit&nbsp;Port=value&nbsp;display</p></pre>
+            </div>
+            <ul>
+                <li><strong><em>value</em></strong><br>Defines the port number to
+                    display.<br><strong>Default:&nbsp;</strong>9000
+                </li>
+            </ul>
+        </li>
+        <li><p>On the application server computer, change to the $CSAM_SOCKADAPTER/bin (UNIX) or %CSAM_SOCKADAPTER/bin
+            (Windows)&nbsp;directory and enter the following command at the UNIX operating system prompt or the Windows
+            instance command prompt:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>csamconfigedit&nbsp;Port=value&nbsp;display</p></pre>
+            </div>
+            <ul>
+                <li><strong><em>value</em></strong><br>Defines the port number to
+                    display.<br><strong>Default:&nbsp;</strong>9000
+                </li>
+            </ul>
+        </li>
+        <li>Compare the outputs in Step 1 and Step 2 and ensure that both the EnablePmux and EnableSSL settings are
+            identical.
+        </li>
+        <li><p>On both the client and application server computers, enter the following command at the UNIX operating
+            system prompt or the Windows instance command prompt::</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>csamconfigedit&nbsp;PortRange=49152-50176&nbsp;display</p></pre>
+            </div>
+            <p>The port settings are compared. If the settings do not match, change the settings such that the settings
+                match on both the computers, and restart the CA Workload Automation AE services.<br>If the settings
+                match, verify that physical port 7163 is not being blocked by a firewall software on either of the
+                computers.</p></li>
+    </ol>
+</div>
+
+<div style="clear:both"></div>
+
+
+</div>
+</body>
+</html>

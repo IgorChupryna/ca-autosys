@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>(UNIX) Install the Server</h2>
+<div id="wiki-content">
+
+    <div>
+        <div class="">
+            <p>You can install the server using the installation wizard. The server installation sets up the database and various configuration files, and configures the server computer to run as a client also. This enables you to run jobs on a server computer.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note: </strong>You can install the server using the CA Workload Automation AE media or by downloading the ISO file by logging in to
+                <em>Download Center, Products</em> in the CA Support Online website (
+                <a rel="nofollow" class="external-link" href="http://support.ca.com">http://support.ca.com</a>).
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Log in as root.</li>
+                <li>Mount the CA Workload Automation AE media.</li>
+                <li><p>Change directories to the mounted file system and run the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>./wa_setup.sh</p></pre>
+                    </div><p>The Welcome page appears.</p></li>
+                <li>Click Next.<br>The License Agreement page appears.</li>
+                <li><p>Read the license text, select the I Accept the Terms of the License Agreement option, and click Next.<br>The Installation Option page appears.</p></li>
+                <li>Select New and click Next.<br>The Installation Type page appears.</li>
+                <li>Select Typical or Custom, based on the type of installation you want to perform and click Next.<br>If you select Typical, the Installation Definition page appears. If you select Custom, the Components page appears.</li>
+                <li>Select the components to install and click Next.</li>
+                <li>Continue with the installation by entering the required information in each wizard page and clicking Next.<br>After you complete the last data entry page of the wizard and click Next, the Review Settings page appears, listing the information that you entered.</li>
+                <li><p>Review the information and, if it is correct, click Install.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> To change an entry, click Back as many times as necessary to locate that entry. Then, make the appropriate change, click Next until the Review Settings page reappears, verify the change, and click Next again.
+                    </div> <p>The Monitor Progress page appears and the progress is displayed. When the installation completes, the Installation Complete page appears.</p></li>
+                <li>Click Finish.<br>The server installation is complete.</li>
+            </ol>
+            <h2 id="id-(UNIX)InstalltheServer-wa_setup.sh—Install,Update,orRemoveCAWorkloadAutomationAE">wa_setup.sh—Install, Update, or Remove CA Workload Automation AE</h2>
+            <p>You can install, update, or remove CA Workload Automation AE using the shell script named <em>wa_setup.sh </em>from the CA Workload Automation AE DVD. It can also be used to generate a response file for a silent installation and to perform a silent installation. When you run wa_setup.sh, you specify the appropriate options depending on the functions you want to perform.</p>
+            <p>The following options are available:</p>
+            <ul>
+                <li><strong>-a <em>response_file</em></strong><br>Creates only a response file with the specified name. You can use this response file during a later installation of CA Workload Automation AE.</li>
+                <li><strong>-F</strong><br>Forces the CA Workload Automation AE installation, ignoring backup errors. When updating an existing installation, wa_setup.sh first backs up the existing installation in case the update fails. Normally, if the backup fails, the update cannot occur. However, this option specifies to ignore the backup errors and continue with the CA Workload Automation AE installation.</li>
+                <li><strong>-h|-?</strong><br>Displays the usage statement.</li>
+                <li><strong>-o </strong><br>Overlays the response file. Use this option with the -a option.</li>
+                <li><p><strong>-p <em>log_file</em></strong><br>Logs the installation in the specified file. If you do not specify this option, the installation log is stored in /opt/CA/installer/log.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> If the installation abnormally terminates, the installation log is stored in /tmp or the directory specified in $TMPDIR.
+                    </div> </li>
+                <li><strong>-r <em>response_file</em></strong><br>Installs CA Workload Automation AE using the specified response file. Specify the full path. Use this option with the -s option.</li>
+                <li><strong>-s</strong><br>Installs CA Workload Automation AE in unattended (silent) mode. If you do not specify the -r option, default parameters are used.</li>
+                <li><strong>-t <em>trace_file</em></strong><br>Traces the installation to the specified file. Specify the full path.</li>
+                <li><strong>-v</strong><br>Displays the version of the installer.</li>
+                <li><strong>-x</strong><br>Extracts only CA Workload Automation AE to the /tmp directory or to the directory specified in $TMPDIR. The file name that is used for the extracted CA Workload Automation AE is internally defined and displayed on the command line.</li>
+                <li><p><strong>-agent</strong><br>Installs only the agent. This option lets you bypass the installation wizard pages that are not directly associated with the typical agent installation.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> You can also install the agent using the agent_setup.sh script. The agent that is installed using either wa_setup.sh or agent_setup.sh is the same.
+                    </div> </li>
+                <li><strong>-client</strong><br>Installs the client and agent. This option lets you bypass the installation wizard pages that are not directly associated with the typical client installation.</li>
+                <li><strong>-server</strong><br>Installs the scheduler, application server, client, and agent. This option lets you bypass the installation wizard pages that are not directly associated with the typical server installation.</li>
+            </ul>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

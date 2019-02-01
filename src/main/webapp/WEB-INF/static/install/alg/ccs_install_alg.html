@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 class="article-name" tabindex="0">Installing on UNIX</h1>
+<h2 class="heading2" id="InstallingonUNIX-(UNIX)InstallCommonComponentsUsingConsoleMode">(UNIX) Install Common
+    Components Using Console Mode</h2>
+<p>This procedure describes the steps to install the common components on UNIX using console mode. As you proceed
+    through the installation, note that pressing the Tab key moves the cursor to a field or an action in a panel.
+    Pressing the spacebar selects or clears an option.</p>
+
+<p><strong>Follow these steps:</strong></p>
+
+<ol>
+    <li><p>Ensure that the $DISPLAY environment variable is unset.<br>For example, enter the following:</p>
+        <div class="code-panel conf-macro output-block" data-hasbody="true"
+             data-macro-name="sp-macrooverride-richtextbody-block">
+            <pre class="ca-code"><p>unset&nbsp;DISPLAY</p></pre>
+        </div>
+    </li>
+    <li>Mount the CA Common Components media.</li>
+    <li><p>Run the following command:</p>
+        <div class="code-panel conf-macro output-block" data-hasbody="true"
+             data-macro-name="sp-macrooverride-richtextbody-block">
+            <pre class="ca-code"><p>./ccc_setup.sh</p></pre>
+        </div>
+        <p><strong>Note: </strong>The setup script performs various system checks, which takes few minutes.<br>The
+            Welcome message appears with Next selected, after the system checks are complete.</p></li>
+    <li>Press Enter.<br>The License Agreement panel appears.</li>
+    <li><p>Press the plus key (+) to scroll through the page and read the license text and select I Agree.<br>The
+        Component Selection panel appears.</p></li>
+    <li>Select the components you want to install by pressing the down-arrow key (or Tab key) to move the cursor through
+        the list of components, and using the spacebar to select or clear an item.
+    </li>
+    <li>Select Next.<br>The next panel appears depending on the components that you selected.</li>
+    <li>Continue with the installation by entering the required information on each panel and selecting Next.<br>The
+        Review Settings panel appears after the last data entry panel, listing the components that you selected to
+        install.
+    </li>
+    <li><p>Review the information and, if it is correct, select Next.</p>
+        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+             data-macro-name="sp-macrooverride-richtextbody-block">
+            <strong>Note:</strong> To make a change to an entry, select Back as many times as necessary to locate that
+            entry. Then, make the appropriate change, select Next until the Review Settings panel appears, and select
+            Next.
+        </div>
+        <p>The installation process begins and the progress is displayed. When the installation completes, you are
+            prompted to exit the installation.</p></li>
+    <li>Select Finish.</li>
+    <li>Log out and then log back in to reset the environment.<br>The common components installation is complete.</li>
+</ol>
+
+
+</body>
+</html>

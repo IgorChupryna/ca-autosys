@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The autosys_secure command is a scheduler and client component utility that defines the EDIT superuser, EXEC superuser, regular user, database password, remote authentication method, and Windows user IDs and passwords for CA Workload Automation AE. You can also use autosys_secure to enable external security (in interactive or batch mode) in CA Workload Automation AE and perform basic CA EEM administration.</p>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autosys_secure</p><p>&nbsp;&nbsp;&nbsp;[-a&nbsp;{-editu | -execu}&nbsp;{<em>user@host&nbsp;</em>|&nbsp;<em>user@domain</em>}<em>&nbsp;</em>[-p<em>&nbsp;password</em>]]</p><p>&nbsp;&nbsp;&nbsp;[-a&nbsp;-u&nbsp;{<em>user@host&nbsp;</em>| user@<em>domain</em>}<em>&nbsp;</em>-p<em>&nbsp;password</em>]<br>&nbsp; &nbsp;[-a&nbsp;-u&nbsp;{<em>user@</em><em>host&nbsp;</em>| user@<em>domain</em>}&nbsp;-sc&nbsp;<em>SecurityCode</em>&nbsp;{-kf&nbsp;<em>KeyFile</em>&nbsp;| -ks&nbsp;<em>KeyStringFile</em>} &nbsp;[-kp&nbsp;<em>Passphrase</em>]]</p><p>&nbsp;&nbsp;&nbsp;[-c&nbsp;{-editu | -execu}&nbsp;{<em>user@</em><em>host&nbsp;</em>|&nbsp;<em>user@domain</em>}<em>&nbsp;</em>-h&nbsp;{NULL |&nbsp;<em>host</em>} |<em>&nbsp;</em>[-p<em>&nbsp;password</em>]]</p><p>&nbsp;&nbsp;&nbsp;[-c -u {<em>user@host&nbsp;</em>|&nbsp;<em>user@domain</em>}&nbsp;&nbsp;-o&nbsp;{NULL |&nbsp;<em>old_password</em>}&nbsp;&nbsp;-p&nbsp;{NULL |&nbsp;<em>new_password</em>}]&nbsp;</p><p>&nbsp; &nbsp;[-c -u {user@host | user@domain} -sc&nbsp;<em>SecurityCode</em>&nbsp;{-osc&nbsp;<em>OldSecurityCode</em>&nbsp;| {-kf&nbsp;<em>KeyFile</em>&nbsp;| -ks&nbsp;<em>KeyStringFile</em>} [-kp&nbsp;<em>Passphrase</em>]}]&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-d&nbsp;-u&nbsp;{<em>user@</em><em>host&nbsp;</em>|&nbsp;<em>user@</em><em>domain</em>} [-p<em>&nbsp;password&nbsp;</em>|&nbsp;-sc&nbsp;<em>SecurityCode</em>]]</p><p>&nbsp; &nbsp;[-e&nbsp;-host&nbsp;<em>host</em>&nbsp;[-secadmu&nbsp;<em>user</em>&nbsp;-p&nbsp;<em>password</em>]]</p><p>&nbsp;&nbsp;&nbsp;[-f&nbsp;set&nbsp;-u&nbsp;<em>user</em>&nbsp;-p&nbsp;<em>password</em>&nbsp;[-t&nbsp;{-1 |&nbsp;<em>DDHH</em>}]]</p><p>&nbsp;&nbsp;&nbsp;[-f&nbsp;show]</p><p>&nbsp;&nbsp;&nbsp;[-f&nbsp;delete]</p><p>&nbsp;&nbsp;&nbsp;[-n&nbsp;-host&nbsp;<em>host</em>&nbsp;[-secadmu&nbsp;<em>user</em>&nbsp;-p&nbsp;<em>password</em>]]</p><p>&nbsp;&nbsp;&nbsp;[-s&nbsp;[{{-editu&nbsp;|&nbsp;-execu&nbsp;|&nbsp;-host&nbsp;| -key&nbsp;}&nbsp;ALL&nbsp;|&nbsp;-secadmu&nbsp;<em>user&nbsp;</em>-p&nbsp;password}]]</p><p>&nbsp;&nbsp;&nbsp;[-x]</p><p>&nbsp;&nbsp;&nbsp;[-?]</p></pre>
+                </div>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Note: </strong>You can define security settings using the CA WAAE Security Utility interactive menu by entering the autosys_secure command without specifying any optional parameters. We recommend this method, but you can also define security settings from the command line by specifying optional parameters when you run the command. This topic provides information about the command line options that you can use to define security settings.
+                </div>
+                <ul>
+                    <li><strong>-a {-editu|-execu} {<em>user@host</em>&nbsp;|&nbsp;<em>user@domain</em>} [-p&nbsp;<em>password</em>]&nbsp;<br></strong>(Optional) Adds an EDIT superuser or EXEC superuser.</li>
+                </ul>
+                <ul>
+                    <li style="list-style-type: none;background-image: none;">
+                        <ul>
+                            <li><strong>-p&nbsp;<em>password<br></em></strong>(Optional) Specifies the password of the user.</li>
+                        </ul></li>
+                    <li><strong>-a -u&nbsp;{<em>user@host</em>&nbsp;|&nbsp;<em>user@domain</em>}&nbsp;-p&nbsp;<em>password&nbsp;</em></strong><br>(Optional)&nbsp;Adds a regular user with password.
+                        <ul>
+                            <li><p><strong>-p&nbsp;<em>password<br></em></strong>(Optional) Specifies the password of the user.</p></li>
+                        </ul></li>
+                    <li><strong>-a -u {<em>user@host</em>&nbsp;|&nbsp;<em>user@domain</em>} -sc&nbsp;<em>SecurityCode</em>&nbsp;{-kf&nbsp;<em>KeyFile</em>&nbsp;| -ks&nbsp;<em>KeyStringFile</em>} &nbsp;[-kp&nbsp;<em>Passphrase</em>]&nbsp;</strong><br>(Optional) Adds a regular user with key credentials.&nbsp;Specify the security code and either the key file or the key string. You can also specify a passphrase for the key file or key string.
+                        <ul>
+                            <li><p><strong>-sc&nbsp;<em>SecurityCode<br></em></strong>Specifies the security code that is used to authorize changes to the key credential user.&nbsp;</p></li>
+                            <li><p><strong>-kf&nbsp;<em>KeyFile<br></em></strong>Specifies the absolute path to the SSH private key file on the remote machine where the agent runs.&nbsp;<br>A&nbsp;<em>key file</em>&nbsp;is the private key part of the Public key cryptography. You can generate private and public keys using the ssh-keygen OpenSSH program.<strong><em><br></em>Limits:&nbsp;</strong>Up to 255 characters<em>&nbsp;<br></em></p>
+                                <div class="bs-callout bs-callout-warning conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    &nbsp;
+                                    <strong>Important!</strong>
+                                    <span> KeyFile can be used for SCP (SFTP) or any of the CA WA Advanced Integration for Hadoop jobs.</span>
+                                </div> </li>
+                            <li><p><strong>-ks&nbsp;<em>KeyStringFile<br></em></strong>Specifies the path to the SSH private key file on the local machine to extract and store in the database.<br>A&nbsp;<em>key string</em>&nbsp;is the content of the key file.<br><strong>Limits:&nbsp;</strong>Up to 255 characters<strong><em><em>&nbsp;</em>&nbsp;<br></em></strong></p>
+                                <div class="bs-callout bs-callout-warning conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    &nbsp;
+                                    <strong>Important!</strong> KeyString is only applicable to the CA WA Advanced Integration for Hadoop job types.
+                                </div> </li>
+                            <li><p><strong>-kp&nbsp;<em>Passphrase<br></em></strong>Specifies the passphrase that is associated with the SSH private key for a user with key credentials.<br><strong>Limits:</strong>&nbsp;Up to 255 characters</p>
+                                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <p><strong>Note: </strong>Prior to using key credentials in jobs, you must configure the machine where the agent is installed and the remote machine that the agent tries to connect to so that they communicate using the Public key cryptography.</p>
+                                </div> </li>
+                        </ul></li>
+                    <li><strong>-c {-editu|-execu} {<em>user@</em><em>host&nbsp;</em>| user@<em>domain}</em><em>&nbsp;</em>-h {NULL|<em>host</em>} |<em>&nbsp;</em>[-p<em>&nbsp;password</em>] &nbsp;</strong><br>(Optional) Changes the host qualifier for the specified EDIT superuser or EXEC superuser. Specify the current host as part of the user ID with the -editu or -execu parameter. Specify the new host with the -h parameter. To remove the host qualifier, specify a value of NULL with the -h parameter.
+                        <ul>
+                            <li><p><span style="color: rgb(51,51,51);"><strong>-p&nbsp;<em>password<br></em></strong>(Optional) Specifies the password of the user.</span></p></li>
+                        </ul></li>
+                    <li><strong>-c -u {<em>user@host</em>&nbsp;|&nbsp;<em>user@domain</em>} &nbsp;- o {NULL|<em>old_password</em>} &nbsp;- p {NULL|<em>new_password</em>} &nbsp;</strong><br>(Optional) Changes the password for the specified user. To remove a password, specify a value of NULL for the -p parameter.&nbsp;To add a password, specify a value of NULL for the -o parameter.</li>
+                    <li><strong>-c -u {<em>user@host</em>&nbsp;|&nbsp;<em>user@domain</em>} -sc&nbsp;<em>SecurityCode</em>&nbsp;{-osc&nbsp;<em>OldSecurityCode</em>&nbsp;|&nbsp;</strong><strong>{-kf&nbsp;<em>KeyFile</em>&nbsp;| -ks&nbsp;<em>KeyStringFile</em>} [-kp&nbsp;<em>Passphrase</em>]}</strong><br>(Optional) Changes the key credentials for the specified user. You can change either the security code&nbsp;or the key file or key string.&nbsp;<br>To change the security code, specify the current security code with the -osc parameter and the new security code with the -sc parameter.&nbsp;<br>To change the key file, specify the&nbsp;current security code with the -sc parameter and the new key file with the -kf parameter. &nbsp;<br>To change the key string, specify the&nbsp;current security code with the -sc parameter and the new key string with the -ks parameter.&nbsp;<br>To change the passphrase that you specified for the key file,&nbsp;specify the&nbsp;current security code with the -sc parameter, the current or new key file with the -kf parameter, and the new passphrase with the -kp parameter.&nbsp;<br>To change the passphrase that you specified for the key string,&nbsp;specify the&nbsp;current security code with the -sc parameter, the current or new key string with the -ks parameter, and the new passphrase with the -kp parameter.</li>
+                </ul>
+                <ul>
+                    <li><strong>-d -u {<em>user@host&nbsp;</em>|&nbsp;<em>user@domain</em>} [-p&nbsp;<em>password</em>&nbsp;| -sc&nbsp;<em>SecurityCode</em>]</strong><br>Deletes the specified user.</li>
+                    <li><strong>-e -host&nbsp;<em>host</em>&nbsp;[-secadmu&nbsp;<em>user</em>&nbsp;-p&nbsp;<em>password</em>]</strong><br>(Optional) Activates external security on the specified host.</li>
+                </ul>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <p><strong>Notes:</strong></p>
+                    <ul>
+                        <li>You can specify multiple CA EEM host names in a comma-separated format. However, each host name must be less than 80 characters and the entire list must be less than 255 characters.</li>
+                        <li>CA Workload Automation AE requires a valid CA EEM authentication certificate to enable external security. If the certificate is missing or invalid, CA Workload Automation AE requires the credentials of an external security user with administrative privileges to generate a new one.</li>
+                        <li>CA Workload Automation AE stores the CA EEM authentication certificate in the database and makes it available to the CA Workload Automation AE instance. If CA Workload Automation AE cannot store the certificate, verify the database for problems.</li>
+                    </ul>
+                </div>
+                <ul>
+                    <li><strong>-f set -u&nbsp;<em>user</em>&nbsp;-p&nbsp;<em>password</em></strong><br>(Optional) Specifies the user credentials to cache and the validity period for those credentials. The default validity period is 24 hours, but you can specify a different validity period using -t option.</li>
+                </ul>
+                <ul>
+                    <li><strong>-t {-1|&nbsp;<em>DDHH</em>}</strong><br>(Optional) Specifies the validity period for the credentials.</li>
+                    <li><p><strong>-1</strong></p><p>Specifies that the credentials never expire.</p><p><strong><em>DDHH</em></strong></p><p>Defines a specific validity period for the credentials in days and hours.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Notes:</strong></p>
+                            <ul>
+                                <li>To specify that the credentials are valid for less the one day, enter a value of 00 for days and then specify a value from 01 through 24 for hours.</li>
+                                <li>If you specify that a non-zero value for days and a 00 value for hours, the credentials expire after the specified number of days simultaneously of day that you generated them.</li>
+                                <li>If you specify 0000, the utility returns an error.</li>
+                                <li>The utility sets the validity period to 24 hours by default when no expiration date and time is specified.</li>
+                            </ul>
+                        </div> </li>
+                </ul>
+                <ul>
+                    <li><strong>-f show</strong><br>(Optional) Displays cached credentials.</li>
+                    <li><strong>-f delete</strong><br>(Optional) Deletes cached credentials. Your session remains active until cached credentials expire or you delete them. To protect the security of your user account, delete cached credentials.</li>
+                    <li><p><strong>-n -host&nbsp;<em>host</em>&nbsp;[-secadmu&nbsp;<em>user</em>&nbsp;-p&nbsp;<em>password</em>]</strong><br>(Optional) Reverts to native security on the specified host.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> Run autosys_secure as an external security user with administrative privileges to revert to native security. You can perform this task when CA Workload Automation AE is running in external security mode and you authenticate autosys_secure with external security as a privileged user.
+                        </div> </li>
+                </ul>
+                <ul>
+                    <li><p><strong>-s [{{-editu | -execu | -host | -key } ALL | -secadmu user -p <em>password</em>}]</strong></p><p>(Optional) Displays security settings for all EDIT superusers, all EXEC superusers, all hosts, all key credential users, the specified administrative user, or all existing users. To display setting for all existing users, specify the parameter without extra&nbsp;options.</p><p>Use&nbsp;<em>one&nbsp;</em>of the following commands to verify&nbsp;the return code to determine if CA Workload Automation AE is running under native security mode or external security mode:</p>
+                        <ul>
+                            <li><p>On UNIX:</p>
+                                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <pre class="ca-code"><p>csh&nbsp;echo&nbsp;$status</p><p>sh&nbsp;or&nbsp;ksh&nbsp;echo&nbsp;$?</p></pre>
+                                </div></li>
+                            <li><p>On Windows:</p>
+                                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <pre class="ca-code"><p>echo&nbsp;%ERRORLEVEL%</p></pre>
+                                </div></li>
+                        </ul><p>When you exit the program, autosys_secure returns&nbsp;<em>one</em>&nbsp;of the following values:</p>
+                        <ul>
+                            <li><strong>1</strong><br>Indicates that a failure occurred.</li>
+                            <li><strong>2</strong><br>Indicates that the system is running in native security mode.</li>
+                            <li><p><strong>3</strong><br>Indicates that the system is running in external security mode.</p>
+                                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <strong>Note:</strong> Run autosys_secure as an external security user with administrative privileges to view the CA EEM server list and unauthenticated user mode setting. You can only view this information when CA Workload Automation AE is running in external security mode and you authenticate autosys_secure with external security as a privileged user.
+                                </div> </li>
+                        </ul></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-q</strong></p><p>(Optional) Runs autosys_secure in quiet mode so it does not display messages.</p><p>In quiet mode, you must use&nbsp;<em>one</em>&nbsp;of the following commands to verify&nbsp;the return code to see whether there were errors:</p>
+                        <ul>
+                            <li><p>On UNIX:<br>On Bourne, Bash, or Korn shell, enter the following command:</p>
+                                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <pre class="ca-code"><p>echo&nbsp;$?</p></pre>
+                                </div><p>On C shell, enter the following command:</p>
+                                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <pre class="ca-code"><p>echo&nbsp;$status</p></pre>
+                                </div></li>
+                            <li><p>On Windows:</p>
+                                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <pre class="ca-code"><p>echo&nbsp;%ERRORLEVEL%</p></pre>
+                                </div></li>
+                        </ul><p>When autosys_secure is successful, the return value is 0. When it is unsuccessful, the value is 1.</p></li>
+                    <li><p><strong>-x<br></strong>(Optional) Returns the command version information to standard output.</p></li>
+                    <li><p><strong>-?<br></strong>(Optional) Displays help for the command.</p></li>
+                </ul>
+                <p><strong>Example: Add a Credentialed User from the Command Line</strong></p>
+                <p>This example adds&nbsp;<em>testuser</em>&nbsp;as the new credentialed user on the&nbsp;<em>machine1</em>&nbsp;host and assigns&nbsp;<em>testuserpass</em>&nbsp;as the password for the user.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autosys_secure&nbsp;-a&nbsp;-u&nbsp;testuser@machine1&nbsp;-p&nbsp;testuserpass</p></pre>
+                </div>
+                <p><strong>Example: List All Defined Users with Password from the Command Line</strong></p>
+                <p>This example lists all users with password.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autosys_secure&nbsp;-s&nbsp;-host&nbsp;ALL</p></pre>
+                </div>
+                <p><strong>Example: Enable External Security from the Command Line</strong></p>
+                <p>This example enables external security.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autosys_secure -e -host&nbsp;<em>ext_sec_server_host&nbsp;</em>-secadmu&nbsp;<em>ExtSecAdmin</em>&nbsp;-p&nbsp;<em>ExtSecAdminpass</em></p></pre>
+                </div>
+                <p><strong>Example : Generate cached credentials from the Command Line</strong></p>
+                <p>This example generates cached credentials that expire 47 hours after the time the command runs.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autosys_secure -f&nbsp;set&nbsp;-u&nbsp;<em>ExtSecUser</em>&nbsp;-p&nbsp;<em>ExtSecUserPass</em>&nbsp;&nbsp;-t&nbsp;0123</p></pre>
+                </div>
+                <p><strong>Example: Add a User and Password for a Hadoop Job from the Command Line</strong><br>This example adds&nbsp;<em>user1</em>&nbsp;as the new credentialed user for the edge node&nbsp;<em>HADOOP_EDGE_NODE</em>&nbsp;and assigns&nbsp;<em>hadoopuser1</em>&nbsp;as the password for the user.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autosys_secure -a -u user1@HADOOP_EDGE_NODE -p hadoopuser1</p></pre>
+                </div>
+                <p><strong>Example: Add a User with Key File and Passphrase for a Hadoop Job from the Command Line</strong><br>This example adds&nbsp;<em>user2</em>&nbsp;as the new credentialed user for the edge node&nbsp;<em>HADOOP_EDGE_NODE</em>&nbsp;and assigns&nbsp;<em>seccode</em>&nbsp;as the security&nbsp;code,&nbsp;<em>/tmp/id_rsa</em>&nbsp;as the key file path and&nbsp;<em>passphrase</em>&nbsp;as the passphrase for the user.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code">autosys_secure -a -u user2@HADOOP_EDGE_NODE -sc seccode -kf /tmp/id_rsa -kp passphrase</pre>
+                </div>
+                <p><strong>Example: Change the Key File and Passphrase for a User</strong><br>This example changes the key file and passphrase for&nbsp;<em>user2</em>&nbsp;user. The key file is changed to&nbsp;<em>/tmp/new_id_rsa</em>&nbsp;and the passphrase is changed to&nbsp;<em>new_passphrase</em>.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autosys_secure -c -u&nbsp;user2@HADOOP_EDGE_NODE&nbsp;-sc seccode -kf /tmp/new_id_rsa -kp new_passphrase</p></pre>
+                </div>
+                <h2 class="heading3" id="autosys_secureCommand--DefineSecuritySettings-NativeandEmbeddedSecurity">Native and Embedded Security</h2>
+                <p>CA Workload Automation AE uses native or external security for protecting jobs, machines, and so on.</p>
+                <p>CA Workload Automation AE native security includes the following:</p>
+                <ul>
+                    <li>Job-level security</li>
+                    <li>Superuser privileges</li>
+                    <li>System-level security</li>
+                    <li>UNIX and Windows file permissions</li>
+                </ul>
+                <p>Security is initiated when either a user or the scheduler sends events that affect a job run.</p>
+                <p>CA Workload Automation AE external security is accomplished through integration with CA EEM. &nbsp;All GUI applications and command-line interfaces have callouts to security. User-defined classes in CA EEM are used to govern what types of resources can be controlled by which users.</p>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <p><strong>Note:</strong>&nbsp;For more information about configuring CA Workload Automation AE to work with CA EEM, see <a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/securing/security-policy-customization" class="conf-macro output-inline" data-hasbody="false">Security Policy Customization</a>.</p>
+                </div>
+                <h2 class="heading3" id="autosys_secureCommand--DefineSecuritySettings-EDITSuperuserandEXECSuperuser">EDIT Superuser and EXEC Superuser</h2>
+                <p>Two users have administrator privileges: the EDIT superuser and the EXEC superuser.</p>
+                <p>The EDIT superuser is the only user with permission to do the following:</p>
+                <ul>
+                    <li>Edit or delete any job, regardless of who owns it and what permissions are set for it.</li>
+                    <li>Change the owner of a job.</li>
+                    <li>Change the database password, remote authentication method, and Windows user passwords.</li>
+                </ul>
+                <p>The EXEC superuser is the only user with permission to do the following:</p>
+                <ul>
+                    <li>Start or kill any job, regardless of the execution permissions on the specified job. This user can affect how jobs run, typically by issuing the sendevent command.</li>
+                    <li>Shut down the scheduler (by sending the STOP_DEMON event).</li>
+                </ul>
+                <h2 class="heading3" id="autosys_secureCommand--DefineSecuritySettings-DatabasePassword">Database Password</h2>
+                <p>The scheduler and command line utilities use the database password to securely access the database (event server). By default, this password is stored in the database as autosys, but the EDIT superuser can use autosys_secure to change it. The EDIT superuser must change this password before CA Workload Automation AE starts a job on a legacy agent.</p>
+                <p>Every event server in an instance must have the same database password. If you are running in dual event server mode, autosys_secure changes the password on both event servers.</p>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Note: </strong>If CA Workload Automation AE has rolled over to single event server mode, do not change the password until you have re-established dual event server mode.
+                </div>
+                <h2 class="heading3" id="autosys_secureCommand--DefineSecuritySettings-RemoteAuthenticationMethod">Remote Authentication Method</h2>
+                <p>CA Workload Automation AE uses remote authentication methods to verify the following:</p>
+                <ul>
+                    <li>Whether a user has permission to start a job on a client.</li>
+                    <li>Whether a scheduler has permission to start a job on a client.</li>
+                </ul>
+                <p>The remote authentication methods are stored in the database and are referenced when a client initializes.</p>
+                <h2 class="heading3" id="autosys_secureCommand--DefineSecuritySettings-UserandHostManagement">User and Host Management</h2>
+                <p><strong>Valid on Windows</strong></p>
+                <p>Windows user IDs and passwords must be entered into the database for jobs to run on Windows clients. When an agent runs a job on a computer, it logs in and impersonates the user who owns the job. To enable the agent to do this, the scheduler passes both the job information and an encrypted version of the job owner's password from the database to the agent. The EDIT superuser can use autosys_secure interactively or from the command line to enter these passwords. After the EDIT superuser enters the IDs and passwords, any user who knows an existing user ID and password can change the password or can delete that user ID and password.</p>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Note: </strong>Entering passwords using autosys_secure is not related to Windows user Account Administration.
+                </div>
+                <h2 class="heading3" id="autosys_secureCommand--DefineSecuritySettings-EncryptedPasswords">Encrypted Passwords</h2>
+                <p>The password is encrypted. It is associated with the autosys database user and is used for database connection. The encrypted password is stored in the configuration file.</p>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

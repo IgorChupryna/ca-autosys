@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The DBMaint command runs the dbstatistics, archive_events, and archive_jobs commands to perform maintenance on the CA Workload Automation AE database.</p>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>DBMaint&nbsp;[-x]&nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><strong>-x</strong><br>(Optional) Returns version information.</li>
+                    <li><strong>-?</strong><br>(Optional) Displays help for the command.</li>
+                </ul>
+                <p>DBMaint runs the dbstatistics command to perform the following tasks:</p>
+                <ul>
+                    <li>Updates the statistics for all the tables except the ujo_meta_enumerations, ujo_meta_properties,ujo_meta_rules,ujo_meta_types, and ujo_real_resource tables.&nbsp;</li>
+                    <li>Runs the dbspace command to determine the available space in the database. If the amount of free space is insufficient, the command issues warnings and generates a DB_PROBLEM alarm.<br>If you use an Oracle database, consider the following points: &nbsp;</li>
+                </ul>
+                <ul>
+                    <li style="list-style-type: none;background-image: none;">
+                        <ul>
+                            <li>The DBMaint command might&nbsp;erroneously report that the database is nearly full. This can occur because DBMaint calculates how much space is not allocated for extents. DBMaint reports entire extents as used space even when they are nearly empty.</li>
+                            <li><p><span>The DBMaint command might&nbsp;incur privilege errors during the execution of either the dbstatistics or dbspace command. These privilege errors might&nbsp;also be incurred when running the programs standalone. Privilege errors occur because the UJOADMIN account has not been granted the ANALYZE ANY privilege or the ujoadmin role does not have SELECT privileges to DBA_TABLES.</span><br>To grant these privileges, run the following SQL commands:</p>
+                                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <pre class="ca-code"><p>sqlplus sys/&lt;passwd&gt;@&lt;ORACLE_SID&gt; as sysdba<br>grant ANALYZE ANY to UJOADMIN;<br>grant SELECT ON DBA_TABLES to UJOADMIN;</p></pre>
+                                </div><p>To revoke these privileges, run the following SQL commands:</p>
+                                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                    <pre class="ca-code"><p>sqlplus sys/&lt;passwd&gt;@&lt;ORACLE_SID&gt; as sysdba<br>revoke ANALYZE ANY from UJOADMIN;<br>revoke SELECT ON DBA_TABLES from UJOADMIN;</p></pre>
+                                </div></li>
+                        </ul></li>
+                </ul>
+                <ul>
+                    <li>Calculates and updates the average job run statistics in the ujo_avg_job_run table. The old data is overwritten with the new data. The command returns either a 0 or 1; 0 indicates success and 1 indicates failure.</li>
+                </ul>
+                <p>DBMaint runs the archive_events command to remove old information from the database tables. By default, the archive_events command removes data that is more than seven days old. Specifically, archive_events removes the following:</p>
+                <ul>
+                    <li>Events and associated alarms from the ujo_job_runs table.</li>
+                    <li>Job run information from the ujo_job_runs table.</li>
+                    <li>autotrack log information from the ujo_audit_info and ujo_audit_msg tables.</li>
+                    <li>Machine information from the ujo_machine table.</li>
+                </ul>
+                <p>The output from DBMaint, $AUTOUSER/out/DBMaint.out, reports the amount of space remaining in the database so you can monitor whether the event tables are getting full. By monitoring these values, you can calculate how many events you can safely maintain in a day before archiving.</p>
+                <p>DBMaint runs the archive_jobs command to remove obsolete jobs from the database tables.</p>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <p><strong>Notes:</strong></p>
+                    <ul>
+                        <li>If you are archiving large event tables, your database connection might time out, causing DBMaint to fail. If this occurs, edit the DBMaint script to increase the value of the -t parameter in the archive_events command. For information about editing the DBMaint script, see <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-ae/11-4-2/en/administrating/ae-configuration/maintain-the-event-server/general-database-maintenance" class="conf-macro output-inline" data-hasbody="true">General Database Maintenance</a>.</li>
+                        <li><span>By default, the CA Workload Automation AE OS user is "autosys". However, you can define a different ID for the OS user during installation.</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

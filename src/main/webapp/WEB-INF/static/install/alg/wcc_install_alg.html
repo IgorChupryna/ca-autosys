@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3 class="heading3" id="InstalltheCAWCCServeronUNIX-InstallCAWCConUNIXUsingConsoleMode">Install CA WCC on UNIX Using
+    Console Mode</h3>
+<p>This procedure describes how to install CA WCC on the CA WCC server using console mode.</p>
+<div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+     data-macro-name="sp-macrooverride-richtextbody-block">
+    <p><strong>Notes:</strong></p>
+    <ul>
+        <li>CA EEM must be running when you install CA WCC so that registration can occur; otherwise, you cannot install
+            CA WCC.
+        </li>
+        <li>Before you begin the installation, stop performance-monitoring, antivirus, and antispyware software.</li>
+        <li>If CA WCC is already installed on the server, you cannot reinstall CA WCC. Uninstall CA WCC first, then
+            install CA WCC.
+        </li>
+        <li>If the database you specify for the CA WCC database is used with another CA WCC instance, the option to
+            install CA WCC in High Availability mode appears.
+        </li>
+    </ul>
+</div>
+<p><strong>Follow these steps:</strong></p>
+<ol>
+    <li>Log in as root.</li>
+    <li><p>Mount the CA WCC media.</p>
+        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+             data-macro-name="sp-macrooverride-richtextbody-block">
+            <strong>Note:</strong> We strongly recommend that you mount the ISO image instead of using an image "buster"
+            tool. The path to the ISO image cannot contain space characters. The use of an image "buster" tool produces
+            unexpected results.
+        </div>
+    </li>
+    <li><p>Change directories to the mounted file system and run the following command in a shell window:</p>
+        <div class="code-panel conf-macro output-block" data-hasbody="true"
+             data-macro-name="sp-macrooverride-richtextbody-block">
+            <pre class="ca-code"><p>./UnixInstaller.sh&nbsp;-console</p></pre>
+        </div>
+        <p>The installation option prompt appears.</p></li>
+    <li>Enter&nbsp;<strong>1&nbsp;</strong>(Install CA Workload Control Center r11.4) and
+        press&nbsp;<strong>Enter</strong>.<br>The Introduction message appears.
+    </li>
+    <li><p>Press&nbsp;<strong>Enter</strong>.<br>The end-user license agreement option panel appears or the installer
+        prompts you to cancel the installation.</p>
+        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+             data-macro-name="sp-macrooverride-richtextbody-block">
+            <strong>Note:</strong> The installer prompts you to cancel only if CA WCC is already installed.
+        </div>
+    </li>
+    <li><p>Press&nbsp;<strong>Enter</strong>&nbsp;or type 2.</p>
+        <div class="bs-callout bs-callout-warning conf-macro output-block" data-hasbody="true"
+             data-macro-name="sp-macrooverride-richtextbody-block">
+            <strong>Important!</strong> You can continue the installation only if you press
+            <strong>Enter</strong> or type 2. If you type 3, the installation is cancelled. If you type 2, you accept
+            the terms of the agreement without reading it. To read the agreement first, press
+            <strong>Enter</strong>.
+        </div>
+        <p>The license agreement or prompt appears, depending on your selection.</p></li>
+    <li><p>(As Applicable) Press&nbsp;<strong>Enter</strong>, read the text, and press&nbsp;<strong>Enter</strong>&nbsp;again.
+        Repeat this action until you reach the end of the text, then type Y to accept the terms and press&nbsp;<strong>Enter</strong>.
+    </p>
+        <div class="bs-callout bs-callout-warning conf-macro output-block" data-hasbody="true"
+             data-macro-name="sp-macrooverride-richtextbody-block">
+            <strong>Important!</strong> The installation continues only if you accept the terms. To cancel the
+            installation, type N and press
+            <strong>Enter</strong>.
+        </div>
+        <p>The next prompt appears.</p></li>
+    <li><p>Specify the installation directory path or accept the default path and press&nbsp;<strong>Enter</strong>.</p>
+        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+             data-macro-name="sp-macrooverride-richtextbody-block">
+            <strong>Note:</strong> Do not specify the root directory. For example, do not specify /.
+        </div>
+        <p>The next prompt appears.</p></li>
+    <li><p>Continue with the installation, responding to each prompt as it appears.</p>
+        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+             data-macro-name="sp-macrooverride-richtextbody-block">
+            <strong>Note:</strong> The following rules apply:
+            <ul>
+                <li><p>For a prompt with multiple options, enter the option number you want (or follow the displayed
+                    instructions to accept the default selection indicated by the right arrow) and press Enter to
+                    complete the selection.</p></li>
+                <li><p>For a prompt that requires a single value, enter the correct value (or accept the default value
+                    enclosed in brackets) and press Enter.</p></li>
+                <li><p>If the value specified for a port is in use or is not in the defined range, you are prompted to
+                    specify a different value.</p></li>
+                <li>For a prompt for a password or for confirmation of a password, type your password and
+                    press&nbsp;<strong>Enter</strong>.
+                </li>
+            </ul>
+        </div>
+    </li>
+    <li><p>Press&nbsp;<strong>Enter</strong>&nbsp;after you respond to the last prompt.</p>
+        <p><span>The summary information appears, listing the components to install.</span></p></li>
+    <li><p>Review the summary information and, if it is correct, press&nbsp;<strong>Enter</strong>.</p>
+        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+             data-macro-name="sp-macrooverride-richtextbody-block">
+            <p><strong>Note:</strong> To change to an entry, enter <strong>back</strong> as many times as necessary to
+                locate that entry. Then, make the appropriate change, press <strong>Enter</strong> until the
+                pre-installation summary appears again, and press <strong>Enter</strong>.</p>
+        </div>
+        <p>The installation process begins, and the progress is displayed. When the installation completes, you are
+            prompted to exit the installation.</p></li>
+    <li><p>Press&nbsp;<strong>Enter</strong>.<br>The CA WCC installation is complete.</p></li>
+    <li><p>Enter&nbsp;<strong>0</strong>.<br>The installer closes.</p>
+        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+             data-macro-name="sp-macrooverride-richtextbody-block">
+            <p><strong>Notes:</strong></p>
+            <ul>
+                <li><p>Log out and log back in to the computer and verify that the CA WCC servers have started before
+                    you use or perform operations with CA WCC. You can display CA WCC server startup status by running
+                    the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>grep "startup in" $CA_WCC_INSTALL_LOCATION/log/*.log</p></pre>
+                    </div>
+                </li>
+                <li><p>Installation log files are in the following location:</p>
+                    <p><em>WCC_installation_root</em>/log/install</p></li>
+            </ul>
+        </div>
+    </li>
+</ol>
+
+
+</body>
+</html>

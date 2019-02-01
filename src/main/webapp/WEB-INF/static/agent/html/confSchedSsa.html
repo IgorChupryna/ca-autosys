@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div >
+
+
+    <h1 class="article-name" tabindex="0">Configure Communication with a Scheduling Manager</h1>
+
+
+    <div>
+        <div class="col-xs-12 col-md-8 col-lg-8">
+            <p>You can change your scheduling manager connection information or can add a connection to a different scheduling manager. If you use the agent with two scheduling managers that require different socket types for communication, specify a main and auxiliary socket for the agent.</p>
+            <p>To configure communication with a scheduling manager, configure the following parameters on the agent:</p>
+            <ul>
+                <li><strong>communication.inputport</strong><br>Specifies the main port number the agent uses to listen for incoming messages from the scheduling manager. You need this port when you configure the scheduling manager to work with the agent.<br><strong>Default:</strong> 7520<br><strong>Limits:</strong> 1024-65534</li>
+                <li><strong>communication.inputport.aux</strong><br>Specifies the optional auxiliary port number the agent uses to listen for incoming messages from the scheduling manager.</li>
+                <li><strong>communication.managerid_<em>n</em></strong><br>Specifies the name of the scheduling manager instance that the agent works with, where <em>n</em> is an integer that corresponds to the scheduling manager being configured.<br><strong>Default:</strong> CENTRAL_MANAGER<br><strong>Example: </strong>MYSERVER</li>
+                <li><p><strong>communication.manageraddress_<em>n</em></strong><br>Specifies the address of the scheduling manager that the agent works with, where <em>n</em> is an integer that corresponds to the scheduling manager being configured. This value corresponds to the IP address in the connection details for the scheduling manager. You can specify a list of addresses for the scheduling manager.<br><strong>Example:</strong> 172.24.36.107 (IPv4) or 0:0:0:0:0:FFFF:192.168.00.00 (IPv6)</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong><strong>Notes:<br></strong></strong>
+                        <ul>
+                            <li>You can specify a DNS name instead of the IP address for the scheduling manager. However, your agent computer must always be able to resolve the DNS name. If there is a DNS outage and your agent computer cannot resolve DNS names, the agent cannot communicate with the scheduling manager.</li>
+                            <li>If the scheduling manager address never changes, enter the DNS name for the scheduling manager in the hosts file for your agent computer. This entry ensures that the IP address can be resolved after DNS disruptions.</li>
+                        </ul>
+                    </div> </li>
+                <li><strong>communication.managerport_<em>n</em></strong><br>Specifies the port that the scheduling manager listens on for communication from agents, where<em> n </em>is an integer that corresponds to the scheduling manager being configured. This value corresponds to the port number in the connection details for the scheduling manager.<br><strong>Default:</strong> 7507<br><strong>Limits:</strong> 1024-65534</li>
+                <li><strong>communication.managerhealthmon_<em>n</em></strong><br>Indicates whether to alert the scheduling manager that a disk threshold has been breached, where <em>n</em> is an integer that corresponds to the scheduling manager being configured. This parameter is applicable if resource monitoring is enabled (agent.resourcemon.enable=true).<br>
+                    <ul>
+                        <li><p><strong>true</strong><br>Sends a message to the scheduling manager when a disk threshold has been breached. A message is also sent when the notice or severe thresholds are resolved. If the critical threshold is breached, the agent sends an emergency shutdown message to indicate the reason for the shutdown.</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong>Note:</strong> If the disk situation prevents a proper shutdown, the delivery of the emergency shutdown message is not guaranteed.
+                            </div> </li>
+                        <li><strong>false</strong><br>Does not send a message to the scheduling manager when a disk threshold has been breached.</li>
+                    </ul><p><strong>Default:</strong> false</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> When implemented on the scheduling manager, the scheduling manager can dynamically set this parameter to true.
+                    </div> </li>
+                <li><strong>communication.monitorobject_<em>n</em></strong><br>Specifies the monitor object for the scheduling manager that is used in agent alive ping.</li>
+                <li><strong>communication.socket_<em>n</em></strong><br>Defines the socket type the agent and scheduling manager use for communication, where <em>n</em> is an integer starting at one that corresponds to the scheduling manager being configured. The following socket types are available:<br>
+                    <ul>
+                        <li>plain</li>
+                        <li>dylan</li>
+                    </ul><p><strong>Default:</strong> plain</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> CA Workload Automation DE does not require this parameter.
+                    </div> </li>
+                <li><strong>communication.receiver.socket.main</strong><br>Specifies the type of socket the agent uses for its main port. The value of this parameter must be different from the communication.receiver.socket.aux parameter. You can specify the following socket types:<br>
+                    <ul>
+                        <li>plain</li>
+                        <li>dylan</li>
+                    </ul><p><strong>Default:</strong> plain</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> CA Workload Automation DE does not require this parameter.
+                    </div> </li>
+                <li><strong>communication.receiver.socket.aux</strong><br>Specifies the type of socket the agent uses for its auxiliary port. The value of this parameter must be different from the communication.receiver.socket.main parameter. You can specify the following socket types:
+                    <ul>
+                        <li>plain</li>
+                        <li>dylan</li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> CA Workload Automation DE does not require this parameter.
+                    </div> </li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> You can configure the agent to work with multiple scheduling managers by adding more definitions in the agentparm.txt file.
+            </div>
+            <p><strong>Example: Configure the Agent to Communicate with a Scheduling Manager</strong></p>
+            <p>In this example, the following configuration parameters are set in the agentparm.txt file for a scheduling manager running under the instance “ACE” at address 130.200.146.134. The scheduling manager listens for incoming messages from the agent on port 49155:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>communication.inputport=7520
+communication.managerid_1=ACE
+communication.manageraddress_1=130.200.146.134
+communication.managerport_1=49155
+communication.monitorobject_1=CAEWA_AGENT/AGENTMON1.0/MAIN
+communication.receiver.socket.main=plain
+communication.socket_1=plain
+</code></pre>
+            </div>
+            <h2 id="ConfigureCommunicationwithaSchedulingManager-ConfiguretheAgentforInternetProtocolVersion6(IPV6)Communication">Configure the Agent for Internet Protocol Version 6 (IPV6) Communication</h2>
+            <p>If your scheduling manager uses Internet Protocol Version 6 (IPV6), configure the agent for this protocol also.</p>
+            <p>To configure the agent for IPV6 communication, configure the following parameters on the agent:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>java.net.preferIPv6Addresses=true
+java.net.preferIPv4Stack=false
+</code></pre>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-4">
+            <p></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+
+<div>
+
+    <h1 class="article-name" tabindex="0">Configure SSA Communication with CA Workload Automation AE</h1>
+
+    <div>
+        <div class="col-xs-12 col-md-8 col-lg-8">
+            <p>CA Secure Socket Adapter (SSA) lets CA Workload Automation AE and the agent use a single multiplexed communication port to ease firewall administration. You can configure SSA communication with CA Workload Automation AE.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>This procedure only applies to agent installations that communicate with CA Workload Automation AE and that support SSA.</li>
+                    <li>By default the agent uses plain socket ports for communication. Although you can change to SSA communication, we do not recommend it.</li>
+                    <li>SSA is only supported with 32-bit agents.</li>
+                </ul>
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Install CA Secure Socket Adapter (SSA):
+                    <ul>
+                        <li><a data-macro-name="sp-plaintextbody-link" href="#ConfigureSSACommunicationwithCAWorkloadAutomationAE-InstallCASecureSocketAdapter(SSA)onUNIX" class="conf-macro output-inline" data-hasbody="true">Install SSA on UNIX</a>.</li>
+                        <li><a data-macro-name="sp-plaintextbody-link" href="#ConfigureSSACommunicationwithCAWorkloadAutomationAE-InstallCASecureSocketAdapter(SSA)onWindows" class="conf-macro output-inline" data-hasbody="true">Install SSA on Windows</a>.</li>
+                    </ul></li>
+                <li><a data-macro-name="sp-plaintextbody-link" href="#ConfigureSSACommunicationwithCAWorkloadAutomationAE-ConfiguretheAgenttoCommunicateUsinganSSA-EnabledPort" class="conf-macro output-inline" data-hasbody="true">Configure the agent to communicate using SSA ports</a>.</li>
+                <li><a data-macro-name="sp-plaintextbody-link" href="#ConfigureSSACommunicationwithCAWorkloadAutomationAE-DefinetheAgentSSAPortonCAWorkloadAutomationAE" class="conf-macro output-inline" data-hasbody="true">Define the agent SSA port on CA Workload Automation AE</a>.</li>
+                <li>Test communication between CA Workload Automation AE and CA Workload Automation System Agent.<br>For more information about testing communication, see the <em>CA Workload Automation AE UNIX Implementation Guide</em> or <em>CA Workload Automation AE Windows Implementation Guide</em>.</li>
+            </ol>
+            <h2 id="ConfigureSSACommunicationwithCAWorkloadAutomationAE-InstallCASecureSocketAdapter(SSA)onUNIX">Install CA Secure Socket Adapter (SSA) on UNIX</h2>
+            <p>CA Secure Socket Adapter (SSA) is a CA common component that is provided with CA Workload Automation AE. SSA lets you enable port multiplexing, which restricts communication to a single physical port.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> For more information about SSA, see the
+                <em>CA Workload Automation AE UNIX Implementation Guide</em>.
+            </div>
+            <p>You can launch the installation program using X-terminal or using console mode.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Set the $DISPLAY environment variable to use X-terminal or unset it to use console mode.</li>
+                <li>Mount the CA Common Components media.</li>
+                <li><p>Run the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+     <pre class="code-block prettyprint"><code>./ccc_setup.sh
+</code></pre>
+                    </div>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> The setup script performs various system checks, which can take a few minutes.
+                    </div> <p>After the system checks are complete, the CA Common Components panel appears with Next selected.</p></li>
+                <li>Press Enter.<br>The License Agreement panel appears.</li>
+                <li><p>Accept the license agreement.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> In console mode, press the Tab key to select the scroll bar. Press the plus key (+) to scroll through the page and read the license text. If you agree with the license agreement, select I Agree.
+                    </div> <p>The Component Selection panel appears.</p></li>
+                <li><p>Select CA Secure Socket Adapter.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> In console mode, press the down-arrow key (or Tab key) to move the cursor through the list of components. Select or clear an item using the spacebar.
+                    </div> </li>
+                <li>Select Next.<br>The Installation Path panel appears.</li>
+                <li>Enter the path to the directory where you want to install SSA, and select Next.<br>The Review Settings panel appears.</li>
+                <li>Review the information and, if it is correct, select Next.<br>The installation process begins and the progress is displayed. When the installation completes, you are prompted to exit the installation.</li>
+                <li>Select Finish.</li>
+                <li>Log out and then log back in to reset the environment.<br>The CA Secure Socket Adapter is installed.</li>
+            </ol>
+            <h2 id="ConfigureSSACommunicationwithCAWorkloadAutomationAE-InstallCASecureSocketAdapter(SSA)onWindows">Install CA Secure Socket Adapter (SSA) on Windows</h2>
+            <p>CA Secure Socket Adapter (SSA) is a CA common component that is provided with CA Workload Automation AE. SSA lets you enable port multiplexing, which restricts communication to a single physical port.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> For more information about SSA, see the
+                <em>CA Workload Automation AE Windows Implementation Guide</em>.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Insert the CA Common Components media into the DVD drive of the computer where you want to install the agent.<br>The CA Common Components Product Explorer dialog opens.</li>
+                <li>Expand CA Common Components for Windows, select Common Components, and click Install.<br>The Introduction panel appears.</li>
+                <li>Click Next.<br>The License Agreement appears.</li>
+                <li>Accept the license agreement, and click Next.<br>The Choose Install Set panel appears.</li>
+                <li>Select Custom, and click Next.<br>By default, the CA Secure Socket Adapter, CA Embedded Entitlements Manager, and Common Communications Interface components are selected to be installed.</li>
+                <li>Unselect the CA Embedded Entitlements Manager and Common Communications Interface components, and click Next.<br>The Get CA Common Components Install Directory panel appears.</li>
+                <li>Enter the path to the directory where you want to install SSA, and select Next.<br>The Review Settings panel appears.</li>
+                <li>Review the information and, if it is correct, click Install.<br>The CA Secure Socket Adapter is installed.</li>
+            </ol>
+            <h2 id="ConfigureSSACommunicationwithCAWorkloadAutomationAE-ConfiguretheAgenttoCommunicateUsinganSSA-EnabledPort">Configure the Agent to Communicate Using an SSA-Enabled Port</h2>
+            <p>By default, the agent is configured to use plain socket ports for communication. To enable SSA communication between the agent and CA Workload Automation AE, you configure the agent to use Dylan socket ports. You use the csamconfigedit utility, which is installed with SSA, to specify the SSA port number and enable port multiplexing.</p>
+            <div class="bs-callout bs-callout-warning conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Important!</strong> The input communication port that is defined for the agent (communication.inputport) must match the port in the machine definition for the agent configured on CA Workload Automation AE.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li><p>Enter the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+     <pre class="code-block prettyprint"><code>csampmux stop
+</code></pre>
+                    </div> <p>The csampmuxf process stops.</p></li>
+                <li><p>Enter the following commands:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+     <pre class="ca-code"><pre>cd $CSAM_SOCKADAPTER/bin
+csamconfigedit Port=<em>value</em> EnableSSL=False EnablePmux=True</pre></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>value</em></strong><br>Specifies the SSA port number of the agent. This port must not be in use by another application.</li>
+                    </ul></li>
+                <li>Change to the agent installation directory.</li>
+                <li>Stop the agent.</li>
+                <li>Open the agentparm.txt file.</li>
+                <li><p>Edit the following parameter:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>communication.inputport=<em>port</em></p></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>port</em></strong><br>Specifies the SSA port number that is configured using the csamconfigedit command.</li>
+                    </ul></li>
+                <li><p>Change the socket type using the following parameter:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+     <pre class="code-block prettyprint"><code>communication.receiver.socket.main=dylan
+</code></pre>
+                    </div> </li>
+                <li>Edit the oscomponent.classpath parameter, as follows:
+                    <ul>
+                        <li><p>On UNIX:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <pre class="ca-code"><pre>oscomponent.classpath=jars/*.jar:jars/ext/*:<em>common_components_install_path</em>/Csam/SockAdapter/lib/casocket.jar</pre></pre>
+                            </div></li>
+                        <li><p>On Windows:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <pre class="ca-code"><pre>oscomponent.classpath=jars/*.jar;jars/ext/*;<em>common_components_install_path</em>/Csam/SockAdapter/bin/casocket.jar</pre></pre>
+                            </div>
+                            <ul>
+                                <li><strong><em>common_components_install_path</em></strong><br>Specifies the path to the directory where the CA common components are installed.<br><strong>UNIX Default:</strong> /opt/CA/SharedComponents<br><strong>Windows Default:</strong> C:\Program Files\CA\SC</li>
+                            </ul></li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> Specify the location of CA Secure Socket Adapter by appending the location of the casocket.jar file to the classpath.
+                    </div> </li>
+                <li>Save and close the agentparm.txt file.</li>
+                <li>Start the agent.<br>The agent is configured to communicate using an SSA-enabled port.</li>
+            </ol>
+            <h2 id="ConfigureSSACommunicationwithCAWorkloadAutomationAE-DefinetheAgentSSAPortonCAWorkloadAutomationAE">Define the Agent SSA Port on CA Workload Automation AE</h2>
+            <p>To communicate with the agent using an SSA-enabled port, change the port that is defined in the machine definition for the agent on CA Workload Automation AE.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Specify one of the following subcommands in a JIL script or at the jil command line:
+                    <ul>
+                        <li><p>If you are creating an agent machine definition:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <pre class="ca-code"><pre>insert_machine: <em>machine_name</em></pre></pre>
+                            </div></li>
+                        <li><p>If you are updating an existing agent machine definition:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <pre class="ca-code"><pre>update_machine: <em>machine_name</em></pre></pre>
+                            </div>
+                            <ul>
+                                <li><strong><em>machine_name</em></strong><br>Specifies the name of the agent that is defined on CA Workload Automation AE.</li>
+                            </ul></li>
+                    </ul></li>
+                <li><p>Specify the following attribute:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><pre>port: <em>port_number</em></pre></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>port_number</em></strong><br>Specifies the port that CA Workload Automation AE uses to listen for traffic. If you configured SSA on the agent, this value is the agent port number that is configured using the csamconfigedit command. This value must match the communication.input port parameter in the agentparm.txt file for the agent.</li>
+                    </ul><p>The SSA port is defined in the machine definition for the agent on CA Workload Automation AE.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> For more information about JIL subcommands and attributes, see the
+                        <em>CA Workload Automation AE Reference Guide</em>.
+                    </div> </li>
+            </ol>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-4">
+            <p></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+</body>
+</html>

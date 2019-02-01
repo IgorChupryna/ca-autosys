@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+
+    <h1 class="article-name" tabindex="0">Start the Agent</h1>
+    <div>
+        <div class="col-xs-12 col-md-8 col-lg-8">
+            <p>Depending on your operating system, you can start the agent multiple ways:</p>
+            <p></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H1,H2,H3,H4,H5,H6,H7" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#StarttheAgent-Start(andStop)theAgentonUNIX" class="toc-link">Start (and Stop) the Agent on UNIX</a></span></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#StarttheAgent-StarttheAgentonWindowsUsingtheCommandPrompt" class="toc-link">Start the Agent on Windows Using the Command Prompt</a></span></li><li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a href="#StarttheAgent-StarttheAgentasaWindowsService" class="toc-link">Start the Agent as a Windows Service</a></span></li><li><span class="toc-item-body" data-outline="4"><span class="toc-outline">4</span><a href="#StarttheAgent-SettheAgentonWindowstoStartAutomatically" class="toc-link">Set the Agent on Windows to Start Automatically</a></span></li><li><span class="toc-item-body" data-outline="5"><span class="toc-outline">5</span><a href="#StarttheAgent-RuntheAgentinWindowsConsoleMode" class="toc-link">Run the Agent in Windows Console Mode</a></span></li><li><span class="toc-item-body" data-outline="6"><span class="toc-outline">6</span><a href="#StarttheAgent-StarttheAgentfromtheiSeriesCommandLine" class="toc-link">Start the Agent from the iSeries Command Line</a></span></li><li><span class="toc-item-body" data-outline="7"><span class="toc-outline">7</span><a href="#StarttheAgent-StarttheAgentfromPASE" class="toc-link">Start the Agent from PASE</a></span></li><li><span class="toc-item-body" data-outline="8"><span class="toc-outline">8</span><a href="#StarttheAgent-StarttheAgentonHPEIntegrityNonStop" class="toc-link">Start the Agent on HPE Integrity NonStop</a></span></li></ul></div>
+            <p></p>
+            <h2 id="StarttheAgent-Start(andStop)theAgentonUNIX">Start (and Stop) the Agent on UNIX</h2>
+            <p>You issue a command to run a script that starts the agent.</p>
+            <div class="bs-callout bs-callout-warning conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Important!</strong> Use the root account to install and start the agent on UNIX. Starting the agent as root enables you to run jobs under different user accounts. If you start the agent with an account other than root, the agent cannot switch users. You cannot run jobs under different user accounts when the agent is not running under root. If you plan to use an account other than root to start the agent, verify that the agent is installed using the same user account to avoid permission problems. Also verify that the account has the permissions to run the commands and scripts that run on the agent computer.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Verify that the cybAgent process and related Java processes from the previous run of the agent were shut down correctly.</li>
+                <li>Change to the agent installation directory.</li>
+                <li><p>Start the agent using the following command <span>(to stop the agent, use the cybAgent -s command.)</span>:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+                        <pre class="code-block prettyprint"><code>cybAgent -a</code></pre>
+                    </div> </li>
+            </ol>
+            <p>The cybagent -a command starts the service and monitors for agent initialization errors for up to 30 seconds. The agent issues a message with a status:</p>
+            <ul>
+                <li>If the agent starts successfully, it returns a message of “Agent service has been started.”</li>
+                <li>If the agent cannot start within the 30 second timeframe, because for example, a port is already in use or the agent service is already running, the agent responds with the message “Unable to start agent service.” <br><br>You can find more information about why the agent service did not start in either the agent log files (see &lt;<em>agent installation directory&gt;</em>/log) or the nohup.stderr file.</li>
+            </ul>
+            <p>If the agent takes longer than 30 seconds to fully initialize, it responds with the message, “The service did not respond to the start request in a timely fashion.” The agent may or may not have successfully started. To determine the status, check the status file. See <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-system-agent/11-4/en/configuring/control-the-agent/verify-the-status-of-the-agent" class="conf-macro output-inline" data-hasbody="true">Verify the Status of the Agent</a>&nbsp;for more information.</p>
+            <p><span style="color: rgb(0,0,0);">The agent also comes with an init script to automate the agent startup during system reboots. The init script may be placed in the system /etc/init.d directory. Some UNIX operating systems may require changes to be made to the script. The init script is placed in the agent install directory.</span></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><span style="color: rgb(0,0,0);">cybagent-R11-3-&lt;agent name&gt;.init</span><br><span style="color: rgb(0,0,0);">Usage: cybagent-R11-3-AGENT.init {start|stop|restart|status|monitor}</span></pre>
+            </div>
+            <p><span style="color: rgb(0,0,0);"><span style="line-height: 1.4285715;">The agent is installed as a service on Microsoft Windows. Although the service name is set during the installation, you can change it as needed per your requirements. You can easily control&nbsp;</span><span style="line-height: 1.4285715;">the agent startup from the Windows Services Console.</span></span></p>
+            <h2 id="StarttheAgent-StarttheAgentonWindowsUsingtheCommandPrompt"><span style="color: rgb(0,51,102);">Start the Agent on Windows Using the Command Prompt</span></h2>
+            <p>By default, the startup type for the agent service is manual. You can start the agent service manually using the command prompt.&nbsp;</p>
+            <p><strong style="line-height: 1.4285715;">Follow these steps:</strong></p>
+            <ol>
+                <li><p>Change to the agent installation directory.<br>Start the agent using one of the following commands:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>net start <em style="line-height: 1.4285715;">service_name</em></p></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>service_name</em></strong><br>Specifies the value that the oscomponent.servicedisplayname parameter in the agentparm.txt file defines.</li>
+                    </ul></li>
+            </ol>
+            <h2 id="StarttheAgent-StarttheAgentasaWindowsService">Start the Agent as a Windows Service</h2>
+            <p>By default, the startup type for the agent service is manual.&nbsp;</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                No special&nbsp;
+                <span>permissions are required for the Windows agent, version 11.3 and later. Because the agent is set up by default to log on as "local system," always use the local system account to start the agent service.&nbsp;</span>
+            </div>
+            <div>
+                You can start the agent service manually using the Windows Control Panel.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Click Start, Control Panel.</li>
+                <li>Double-click Administrative Tools.</li>
+                <li>Double-click Services.</li>
+                <li>Right-click the agent service and click Start.</li>
+            </ol>
+            <h2 id="StarttheAgent-SettheAgentonWindowstoStartAutomatically">Set the Agent on Windows to Start Automatically</h2>
+            <p>By default, the startup type for the agent service is manual; the agent does not start on system startup. You can start the agent manually using the Control Panel or command prompt. You can set the Service Startup Type as Automatic to start the service at system startup.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Click Start, Control Panel.</li>
+                <li>Double-click Administrative Tools.</li>
+                <li>Double-click Services.</li>
+                <li>Right-click the agent service and select Properties.</li>
+                <li>Select Automatic from the Startup type drop-down list on the dialog.</li>
+                <li>Click OK.<br>The agent is set to start automatically the next time it starts up.</li>
+            </ol>
+            <h2 id="StarttheAgent-RuntheAgentinWindowsConsoleMode">Run the Agent in Windows Console Mode</h2>
+            <p>You can run the agent in console mode using the cybAgent command with the -debug extension. The agent runs as a normal console application. Running the agent in console mode is useful when diagnosing a problem. In this mode, the agent runs in the foreground. Because some applications cannot run correctly while the agent runs as a service, try to run these applications using console mode. To keep the agent running, do not close the DOS window that you used to start it.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Stop the agent.</li>
+                <li>Change to the agent installation directory.</li>
+                <li><p>Enter the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+     <pre class="code-block prettyprint"><code>cybAgent -debug
+</code></pre>
+                    </div> <p>The agent runs in the foreground.</p></li>
+            </ol>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> You can run multiple agents in console mode.
+            </div>
+            <h2 id="StarttheAgent-StarttheAgentfromtheiSeriesCommandLine">Start the Agent from the iSeries Command Line</h2>
+            <p>To start the agent from the iSeries command line, enter the following command:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p><em>library_name</em>/CYBAGENT</p></pre>
+            </div>
+            <ul>
+                <li><strong><em>library_name</em></strong><br>Specifies the name of the library that contains the required agent objects.</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> You can add this item to your system IPL Start-Up program. For more information about changing the IPL Start-Up program, see the IBM documentation.
+            </div>
+            <h2 id="StarttheAgent-StarttheAgentfromPASE">Start the Agent from PASE</h2>
+            <p>You can start the agent from PASE.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note: </strong>Before you start the agent, ensure the cybAgent process and related Java processes from the previous run of the agent were shut down correctly.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li><a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-system-agent/11-4/en/configuring/control-the-agent/open-a-pase-terminal-session-on-iseries" class="conf-macro output-inline" data-hasbody="true">Open a PASE terminal session</a>.</li>
+                <li>Change to the agent installation directory.</li>
+                <li><p>Start the agent using the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+                        <pre class="code-block prettyprint"><code>./cybAgent</code></pre>
+                    </div> </li>
+            </ol>
+            <h2 id="StarttheAgent-StarttheAgentonHPEIntegrityNonStop"><span style="color: rgb(0,0,0);">Start the Agent on HPE Integrity NonStop</span></h2>
+            <p>To start the agent, you issue a command to run a script that starts the agent.</p>
+            <div class="confluence-information-macro confluence-information-macro-note">
+                <span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" style="color: rgb(89,67,0);">&nbsp;</span>
+                <div class="confluence-information-macro-body">
+                    <strong>Important!&nbsp;</strong>
+                    <span>You may install and run the System Agent by using a non-super.super (non-root) user ID. See&nbsp;</span>
+                    <a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-system-agent/11-4/en/getting-started/ca-wa-system-agent-for-hpe-integrity-nonstop/authentication-rules-for-running-agent-for-hpe-integrity-nonstop-and-jobs" class="conf-macro output-inline" data-hasbody="true">Authentication Rules for Running the Agent and Running Jobs</a>
+                    <span>&nbsp;for more information.</span>
+                </div>
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Log onto the OSS environment of the machine where the agent runs.</li>
+                <li>Verify that the cybAgent process and related Java processes from the previous run of the agent were shut down correctly.</li>
+                <li>Change to the agent installation directory.</li>
+                <li><p>Start the agent by using the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code">./cybAgent &amp;</pre>
+                    </div></li>
+            </ol>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-4">
+            <p></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+
+
+
+
+</div>
+
+
+
+<h1 class="article-name" tabindex="0">Stop the Agent</h1>
+
+<div>
+    <div>
+        <div class="">
+            <p>Depending on your operating system, you can stop the agent multiple ways.</p>
+            <p></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H1,H2,H3,H4,H5,H6,H7" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#StoptheAgent-StoptheAgentonUNIX" class="toc-link">Stop the Agent on UNIX</a></span></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#StoptheAgent-StoptheAgentonWindowsUsingtheCommandPrompt" class="toc-link">Stop the Agent on Windows Using the Command Prompt</a></span></li><li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a href="#StoptheAgent-StoptheAgentasaWindowsService" class="toc-link">Stop the Agent as a Windows Service</a></span></li><li><span class="toc-item-body" data-outline="4"><span class="toc-outline">4</span><a href="#StoptheAgent-StoptheAgentRunninginWindowsConsoleMode" class="toc-link">Stop the Agent Running in Windows Console Mode</a></span></li><li><span class="toc-item-body" data-outline="5"><span class="toc-outline">5</span><a href="#StoptheAgent-StoptheAgentfromtheiSeriesCommandLine" class="toc-link">Stop the Agent from the iSeries Command Line</a></span></li><li><span class="toc-item-body" data-outline="6"><span class="toc-outline">6</span><a href="#StoptheAgent-StoptheAgentfromPASE" class="toc-link">Stop the Agent from PASE</a></span></li><li><span class="toc-item-body" data-outline="7"><span class="toc-outline">7</span><a href="#StoptheAgent-StoptheAgentonHPEIntegrityNonStop" class="toc-link">Stop the Agent on HPE Integrity NonStop</a></span></li></ul></div>
+            <p></p>
+            <h2 id="StoptheAgent-StoptheAgentonUNIX">Stop the Agent on UNIX</h2>
+            <p>You issue a command to run a script that stops the agent.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Change to the agent installation directory.</li>
+                <li><p>Stop the agent using the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+     <pre class="code-block prettyprint"><code>./cybAgent -s
+</code></pre>
+                    </div> </li>
+            </ol>
+            <p>The cybagent -s command stops the agent service and returns a message that provides the status of the agent:</p>
+            <ul>
+                <li>If the agent stops successfully, it returns a message of “Agent service has been stopped.”</li>
+                <li>If the agent cannot stop within the timeout time frame (the default is 5 minutes 3 seconds), the agent responds with the message “Agent service cannot be stopped - timed out waiting for agent to stop.”<br>You can find more information about why the agent service did not stop in either the agent log files (see &lt;<em>agent installation directory&gt;</em>/log) or the nohup.stderr file. The timeout is equivalent to the VM_SHUTDOWN_TIMEOUT parameter + 3 seconds.</li>
+            </ul>
+            <h2 id="StoptheAgent-StoptheAgentonWindowsUsingtheCommandPrompt">Stop the Agent on Windows Using the Command Prompt</h2>
+            <p>You can stop the agent service manually using the command prompt.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Change to the agent installation directory.</li>
+                <li><p>Stop the agent using one of the following commands:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>cybAgent -s</p><p>net stop <em>service_name</em></p></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>service_name</em></strong><br>Specifies the value that the oscomponent.servicedisplayname parameter in the agentparm.txt file defines.</li>
+                    </ul></li>
+            </ol>
+            <h2 id="StoptheAgent-StoptheAgentasaWindowsService">Stop the Agent as a Windows Service</h2>
+            <p>You can stop the agent service manually using the Windows Control Panel.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Click Start, Control Panel.</li>
+                <li>Double-click Administrative Tools.</li>
+                <li>Double-click Services.</li>
+                <li>Right-click the agent service and click Stop.</li>
+            </ol>
+            <h2 id="StoptheAgent-StoptheAgentRunninginWindowsConsoleMode">Stop the Agent Running in Windows Console Mode</h2>
+            <p>You can stop an agent that is using console mode to run in the foreground.</p>
+            <p>To stop the agent on Windows in console mode, press Ctrl+C.</p>
+            <h2 id="StoptheAgent-StoptheAgentfromtheiSeriesCommandLine">Stop the Agent from the iSeries Command Line</h2>
+            <p>To stop the agent from the iSeries command line, enter the following command:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p><em>library_name</em>/CYBAGENT OPTION(SHUTDOWN)</p></pre>
+            </div>
+            <ul>
+                <li><strong><em>library_name</em></strong><br>Specifies the name of the library that contains the required agent objects.</li>
+            </ul>
+            <h2 id="StoptheAgent-StoptheAgentfromPASE">Stop the Agent from PASE</h2>
+            <p>You can stop the agent from PASE.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li><a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-system-agent/11-4/en/configuring/control-the-agent/open-a-pase-terminal-session-on-iseries" class="conf-macro output-inline" data-hasbody="true">Open a PASE terminal session</a>.</li>
+                <li>Change to the agent installation directory.</li>
+                <li><p>Stop the agent using the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+                        <pre class="code-block prettyprint"><code>./cybAgent -s</code></pre>
+                    </div> </li>
+            </ol>
+            <h2 id="StoptheAgent-StoptheAgentonHPEIntegrityNonStop">Stop the Agent on HPE Integrity NonStop</h2>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Log onto the OSS environment of the machine where the agent runs.</li>
+                <li>Change to the agent installation directory.</li>
+                <li><p>Stop the agent by using the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code">./cybAgent -s</pre>
+                    </div></li>
+            </ol>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+<h1 class="article-name" tabindex="0">Verify the Status of the Agent</h1>
+
+<div >
+
+
+
+    <div>
+        <div class="col-xs-12 col-md-8 col-lg-8">
+            <p>If you have problems running workload using the agent, verify that the agent is still running. The status file shows whether the agent is running or a controlled shutdown has occurred.&nbsp;The agent process status can verify whether the agent is down, which is helpful when a controlled shutdown did not occur and the status file does not show the correct status.</p>
+            <p>You can verify the status in the following ways:</p>
+            <p></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H2,H3,H4,H5,H6,H7" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#VerifytheStatusoftheAgent-ViewtheStatusFileonUNIXorWindows" class="toc-link">View the Status File on UNIX or Windows</a></span></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#VerifytheStatusoftheAgent-ViewtheStatusFileoniSeries" class="toc-link">View the Status File on iSeries&nbsp;</a></span><ul style=""><li><span class="toc-item-body" data-outline="2.1"><span class="toc-outline">2.1</span><a href="#VerifytheStatusoftheAgent-FromtheiSeriesCommandLine" class="toc-link">From the iSeries Command Line</a></span></li><li><span class="toc-item-body" data-outline="2.2"><span class="toc-outline">2.2</span><a href="#VerifytheStatusoftheAgent-FromPASE" class="toc-link">From PASE</a></span></li></ul></li><li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a href="#VerifytheStatusoftheAgent-ChecktheAgentProcessStatusonUNIX" class="toc-link">Check the Agent Process Status on UNIX</a></span></li><li><span class="toc-item-body" data-outline="4"><span class="toc-outline">4</span><a href="#VerifytheStatusoftheAgent-ChecktheAgentStatusonWindows" class="toc-link">Check the Agent Status on Windows</a></span></li><li><span class="toc-item-body" data-outline="5"><span class="toc-outline">5</span><a href="#VerifytheStatusoftheAgent-ChecktheAgentProcessStatusfromtheiSeriesCommandLine" class="toc-link">Check the Agent Process Status from the iSeries Command Line</a></span></li><li><span class="toc-item-body" data-outline="6"><span class="toc-outline">6</span><a href="#VerifytheStatusoftheAgent-ChecktheAgentProcessStatusfromPASE" class="toc-link">Check the Agent Process Status from PASE</a></span></li><li><span class="toc-item-body" data-outline="7"><span class="toc-outline">7</span><a href="#VerifytheStatusoftheAgent-VerifyStatusofAgentforHPEIntegrityNonStop" class="toc-link">Verify Status of Agent for HPE Integrity NonStop&nbsp;</a></span><ul style=""><li><span class="toc-item-body" data-outline="7.1"><span class="toc-outline">7.1</span><a href="#VerifytheStatusoftheAgent-ViewtheStatusFile" class="toc-link">View the Status File</a></span></li><li><span class="toc-item-body" data-outline="7.2"><span class="toc-outline">7.2</span><a href="#VerifytheStatusoftheAgent-ChecktheAgentProcessStatus" class="toc-link">Check the Agent Process Status</a></span></li></ul></li><li><span class="toc-item-body" data-outline="8"><span class="toc-outline">8</span><a href="#VerifytheStatusoftheAgent-RunAgentforHPEIntegrityNonStopasaNamedProcess" class="toc-link">Run Agent for HPE Integrity NonStop as a Named Process</a></span><ul style=""><li><span class="toc-item-body" data-outline="8.1"><span class="toc-outline">8.1</span><a href="#VerifytheStatusoftheAgent-Stoptheagentwhenitrunsasanamedprocess" class="toc-link">Stop the agent when it runs as a named process</a></span></li></ul></li></ul></div>
+            <p></p>
+            <h2 class="Body" id="VerifytheStatusoftheAgent-ViewtheStatusFileonUNIXorWindows"><span style="color: rgb(0,51,102);">View the Status File on UNIX or Windows</span></h2>
+            <p>The status file describes the status of the agent core. To verify that the agent is running or a controlled shutdown has occurred, view the status file.</p>
+            <p class="Body"><span style="color: rgb(0,0,0);">The file is located in the agent installation directory and is updated when the agent starts and stops. The following example shows the status file after the agent starts:</span></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p class="Body"><span style="color: rgb(0,0,0);">C:\Program Files\CA\WA Agent R11.3&gt;more status</span></p><p class="Body"><span style="color: rgb(0,0,0);">CA Workload Automation Agent for Microsoft Windows R11.3, Build 717</span></p><p class="Body"><span style="color: rgb(0,0,0);">Started at: Wed Jan 11 13:10:58 2015</span></p><p class="Body"><span style="color: rgb(0,0,0);">OS component - 12096</span></p></pre>
+            </div>
+            <p class="Body"><span style="color: rgb(0,0,0);">When agent is shut down, the status file will show:</span></p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+   <pre class="ca-code"><p><span style="color: rgb(0,0,0);">C:\Program Files\CA\WA Agent R11.3&gt;more status</span></p><p><span style="color: rgb(0,0,0);">Inactive</span></p>
+    <div>
+     <span style="color: rgb(0,0,255);"><br></span>
+    </div></pre>
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Change to the agent installation directory.</li>
+                <li>Do <em>one</em> of following actions depending on your system:
+                    <ul>
+                        <li>On UNIX, enter the cat status command.</li>
+                        <li>On Windows, open the status file using a text editor.</li>
+                    </ul></li>
+            </ol>
+            <h2 id="VerifytheStatusoftheAgent-ViewtheStatusFileoniSeries"><span style="color: rgb(0,0,0);">View the Status File on iSeries&nbsp;</span></h2>
+            <h3 id="VerifytheStatusoftheAgent-FromtheiSeriesCommandLine"><span style="color: rgb(0,0,0);">From the iSeries Command Line</span></h3>
+            <p>The status file describes the status of the agent core. To verify that the agent is running or a controlled shutdown has occurred, verify the status in the status file.</p>
+            <p class="Body"><strong style="line-height: 1.4285715;">Follow these steps:</strong></p>
+            <ol>
+                <li><p>Enter the following command from the iSeries command line:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>WRKLNK '<em>install_path</em>'</p></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>install_path</em></strong><br>Specifies the path to the agent installation directory.</li>
+                    </ul>A list of files in the specified directory appears.</li>
+                <li>Enter the display option next to the status file name.<br>The contents of the status file appear.</li>
+            </ol>
+            <p><strong>Example: Verify the Status in the Status File</strong></p>
+            <p>The following response shows that the agent is running. The number - 1507 in this example is the process ID (PID) for the agent process.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>CA Workload Automation Agent for OS/400 PowerPC R11.3, Build 20091215
+Started at:
+OS component - 1507
+</code></pre>
+            </div>
+            <p>The following response indicates that the agent is not running.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>Inactive
+</code></pre>
+            </div>
+            <p>The agent was shut down in a controlled manner as shown in the default_Agent.log.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+                <pre class="code-block prettyprint"><code>CybAgentDriver - CybAgentDriver terminated</code></pre>
+            </div>
+            <h3 id="VerifytheStatusoftheAgent-FromPASE"><span style="color: rgb(0,0,0);">From PASE</span></h3>
+            <p>The status file describes the status of the agent core. To verify that the agent is running or a controlled shutdown has occurred, verify the status in the status file.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li><a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-system-agent/11-4/en/configuring/control-the-agent/open-a-pase-terminal-session-on-iseries" class="conf-macro output-inline" data-hasbody="true">Open a PASE terminal session</a>.</li>
+                <li>Change to the agent installation directory.</li>
+                <li><p>Enter the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+     <pre class="code-block prettyprint"><code>cat status
+</code></pre>
+                    </div> <p>The contents of the status file appear.</p></li>
+            </ol>
+            <p><strong>Example: Check the status file</strong></p>
+            <p>The following response shows that the agent is running. The number - 1507 in this example is the process ID (PID) for the agent process.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>CA Workload Automation Agent for OS/400 PowerPC R11.3, Build 20091215
+Started at:
+OS component - 1507
+</code></pre>
+            </div>
+            <p>The following response indicates that the agent is not running.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>Inactive
+</code></pre>
+            </div>
+            <p>The agent was shut down in a controlled manner as shown in the default_Agent.log.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>CybAgentDriver - CybAgentDriver terminated
+</code></pre>
+            </div>
+            <h2 id="VerifytheStatusoftheAgent-ChecktheAgentProcessStatusonUNIX">Check the Agent Process Status on UNIX</h2>
+            <p>If the agent is down and a controlled shutdown did not occur, verify the status of the agent process.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Change to the agent installation directory.</li>
+                <li>Enter one of the following commands:
+                    <ul>
+                        <li>To verify the status of a single agent, enter the <strong># ps -ef | grep PID</strong> command.</li>
+                        <li>To verify the status of multiple agents or an agent with an unknown PID, enter <strong># ps -ef | grep cybAgent</strong>.</li>
+                        <li>To verify the status of a separate Java process before a new start, enter <strong># ps -ef | grep Java</strong>.</li>
+                    </ul></li>
+            </ol>
+            <p><strong>Example: Check the Process Status of a Single Agent on UNIX</strong></p>
+            <p>Suppose that you want to verify the process status of an agent that has the PID number 13214.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Change to the agent installation directory.</li>
+                <li><p>Enter the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+                        <pre class="code-block prettyprint"><code># ps -ef | grep 13214</code></pre>
+                    </div> </li>
+            </ol>
+            <h2 id="VerifytheStatusoftheAgent-ChecktheAgentStatusonWindows">Check the Agent Status on Windows</h2>
+            <p>If the agent is down and a controlled shutdown did not occur, verify the status of the agent on Windows using the Control Panel.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Click Start, Control Panel.</li>
+                <li>Double-click Administrative Tools.</li>
+                <li>Double-click Services.</li>
+                <li>Locate the agent service name and verify the status in the Status column.</li>
+            </ol>
+            <h2 id="VerifytheStatusoftheAgent-ChecktheAgentProcessStatusfromtheiSeriesCommandLine">Check the Agent Process Status from the iSeries Command Line</h2>
+            <p>If the agent is down and a controlled shutdown did not occur, you can display the agent process to verify the status.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li><p>Enter the following command from the iSeries command line:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><pre>WRKACTJOB SBS(<em>subsystem_name</em>)</pre></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>subsystem_name</em></strong><br>Specifies the name of the subsystem that runs the agent jobs.<br><strong>Default:</strong> The name of the library that contains the required agent objects.</li>
+                    </ul>A list of jobs running in the agent subsystem is displayed.</li>
+                <li>Enter the display option next to cybAgent.bin.<br>The status of the agent appears.</li>
+            </ol>
+            <h2 id="VerifytheStatusoftheAgent-ChecktheAgentProcessStatusfromPASE">Check the Agent Process Status from PASE</h2>
+            <p>If the agent is down and a controlled shutdown did not occur, you can display the agent process to verify the status.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li><a data-macro-name="sp-plaintextbody-link" href="/ca-workload-automation-system-agent/11-4/en/configuring/control-the-agent/open-a-pase-terminal-session-on-iseries" class="conf-macro output-inline" data-hasbody="true">Open a PASE terminal session</a>.</li>
+                <li>Change to the agent installation directory.</li>
+                <li><p>Enter the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><pre># ps -ef | grep <em>PID</em></pre></pre>
+                    </div>
+                    <ul>
+                        <li><em><strong>PID</strong></em><br>Specifies the process ID (PID) of the agent.</li>
+                    </ul>The status of the specified process appears.</li>
+            </ol>
+            <p><strong>Example: Check the Process Status Using a PID</strong></p>
+            <p>Suppose that the agent has a PID of 13214. Display the process status using the following command:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code># ps -ef | grep 13214
+</code></pre>
+            </div>
+            <p>A sample response is as follows</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>cybuser 13214 12216  0  Apr 16 ?    0:00  ./cybAgent
+</code></pre>
+            </div>
+            <p><strong>Example: Check the Process Status of Multiple Agents or an Agent with an Unknown PID</strong></p>
+            <p>Suppose that you want to display the process status of an agent with the name cybAgent. Enter the following command:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code># ps -ef | grep cybAgent
+</code></pre>
+            </div>
+            <p>The statuses of all processes that contain cybAgent in the name appear.</p>
+            <h2 id="VerifytheStatusoftheAgent-VerifyStatusofAgentforHPEIntegrityNonStop"><span style="color: rgb(0,0,0);">Verify Status of Agent for HPE Integrity NonStop&nbsp;</span></h2>
+            <p>To check the status of the agent, you can do one of the following:&nbsp;</p>
+            <div class="toc-macro rbtoc1429281187427">
+                <ul class="toc-indentation">
+                    <li>View the Status File –&nbsp;This file indicates whether the agent is running or a controlled shutdown has occurred.</li>
+                    <li>Check the Agent Process Status –&nbsp;When the agent is down, you can check the status of the agent process. This is useful when&nbsp;a controlled shutdown did not occur and the status file does not show the correct status.</li>
+                </ul>
+            </div>
+            <h3 class="Body" id="VerifytheStatusoftheAgent-ViewtheStatusFile">View the Status File</h3>
+            <p>The status file describes the status of the agent core. You can view it to verify that either the agent is running or a controlled shutdown has occurred.&nbsp;<span style="color: rgb(0,0,0);">The file is located in the agent installation directory and is updated when the agent starts and stops.</span></p>
+            <p><span style="color: rgb(0,0,0);">The following examples show the status file after the agent starts and stops.</span></p>
+            <p><strong>Example: Status File After Agent Starts</strong></p>
+            <p>/opt/CA/WA_Agent_R12_0_0: cat status<span style="color: rgb(0,0,0);">&nbsp;</span></p>
+            <p>CA Workload Automation Agent for NONSTOP_KERNEL IA64N R12.0, Build 20150428</p>
+            <p>Started at: Thu Apr 30 12:50:20 2015</p>
+            <p>OS component – 1929380249</p>
+            <p></p>
+            <p class="Body"><strong><span style="color: rgb(0,0,0);">Example: Status File After Agent Stops</span></strong></p>
+            <p class="Body"><span style="color: rgb(0,0,0);">When the agent is shut down, the status file will show:&nbsp;</span></p>
+            <pre class="ca-code-default">/opt/CA/WA_Agent_R12_0_0: cat status
+Inactive
+</pre>
+            <h3 id="VerifytheStatusoftheAgent-ChecktheAgentProcessStatus">Check the Agent Process Status</h3>
+            <p>To check the status of the process,&nbsp;follow these steps:</p>
+            <ol>
+                <li>Change to the agent installation directory.</li>
+                <li>Enter one of the following commands:
+                    <ul>
+                        <li><p>To verify the status of a single agent, enter the following command:&nbsp;</p><pre class="ca-code-default"># ps -ef | grep <em>PID</em></pre></li>
+                        <li><p>To verify the status of multiple agents, enter the following command:&nbsp;</p><pre class="ca-code-default"># ps -ef | grep cybAgent</pre></li>
+                    </ul></li>
+            </ol>
+            <p><strong>Example: Check the Process Status of a Single Agent&nbsp;</strong></p>
+            <p>This example shows how to verify the process status of an agent with the PID number&nbsp;1929380249.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Change to the agent installation directory.</li>
+                <li><p>Enter the following command:</p><pre class="ca-code-default"># ps -ef | grep 1929380249</pre></li>
+            </ol>
+            <h2 id="VerifytheStatusoftheAgent-RunAgentforHPEIntegrityNonStopasaNamedProcess">Run Agent for HPE Integrity NonStop as a Named Process</h2>
+            <p>You can run the agent as a named process. To do this, add the –name=/G/&lt;<em>process-name</em>&gt; parameter to the run command located in the cybAgent startup script or command file, as shown in the following example.&nbsp;In the example, the agent runs under a process named $AGNT.</p>
+            <pre class="ca-code-default">run -name=/G/AGNT -term=/G/ZHOME ./cybAgent.bin "$@"</pre>
+            <p>Also, instead of hard coding the name in the cybAgent startup script, you can modify the script to accept the process name and use that value in the –name= parameter.</p>
+            <div class="confluence-information-macro confluence-information-macro-note">
+                <span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" style="color: rgb(89,67,0);">&nbsp;</span>
+                <div class="confluence-information-macro-body">
+                    Note: Process names must conform to standard Guardian process name conventions.
+                </div>
+            </div>
+            <h3 id="VerifytheStatusoftheAgent-Stoptheagentwhenitrunsasanamedprocess">Stop the agent when it runs as a named process</h3>
+            <p>When the agent is running as a named process, you cannot stop it by using the ./cybAgent –s command. Instead, to stop the agent when it is running as a named process, use the kill –SIGINT &lt;<em>process-id</em>&gt; command, replacing &lt;<em>process-id</em>&gt; with the process ID specified in the status file, as shown in the following example.</p>
+            <pre class="ca-code-default">$ someuser@somehost&gt; cat status<br>CA Workload Automation Agent for NONSTOP_KERNEL IA64N R12.0, Build 20150716<br><br>Started at: Wed Sep 16 10:00:05 2015<br><br>OS component - 989856392<br><br>/opt/CA/WA_Agent_R12_0_0<br><br>$ someuser@somehost&gt; kill -SIGINT 989856392</pre>
+            <div class="confluence-information-macro confluence-information-macro-information">
+                <span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon" style="color: rgb(74,103,133);">&nbsp;</span>
+                <div class="confluence-information-macro-body">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-4">
+            <p></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+</body>
+</html>

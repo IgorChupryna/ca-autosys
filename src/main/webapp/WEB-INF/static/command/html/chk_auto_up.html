@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The chk_auto_up command is a client component that determines whether the event server (database), application server, and the scheduler are running. Because the event server and the scheduler must both be running for a job to start, the chk_auto_up command is the first utility that you should run when troubleshooting why events or jobs are not processing as scheduled.</p>
+                <p><strong>UNIX Note:&nbsp;</strong>chk_auto_up uses the product environment variables to locate the configuration file $AUTOUSER/config.$AUTOSERV, and uses the information to determine the application server, data server, and database names. If chk_auto_up completes successfully, the product environment variables and the configuration file are set up correctly.</p>
+                <p><strong>Windows Note:</strong>&nbsp;chk_auto_up uses the product environment variables to locate the instance configuration as defined in the CA Workload Automation AE Administrator, and uses the information to determine the application server, data server, and database names. If chk_auto_up completes successfully, the product environment variables and the configuration are set up correctly.</p>
+                <p>When you issue the chk_auto_up command, the client (the machine from which you issued chk_auto_up) sends a request to the application server and waits for the application server to respond. The application server performs the following actions:</p>
+                <ul>
+                    <li>look for schedulers who report their status as active in the database</li>
+                    <li>contact each active scheduler and wait for the schedulers to respond</li>
+                    <li>collect all results and prepare a response for chk_auto_up to report</li>
+                </ul>
+                <p>If you are running the instance in High Availability mode with dual event servers, chk_auto_up also reports the state of the system including all schedulers and any occurrence of a database rollover or scheduler failover.</p>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>chk_auto_up&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-Q]&nbsp;[-r&nbsp;<em>ComponentFlags</em>]&nbsp;[{-usr&nbsp;<em>username&nbsp;</em>{-pw|pwx}&nbsp;<em>password</em>|-saml&nbsp;<em>auth_artifact</em>}]</p><p>&nbsp;&nbsp;&nbsp;[-x]&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-Q<br></strong>(Optional) Returns the exit code without any descriptive message. This makes the command useful for inclusion in shell scripts. In this case, the return code is sufficient to indicate status. If you omit the -Q parameter, the command also returns a descriptive message.</p></li>
+                    <li><p><strong>-r&nbsp;<em>ComponentFlags<br></em></strong>(Optional) Checks one or more of the CA Workload Automation AE components. You can use this option to verify&nbsp;the status of the event server and/or the application server and/or the scheduler. The value that is specified for the - r option determines the component to be checked.<br><strong>Limits:</strong>&nbsp;This value can be one of the following:</p>
+                        <ul>
+                            <li><strong>001 or 1</strong><br>Returns the status of the event server(s).</li>
+                            <li><strong>010 or 10</strong><br>Returns the status of the scheduler(s).</li>
+                            <li><strong>011 or 11</strong><br>Returns the status of the event server(s) and the scheduler(s).</li>
+                            <li><strong>100</strong><br>Returns the status of the application server.</li>
+                            <li><strong>101</strong><br>Returns the status of the application server and the event server(s).</li>
+                            <li><strong>110</strong><br>Returns the status of the application server and the scheduler(s).</li>
+                            <li><strong>111</strong><br>Returns the status of the application server, event server(s), and scheduler(s).</li>
+                        </ul>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Note:</strong> Use the - r option to verify the status of the application server. If you invoke the chk_auto_up command without any arguments, it just checks the status of the event server(s) and scheduler(s).
+                        </div> </li>
+                    <li>
+                        <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                            <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                            <p>(Optional) Specifies external security credentials as follows:</p>
+                            <ul>
+                                <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                                <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                    </div> </li>
+                                <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Notes: </strong></p>
+                                <ul>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                        <ul>
+                                            <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                            <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                            <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                        </ul></li>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                    <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                        <ul>
+                                            <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                            <li>CA Workload Automation AE is operating in native security mode.</li>
+                                        </ul></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                    <li><p><strong>-x</strong></p><p>(Optional) Returns the command version information to standard output.</p></li>
+                    <li><p><strong>-?</strong></p><p>(Optional) Displays help for the command.</p></li>
+                </ul>
+                <h2 class="heading2" id="chk_auto_upCommand—ConfirmApplicationServer,Scheduler,andEventServerStatus-ExitCodes">Exit Codes</h2>
+                <p>The chk_auto_up command exits with two sets of exit codes, which include the following:</p>
+                <ul>
+                    <li>Runs the application without any arguments.</li>
+                    <li>Runs the application with the - r option.</li>
+                </ul>
+                <h3 class="heading3" id="chk_auto_upCommand—ConfirmApplicationServer,Scheduler,andEventServerStatus-Runningchk_auto_upWithoutAnyArguments">Running chk_auto_up Without Any Arguments</h3>
+                <p>If you run chk_auto_up command without any arguments, the application exits with one of the following return codes:</p>
+                <ul>
+                    <li><strong>0</strong><br>Indicates that the scheduler or the event server is not running.</li>
+                    <li><strong>1</strong><br>Indicates that the scheduler is not running, but the event server is running.</li>
+                    <li><strong>2</strong><br>Indicates that the scheduler is not running, but the primary and dual event servers are running.</li>
+                    <li><p><strong>10</strong><br>Indicates that the scheduler is running, but the event server is not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.&nbsp;</p></li>
+                    <li><strong>11</strong><br>Indicates that the scheduler and the event server are running.</li>
+                    <li><strong>12</strong><br>Indicates that the scheduler and the dual event servers are running.</li>
+                    <li><p><strong>20</strong><br>Indicates that the shadow scheduler is running, but the event server is not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.&nbsp;</p></li>
+                    <li><strong>21</strong><br>Indicates that the shadow scheduler and the event server are running.</li>
+                    <li><strong>22</strong><br>Indicates that the shadow scheduler and the dual event servers are running.</li>
+                    <li><strong>30</strong><br>Indicates that the primary and shadow schedulers are running, but the event server is not running. This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.</li>
+                    <li><strong>31</strong><br>Indicates that the primary and shadow schedulers and the event server are running.</li>
+                    <li><strong>32</strong><br>Indicates that the primary and shadow schedulers and the dual event servers are running.</li>
+                    <li><p><strong>40&nbsp;</strong><br>Indicates that the tie-breaker scheduler is running, but the event server is not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.&nbsp;</p></li>
+                    <li><strong>41&nbsp;</strong><br>Indicates that the tie-breaker scheduler and the event server are running.</li>
+                    <li><strong>42</strong><br>Indicates that the tie-breaker scheduler and the dual event servers are running.</li>
+                    <li><p><strong>50</strong><br>Indicates that the primary scheduler and the tie-breaker scheduler are running, but the event server is not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.&nbsp;</p></li>
+                    <li><strong>51</strong><br>Indicates that the primary scheduler, tie-breaker scheduler, and the event server are running.</li>
+                    <li><strong>52</strong><br>Indicates that the primary scheduler, tie-breaker scheduler, and the dual event servers are running.</li>
+                    <li><p><strong>60</strong><br>Indicates that the shadow scheduler and the tie-breaker scheduler are running, but the event server is not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.</p></li>
+                    <li><strong>61&nbsp;</strong><br>Indicates that the shadow scheduler, tie-breaker scheduler, and the event server are running.</li>
+                    <li><strong>62&nbsp;</strong><br>Indicates that the shadow scheduler, tie-breaker scheduler, and the dual event servers are running.</li>
+                    <li><p><strong>70</strong><br>Indicates that the primary, shadow, and tie-breaker schedulers are running, but the event server is not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.&nbsp;</p></li>
+                    <li><strong>71</strong><br>Indicates that the primary scheduler, shadow scheduler, tie-breaker scheduler, and the event server are running.</li>
+                    <li><strong>72</strong><br>Indicates that the primary scheduler, shadow scheduler, tie-breaker scheduler, and the dual event servers are running.</li>
+                    <li><strong>81&nbsp;</strong><br>Indicates that the event server is running, but the scheduler(s) are not responding.</li>
+                    <li><strong>82</strong><br>Indicates that the dual event servers are running, but the scheduler(s) are not responding.</li>
+                    <li><p><strong>99<br></strong>Indicates that one of the following has occurred:</p>
+                        <ul>
+                            <li>One or more of the following environment variables is not set or is set incorrectly:
+                                <ul>
+                                    <li>AUTOSYS</li>
+                                    <li>AUTOSERV</li>
+                                    <li>AUTOUSER.</li>
+                                </ul></li>
+                            <li>The chk_auto_up command is issued with invalid arguments.</li>
+                            <li>The application server is not running or not configured correctly.</li>
+                        </ul></li>
+                </ul>
+                <h3 class="heading3" id="chk_auto_upCommand—ConfirmApplicationServer,Scheduler,andEventServerStatus-Runningchk_auto_upwiththe-rArgument">Running chk_auto_up with the -r Argument</h3>
+                <p>If you run the chk_auto_up command with the - r argument, the application exits with any one of the following return codes.</p>
+                <p>If you run the chk_auto_up command with the - r 1 argument, it checks the event server and exits with one of the following return codes:</p>
+                <ul>
+                    <li><strong>1</strong><br>Indicates that the event server is running.</li>
+                    <li><strong>2</strong><br>Indicates that the dual event servers are running.</li>
+                </ul>
+                <p>If you run the chk_auto_up command with the - r 10 argument, it checks the scheduler and exits with one of the following return codes:</p>
+                <ul>
+                    <li><strong>0</strong><br>Indicates that the scheduler is not running.</li>
+                    <li><strong>10</strong><br>Indicates that the primary scheduler is running.</li>
+                    <li><strong>20</strong><br>Indicates that the shadow scheduler is running.</li>
+                    <li><strong>30</strong><br>Indicates that the primary and shadow schedulers are running.</li>
+                    <li><strong>40</strong><br>Indicates that the tie-breaker scheduler is running.</li>
+                    <li><strong>50</strong><br>Indicates that the primary and tie-breaker schedulers are running.</li>
+                    <li><strong>60</strong><br>Indicates that the shadow and tie-breaker schedulers are running.</li>
+                    <li><strong>70</strong><br>Indicates that the primary, shadow, and tie-breaker schedulers are running.</li>
+                </ul>
+                <p>If you run the chk_auto_up command with the - r 11 argument, it checks the scheduler and the event server, and exits with one of the following return codes:</p>
+                <ul>
+                    <li><strong>0</strong><br>Indicates that the scheduler or the event server is not running.</li>
+                    <li><strong>1</strong><br>Indicates that the scheduler is not running, but the event server is running.</li>
+                    <li><strong>2</strong><br>Indicates that the scheduler is not running, but the primary and dual event servers are running.</li>
+                    <li><p><strong>10</strong><br>Indicates that the scheduler is running, but the event server is not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.&nbsp;</p></li>
+                    <li><strong>11</strong><br>Indicates that the scheduler and the event server are running.</li>
+                    <li><strong>12</strong><br>Indicates that the scheduler and the dual event servers are running.</li>
+                    <li><p><strong>20</strong><br>Indicates that the shadow scheduler is running, but the event server is not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.</p></li>
+                    <li><strong>21</strong><br>Indicates that the shadow scheduler and the event server are running.</li>
+                    <li><strong>22</strong><br>Indicates that the shadow scheduler and the dual event servers are running.</li>
+                    <li><strong>30</strong><br>Indicates that the primary and shadow schedulers are running, but the event server is not running. This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.</li>
+                    <li><strong>31</strong><br>Indicates that the primary and shadow schedulers and the event server are running.</li>
+                    <li><strong>32</strong><br>Indicates that the primary and shadow schedulers and the dual event servers are running.</li>
+                    <li><p><strong>40</strong><br>Indicates that the tie-breaker scheduler is running, but the event server is not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.</p></li>
+                    <li><strong>41</strong><br>Indicates that the tie-breaker scheduler and the event server are running.</li>
+                    <li><strong>42</strong><br>Indicates that the tie-breaker scheduler and the dual event servers are running.</li>
+                    <li><p><strong>50</strong><br>Indicates that the primary and tie-breaker schedulers are running, but the event server is not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.</p></li>
+                    <li><strong>51</strong><br>Indicates that the primary scheduler, tie-breaker scheduler, and the event server are running.</li>
+                    <li><strong>52</strong><br>Indicates that the primary scheduler, tie-breaker scheduler, and the dual event servers are running.</li>
+                    <li><p><strong>60</strong><br>Indicates that the shadow and tie-breaker schedulers are running, but the event server is not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.</p></li>
+                    <li><strong>61</strong><br>Indicates that the shadow scheduler, tie-breaker scheduler, and the event server are running.</li>
+                    <li><strong>62</strong><br>Indicates that the shadow scheduler, tie-breaker scheduler, and the dual event servers are running.</li>
+                    <li><p><strong>70</strong><br>Indicates that the primary, shadow, and tie-breaker schedulers are running, but the event server is not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.&nbsp;</p></li>
+                    <li><strong>71</strong><br>Indicates that the primary scheduler, shadow scheduler, tie-breaker scheduler, and the event server are running.</li>
+                    <li><strong>72</strong><br>Indicates that the primary scheduler, shadow scheduler, tie-breaker scheduler, and the dual event servers are running.</li>
+                    <li><strong>81</strong><br>Indicates that the event server is running, but the scheduler(s) are not responding.</li>
+                    <li><strong>82</strong><br>Indicates that the dual event servers are running, but the scheduler(s) are not responding.</li>
+                    <li><p><strong>99<br></strong>Indicates that one of the following has occurred:</p>
+                        <ul>
+                            <li>One or more of the following environment variables is not set or is set incorrectly:
+                                <ul>
+                                    <li>AUTOSYS</li>
+                                    <li>AUTOSERV</li>
+                                    <li>AUTOUSER.</li>
+                                </ul></li>
+                            <li>The chk_auto_up command is issued with invalid arguments.</li>
+                            <li>The application server is not running or not configured correctly.</li>
+                        </ul></li>
+                </ul>
+                <p>If you run the chk_auto_up command with the - r 100 argument, it checks the application server, and exits with one of the following return codes:</p>
+                <ul>
+                    <li><strong>0</strong><br>Indicates that at least one or more application servers are not running.</li>
+                    <li><strong>100</strong><br>Indicates that all the application servers are running.</li>
+                </ul>
+                <p>If you run the chk_auto_up command with the - r 101 argument, it checks the application server and the event server, and exits with one of the following return codes:</p>
+                <ul>
+                    <li><strong>0</strong><br>Indicates that the event server or at least one or more application servers are not running.</li>
+                    <li><strong>1</strong><br>Indicates that the event server is running, but at least one or more application servers are not running.</li>
+                    <li><strong>2</strong><br>Indicates that the dual event server is running, but at least one or more application servers are not running.</li>
+                    <li><strong>100</strong><br>Indicates that all the application servers are running, but the event server is not running.</li>
+                    <li><strong>101</strong><br>Indicates that the event server or all the application servers are running.</li>
+                    <li><strong>102</strong><br>Indicates that the dual event server or all the application servers are running</li>
+                </ul>
+                <p>If you run the chk_auto_up command with the - r 110 argument, it checks the application server and the event server, and exits with one of the following return codes:</p>
+                <ul>
+                    <li><strong>0</strong><br>Indicates that the scheduler or at least one or more application servers are not running.</li>
+                    <li><strong>10</strong><br>Indicates that the primary scheduler is running, but at least one or more application servers are not running.</li>
+                    <li><strong>20</strong><br>Indicates that the shadow scheduler is running, but&nbsp;at least one or more application servers are not running.</li>
+                    <li><strong>30</strong><br>Indicates that the primary and shadow schedulers are running, but at least one or more application servers are not running.</li>
+                    <li><strong>40</strong><br>Indicates that the tie-breaker scheduler is running, but at least one or more application servers are not running.</li>
+                    <li><strong>50</strong><br>Indicates that the primary and tie-breaker schedulers are running, but at least one or more application servers are not running.</li>
+                    <li><strong>60</strong><br>Indicates that the shadow and tie-breaker schedulers are running, but at least one or more application servers are not running.</li>
+                    <li><strong>70</strong><br>Indicates that the primary, shadow, and tie-breaker schedulers are running, but at least one or more application servers are not running.</li>
+                    <li><strong>100</strong><br>Indicates that all the application servers are running, but the scheduler is not running.</li>
+                    <li><strong>110</strong><br>Indicates that the primary scheduler or all the application servers are running.</li>
+                    <li><strong>120</strong><br>Indicates that the shadow scheduler or all the application servers are running.</li>
+                    <li><strong>130</strong><br>Indicates that the primary and shadow schedulers or all the application servers are running.</li>
+                    <li><strong>140</strong><br>Indicates that the tie-breaker scheduler or all the application servers are running.</li>
+                    <li><strong>150</strong><br>Indicates that the primary and tie-breaker schedulers or all the application servers are running.</li>
+                    <li><strong>160</strong><br>Indicates that the shadow and tie-breaker schedulers or all the application servers are running.</li>
+                    <li><strong>170</strong><br>Indicates that the primary, shadow, and tie-breaker schedulers or all the application servers are running.</li>
+                </ul>
+                <p>If you run the chk_auto_up command with the - r 111 argument, it checks the application server, scheduler, and the event server, and exits with one of the following return codes:</p>
+                <ul>
+                    <li><strong>0</strong><br>Indicates that the scheduler, event server, or at least one or more application servers are not running.</li>
+                    <li><strong>1</strong><br>Indicates that the scheduler or at least one or more application servers are not running, but the event server is running.</li>
+                    <li><strong>2</strong><br>Indicates that the scheduler or at least one or more application servers are not running, but the primary and dual event servers are running.</li>
+                    <li><p><strong>10</strong><br>Indicates that the scheduler is running, but the event server or at least one or more application servers are not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.&nbsp;</p></li>
+                    <li><strong>11</strong><br>Indicates that the scheduler and the event server are running, but at least one or more application servers are not running.</li>
+                    <li><strong>12</strong><br>Indicates that the scheduler and the dual event servers are running, but at least one or more application servers are not running.</li>
+                    <li><p><strong>20</strong><br>Indicates that the shadow scheduler is running, but the event server or at least one or more application servers are not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.&nbsp;</p></li>
+                    <li><strong>21</strong><br>Indicates that the shadow scheduler and the event server are running, but at least one or more application servers are not running.</li>
+                    <li><strong>22</strong><br>Indicates that the shadow scheduler and the dual event servers are running, but at least one or more application servers are not running.</li>
+                    <li><p><strong>30</strong><br>Indicates that the primary and shadow schedulers are running, but the event server or at least one or more application servers are not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.</p></li>
+                    <li><strong>31</strong><br>Indicates that the primary and shadow schedulers and the event server are running, but at least one or more application servers are not running.</li>
+                    <li><strong>32</strong><br>Indicates that the primary and shadow schedulers and the dual event servers are running, but at least one or more application servers are not running.</li>
+                    <li><p><strong>40</strong><br>Indicates that the tie-breaker scheduler is running, but the event server or at least one or more application servers are not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.</p></li>
+                    <li><strong>41</strong><br>Indicates that the tie-breaker scheduler and the event server are running, but at least one or more application servers are not running.</li>
+                    <li><strong>42</strong><br>Indicates that the tie-breaker scheduler and the dual event servers are running, but at least one or more application servers are not running.</li>
+                    <li><p><strong>50</strong><br>Indicates that the primary and tie-breaker schedulers are running, but the event server or at least one or more application servers are not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.&nbsp;</p></li>
+                    <li><strong>51</strong><br>Indicates that the primary and tie-breaker schedulers and the event server are running, but at least one or more application servers are not running.</li>
+                    <li><strong>52</strong><br>Indicates that the primary and tie-breaker schedulers and the dual event servers are running, but at least one or more application servers are not running.</li>
+                    <li><p><strong>60</strong><br>Indicates that the shadow and tie-breaker schedulers are running, but the event server or at least one or more application servers are not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.</p></li>
+                    <li><strong>61</strong><br>Indicates that the shadow and tie-breaker schedulers and the event server are running, but at least one or more application servers are not running.</li>
+                    <li><strong>62</strong><br>Indicates that the shadow and tie-breaker schedulers and the dual event servers are running, but at least one or more application servers are not running.</li>
+                    <li><p><strong>70</strong><br>Indicates that the primary, shadow, and the tie-breaker schedulers are running, but the event server or at least one or more application servers are not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.&nbsp;</p></li>
+                    <li><strong>71</strong><br>Indicates that the primary, shadow, and tie-breaker schedulers and the event server are running, but at least one or more application servers are not running.</li>
+                    <li><strong>72</strong><br>Indicates that the primary, shadow, and tie-breaker schedulers and the dual event servers are running, but at least one or more application servers are not running.</li>
+                    <li><strong>81</strong><br>Indicates that the event server is running, but the scheduler(s) are not responding and at least one or more application servers are not running.</li>
+                    <li><strong>82</strong><br>Indicates that the dual event servers are running, but the scheduler(s) are not responding and at least one or more application servers are not running.</li>
+                    <li><p><strong>99<br></strong>Indicates that one of the following has occurred:</p>
+                        <ul>
+                            <li>One or more of the following environment variables is not set or is set incorrectly:
+                                <ul>
+                                    <li>AUTOSYS</li>
+                                    <li>AUTOSERV</li>
+                                    <li>AUTOUSER.</li>
+                                </ul></li>
+                            <li>The chk_auto_up command is issued with invalid arguments.</li>
+                            <li>The application server is not running or not configured correctly.</li>
+                        </ul></li>
+                    <li><strong>100</strong><br>Indicates that the scheduler or the event server is not running, but all the application servers are running.</li>
+                    <li><strong>101</strong><br>Indicates that the scheduler is not running, but the event server or all the application servers are running.</li>
+                    <li><strong>102</strong><br>Indicates that the scheduler is not running, but the primary and dual event servers or all the application servers are running.</li>
+                    <li><p><strong>110</strong><br>Indicates that the scheduler is running, but the event server is not running.&nbsp;This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.</p></li>
+                    <li><strong>111</strong><br>Indicates that the scheduler and the event server are running or all the application servers are running.</li>
+                    <li><strong>112</strong><br>Indicates that the scheduler and the dual event servers are running or all the application servers are running.</li>
+                    <li><p><strong>120</strong><br>Indicates that the shadow scheduler is running, but the event server is not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.&nbsp;</p></li>
+                    <li><strong>121</strong><br>Indicates that the shadow scheduler and the event server are running or all the application servers are running.</li>
+                    <li><strong>122</strong><br>Indicates that the shadow scheduler and the dual event servers are running or all the application servers are running.</li>
+                    <li><strong>130</strong><br>Indicates that the primary and shadow schedulers are running, but the event server is not running. This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.</li>
+                    <li><strong>131</strong><br>Indicates that the primary and shadow schedulers and the event server are running or all the application servers are running.</li>
+                    <li><strong>132</strong><br>Indicates that the primary and shadow schedulers and the dual event servers are running or all the application servers are running.</li>
+                    <li><p><strong>140</strong><br>Indicates that the tie-breaker scheduler is running, but the event server is not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.&nbsp;</p></li>
+                    <li><strong>141</strong><br>Indicates that the tie-breaker scheduler and the event server are running or all the application servers are running.</li>
+                    <li><strong>142</strong><br>Indicates that the tie-breaker scheduler and the dual event servers are running or all the application servers are running.</li>
+                    <li><p><strong>150</strong><br>Indicates that the primary and tie-breaker schedulers are running, but the event server is not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.</p></li>
+                    <li><strong>151</strong><br>Indicates that the primary and tie-breaker schedulers and the event server are running or all the application servers are running.</li>
+                    <li><strong>152</strong><br>Indicates that the primary and tie-breaker schedulers and the dual event servers are running or all the application servers are running.</li>
+                    <li><p><strong>160</strong><br>Indicates that the shadow and tie-breaker schedulers are running, but the event server is not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.&nbsp;</p></li>
+                    <li><strong>161</strong><br>Indicates that the shadow and tie-breaker schedulers and the event server are running or all the application servers are running.</li>
+                    <li><strong>162</strong><br>Indicates that the shadow and tie-breaker schedulers and the dual event servers are running or all the application servers are running.</li>
+                    <li><p><strong>170</strong><br>Indicates that the primary, shadow, and tie-breaker schedulers are running, but the event server is not running.<br>This could happen if the database password was changed in configuration file, but the application server was not restarted. The chk_auto_up command prints a detailed error message if it is not able to connect to the event server.</p></li>
+                    <li><strong>171</strong><br>Indicates that the primary, shadow, and tie-breaker schedulers and the event server are running or all the application servers are running.</li>
+                    <li><strong>172</strong><br>Indicates that the primary, shadow, and tie-breaker schedulers and the dual event servers are running or all the application servers are running.</li>
+                    <li><strong>181</strong><br>Indicates that the event server or all the application servers are running, but the scheduler(s) are not responding.</li>
+                    <li><strong>182</strong><br>Indicates that the dual event servers or all the application servers are running, but the scheduler(s) are not responding.</li>
+                </ul>
+                <p><strong>Example: Confirm Event Server and Scheduler Status</strong></p>
+                <p>This example determines whether the event server and scheduler are up, and displays the results on your monitor:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>chk_auto_up</p></pre>
+                </div>
+                <p><strong>Example: Confirm Event Server, Application Server, and Scheduler Status</strong></p>
+                <p>This example determines whether the event server, application server, and scheduler are up, and displays the results on your monitor:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>chk_auto_up&nbsp;&nbsp;-&nbsp;r&nbsp;111</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

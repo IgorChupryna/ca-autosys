@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p></p>
+            <p>With Quick Edit, you can schedule CA Workload Automation AE jobs, and manage jobs on distributed networks. You can also view detailed information about all currently defined workload objects and define new ones, as needed.</p>
+            <p>To access Quick Edit, click the Quick Edit tab in the main CA WCC page.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note: </strong>In external security mode, use the ApplicationAccess resource to control access to Quick Edit. For more information about access policies, see
+                <em><a data-macro-name="sp-nobody-link" href="/ca-workload-automation-ae/11-4-2/en/securing" class="conf-macro output-inline" data-hasbody="false">Securing</a></em>.
+            </div>
+            <p></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H1,H2" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#CAWCCQuickEditApplication-QuickEditNavigation" class="toc-link">Quick Edit Navigation</a></span></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#CAWCCQuickEditApplication-UsetheCustomizeDialog" class="toc-link">Use the Customize Dialog</a></span></li><li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a href="#CAWCCQuickEditApplication-UsetheCreateObjectDialog" class="toc-link">Use the Create Object Dialog</a></span></li><li><span class="toc-item-body" data-outline="4"><span class="toc-outline">4</span><a href="#CAWCCQuickEditApplication-UsetheCreateJobDialog" class="toc-link">Use the Create Job Dialog</a></span></li></ul></div>
+            <p></p>
+            <h2 id="CAWCCQuickEditApplication-QuickEditNavigation">Quick Edit Navigation</h2>
+            <p>Quick Edit consists of the following sections:</p>
+            <ul>
+                <li><strong>Title bar</strong><br>Lets you refresh page content, customize search and display parameters, set preferred job types, and create workload objects.</li>
+                <li><strong>Search section</strong><br>Displays key search fields that help you find specific workload objects. You can search for specific objects, character strings, wildcard characters, or object groups. All searches are limited to the selected server and object type.</li>
+                <li><strong>Search Results</strong><br>Displays the results of your search criteria in a table. You can use the Search Results section to select one or more objects for deletion, perform an action such as viewing or creating a job override, create a copy of any object, or select an object to view its detailed properties. The fields that are displayed are dependent on the type of object selected.</li>
+                <li><strong>Properties section</strong><br>Lets you view or edit object properties that can be displayed when you select or create an object from the Search Results section.</li>
+            </ul>
+            <h2 class="heading3" id="CAWCCQuickEditApplication-UsetheCustomizeDialog">Use the Customize Dialog</h2>
+            <p>The Customize dialog opens when you click Customize in the Quick Edit title bar. You can use the Customize dialog to set default values in Quick Edit.</p>
+            <p>This dialog contains the following tabs:</p>
+            <ul>
+                <li><strong>Filter Job Types</strong><br>Specifies the preferred job types to display in the Create Object, Create Job, and Select Job Types dialogs.</li>
+                <li><strong>General</strong><br>Specifies default values to use for Quick Edit search and display parameters.</li>
+            </ul>
+            <h3 class="heading4" id="CAWCCQuickEditApplication-SetDisplayPreferences">Set Display Preferences</h3>
+            <p>You can set your display preferences on the General tab of the Customize dialog.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Click Customize on the title bar.</li>
+                <li>Select the General tab.</li>
+                <li>Make the appropriate changes and click Save.<br>Your preferences are saved, the dialog closes, and the display is updated.</li>
+            </ol>
+            <h3 class="heading4" id="CAWCCQuickEditApplication-SetJobTypePreferences">Set Job Type Preferences</h3>
+            <p>You can use the Filter Job Types tab in the Customize dialog to select the job types to be displayed in the Create Object, Create Job, and Select Job Types dialogs.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li><p>Click Customize on the title bar.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> The first time you open the Customize dialog, all available job types are selected on the Filter Job Types tab.
+                    </div> </li>
+                <li><p>Clear the Select check box for the job types you do not need.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> When a group name is selected, all job types within the group are selected. Clearing the group name check box clears all job types within the group. If you clear certain job types within a selected group, the group name check box is cleared also. Similarly, if you select all job types within an unselected group, the group name check box is selected also.
+                    </div> </li>
+                <li>Click Save.<br>Your job type preferences are saved.</li>
+            </ol>
+            <h2 id="CAWCCQuickEditApplication-UsetheCreateObjectDialog">Use the Create Object Dialog</h2>
+            <p>The Create Object dialog opens when you click Create in the Quick Edit title bar. You can use the Create Object dialog to create a job, box job, calendar, cycle, global variable, or machine type.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> If the selected server has no credentials set, the object tree does not appear. An error message is displayed instead.
+            </div>
+            <h2 class="heading3" id="CAWCCQuickEditApplication-UsetheCreateJobDialog">Use the Create Job Dialog</h2>
+            <p>The Create Job dialog opens when you click the Create Job in this Box Job icon from the Search Results table, or select the Create Job in this Box action from a box job’s properties panel while in edit mode.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> When you select a job type, the following limitations occur:</p>
+                <ul>
+                    <li>The User Defined job type appears only if that job type is defined on the back-end server.</li>
+                    <li>Only the job types defined on the Filter Job Types tab in the Customize dialog, and those to which you have been authorized in CA EEM, are displayed.</li>
+                    <li>Job templates for a specific job type, if available, appear in the list below the job type with which they are associated. Selecting a job template creates the job with specific properties predefined.</li>
+                </ul>
+            </div>
+            <p></p>
+            <p></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

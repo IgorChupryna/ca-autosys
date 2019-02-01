@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+    <div>
+        <div class="">
+            <p>You can control how CA Embedded Entitlements Manager refers to global users and global groups from <em>one</em>
+                of the following options:</p>
+            <ul>
+                <li>Store data internally in CA Embedded Entitlements Manager</li>
+                <li>Refer data from an external LDAP directory</li>
+                <li>Refer data from a CA SiteMinder Policy Server</li>
+            </ul>
+            <p>You can use the settings on this page to configure the global users and groups settings.</p>
+            <ul>
+                <li><strong>Store in internal datastore </strong><br>Specifies that the global users and global groups
+                    data is stored in an internal datastore in CA Embedded Entitlements Manager. Using this
+                    configuration, you can perform the following tasks:
+                    <ul>
+                        <li>Manage the global users and global groups</li>
+                        <li>Authenticate users</li>
+                        <li>Assign access permissions to CA Embedded Entitlements Manager application policies</li>
+                        <li>Manage user passwords</li>
+                        <li>Manage password policies</li>
+                    </ul>
+                </li>
+                <li><strong>Reference from an External Directory </strong><br>Specifies that the global users and global
+                    groups data is referenced from an external LDAP directory. Using this configuration, you can
+                    retrieve global users and global groups from an external LDAP directory to perform the following
+                    tasks:<br>
+                    <ul>
+                        <li>Authenticate users</li>
+                        <li>Assign access permissions to CA Embedded Entitlements Manager application policies</li>
+                    </ul>
+                    You cannot manage the global users and global groups, manage passwords, or password policies.
+                </li>
+                <li><strong>Reference from CA SiteMinder Policy Server</strong><br>Specifies that the global users and
+                    global groups data is referenced from a CA SiteMinder Policy Server. Using this configuration, you
+                    can retrieve global users and global groups from a CA SiteMinder Policy Server to perform the
+                    following tasks:<br>
+                    <ul>
+                        <li>Authenticate users</li>
+                        <li>Assign access permissions to CA Embedded Entitlements Manager application policies</li>
+                    </ul>
+                    You cannot manage the global users and global groups, manage passwords, or password policies.
+                </li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note</strong>: If you change a configuration type in an existing directory configuration, the
+                existing user application details are still stored in CA EEM. You must manually delete the details from
+                CA EEM.
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+
+    <div>
+        <div class="">
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                CA EEM uses CA Directory to internally store the global users and global groups.
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Log on to the CA EEM Server as an EiamAdmin using the Application &lt;Global&gt;.<br>The CA EEM home
+                    page appears.
+                </li>
+                <li>Select Configure, EEM Server, Global Users/Global Groups.<br>The Global Users/Global Groups page
+                    appears.
+                </li>
+                <li>Select Store in internal datastore, and click Save.<br>CA EEM is configured with internal datastore.
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

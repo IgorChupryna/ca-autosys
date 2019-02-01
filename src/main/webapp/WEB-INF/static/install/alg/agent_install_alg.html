@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>(UNIX) Install the Agent Using wa_setup.sh</h2>
+
+<div id="wiki-content">
+    <div>
+        <div class="">
+            <p>You can install the agent using the wa_setup.sh script from the CA Workload Automation AE DVD. The agent
+                installation must be performed on every computer that you use to run jobs.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>You can install the agent using the CA Workload Automation AE or the CA Workload Automation AE
+                        Standalone Agent DVD or by downloading the ISO file by logging in to <em>Download Center,
+                            Products</em> in the CA Support Online website (<a rel="nofollow" class="external-link"
+                                                                               href="http://support.ca.com">http://support.ca.com</a>).
+                    </li>
+                    <li>If you have installed the CA Workload Automation AE server or client on this computer, the agent
+                        is already installed.
+                    </li>
+                    <li>We recommend that you use wa_setup.sh to install the agent only if the computer where you want
+                        to install the agent is physically accessible. The wa_setup.sh script is large in size and is
+                        not as efficient for distributing across the network.
+                    </li>
+                </ul>
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Log in as root.</li>
+                <li>Mount the CA Workload Automation AE media.</li>
+                <li><p>Change directories to the mounted file system and run the following command:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>./wa_setup.sh</p></pre>
+                    </div>
+                    <p>The Welcome page appears.</p></li>
+                <li>Click Next.<br>The License Agreement page appears.</li>
+                <li><p>Read the license text, select the I Accept the Terms of the License Agreement option, and click
+                    Next.<br>The Installation Option page appears.</p></li>
+                <li>Select New and click Next.<br>The Installation Type page appears.</li>
+                <li>Select Typical or Custom based on the type of installation you want to perform and click Next.<br>If
+                    you select Typical, the Installation Definition page appears. If you select Custom, the Components
+                    page appears.
+                </li>
+                <li>Select Agent and click Next.</li>
+                <li>Continue with the installation by entering the required information in each wizard page and clicking
+                    Next.<br>After you complete the last data entry page of the wizard and click Next, the Review
+                    Settings page appears, listing the information you entered.
+                </li>
+                <li><p>Review the information and, if it is correct, click Install.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> To make a change to an entry, click Back as many times as necessary to
+                        locate that entry. Then, make the appropriate change, click Next until the Review Settings page
+                        reappears, verify the change, and click Next again.
+                    </div>
+                    <p>The Monitor Progress page appears and the progress is displayed. When the installation completes,
+                        the Installation Complete page appears.</p></li>
+                <li>Click Finish.<br>The agent installation is complete.</li>
+            </ol>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The clean_files command is a client component utility that deletes old agent log files.</p>
+                <p><strong>UNIX Notes:</strong></p>
+                <ul>
+                    <li>clean_files searches the database for legacy machines on which jobs were started, and then sends a command to the agents on the returned machines to purge all log files from the legacy&nbsp;agent log directory of the machine (specified by AutoRemoteDir in the configuration file).</li>
+                    <li>Agent log files are deleted automatically only when a job finishes normally, and when the CleanTmpFiles parameter in the configuration file specifies to delete log files at the end of each job. Because agent logs for failed jobs are not deleted and can use valuable disk space, we recommend that you run clean_files daily as part of the daily DBMaint cycle.</li>
+                </ul>
+                <p><strong>Windows Notes:</strong></p>
+                <ul>
+                    <li>clean_files searches the database for legacy machines on which jobs were started, and then sends a command to the agents on the returned machines to purge all log files from each legacy&nbsp;agent log directory of the machine (specified during installation or in the Legacy Enterprise Wide Logging Directory field on the Instance - CA Workload Automation AE Administrator window of CA Workload Automation AE Administrator).</li>
+                    <li>Agent log files are deleted automatically only when a job finishes normally, and when the Clean Temporary Files check box is selected on the Scheduler - CA Workload Automation AE Administrator window of CA Workload Automation AE Administrator. Because agent logs for failed jobs are not deleted and can use valuable disk space, we recommend that you run clean_files daily as part of the daily database maintenance cycle, which you can set up on the Scheduler - CA Workload Automation AE Administrator window of CA Workload Automation AE Administrator.</li>
+                </ul>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>clean_files&nbsp;-d&nbsp;<em>num_days</em>&nbsp;[-x]&nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-d&nbsp;<em>num_days</em></strong></p><p>Removes log files older than the specified number of days.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Windows</strong>
+                            <strong>Note: </strong>This option is only effective on the NTFS file systems. On the other file systems that do not store file timestamps (For example: FAT), this command removes all agent log files.
+                        </div> </li>
+                    <li><strong>-x</strong><br>(Optional) Displays the version number of the clean_files command.</li>
+                    <li><strong>-?</strong><br>(Optional) Displays help for the command.</li>
+                </ul>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Note: </strong>If you experience problems running jobs successfully, the agent log files are useful diagnostic tools. In this case, do not run clean_files or remove the agent log files until the problem has been diagnosed and resolved.
+                </div>
+                <p><strong><strong>Example:</strong>&nbsp;Delete All Agent Log Files That are More Than One Day Old</strong></p>
+                <p>This example starts clean_files and deletes all agent log files that are more than one day old:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>clean_files&nbsp;-d&nbsp;1</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

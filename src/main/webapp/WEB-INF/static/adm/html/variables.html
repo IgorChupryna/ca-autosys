@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="wiki-content">
+
+    <div>
+        <div class="">
+            <p><span style="color: rgb(51,51,51);">You can define environment variables on CA Workload Automation AE&nbsp;to customize:</span>
+            </p>
+            <ul>
+                <li>How the CA Workload Automation AE&nbsp;components generate and manage the output log files</li>
+                <li>How the CA Workload Automation AE&nbsp;components communicate with each other over the network</li>
+                <li>The behavior of the scheduler, application server, client utilities, or SDK</li>
+            </ul>
+            <p>On UNIX, you can define the environment variables by issuing either the setenv or the export command
+                (depending on your UNIX operating system) at the operating system prompt.</p>
+            <p>On Windows, you can define the environment variables using&nbsp;<em>one</em>&nbsp;of the following ways:
+            </p>
+            <ul>
+                <li>Using the System - CA Workload Automation AE&nbsp;Administrator window of the Administrator utility.
+                    Use this method when you define environment variables to customize the scheduler or application
+                    server behavior.
+                </li>
+                <li>Issuing the set command at the instance command prompt - Use this method when you define environment
+                    variables to configure the client utilities.
+                </li>
+            </ul>
+            <h2 id="EnvironmentVariables-WAAE.txtFile">WAAE.txt File</h2>
+            <p>The WAAE.txt file defines the environment settings for jobs that are started on behalf of all managers
+                for all instances of. You can define the environment variables on a single line as a variable=value
+                pair. The jobs that the agent runs inherit these environment variables.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note: </strong>The WAAE.txt file applies to the CA Workload Automation Agent for UNIX, Linux, or
+                Windows.
+            </div>
+            <p>The WAAE.txt file is located in the following directory:</p>
+            <ul>
+                <li>Windows -- %AUTOROOT%\SystemAgent\<em>agent_name</em>\Profiles</li>
+                <li>UNIX -- $AUTOROOT/SystemAgent/<em>agent_name</em>/profiles</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> For more information about how to set up the environment variables for the agent,
+                see
+                <a rel="nofollow" class="external-link" href="https://wiki.ca.com/wlaagents">CA Workload Automation
+                    Agents for UNIX, Linux, or Windows</a>.
+            </div>
+            <h2 id="EnvironmentVariables-(UNIX)auto.profileFile">(UNIX) auto.profile File</h2>
+            <p>The /etc/auto.profile file is one of the several objects that source the environment for a job. The
+                /etc/auto.profile file is automatically created during installation and contains variable definitions
+                such as AUTOUSER. The file is on the computer where CA Workload Automation AE&nbsp;is installed.</p>
+            <p>A sample auto.profile file is available in the $AUTOSYS/install/data/auto.profile directory. We recommend
+                that you make a copy of this file before you modify it.</p>
+            <p>System environment variables are automatically set in the environment for a job. When a job is submitted,
+                the agent processes the following information to source the environment, in the following order:</p>
+            <ol>
+                <li>/etc/auto.profile</li>
+                <li>The environment variables that are defined using the envvars attribute in the job definition (if
+                    specified).
+                </li>
+                <li>The job profile that is defined using the profile attribute (if specified).</li>
+            </ol>
+            <h2 class="heading4" id="EnvironmentVariables-(Windows)EnvironmentVariablesintheAdministratorUtility">
+                (Windows) Environment Variables in the Administrator Utility</h2>
+            <p>You can view the environment variables on the System - CA Workload Automation AE&nbsp;Administrator
+                window of the Administrator utility. These settings are defined when you open the CA Workload Automation
+                AE&nbsp;instance command prompt. You can modify or add to these standard environment variables. These
+                settings reflect the basic information&nbsp;that is used when you run the CA Workload Automation AE&nbsp;components.
+                You can prevent potential problems by properly setting the required environment variables in every
+                user's environment and configuring CA Workload Automation AE&nbsp;correctly.</p>
+            <p>The System - CA Workload Automation AE&nbsp;Administrator window displays the following environment
+                variables:</p>
+            <ul>
+                <li><strong>ASB_INSTANCE</strong><br>Identifies a unique CA Workload Automation AE broker instance name.
+                    This environment variable is used by the cross-platform interface of CA Workload Automation AE. CA,
+                    Inc. Common Communications Interface (CAICCI) uses this name to identify the scheduling manager or
+                    agent when communicating with remote mainframe instances.
+                </li>
+                <li><p><strong>AUTOROOT</strong><br>Identifies the top-level CA Workload Automation AE&nbsp;directory.
+                </p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> On UNIX, the equivalent environment variable is $AUTOROOT.
+                    </div>
+                </li>
+                <li><p><strong>AUTOSERV</strong><br>Identifies the instance ID, which is a three-character uppercase
+                    alphanumeric ID that identifies a CA Workload Automation AE&nbsp;server installation on a particular
+                    computer. By default, the instance ID is ACE. You cannot change this ID using the Administrator
+                    utility. To change the instance ID, uninstall CA Workload Automation AE&nbsp;and reinstall it using
+                    the new ID.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> On UNIX, the equivalent environment variable is $AUTOSERV.
+                    </div>
+                </li>
+                <li><p><strong>AUTOSYS</strong><br>Identifies the path of the CA Workload Automation AE&nbsp;software.
+                </p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> On UNIX, the equivalent environment variable is $AUTOSYS.
+                    </div>
+                </li>
+                <li><p><strong>AUTOUSER</strong><br>Identifies the path of the CA Workload Automation AE&nbsp;user's
+                    directory. This directory contains the user configuration files, scheduler output files, encryption
+                    files, and archive output files that are generated during database maintenance.</p></li>
+                <li><strong>ISDBGACTIV</strong><br>Identifies the debug level to use. The valid values are LIGHT, HEAVY,
+                    JOB, DUMP, AFM, DBQUERY, EXTVJ, COMM, MS, GBE, OFF, UTC, and RESOURCE<em>n</em>.<br><strong>Default:&nbsp;</strong>OFF
+                </li>
+                <li><p><strong>LOGROLLOVER</strong><br>Identifies when the scheduler, application server, and aggregator
+                    logs roll over or are purged. The log can roll over at midnight or when the log file size is equal
+                    to the specified size. The log is purged when the log file becomes older than the specified number
+                    of days. The valid values are OFF, SIZE(x), MIDNIGHT, and PURGE(x).<br><strong>Default:</strong>&nbsp;MIDNIGHT,PURGE(7)
+                </p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Notes: </strong>
+                        <p>You can specify multiple values; separate each value with a comma. For example,
+                            SIZE(x),PURGE(x),MIDNIGHT.</p>
+                        <p>Specify the log file size in megabytes. If you do not specify a value for the SIZE(x)
+                            parameter, it is set to SIZE(100) by default. The scheduler, application server, and
+                            aggregator logs roll over when the log file size reaches 100 MB.</p>
+                        <p>By default, all log files that are older than 7 days are purged at midnight. If you do not
+                            specify a value for the PURGE(x) parameter or you set this value to PURGE(0), the log files
+                            are not purged. The maximum value that you can set the PURGE(x) parameter to is the total
+                            numbers of days since the epoch date (January 01, 1970).</p>
+                    </div>
+                </li>
+                <li><strong>PATH</strong><br>Identifies the path of the CA Workload Automation AE&nbsp;utilities. This
+                    path is appended to the system path at runtime.
+                </li>
+                <li><strong>PRIMARYCCISYSID</strong><br>Identifies the aliased CAICCI system ID specified in the ccirmtd
+                    configuration file. This environmental variable is used by the cross-platform interface of CA
+                    Workload Automation AE. It allows the agents to transfer event data to either a primary or a shadow
+                    scheduler when running in high availability mode.
+                </li>
+            </ul>
+            <h2 id="EnvironmentVariables-(Windows)ManageSystemEnvironmentVariablesUsingtheAdministratorUtility">
+                (Windows) Manage System Environment Variables Using the Administrator Utility</h2>
+            <p>You can add a system environment variable that CA Workload Automation AE&nbsp;can use.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Click Start, Programs, CA, Workload Automation AE, Administrator.</li>
+                <li>Select the instance to which you want to add the system environment variable from the Instance
+                    drop-down list in the Settings pane.
+                </li>
+                <li>Click the Services icon on the toolbar.</li>
+                <li>Right-click the scheduler and select Stop. Repeat this action for the application server.</li>
+                <li>Click the System icon on the toolbar.</li>
+                <li>Enter a variable name in the Variable field and its value in the Value field, and click Set.<br>The
+                    environment variable details are displayed in the Environment Variables pane.
+                </li>
+                <li>Click the Services icon on the toolbar.</li>
+                <li>Right-click the scheduler and select Start. Repeat this action for the application server.<br>The
+                    scheduler and application server start. The system environment variable is added to the selected
+                    instance.
+                </li>
+            </ol>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>To modify a system environment variable, double-click the system environment variable to modify
+                        in the Environment Variables pane and modify the variable name or its value, or both, and click
+                        Set. After you restart the scheduler and the application server, the system environment variable
+                        definition is modified.
+                    </li>
+                    <li>To delete a system environment variable, double-click the system environment variable to delete
+                        in the Environment Variables pane and click Delete. After you restart the scheduler and the
+                        application server, the system environment variable definition is deleted from the selected
+                        instance.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+
+</body>
+</html>

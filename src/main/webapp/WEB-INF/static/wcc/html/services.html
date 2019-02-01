@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p>This section describes CA WCC default ports and services.</p>
+            <p></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H1,H2" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#ManageCAWCCDefaultPortsandServices-TomcatApplicationServersandDefaultPorts" class="toc-link">Tomcat Application Servers and Default Ports</a></span></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#ManageCAWCCDefaultPortsandServices-CAWCCServices" class="toc-link">CA WCC Services</a></span></li></ul></div>
+            <p></p>
+            <h2 class="heading2" id="ManageCAWCCDefaultPortsandServices-TomcatApplicationServersandDefaultPorts">Tomcat Application Servers and Default Ports</h2>
+            <p>The following table lists the default Tomcat application servers installed by CA WCC, the related CA WCC service and applications running on the server, and default port settings:</p>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Server</strong></th>
+                        <th class="confluenceTh"><strong>CA WCC Service</strong></th>
+                        <th class="confluenceTh"><strong>Applications Running</strong></th>
+                        <th class="confluenceTh"><strong>Port</strong></th>
+                        <th class="confluenceTh"><strong>SSL</strong></th>
+                        <th class="confluenceTh"><strong>Shutdown</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Tomcat</td>
+                        <td class="confluenceTd">CA-wcc</td>
+                        <td class="confluenceTd"><p>CA WCC 64-bit</p><p>User Interface</p></td>
+                        <td class="confluenceTd">8080</td>
+                        <td class="confluenceTd">8443</td>
+                        <td class="confluenceTd">8005</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Services Tomcat</td>
+                        <td class="confluenceTd">CA-wcc-services</td>
+                        <td class="confluenceTd">CA WCC 32-bit</td>
+                        <td class="confluenceTd">10132</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">10133</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">CA-wcc-db</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">1527</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                        <td class="confluenceTd">&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>The following table lists other default ports:</p>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th class="confluenceTh"><strong>Name</strong></th>
+                        <th class="confluenceTh"><strong>Port</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">CA EEM</td>
+                        <td class="confluenceTd">5250</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">CA EEM Failover Port</td>
+                        <td class="confluenceTd">509</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Event Bus</td>
+                        <td class="confluenceTd">7004</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">Internal database</td>
+                        <td class="confluenceTd">1527</td>
+                    </tr>
+                    <tr>
+                        <td class="confluenceTd">SSA Port</td>
+                        <td class="confluenceTd">7163</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> If a port conflict is detected during the installation of CA WCC, an error message is displayed. However, port conflict detection is effective only for the port currently in use at the time of installation. If another application is configured to use a port and that application is not running when you install CA WCC, the port conflict cannot be detected. Ensure that ports specified for CA WCC do not conflict with other applications. To continue the installation, select a different port number. Note the default port assignments and consider the following when you select a different port:</p>
+                <ul>
+                    <li>The range of Tomcat and Event Bus ports is 1025-65535. Additionally, port 80 is available for the Tomcat port and port 443 is available for the Tomcat SSL port. However, if you are installing CA WCC on UNIX, specify a run as (non-root) user, and you intend to use port 80 or 443, the port must be set up for non-root user access before you begin the installation.</li>
+                    <li>The Event Bus port must not be in the dynamic port range of the machine.</li>
+                    <li>The range of database ports is 1025-65535 for the internal database and for the port on which an external database is running.</li>
+                    <li>The range for the SSA port is 49152-50176.</li>
+                    <li>The range of system or well-known ports is 0-1023.</li>
+                    <li>The range of user or user (registered) ports is 1024-49151.</li>
+                    <li>The range of dynamic and private ports is 49152-65535.</li>
+                    <li>If the firewall is enabled and CA WCC is using the internal database, and you are using CA Workload Automation AE in standalone mode and CA EEM with no failover installed on different machines, then you can open all outgoing ports and can close all incoming ports except the following for CA WCC:
+                        <ul>
+                            <li>CA WCC Tomcat port (the default for non-SSL is 8080; the default for SSL is 8443)</li>
+                            <li>SSA physical port 7163</li>
+                        </ul></li>
+                    <li>The firewall must accept all traffic from the loopback (lo) interface.</li>
+                    <li>After enabling the firewall, the firewall rules must ensure that the CA WCC server can ping the computer on which the CA WCC database, Reporting database, and CA EEM are hosted.</li>
+                    <li>The Event Bus port 7004 is to be opened in an enabled firewall if you are using HA mode.</li>
+                </ul>
+            </div>
+            <h2 class="heading2" id="ManageCAWCCDefaultPortsandServices-CAWCCServices">CA WCC Services</h2>
+            <p><span>The following are the services that CA WCC runs:</span></p>
+            <ul>
+                <li>CA-wcc</li>
+                <li>CA-wcc-services</li>
+                <li>CA-wcc-db</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <ul>
+                    <li>CA-wcc-db runs only if the internal database was selected in the Database Settings panel when CA WCC was installed.</li>
+                    <li>When you start or restart CA-wcc, CA-wcc-services is automatically started if it is not yet running.</li>
+                    <li>When you stop CA-wcc-services, CA-wcc is automatically stopped.</li>
+                    <li>On Windows, you can manage services using the Services window.</li>
+                    <li>On UNIX, use the unisrvcntr command to manage services.</li>
+                </ul>
+            </div>
+            <h3 class="heading3" id="ManageCAWCCDefaultPortsandServices-unisrvcntrCommand">unisrvcntr Command</h3>
+            <p>On UNIX, use the unisrvcntr command to stop, start, or restart a CA WCC service. The syntax for the unisrvcntr command is as follows:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>unisrvcntr&nbsp;{start|stop|restart|status}&nbsp;<em>service_name</em></p></pre>
+            </div>
+            <ul>
+                <li><strong>start</strong><br>Starts the service.</li>
+                <li><strong>stop</strong><br>Stops the service.</li>
+                <li><strong>restart</strong><br>Stops and then starts the service.</li>
+                <li><strong>status</strong><br>Reports the status of the service.</li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <ul>
+                    <li>The unisrvcntr command must be run as a root user.</li>
+                    <li>The&nbsp;<em>service_name</em>&nbsp;is optional when you run the command with the status argument. With no service name specified, the status of each service that is managed by unisrvcntr is displayed.</li>
+                </ul>
+            </div>
+            <h3 class="heading3" id="ManageCAWCCDefaultPortsandServices-RestartCAWCCServices">Restart CA WCC Services</h3>
+            <p>After you update the CA EEM server definition, change ports, or change the SSL mode using the Configuration Batch Interface, restart CA WCC services.</p>
+            <p>UNIX:</p>
+            <p>To restart CA WCC services on UNIX, run the following command in a shell window:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <pre class="ca-code"><p>unisrvcntr&nbsp;restart&nbsp;CA-wcc-services</p></pre>
+            </div>
+            <p>Windows:</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Open the Services window.</li>
+                <li>Select CA-wcc-services and click the Restart button.<br>The Restart Other Services dialog opens.</li>
+                <li>Click Yes.<br>The dialog closes and CA WCC services are restarted.</li>
+            </ol>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p>After you restart CA WCC services, verify that the CA WCC servers have started before you use or perform operations with CA WCC. You display CA WCC server startup status by running the following command:</p>
+                <p><span>UNIX:</span></p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>grep&nbsp;"startup&nbsp;in"&nbsp;$CA_WCC_INSTALL_LOCATION/log/*.log</p></pre>
+                </div>
+                <p><span><span>Windows:</span></span></p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>findstr&nbsp;/C:"startup&nbsp;in"&nbsp;"%CA_WCC_INSTALL_LOCATION%"\log\*.log</p></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+</body>
+</html>

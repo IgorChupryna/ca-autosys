@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <h1 class="article-name" tabindex="0">Spool File Maintenance</h1>
+    <div>
+        <div class="col-xs-12 col-md-8 col-lg-8">
+            <p><span>T</span>his topic describes how the agent uses spool files. It also explains how to maintain them
+                for better performance.</p>
+            <p></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline"
+                 data-headerelements="H2,H3,H4,H5,H6,H7" data-hasbody="false" data-macro-name="toc">
+                <ul style="">
+                    <li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a
+                            href="#SpoolFileMaintenance-SpoolFiles" class="toc-link">Spool Files</a></span></li>
+                    <li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a
+                            href="#SpoolFileMaintenance-ConfiguretheAgenttoClearSpoolFilesAutomatically"
+                            class="toc-link">Configure the Agent to Clear Spool Files Automatically</a></span></li>
+                    <li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a
+                            href="#SpoolFileMaintenance-ConfiguretheAgenttoAutomaticallyDeleteSpoolFilesofCompletedJobs"
+                            class="toc-link">Configure the Agent to Automatically Delete Spool Files of Completed Jobs</a></span>
+                    </li>
+                    <li><span class="toc-item-body" data-outline="4"><span class="toc-outline">4</span><a
+                            href="#SpoolFileMaintenance-ClearWindowsSpoolFilesUsingtheClearspoolCommand"
+                            class="toc-link">Clear Windows Spool Files Using the Clearspool Command</a></span></li>
+                    <li><span class="toc-item-body" data-outline="5"><span class="toc-outline">5</span><a
+                            href="#SpoolFileMaintenance-ClearUNIXSpoolFilesUsingScripts" class="toc-link">Clear UNIX Spool Files Using Scripts</a></span>
+                    </li>
+                    <li><span class="toc-item-body" data-outline="6"><span class="toc-outline">6</span><a
+                            href="#SpoolFileMaintenance-SpoolFilesforWorkloadoniSeries" class="toc-link">Spool Files for Workload on iSeries</a></span>
+                    </li>
+                </ul>
+            </div>
+            <p></p>
+            <h2 id="SpoolFileMaintenance-SpoolFiles">Spool Files</h2>
+            <p>The output for workload is stored in spool files that the agent software generates. Depending on the type
+                of workload the agent runs, the spool files are stored in and accessed from different locations.</p>
+            <p>The spool files are limited in size by the available space on the file system where they reside. To
+                maintain storage space, it is important to clear spool files regularly. The agent does not clear them by
+                default. You can configure the agent to clear spool files automatically.</p>
+            <p><span style="color: rgb(0,0,0);">Spool files are kept under the spool directory that is specified in the agentparm.txt file. By default this directory is in the installation directory:<br>spooldir=C:/Program Files/CA/WA Agent/spool</span>
+            </p>
+            <p><span style="color: rgb(0,0,0);">You can change the spool directory location. Remote fileshare, such as NFS and Windows fileshare, is also supported. The remote share must be accessible and have read and write permissions for the user that starts the agent:&nbsp;</span><br><span
+                    style="color: rgb(0,0,0);">spooldir=/mnt/remote/user/export/spool</span></p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <span style="color: rgb(0,0,0);"><strong>Note:</strong> Linux and UNIX agents are&nbsp;usually started as root. The NFS exports might not allow a root user to have read and write access.</span>
+            </div>
+            <p>The frequency for clearing the spool files varies, depending on your installation.</p>
+            <div class="bs-callout bs-callout-tip conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><span style="color: rgb(0,0,0);"><strong>Best Practice:</strong>&nbsp;</span><br><span
+                        style="color: rgb(0,0,0);">Enable spool directory cleanup on daily basis by using the following settings. The first setting enables automatic cleanup. The second setting allows the agent to retain a spool for up to 10 days. The last setting tells the agent to clean the spool once every 24 hours.</span>
+                </p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true"
+                     data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><span
+                            style="color: rgb(0,0,0);">runnerplugin.spool.clean.enable=true</span><br><span
+                            style="color: rgb(0,0,0);">runnerplugin.spool.expire=10D </span><br><span
+                            style="color: rgb(0,0,0);">runnerplugin.spool.sleep=24H</span></pre>
+                </div>
+            </div>
+            <h2 id="SpoolFileMaintenance-ConfiguretheAgenttoClearSpoolFilesAutomatically">Configure the Agent to Clear
+                Spool Files Automatically</h2>
+            <p>You can configure the agent to clear the workload spool files automatically by modifying the
+                agentparm.txt file. You can also set parameters to specify a file expiration time and sleep time.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong></p>
+                <ul>
+                    <li>The agent logs the spool-file cleanup activity in the runner_spool_cleaner.log file. This file
+                        is located in the log directory of the agent.
+                    </li>
+                    <li>(Agent for HP Integrity Nonstop) The agent does not clean up output to the NonStop spooler.</li>
+                </ul>
+            </div>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>(iSeries systems only)&nbsp;<a data-macro-name="sp-plaintextbody-link"
+                                                   href="/ca-workload-automation-system-agent/11-4/en/configuring/control-the-agent/open-a-pase-terminal-session-on-iseries"
+                                                   class="conf-macro output-inline" data-hasbody="true">Open a PASE
+                    terminal session</a>.
+                </li>
+                <li>Change to the agent installation directory.</li>
+                <li>Stop the agent.</li>
+                <li>Open the agentparm.txt file that is located in the agent installation directory.</li>
+                <li><p>Set the following parameter:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-plaintextbody-block">
+     <pre class="code-block prettyprint"><code>runnerplugin.spool.clean.enable=true
+</code></pre>
+                    </div>
+                </li>
+                <li>(Optional) Specify the following parameters:
+                    <ul>
+                        <li><p><strong>runnerplugin.spool.expire</strong><br>Specifies the file expiration time. The
+                            agent deletes spool files that are older than this value.</p>
+                            <p>When spool files are removed automatically, all files and empty directories under the
+                                spool directory that are older than the time specified in runnerplugin.spool.expire are
+                                deleted, regardless of their source or the state of the job that generated them. To
+                                ensure that files for running jobs are not deleted, the value in
+                                runnerplugin.spool.expire should always be larger than the time it takes for the
+                                longest-running job to complete.</p>
+                            <p>This parameter uses the following syntax:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-richtextbody-block">
+                                <pre class="ca-code"><p><em>n</em>[D|H|M|S]</p></pre>
+                            </div>
+                            <ul>
+                                <li><strong><em>n</em></strong><br>Specifies the time period.</li>
+                                <li><strong><em>D</em></strong><br>Specifies the time period unit as days (the default)
+                                </li>
+                                <li><strong>H</strong><br>Specifies the time period unit as hours.</li>
+                                <li><strong>M</strong><br>Specifies the time period unit as minutes.</li>
+                                <li><strong>S</strong><br>Specifies the time period unit as seconds.</li>
+                            </ul>
+                            <p><strong>Default:</strong>&nbsp;10D (10 days)</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-richtextbody-block">
+                                <strong>Note:</strong> You cannot specify combinations of time periods. For example,
+                                12D3H is not valid.
+                            </div>
+                        </li>
+                        <li><strong>runnerplugin.spool.sleep</strong><br>Specifies the sleep interval. At every
+                            interval, the agent checks for spool files that meet the expiration time and deletes
+                            them.<br><strong>Default:</strong>&nbsp;1D (one day)
+                        </li>
+                    </ul>
+                </li>
+                <li>Save and close the agentparm.txt file.</li>
+                <li>(iSeries systems only)<a data-macro-name="sp-plaintextbody-link"
+                                             href="/ca-workload-automation-system-agent/11-4/en/configuring/control-the-agent/start-the-subsystem-that-runs-the-agent-on-iseries"
+                                             class="conf-macro output-inline" data-hasbody="true">&nbsp;</a><a
+                        data-macro-name="sp-plaintextbody-link"
+                        href="/ca-workload-automation-system-agent/11-4/en/configuring/control-the-agent/start-the-subsystem-that-runs-the-agent-on-iseries"
+                        class="conf-macro output-inline" data-hasbody="true">Start the subsystem that runs the agent if
+                    it has stopped</a>.
+                </li>
+                <li>Start the agent.<br>The agent is configured to clear spool files automatically.</li>
+            </ol>
+            <p><strong>Example: Delete Spool Files Older Than 10 Days</strong></p>
+            <p>Suppose that you want to configure the agent to review the spool files every 36 hours and delete spool
+                files that are older than 10 days.</p>
+            <p>Add the indicated values to the following parameters in the agentparm.txt file:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>runnerplugin.spool.clean.enable=true
+runnerplugin.spool.expire=10D
+runnerplugin.spool.sleep=36H
+</code></pre>
+            </div>
+            <p>The agent deletes spool files that are older than 10&nbsp;days.</p>
+            <p><strong>Example: Check Spool Files When the Sleep Interval Is Greater Than the File Expiration
+                Time</strong></p>
+            <p>Suppose that you want to configure the agent to review the spool files every 50 minutes and delete spool
+                files that are older than 50 minutes as specified by runnerplugin.spool.expire.</p>
+            <p>Add the indicated values to the following parameters in the agentparm.txt file:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>runnerplugin.spool.clean.enable=true
+runnerplugin.spool.expire=50M
+runnerplugin.spool.sleep=2H
+</code></pre>
+            </div>
+            <p>The agent ignores the two-hour sleep interval set by runnerplugin.spool.sleep.</p>
+            <h2 id="SpoolFileMaintenance-ConfiguretheAgenttoAutomaticallyDeleteSpoolFilesofCompletedJobs">Configure the
+                Agent to Automatically Delete Spool Files of Completed Jobs</h2>
+            <p>You can configure the agent to delete a spool file automatically when the job completes successfully.</p>
+            <p>To configure the agent to delete spool files automatically, add the following parameter to the
+                agentparm.txt file and restart the agent:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>agent.spool.success.autocleanup=true
+</code></pre>
+            </div>
+            <h2 id="SpoolFileMaintenance-ClearWindowsSpoolFilesUsingtheClearspoolCommand">Clear Windows Spool Files
+                Using the Clearspool Command</h2>
+            <p>On Windows, you can clear agent spool files that are older than a specific number of days using the
+                clearspool command. When you issue the command, you can also view debugging messages as the command
+                runs.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Define the ESPAGENTDIR environment variable with the path to agent installation directory.<br>The
+                    agent installation directory must contain a valid agentparm.txt file.
+                </li>
+                <li><p>Enter the following command at the Windows command prompt:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <pre class="ca-code"><p>clearspool&nbsp;<em>n</em>&nbsp;[debug]</p></pre>
+                    </div>
+                    <ul>
+                        <li><strong><em>n</em></strong><br>Specifies the maximum number of days a spool file is
+                            maintained. The clearspool command removes all files older than&nbsp;<em>n</em>&nbsp;days.
+                        </li>
+                        <li><strong>debug</strong><br>(Optional) Displays messages to the command prompt as the
+                            clearspool command runs.
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+            <p><strong>Example: Clearing spool files older than five days</strong></p>
+            <p>The following command deletes all files older than five days.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>clearspool 5
+</code></pre>
+            </div>
+            <p><strong>Example: Displaying the debugging messages</strong></p>
+            <p>The following command deletes all files older than 10 days and displays debugging messages to the command
+                prompt as it runs.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>clearspool 10 debug
+</code></pre>
+            </div>
+            <h2 id="SpoolFileMaintenance-ClearUNIXSpoolFilesUsingScripts">Clear UNIX Spool Files Using Scripts</h2>
+            <p>You can clear UNIX spool files periodically using the clearspool and deldirifempty (delete directory if
+                empty) scripts.</p>
+            <ol>
+                <li>Create the clearspool and deldirifempty scripts.</li>
+                <li>Schedule the clearspool script using CA WA server or run it manually.<br>The clearspool script
+                    deletes files that meet certain modification time criteria. If the spool files are cleared, the
+                    clearspool script calls deldirifempty. The deldirifempty script deletes empty directories within the
+                    spool directory.<br>If you run clearspool from a Telnet session, ensure that you switch to the
+                    directory containing the spool files.<br>If you used the defaults when installing the agent, the
+                    spool directory is called spool.<br>The clearspool script assumes that the spool directory is called
+                    spool in the current directory. If not, supply the full directory path name in the environment
+                    variable SPOOL.
+                </li>
+            </ol>
+            <p><strong>Example: Create the clearspool and deldirifempty Scripts</strong></p>
+            <p>This example uses sample scripts. You can have other file maintenance procedures.</p>
+            <ol>
+                <li><p>Create the following script for clearspool:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+     <pre class="ca-code"><pre>#! /bin/ksh
+  if [[ -z $SPOOL ]]
+    then
+      SPOOL=./spool
+  fi
+find $SPOOL -type f -mtime +<em>n</em> -exec rm {} \;
+find $SPOOL -depth -type d -exec /bin/ksh /script_path/deldirifempty {} \;</pre></pre>
+                    </div>
+                    <ul>
+                        <li><strong>mtime&nbsp;<em>n</em></strong><br>Specifies the age of the files to be deleted.
+                            <ul>
+                                <li>+<em>n</em>&nbsp;-- deletes files last modified more than&nbsp;<em>n</em>&nbsp;days.
+                                </li>
+                                <li><em>n</em>&nbsp;-- deletes files last modified exactly&nbsp;<em>n</em>&nbsp;days
+                                    ago.
+                                </li>
+                                <li>-<em>n</em>&nbsp;-- deletes files last modified less than&nbsp;<em>n</em>&nbsp;days
+                                    ago.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> Put this script in the same directory as the cybAgent binary. Otherwise,
+                        specify the full path for SPOOL. You cannot specify a symbolic-linked directory for the SPOOL
+                        path.
+                    </div>
+                </li>
+                <li><p>Create the following script for deldirifempty:</p>
+                    <div class="code-panel conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-plaintextbody-block">
+     <pre class="code-block prettyprint"><code>#!/bin/ksh
+Dir=$(ls -A $1)
+ if [[ -z $Dir ]]
+  then
+   echo  "deleting directory $1"
+   rmdir $1
+  else
+   echo "$1 is not empty"
+ fi
+</code></pre>
+                    </div>
+                </li>
+            </ol>
+            <p><strong>Example: Deleting Files Modified Yesterday or Earlier</strong></p>
+            <p>In the following example, mtime is specified as +1 to delete files that were last modified at least one
+                day ago. The clearspool script then calls the deldirifempty script, which deletes any empty spool
+                subdirectories.</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>#!/bin/ksh
+  if [[ -z $SPOOL ]]
+    then
+     SPOOL=/AgentDirectory/spool
+  fi
+find $SPOOL  - type f  - mtime +1  - exec rm {} \;
+find $SPOOL  - depth  - type d -exec /bin/ksh  /script_path/
+deldirifempty {} \;
+</code></pre>
+            </div>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> $SPOOL cannot be symbolic-linked directories.
+            </div>
+            <h2 id="SpoolFileMaintenance-SpoolFilesforWorkloadoniSeries">Spool Files for Workload on iSeries</h2>
+            <p>For iSeries workload, the spool files are native objects on the iSeries system. Spool files can be
+                created while a job executes and a spool file is created from the job log after the job completes.
+                Unlike spool files for UNIX workload, iSeries job spool files are not stored in a spool directory.</p>
+            <p><span>For best results, u</span>se your routine maintenance procedures to clear spool files on the
+                iSeries system.</p>
+            <p>You can schedule workload using the scheduling manager and the agent to automate the clearing of the
+                spool files.</p>
+            <p>For UNIX workload on the iSeries system, the agent creates the spool files and stores them in a spool
+                directory. By default, these spool files do not clear automatically. We recommend that you clear these
+                spool files periodically. If the file system where a spool file resides reaches its maximum size, the
+                agent cannot continue to run.</p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-4">
+            <p></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+<div>
+    <h1 class="article-name" tabindex="0">Log File Maintenance</h1>
+    <div>
+        <div class="col-xs-12 col-md-8 col-lg-8">
+            <p>The agent keeps a set of logs that you must clear periodically to maintain disk space availability. The
+                log files contain records of all messages between the agent and the scheduling manager, and internal
+                messages. These files are located in the log directory by default and are updated continually while the
+                agent is running. The types and number of logs that are generated depend on the log.level parameter set
+                in the agentparm.txt file.</p>
+            <p>You can configure agent log file properties that control the log file size, the types and number of log
+                files that are generated, and how the agent archives the log files. Depending on your scheduling
+                manager, you can also clear log files manually.</p>
+            <p></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline"
+                 data-headerelements="H1,H2,H3,H4,H5,H6,H7" data-hasbody="false" data-macro-name="toc">
+                <ul style="">
+                    <li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a
+                            href="#LogFileMaintenance-ChangetheDefaultLogFileLocation" class="toc-link">Change the Default Log File Location</a></span>
+                    </li>
+                    <li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a
+                            href="#LogFileMaintenance-LogSettings" class="toc-link">Log Settings</a></span></li>
+                    <li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a
+                            href="#LogFileMaintenance-ConfiguretheAgenttoClearLogFilesAutomatically" class="toc-link">Configure the Agent to Clear Log Files Automatically</a></span>
+                    </li>
+                    <li><span class="toc-item-body" data-outline="4"><span class="toc-outline">4</span><a
+                            href="#LogFileMaintenance-EnableorDisableJobLogs" class="toc-link">Enable or Disable Job Logs</a></span>
+                    </li>
+                    <li><span class="toc-item-body" data-outline="5"><span class="toc-outline">5</span><a
+                            href="#LogFileMaintenance-ConfiguretheAgenttoAutomaticallyDeleteJobLogs" class="toc-link">Configure the Agent to Automatically Delete Job Logs</a></span>
+                    </li>
+                </ul>
+            </div>
+            <p></p>
+            <h2 id="LogFileMaintenance-ChangetheDefaultLogFileLocation"><span style="color: rgb(0,0,0);">Change the Default Log File Location</span>
+            </h2>
+            <p>The log files by default are sent to the Log directory under the Agent installation directory. In some
+                situations, however, it might be more beneficial to store the log files in a different location. For
+                example, if you have space constraints and your log files consume a large amount of space, you might
+                want to redirect the log files to a different location where more space is available.&nbsp;</p>
+            <p>You can specify a new location for the log files by setting the log.folder parameter. This parameter
+                provides the name and location of a folder where the log files are to be stored. You can specify the
+                location through either a full path name or relative path name. If you specify a relative path only, the
+                agent creates the folder in the agent installation directory.</p>
+            <h2 id="LogFileMaintenance-LogSettings"><span style="color: rgb(0,0,0);">Log Settings</span></h2>
+            <p><span style="color: rgb(0,0,0);">The log settings specify the amount of detail to include in the log files created by the agent and plug-ins. By default,&nbsp;the log level is set to 5. Some of the logs that are created at this log level include:</span>
+            </p>
+            <ul>
+                <li><span style="color: rgb(0,0,0);">agent_mgr_commsnd.log</span></li>
+            </ul>
+            <ul>
+                <li><span style="color: rgb(0,0,0);">agent_properties.log</span></li>
+            </ul>
+            <ul>
+                <li><span style="color: rgb(0,0,0);">cybcontrollerpluginmanager.log</span></li>
+            </ul>
+            <ul>
+                <li><span style="color: rgb(0,0,0);">defaultlog_agent.log</span></li>
+            </ul>
+            <ul>
+                <li><span style="color: rgb(0,0,0);">initiatormanager.log</span></li>
+            </ul>
+            <ul>
+                <li><span style="color: rgb(0,0,0);">management_hub.log</span></li>
+            </ul>
+            <ul>
+                <li><span style="color: rgb(0,0,0);">messagedistributoroutgoing.log</span></li>
+            </ul>
+            <ul>
+                <li><span style="color: rgb(0,0,0);">receiver.log</span></li>
+            </ul>
+            <ul>
+                <li><span style="color: rgb(0,0,0);">rmipluginmanager.log</span></li>
+            </ul>
+            <ul>
+                <li><span style="color: rgb(0,0,0);">runner_os_component.log</span></li>
+            </ul>
+            <ul>
+                <li><span style="color: rgb(0,0,0);">simple_health_monitor.log</span></li>
+            </ul>
+            <ul>
+                <li><span style="color: rgb(0,0,0);">transmitter.log</span></li>
+            </ul>
+            <ul>
+                <li><span style="color: rgb(0,0,0);">transmitter_queue_spool_&lt;manger_instance&gt;_7500.log</span>
+                </li>
+            </ul>
+            <div class="bs-callout bs-callout-tip conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><span style="color: rgb(0,0,255);"><span style="color: rgb(0,0,0);"><strong>Best Practice:</strong> The following settings are recommended for production environments.</span> </span>
+                </p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true"
+                     data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><span style="color: rgb(0,0,0);">log.level=5 </span><br><span
+                            style="color: rgb(0,0,0);">log.archive=1 </span><br><span style="color: rgb(0,0,0);">log.maxsize=1M</span></pre>
+                </div>
+                <p><span style="color: rgb(0,0,0);">The agent allows maximum size and archival of logs. The log.maxsize parameter tells agent to create a new log once the size has been reached. The log size of 1 MB is usually adequate. If additional information is needed, the size may be increased to 2 MB. </span><br><span
+                        style="color: rgb(0,0,0);">After the new log is created, the old log is renamed either by a time stamp or as &lt;<em>log</em>&gt;. archive.log. The log.archive=1 renames logs with archive.log.</span>
+                </p>
+            </div>
+            <h2 id="LogFileMaintenance-ConfiguretheAgenttoClearLogFilesAutomatically">Configure the Agent to Clear Log
+                Files Automatically</h2>
+            <p>The agent has a housekeeping function that automatically removes all existing files with the extension
+                .log that reach a certain size. You can configure the agent to clear the log files automatically by
+                modifying the agentparm.txt file.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>(iSeries systems only) <a data-macro-name="sp-plaintextbody-link"
+                                              href="/ca-workload-automation-system-agent/11-4/en/configuring/control-the-agent/open-a-pase-terminal-session-on-iseries"
+                                              class="conf-macro output-inline" data-hasbody="true">Open a PASE terminal
+                    session</a>.
+                </li>
+                <li>Change to the agent installation directory.</li>
+                <li>Stop the agent.</li>
+                <li>Open the agentparm.txt file that is located in the agent installation directory.</li>
+                <li><p>Specify the maximum log size using the following parameter.</p>
+                    <ul>
+                        <li><p><strong><strong>log.maxsize=<em>maximum_size</em>[<em>B</em>|K|M|G]</strong></strong></p>
+                            <p>Specifies the maximum log size. When the log file exceeds the specified size, the agent
+                                archives it and starts a new log file. If the log.archive parameter is set to 3, the
+                                agent ignores this parameter. The agent does not create an archive file, but it does
+                                append all logs. You can specify the following optional modifiers:</p>
+                            <ul>
+                                <li><strong>B</strong><br>Specifies the size in bytes.</li>
+                                <li><strong>K</strong><br>Specifies the size in kilobytes.</li>
+                                <li><strong>M</strong><br>Specifies the size in megabytes.</li>
+                                <li><strong>G</strong><br>Specifies the size in gigabytes.</li>
+                            </ul>
+                            <p><strong>Limits:</strong> Up to 2 GB<br><strong>Default:</strong> 1M</p>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                                 data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p>&nbsp;<strong>Note:</strong> The default (no modifier) size is in bytes.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li><p>Specify the log archiving options using the following parameter:</p>
+                    <ul>
+                        <li><p><strong>log.archive</strong><br>Defines the log archiving options. Options are as
+                            follows:</p>
+                            <ul>
+                                <li><strong>0</strong><br>Appends the current date and time to the log file.</li>
+                                <li><strong>1</strong><br>Renames to logfile.archive and starts a new file.</li>
+                                <li><strong>2</strong><br>Removes the current file.</li>
+                                <li><strong>3</strong><br>Appends new log entries to the current logs.</li>
+                            </ul>
+                            <p><strong>Default:</strong> 0</p></li>
+                    </ul>
+                </li>
+                <li><p>Specify the types of logs and number of logs to generate using the following parameter:</p>
+                    <ul>
+                        <li><p><strong>log.level</strong><br>Specifies the type and number of logs the agent generates.
+                            This parameter is important for troubleshooting. Options are as follows:</p>
+                            <ul>
+                                <li><strong>0, 1, or 2</strong><br>Creates logs for any errors including the receiver
+                                    and transmitter logs. Level 2 is adequate for production, unless problems arise
+                                    requiring more details for troubleshooting.
+                                </li>
+                                <li><strong>3</strong><br>Adds queues. If this value is specified, the agent ignores the
+                                    log.maxsize parameter.
+                                </li>
+                                <li><strong>4 or 5</strong><br>Adds debugging information. Use log level 5 for setup and
+                                    initial testing.
+                                </li>
+                                <li><strong>6-8</strong><br>Adds tracing information to diagnose a problem. These levels
+                                    are not intended for continuous use.
+                                </li>
+                            </ul>
+                            <p><strong>Default:</strong> 5</p></li>
+                    </ul>
+                </li>
+                <li>Save and close the agentparm.txt file.</li>
+                <li>(iSeries systems only) <a data-macro-name="sp-plaintextbody-link"
+                                              href="/ca-workload-automation-system-agent/11-4/en/configuring/control-the-agent/start-the-subsystem-that-runs-the-agent-on-iseries"
+                                              class="conf-macro output-inline" data-hasbody="true">Start the subsystem
+                    that runs the agent if it has stopped</a>.
+                </li>
+                <li><p>Start the agent.<br>The agent is configured to clear log files automatically.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                         data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> In some combinations of log.level and log.archive settings, a new file is
+                        generated (runner_plugin_transmitter_queue.log).
+                    </div>
+                </li>
+            </ol>
+            <h2 id="LogFileMaintenance-EnableorDisableJobLogs">Enable or Disable Job Logs</h2>
+            <p>By default, the agent creates a job log for every script or binary request that runs on the system it
+                manages. The job log contains environment and other diagnostic information that you can use to debug
+                failed jobs.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> On iSeries, these job logs are different than the job logs the iSeries system
+                    creates.</p>
+            </div>
+            <p>To enable or disable job logs, configure the following parameter on the agent:</p>
+            <ul>
+                <li><strong>oscomponent.joblog</strong><br>Sets whether the agent creates a job log for each job that
+                    runs.<br>
+                    <ul>
+                        <li><strong>true</strong><br>Enables job logs.</li>
+                        <li><strong>false</strong><br>Disables job logs.</li>
+                    </ul>
+                    <strong>Default:</strong> true
+                </li>
+            </ul>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-richtextbody-block">
+                <strong>Note:</strong> The agent stores the job logs in the spool file directory, which you must clear
+                periodically depending on the volume of your workload. You can also configure the agent to delete job
+                logs automatically when jobs complete successfully.
+            </div>
+            <h2 id="LogFileMaintenance-ConfiguretheAgenttoAutomaticallyDeleteJobLogs">Configure the Agent to
+                Automatically Delete Job Logs</h2>
+            <p>You can configure the agent to delete a job log automatically when the job completes successfully.</p>
+            <p>To configure the agent to delete job logs automatically, add the following parameter to the agentparm.txt
+                file and restart the agent:</p>
+            <div class="code-panel conf-macro output-block" data-hasbody="true"
+                 data-macro-name="sp-macrooverride-plaintextbody-block">
+   <pre class="code-block prettyprint"><code>oscomponent.joblog.success.autocleanup=true
+</code></pre>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-4">
+            <p></p>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+
+
+</body>
+</html>

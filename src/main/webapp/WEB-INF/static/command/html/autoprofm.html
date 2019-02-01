@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p><strong>Valid on Windows</strong></p>
+                <p>In Unicenter AutoSys JM 4.5.1 and r11, job profile information was stored in the Windows registry. To upgrade to r11.3, Release 11.3.5, or Release [assign the value for rn in your book], the job profile information in the registry must be converted to a file format that is compatible with the new CA Workload Automation Agent for UNIX, Linux, or Windows. The new CA Workload Automation Agent does not read job profile information from the Windows registry as past legacy agents did. Moving the job profile information to a flat file format makes the implementation consistent across both the UNIX and Windows platforms.</p>
+                <p>When you upgrade CA Workload Automation AE, the upgrade process automatically converts the job profiles. You can also issue the autoprofm command to convert profiles manually after an upgrade. You can specify where these converted files are stored.</p>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <p><strong>Notes:</strong></p>
+                    <ul>
+                        <li>The autoprofm command must be run from the environment of the instance which owns the job profiles.</li>
+                        <li>On UNIX, the job profiles are still defined in shell script files that contain the environment variables you want to source. You can specify the name of the script file (or the path to and name of the file) in the profile attribute.</li>
+                    </ul>
+                </div>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autoprofm&nbsp;</p><p>&nbsp;&nbsp;&nbsp;-P&nbsp;<em>directory</em>&nbsp;</p><p>&nbsp; &nbsp;[-N&nbsp;<em>agent_name</em>]&nbsp;[{-usr&nbsp;<em>username&nbsp;</em>{-pw|pwx}&nbsp;<em>password</em>|-saml&nbsp;<em>auth_artifact</em>}]&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-x]&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><strong>-P&nbsp;<em>directory</em></strong><br>Specifies the directory to store the converted profiles.</li>
+                    <li><p><strong>-N&nbsp;<em>agent_name</em></strong><br>(Optional) Specifies the name of an agent.<br><strong>Default:</strong>&nbsp;WA_AGENT</p></li>
+                    <li>
+                        <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                            <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                            <p>(Optional) Specifies external security credentials as follows:</p>
+                            <ul>
+                                <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                                <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                    </div> </li>
+                                <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Notes: </strong></p>
+                                <ul>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                        <ul>
+                                            <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                            <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                            <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                        </ul></li>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                    <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                        <ul>
+                                            <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                            <li>CA Workload Automation AE is operating in native security mode.</li>
+                                        </ul></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                    <li><p><strong>-x<br></strong>(Optional) Returns the command version information to standard output.</p></li>
+                    <li><p><strong>-?<br></strong>(Optional) Displays help for the command.</p></li>
+                </ul>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <p><strong>Notes:</strong></p>
+                    <ul>
+                        <li>If you are converting profiles from different 4.5.1 instances and the profiles have the same name, the autoprofm command renames the files to&nbsp;<em>profilename_instancename</em>&nbsp;to avoid overwriting the files.</li>
+                        <li>If you are converting profiles from different r11 instances and the profiles have the same name, the autoprofm command renames the files to&nbsp;<em>profilename_</em>11.0_Base to avoid overwriting the files.</li>
+                        <li>Similarly, if the r11.3, Release 11.3.5, or Release 11.3.6 instance already has job profiles with the same name, the autoprofm tool renames the migrated files to&nbsp;<em>profilename_instancename</em>&nbsp;or&nbsp;<em>profilename</em>_11.0_Base. The files are renamed to avoid overwriting the existing job profiles.</li>
+                        <li>To convert the DEFAULT job profile, the autoprofm command collects the environment variables in all the DEFAULT profiles and writes them a single DEFAULT profile for CA Workload Automation AE r11.3, Release 11.3.5, or Release [assign the value for rn in your book]. The agent sets the oscomponent.environment.variables parameter in its agentparm.txt file to this new DEFAULT profile. Jobs that do not have a profile that is associated with them uses the environment variables defined in the new DEFAULT profile.</li>
+                        <li>The migration activity is logged in the %AUTOUSER%\out\autoprofm.<em>instance_name&nbsp;</em>file.</li>
+                    </ul>
+                </div>
+                <p><strong>Example: Store the Current Job Profiles</strong></p>
+                <p>This example stores the current job profiles in the&nbsp;default profile location of the agent.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autoprofm&nbsp;&nbsp;-&nbsp;P&nbsp;"c:\program&nbsp;files\CA\Workload&nbsp;Automation&nbsp;AE\SystemAgent\WA_AGENT\Profiles"</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

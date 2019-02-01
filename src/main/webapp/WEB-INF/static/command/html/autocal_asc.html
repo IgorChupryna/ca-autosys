@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The autocal_asc command provides a text-based command-line mechanism that lets you manage calendar definitions.&nbsp;Calendars let you customize job schedules.</p>
+                <p>A calendar specifies either fixed dates or criteria as follows:</p>
+                <ul>
+                    <li><strong>Standard calendar</strong><br>Specifies a list of fixed dates, such as holidays.</li>
+                    <li><strong>Cycle</strong><br>Specifies a list date ranges (periods).</li>
+                    <li><strong>Extended calendar</strong><br>Specifies a set of criteria that the utility uses to generate a list of fixed dates.</li>
+                </ul>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <p><strong>Notes: </strong></p>
+                    <ul>
+                        <li>An extended calendar might reference a cycle and apply rules to the periods in it. To customize a job schedule, use a standard or extended calendar (not a cycle).</li>
+                        <li>The interactive calendar utility lets you define, modify, regenerate, and delete calendars.</li>
+                        <li>Command line options do not support calendar regeneration; use the interactive utility to regenerate extended calendars after you modify criteria.</li>
+                        <li>Command line options support calendar creation, deletion, and modification. We recommend that you use the interactive utility to define calendars, delete calendars, and make modifications to a single calendar. To modify multiple calendars simultaneously, use command line options.</li>
+                        <li>Use the autocal_asc command with the redirection operator to add or delete dates from a standard calendar. To add dates to a standard calendar, create a text file and include the calendar name, the A option, and the dates to be added to the calendar and then issue the autocal_asc command with the redirection operator and specify the text file name. To delete dates from a standard calendar, create a text file and include the calendar name, the D option, and the dates to be deleted from the calendar and then issue the autocal_asc command with the redirection operator and specify the text file name.</li>
+                    </ul>
+                </div>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autocal_asc&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[{-D&nbsp;{-c|-e|-s}&nbsp;<em>calendar_name</em>|-E&nbsp;<em>export_filename&nbsp;</em>{-c|-e|-s&nbsp;[-f&nbsp;<em>date_format</em>]}{<em>calendar_name</em>|ALL}|-l&nbsp;[{c|e|s}|-I&nbsp;<em>import_filename&nbsp;</em>[-F][-f&nbsp;<em>date_format</em>]|[{-usr&nbsp;<em>username&nbsp;</em>{-pw|pwx}&nbsp;<em>password</em>|-saml&nbsp;<em>auth_artifact</em>}]}]&nbsp;</p><p>&nbsp;&nbsp;&nbsp;[-x]</p><p>&nbsp;&nbsp;&nbsp;[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-D {-c|-e|-s}&nbsp;<em>calendar_name</em></strong></p><p>(Optional) Deletes the specified calendar or cycle from the database.</p></li>
+                    <li><strong>-E&nbsp;<em>export_filename&nbsp;</em>{-c|-e|-s&nbsp;[-f&nbsp;<em>date_format</em>]} {<em>calendar_name</em>|ALL}</strong><br>(Optional) Exports the specified calendars to the specified file.</li>
+                </ul>
+                <p style="margin-left: 60.0px;"><strong>-c|-e|-s&nbsp;[-f&nbsp;<em>date_format</em>]&nbsp;<em>calendar_name</em></strong></p>
+                <p style="margin-left: 90.0px;">Specifies a specific calendar of the relevant type.</p>
+                <p style="margin-left: 90.0px;"><strong>Limits:</strong>&nbsp;1-64 of the following characters:&nbsp;Alphanumeric characters and the following symbols: period (.), underscore (_), pound (#), and hyphen (-).</p>
+                <p style="margin-left: 60.0px;"><strong>-c|-e|-s&nbsp;[-f&nbsp;<em>date_format</em>]&nbsp;ALL</strong></p>
+                <p style="margin-left: 90.0px;">Specifies all calendars of the relevant type.</p>
+                <p style="margin-left: 60.0px;"><strong>-f&nbsp;<em>date_format</em></strong></p>
+                <p style="margin-left: 90.0px;">(Optional) Specifies the date format to use for a standard calendar in the file that is exported. If you do not specify this parameter, the default instance specific date format is used.</p>
+                <ul>
+                    <li><p><strong>-l[{c|e|s}]</strong><br>(Optional) lists all calendars of the specified type. If you do not specify a calendar type, the utility lists all calendars of all types.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note:</strong>&nbsp;For each calendar, the calendar name, type, and description are displayed.</p>
+                        </div> </li>
+                    <li><strong>-I&nbsp;<em>import_filename&nbsp;</em><strong>[-F]&nbsp;[-f&nbsp;<em>date_format</em>]</strong></strong><br>(Optional) Imports calendar definitions from the specified file.</li>
+                </ul>
+                <p style="margin-left: 60.0px;"><strong>[-F]</strong></p>
+                <p style="margin-left: 90.0px;">Force overwrites the calendar definitions from the specified file.</p>
+                <p style="margin-left: 60.0px;"><strong>-f&nbsp;<em>date_format</em></strong></p>
+                <p style="margin-left: 90.0px;">(Optional) Specifies the date format to use for a standard calendar in the file that is imported. If you do not specify this parameter, the default instance specific date format is used.</p>
+                <ul>
+                    <li>
+                        <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                            <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                            <p>(Optional) Specifies external security credentials as follows:</p>
+                            <ul>
+                                <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                                <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                    </div> </li>
+                                <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Notes: </strong></p>
+                                <ul>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                        <ul>
+                                            <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                            <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                            <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                        </ul></li>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                    <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                        <ul>
+                                            <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                            <li>CA Workload Automation AE is operating in native security mode.</li>
+                                        </ul></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                    <li><p>-x</p><p>(Optional) Returns the command version information to standard output.</p></li>
+                    <li><p>-?<br>(Optional) Displays help for the command.</p></li>
+                </ul>
+                <p><strong>Example: Export a Calendar</strong></p>
+                <p>This example exports the standard calendar federal_holidays to the file holidays_06.txt.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autocal_asc&nbsp;-E&nbsp;holidays_06.txt&nbsp;-s&nbsp;federal_holidays</p></pre>
+                </div>
+                <p><strong>Example: Define a Standard Calendar</strong></p>
+                <p>This example defines a standard calendar named Holidays2007 in a text file.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>calendar:&nbsp;Holiday2007</p><p>description: Holiday calendar for 2007</p><p>01/01/2007&nbsp;00:00</p><p>01/02/2007&nbsp;00:00</p><p>01/16/2007&nbsp;00:00</p><p>02/20/2007&nbsp;00:00</p><p>05/29/2007&nbsp;00:00</p><p>07/02/2007&nbsp;00:00</p><p>09/04/2007&nbsp;00:00</p><p>11/23/2007&nbsp;00:00</p><p>11/24/2007&nbsp;00:00</p><p>12/25/2007&nbsp;00:00</p><p>12/26/2007&nbsp;00:00</p></pre>
+                </div>
+                <p><strong>Example: Define a Cycle</strong></p>
+                <p>This example defines a cycle with four 3-month periods named Quarter 2007 in a text file.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>cycle:&nbsp;Quarter2007</p><p>description: Quarterly calendar for 2007</p><p>start_date:&nbsp;01/01/2007</p><p>end_date:&nbsp;03/31/2007</p><p>start_date:&nbsp;04/01/2007&nbsp;</p><p>end_date:&nbsp;06/30/2007&nbsp;</p><p>start_date:&nbsp;07/01/2007&nbsp;</p><p>end_date:&nbsp;09/30/2007&nbsp;</p><p>start_date:10/01/2007</p><p>end_date:12/31/2007</p></pre>
+                </div>
+                <p><strong>Example: Define an Extended Calendar</strong></p>
+                <p>This example defines an extended calendar named LastWeekCycleCal in a text file.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>extended_calendar:&nbsp;LastWeekCycleCal</p><p>description:</p><p>workday:&nbsp;mo,tu,we,th,fr</p><p>non_workday:&nbsp;W</p><p>holiday:&nbsp;</p><p>holcal:&nbsp;</p><p>cyccal:&nbsp;Quarter2007</p><p>adjust:&nbsp;0</p><p>condition:&nbsp;CWEEK#L</p></pre>
+                </div>
+                <p><strong>Example: Import Calendars</strong></p>
+                <div class="bs-callout bs-callout-warning conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Important!</strong> The definitions in the previous examples become calendar objects only when you import the text file that contains them. To ensure that updates are applied to calendar objects, import the file again after you modify it.
+                </div>
+                <p>This example imports calendar definitions in the previous examples from the text file named Calendars2007.txt to the CA Workload Automation AE database.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autocal_asc&nbsp;-I&nbsp;Calendars2007.txt</p></pre>
+                </div>
+                <p><strong>Example: Add Dates to a Standard Calendar Using the Redirection Operator</strong></p>
+                <p>This example creates a calendar named&nbsp;<em>holiday_2016</em>&nbsp;and adds 01/04/2016, 02/04/2016, and 03/04/2016 dates to it. Create a text file named&nbsp;<em>dates.txt</em>&nbsp;and specify the calendar name, the A option, and the dates to be added to the calendar as follows: &nbsp;</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>holiday_2016<br>A<br>01/04/2016<br>02/04/2016<br>03/04/2016</p></pre>
+                </div>
+                <p>Issue the autocal_asc command with the redirection operator and the text file name as follows:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autocal_asc &lt; dates.txt</p></pre>
+                </div>
+                <p><strong>Example: Delete Dates from a Standard Calendar Using the Redirection Operator</strong></p>
+                <p>This example deletes 02/04/2016 and 03/04/2016 dates from the calendar named&nbsp;<em>holiday_2016</em>. In the text file named&nbsp;<em>dates.txt</em>, specify the calendar name, the D option, and the dates to be deleted from the calendar as follows:&nbsp;</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>holiday_2016<br>D<br>02/04/2016<br>03/04/2016</p></pre>
+                </div>
+                <p>Issue the autocal_asc command with the redirection operator and the text file name as follows:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autocal_asc &lt; dates.txt</p></pre>
+                </div>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Note:</strong> The interactive calendar utility lets you define and modify calendar objects directly. We recommend that you use this utility to create new calendars but that you manage definitions in a text file.
+                </div>
+                <p><strong>Example: Delete an Extended Calendar</strong></p>
+                <p>This example deletes the extended calendar&nbsp;LastWeekCycleCal.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autocal_asc -D -e&nbsp;LastWeekCycleCal</p></pre>
+                </div>
+                <p><strong>Example: List all Standard Calendars</strong></p>
+                <p>This example lists all standard calendars.&nbsp;</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autocal_asc –ls</p></pre>
+                </div>
+                <p class="heading2"><strong>Example: Modify the Description of a Standard Calendar Using the&nbsp;Calendar Utility Interactive Menu</strong></p>
+                <p>This example modifies the description of a standard calendar named Holidays2007.&nbsp;</p>
+                <p>Issue the autocal_asc command with no additional options to open the Calendar Utility Interactive menu, and then follow these steps:</p>
+                <ol>
+                    <li>Type 1 and press Enter.</li>
+                    <li>Type 7 and press Enter.</li>
+                    <li>Enter Holidays2007 when the utility prompts you to enter the calendar name and press Enter.</li>
+                    <li>Enter "Holiday List for the Year 2007" when the utility prompts you to enter the calendar description and press Enter.&nbsp;</li>
+                    <li>Enter 0 to exit the Calendar Utility interactive menu.</li>
+                </ol>
+                <p class="heading2"><strong>Example: Specify the Date Format for a Standard Calendar in the File that is Imported</strong></p>
+                <p>This example uses yyyy/mm/dd date format for the standard calendar named&nbsp;<em>caldates</em>&nbsp;in the file that is imported.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autocal_asc –I caldates –f yyyy/mm/dd</p></pre>
+                </div>
+                <p>In the file that is imported, the dates are defined as follows:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>calendar: caldates</p><p>description: date format for standard calendar</p><p>01/20/2016 00:00:00</p><p>01/29/2016 00:00:00</p><p>02/28/2016 00:00:00</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

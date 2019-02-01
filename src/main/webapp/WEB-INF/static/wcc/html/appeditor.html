@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div>
+        <div class="">
+            <p></p>
+            <p>Application Editor provides a graphical representation of all the&nbsp;relationships between CA Workload Automation AE jobs and their dependencies. It displays the conditions of the relationships that must be met before a job can run, and the successor jobs triggered when a job finishes running.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note:</strong> The new job that is dragged from the palette and dropped on to the graph is red in color. After entering the mandatory and optional fields as required and applied, the color changes to teal.</p>
+            </div>
+            <p>You can create a job flow or modify an existing job flow by adding or deleting objects graphically using drag-and-drop. If your site is implementing this feature, your administrator can create job templates with predefined properties for use. Changes made to the job flow or object properties can be committed to the selected CA Workload Automation AE server.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Note: </strong>If committed to a AE r11.3 server, the following job types are ignored and a warning message is displayed:</p>
+                <ul>
+                    <li>Micro Focus</li>
+                    <li>Process Automation Process Execution</li>
+                    <li>Process Automation Start Request Form</li>
+                    <li>Remote Execution</li>
+                    <li>SNMP Value Get</li>
+                    <li>SNMP Value Set</li>
+                    <li>Wake on LAN</li>
+                    <li>Web Service Document/Literal</li>
+                </ul>
+            </div>
+            <p class="heading2"></p>
+            <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H1,H2" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="#CAWCCApplicationEditor-ApplicationEditorNavigation" class="toc-link">Application Editor Navigation</a></span></li><li><span class="toc-item-body" data-outline="2"><span class="toc-outline">2</span><a href="#CAWCCApplicationEditor-WorkloadObjects" class="toc-link">Workload Objects</a></span></li><li><span class="toc-item-body" data-outline="3"><span class="toc-outline">3</span><a href="#CAWCCApplicationEditor-LogicalOperators" class="toc-link">Logical Operators</a></span></li><li><span class="toc-item-body" data-outline="4"><span class="toc-outline">4</span><a href="#CAWCCApplicationEditor-Dependencies" class="toc-link">Dependencies</a></span></li><li><span class="toc-item-body" data-outline="5"><span class="toc-outline">5</span><a href="#CAWCCApplicationEditor-CustomizeDialog" class="toc-link">Customize Dialog</a></span></li></ul></div>
+            <p></p>
+            <h2 class="heading2" id="CAWCCApplicationEditor-ApplicationEditorNavigation">Application Editor Navigation</h2>
+            <p>Application Editor is accessed by clicking the Application Editor tab in the main CA WCC page. The Application Editor page contains two sections: Flow and Properties. Initially, only the Flow section is displayed. To edit a job, a page navigation link lets you move from the Flow to the Properties section.</p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes: </strong></p>
+                <ul>
+                    <li>Access to Application Editor is controlled through the ApplicationAccess resource in CA EEM.</li>
+                    <li><p>The Properties section appears when you right-click a job object in the Graph and select Edit.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p><strong>Note: </strong>If the job has an error condition, an error message opens and the display does not automatically scroll down to the Properties section. You can manually scroll down to the Properties section and correct the error.</p>
+                        </div> </li>
+                </ul>
+            </div>
+            <p>The Flow section consists of the following panes:</p>
+            <ul>
+                <li>The upper left pane is the Palette, which lists object types that you can add to the job flow.</li>
+                <li>The lower left pane is the Overview, which displays a thumbnail view of all the jobs and dependencies imported into Application Editor.</li>
+                <li>The left pane also contains the Delete List section, displaying a list of the jobs that are selected for deletion.</li>
+                <li>The center pane is the Graph, which graphically displays an editable view of the jobs and dependencies that you imported into Application Editor or manually added when you started a new flow, or that were displayed previously in the Application Editor.
+                    <ul>
+                        <li>You can define the conditions required to run a job by dragging objects from the Palette and dropping them onto the Graph. Job properties and dependencies can be edited, and multiple changes can be committed to the server you select in a single operation.</li>
+                        <li>If you save object property and job flow changes before you leave Application Editor and close CA WCC, you can redisplay the job flow that was displayed when you left by selecting Load Flow from the drop-down list the next time you start and log in to CA WCC, and access Application Editor.</li>
+                        <li>If some objects in the imported job flows are not visible in the Graph, the boundary box in the Overview pane can be dragged to display them in the Graph.</li>
+                    </ul></li>
+                <li>The right pane consists of the SAP filters sections. SAP drag-and-drop functionality let you use an SAP job that exists on an SAP server as a template to create a new SAP job, and is implemented by the SAP Filters and SAP Filter Results panes. The SAP Filters and SAP Filter Results panes are displayed by default when you select any one or all the following job types in the Customize dialog: SAP R/3, SAP Batch Input Session, SAP BW Process Chain, or SAP BW InfoPackage. The SAP Filters pane contains filters with SAP job properties which you can use to search for jobs on an SAP server. The SAP Filter Results pane contains the search results. You can drag a job from the search results into the job flow to create a new SAP job, modify the job properties, and then commit the job flow to create the new job on the specified CA Workload Automation AE server.</li>
+                <li>The Properties section lets you edit the properties of the job that has been imported or added to the job flow, and appears when you right-click the job and select Edit. When you add a job to the Graph, it is displayed with a red border and an asterisk (*) next to its name, indicating that a required property is missing.</li>
+                <li><p>The Delete List pane contains a list of jobs that you deleted from the job flow displayed in the Graph. The jobs are deleted from the specified server when you commit the job flow. If needed, you can remove jobs from the list before you commit the job flow.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> If the icon of a dependent job shown in the Graph contains a question mark (?), the job cannot be edited in Application Editor.
+                    </div> </li>
+            </ul>
+            <h2 class="heading2" id="CAWCCApplicationEditor-WorkloadObjects">Workload Objects</h2>
+            <p>For information about the jobs and workload objects that are supported in CA WCC, see Manage the Job Flow and Manage Workload Objects sections.</p>
+            <h2 class="heading2" id="CAWCCApplicationEditor-LogicalOperators">Logical Operators</h2>
+            <p>A logical operator uses the logically combined result of two or more objects in the job flow to control subsequent processing. Objects are connected to logical operators using dependency links. You must define the property of the dependency link, such as the result of a job run (success, failure, and so on), from objects that precede the logical operator. The dependency link from a logical operator to the next object in the job flow has no properties to define; the operator itself controls subsequent processing.</p>
+            <p>The available logical operators are:</p>
+            <ul>
+                <li><strong>AND</strong><br>Subsequent processing occurs as the result of the logical AND of two or more preceding objects. For example, if you want Command_Job_3 to run when Command_Job_1&nbsp;and Command_Job_2 complete successfully, the dependency statement for Command_Job_3&nbsp;is: s(Command_Job_1) &amp; s(Command_Job_2).<br>The following diagram shows how this dependency statement appears in Application Editor:<br><img data-macro-name="sp-image" class="img-responsive" src="/ca-workload-automation-ae/11-4-2/en/files/361355956/456951814/1/1505886684084/and.png" data-hasbody="false" height="250"><br><br></li>
+                <li><strong>OR</strong><br>Subsequent processing occurs as the result of the logical OR of two or more preceding objects. For example, if you want Command_Job_3&nbsp;to run when Command_Job_1&nbsp;or Command_Job_2&nbsp;completes successfully, the dependency statement for Command_Job_3&nbsp;is: s(Command_Job_1) | s(Command_Job_2).&nbsp;<br>The following diagram shows how this dependency statement appears in Application Editor:<br><img data-macro-name="sp-image" class="img-responsive" src="/ca-workload-automation-ae/11-4-2/en/files/361355956/456951815/1/1505886702531/or.png" data-hasbody="false" height="250"></li>
+            </ul>
+            <h2 class="heading2" id="CAWCCApplicationEditor-Dependencies">Dependencies</h2>
+            <p>A dependency is created by linking two objects in the Graph. The link appears as an arrow pointing from the dependency object to the object that depends on it. The dependency link property defines the condition of the object that must be met before the next step in the job flow is performed. You can select the properties for a dependency link originating from a job or a global variable by right-clicking the link and selecting Edit.</p>
+            <p>For the dependency link from a job, you can select one of the following conditions:</p>
+            <ul>
+                <li>SUCCESS -- If the job completes successfully, processing continues with the next step in the flow. The link color is green.</li>
+                <li>FAILURE -- If the job fails, processing continues with the next step in the flow. The link color is red.</li>
+                <li>DONE -- If the job indicates that it is done, processing continues with the next step in the flow. The link color is blue.</li>
+                <li>TERMINATED -- If the job is terminated, processing continues with the next step in the flow. The link color is magenta.</li>
+                <li>NOTRUNNING -- If the job is not running, processing continues with the next step in the flow. The link color is gray.</li>
+                <li>EXITCODE -- If the job returns the exit code you select, processing continues with the next step in the flow. The link color is black.</li>
+            </ul>
+            <p>For the dependency link from a global variable or from a job when the selected dependency condition is EXITCODE, you can select one of the following operators and a value:</p>
+            <ul>
+                <li>= (Equal) -- If the global variable or job exit code is equal to the value specified, processing continues with the next step in the flow.</li>
+                <li>!= (Not equal) -- If the global variable or job exit code is not equal to the value specified, processing continues with the next step in the flow.</li>
+                <li>&lt; (Less than) -- If the global variable or job exit code is less than the value specified, processing continues with the next step in the flow.</li>
+                <li>&gt; (Greater than) -- If the global variable or job exit code is greater than the value specified, processing continues with the next step in the flow.</li>
+                <li>&lt;= (Less than or equal to) -- If the global variable or job exit code is less than or equal to the value specified, processing continues with the next step in the flow.</li>
+                <li>&gt;= (Greater than or equal to) -- If the global variable or job exit code is greater than or equal to the value specified, processing continues with the next step in the flow.</li>
+            </ul>
+            <h2 class="heading2" id="CAWCCApplicationEditor-CustomizeDialog">Customize Dialog</h2>
+            <p>You can use the Customize dialog to set default values in Application Editor.</p>
+            <p>This dialog contains the following tabs:</p>
+            <ul>
+                <li>Filter Job Types -- You can use the Filter Job Types tab to select one or more preferred job types from the list of job types created by your administrator in the Filter Job Types Batch Interface. Only the selected job types are available in the Palette.</li>
+                <li>General -- You can use the General tab in the Customize dialog to hide the SAP drag-and-drop panes, specify the number of rows per page to display in the SAP drag-and-drop panes, specify default values to use for display arameters, and to customize other settings.</li>
+            </ul>
+            <h3 class="heading3" id="CAWCCApplicationEditor-SetDisplayPreferences">Set Display Preferences</h3>
+            <p>You can set your display preferences on the General tab of the Customize dialog.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li>Click Customize.<br>The Customize dialog opens.</li>
+                <li>Click the General tab, make the appropriate changes, and click Save.<br>Your preferences are saved, the dialog closes, and the display is updated.</li>
+            </ol>
+            <h3 class="heading3" id="CAWCCApplicationEditor-SetJobTypePreferences">Set Job Type Preferences</h3>
+            <p>You can use the Filter Job Types tab of the Customize dialog to select the job types to be displayed in the Palette.</p>
+            <p><strong>Follow these steps:</strong></p>
+            <ol>
+                <li><p>Click Customize on the title bar.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> The first time you open the Customize dialog, all available job types are selected on the Filter Job Types tab.
+                    </div> </li>
+                <li><p>Clear the Select check box for the job types you do not need.</p>
+                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                        <strong>Note:</strong> When a group name is selected, all job types within the group are selected. Clearing the group name check box clears all job types within the group. If you clear certain job types within a selected group, the group name check box is cleared also. Similarly, if you select all job types within an unselected group, the group name check box is selected also.
+                    </div> </li>
+                <li>Click Save.<br>Your job type preferences are saved.</li>
+            </ol>
+            <p></p>
+            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>Only the job types (and corresponding job templates, if any) displayed in the Palette can be added to the job flow in the Graph.</li>
+                    <li>Job templates, if any, are displayed in the Palette automatically when the corresponding job type is selected in the Customize dialog.</li>
+                </ul>
+                <p><strong><br></strong></p>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+
+</div>
+</body>
+</html>

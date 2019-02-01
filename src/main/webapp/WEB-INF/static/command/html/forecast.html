@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p>The forecast command reports job flows based on a date or date range. Forecast reports can help you predict the outcome for a set of predefined conditions. You can see what happens when values are changed for each forecast period and can use this information to plan workflow. Based on the current job definitions, the reported job flow displays a list of jobs predicted to run on the dates you specify.</p>
+                <p>The forecast report displays day-based jobs and event-based jobs that are expected to occur during a specified time frame of any length. The memory the system uses to generate a forecast report is directly correlated to the length of the time frame, the number of jobs that are scheduled to run during that time frame, and the types of those jobs.</p>
+                <p>For example, a database containing 45,375 jobs (including 12,107 jobs with date-time conditions) has the following consumption (actual values might differ on your system):</p>
+                <ul>
+                    <li>A one day (24 hours) forecast consumes 50 MB of memory and 80 percent CPU, takes 14 seconds, and generates a 72,307 line report.</li>
+                    <li>A one-week (168 hours) forecast consumes 130 MB of memory and 80 percent CPU, takes 2 minutes and 22 seconds, and generates a 834,578 line report.</li>
+                </ul>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following formats:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>&nbsp;</p><p>forecast&nbsp;{&nbsp;-&nbsp;M&nbsp;<em>machine_name </em>|&nbsp;-J&nbsp;<em>job_name </em>|<em>&nbsp;</em>-M<em>&nbsp;machine_name&nbsp;</em>-J&nbsp;<em>job_name</em>]&nbsp;-F&nbsp;{"<em>mm/dd/yyyy HH:MM </em>|<em> mm/dd/yyyy HH:MM-mm/dd/yyyy HH:MM</em>"}[-T&nbsp;"<em>mm/dd/yyyy HH:MM</em>"]&nbsp;[<em>OPTIONS</em>]&nbsp;[{-usr&nbsp;<em>username&nbsp;</em>{-pw|pwx}&nbsp;<em>password</em>|-saml&nbsp;<em>auth_artifact</em>}]</p><p>[-x]</p><p>[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-M&nbsp;<em>machine_name</em></strong><br>Specifies the name of the machine whose workflow the report forecasts.</p></li>
+                    <li><p><strong>-J&nbsp;<em>job_name</em></strong><br>Specifies the name of the job whose workflow the report forecasts.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Notes:</strong>
+                            <ul>
+                                <li><p>To forecast workflow for all jobs that run on a particular machine, use the -M parameter alone. To forecast workflow all runs of a particular job regardless of which machine executes the run, use the -J parameter alone. To forecast workflow only the runs of a job that a specific machine executes, use the -M and -J parameters together.&nbsp;</p></li>
+                                <li><p>You do not need to precede the job name that contains a colon with a backslash.</p></li>
+                            </ul>
+                        </div> </li>
+                    <li><p><strong>-F "<em>mm/dd/yyyy HH:MM[:ss</em>]"| "<em>mm/dd/yyyy HH:MM[:ss]</em>-<em>mm/dd/yyyy HH:MM[:ss]</em>"</strong><br>Specifies the period for which the report forecasts workflow.</p></li>
+                    <li><p><strong>-T "<em>mm/dd/yyyy HH:MM[:ss]</em>"</strong><br>(Optional) Specifies when to generate the forecast report.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <p>Note: Use the date and time format that is specified in the configuration file when you specify the -F parameter or the -T option. The default format is mm/dd/yyyy HH:MM[:ss]. For example, to forecast workflow information for the period between January 2, 2013 at 5 p.m. and January 3, 2013 at 5 p.m. using the default format, specify the -F parameter as follows:</p>
+                            <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <pre class="ca-code">-F 01/02/2013 17:00:00-01/03/2013 17:00:00</pre>
+                            </div>
+                        </div> </li>
+                    <li><p><strong>OPTIONS</strong><br>(Optional) Specifies optional attributes that you can use to control what the information the forecast report displays.</p></li>
+                    <li>
+                        <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                            <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                            <p>(Optional) Specifies external security credentials as follows:</p>
+                            <ul>
+                                <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                                <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                    </div> </li>
+                                <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Notes: </strong></p>
+                                <ul>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                        <ul>
+                                            <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                            <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                            <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                        </ul></li>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                    <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                        <ul>
+                                            <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                            <li>CA Workload Automation AE is operating in native security mode.</li>
+                                        </ul></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                    <li><p><strong>-x</strong></p><p>(Optional) Returns the command version information to standard output.</p></li>
+                    <li><p><strong>-?</strong></p><p>(Optional) Displays help for the command.</p></li>
+                </ul>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Notes:</strong>
+                    <ul>
+                        <li>If the -l option is specified, the command considers all the jobs that start a day before the specified time frame. Those jobs' successors are evaluated to identify any jobs that occur within that time frame.</li>
+                        <li>To determine which day-based jobs occur in the specified time frame, the forecast command considers the following job attributes:<br>
+                            <ul>
+                                <li>start_mins</li>
+                                <li>start_times</li>
+                                <li>run_window</li>
+                                <li>run_calendar</li>
+                                <li>exclude_calendar</li>
+                                <li>days_of_week</li>
+                            </ul>To determine which event-based jobs occur, the command then traces the event-based jobs based on the box and child relationships, dependency relationships, and average run-time information of the predecessor job.</li>
+                        <li>The forecast command interprets the logical operators specified in a condition (job dependencies) as OR. For example, consider jobs A, B, and C. Suppose that jobs A and B have start times of 10:00 and 11:00, and job C depends on the success of jobs A and B. In an AND condition, the start time of job C in its first run would be evaluated to whichever time occurs later (11:00 in this example). After both jobs A and B run to SUCCESS, job C would start at both 10:00 and 11:00 in subsequent runs. However, the forecast command interprets the condition as OR, so the generated report shows the start time for job C as both 10:00 and 11:00 for all runs.</li>
+                        <li>To project jobs during dependency traces, the forecast command uses the average run time for the job. If no average run time information is available, the command uses 1 minute.</li>
+                        <li>The forecast command ignores global variables, job overrides, cross-instance dependencies, DST changes, and the timezone attribute associated with a job. The forecast report is based on the local time zone.</li>
+                    </ul>
+                </div>
+                <p><strong>Example: Create a Forecast Report for Jobs Running on a Specific Machine</strong></p>
+                <p>This example generates forecast report for all jobs on the testm<em>&nbsp;</em>machine. The report forecasts when each job runs between 00:00 on January 16, 2012 and 23:59 on January 16, 2012.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>forecast&nbsp;-m&nbsp;testm&nbsp;-F&nbsp;"01/16/2012"&nbsp;</p></pre>
+                </div>
+                <p><strong>Example: Create a Forecast Report for a Specific Job</strong></p>
+                <p>This example generates a report that forecasts when test3 runs on the testm machine between 00:00 on January 16, 2012 and 23:59 on January 16, 2012.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>forecast&nbsp;-m&nbsp;testm&nbsp;&nbsp;-&nbsp;j&nbsp;test3&nbsp;-F&nbsp;"01/16/2012"&nbsp;</p></pre>
+                </div>
+                <p><strong>Example: Create a Forecast Report for a Job for Multiple Days</strong></p>
+                <p>This example generates report that forecasts when test2<em>&nbsp;</em>runs between 00:00 on January 1, 2012 and 23:59 on January 3, 2012.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>forecast&nbsp;-F&nbsp;"01/01/2012"&nbsp;-T&nbsp;"01/03/2012"&nbsp;-J&nbsp;test2&nbsp;-n</p></pre>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>

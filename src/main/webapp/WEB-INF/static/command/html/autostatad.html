@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wiki-content">
+
+
+
+    <div class="conf-macro output-block" data-hasbody="true" data-macro-name="sp-pagelayout">
+        <div>
+            <div class="">
+                <p><strong>Valid on UNIX</strong></p>
+                <p>The autostatad command reports the current status of the specified CA AutoSys Workload Automation Adapter job to standard output. For example, you might use the autostatad command to report the status of a CA AutoSys Workload Automation for SAP job.</p>
+                <p>When CA Workload Automation AE runs an adapter job, the adapter stores the job's current status in the CA Workload Automation AE database as a global variable. The global variable name is the job name and its value is the job status and the date and time the status was written to the database.</p>
+                <p><strong>Syntax</strong></p>
+                <p>This command has the following format:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autostatad&nbsp;-J&nbsp;<em>job_name</em>&nbsp;[-h]&nbsp;[-s]&nbsp;[-t]&nbsp;[{-usr&nbsp;<em>username&nbsp;</em>{-pw|pwx}&nbsp;<em>password</em>|-saml&nbsp;<em>auth_artifact</em>}]</p><p>[-x]</p><p>[-?]</p></pre>
+                </div>
+                <ul>
+                    <li><p><strong>-J&nbsp;<em>job_name</em></strong></p><p>Specifies the job to report on.&nbsp;The job's current status is returned to standard output.</p>
+                        <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                            <strong>Notes:</strong>
+                            <ul>
+                                <li><p>You can use wildcards, including the percent (%) character, in this value.</p></li>
+                                <li><p>Adapter jobs do not support colons in the job name. If you specify a colon in the adapter job name, the job fails during execution.</p></li>
+                            </ul>
+                        </div> </li>
+                </ul>
+                <ul>
+                    <li><p><strong>-h</strong></p><p>(Optional) Displays help for the command.</p></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-s<br></strong>(Optional) Displays only the status for the specified job, without the job name or any labeling. This parameter is useful for creating stripped output to include in scripts.<strong>&nbsp;</strong></p></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-t</strong></p><p>(Optional) Displays the date and time the job's status was written to the CA Workload Automation AE database.</p></li>
+                    <li>
+                        <div class="conf-macro output-block conf-macro output-inline" data-hasbody="true" data-macro-name="cache">
+                            <strong>{-usr <em>username </em>{<em>-pw|</em>-pwx} <em>password </em>|-saml <em>auth_artifac</em>t}</strong>
+                            <p>(Optional) Specifies external security credentials as follows:</p>
+                            <ul>
+                                <li><strong>-usr <em>username </em>-pw <em>password</em></strong><br>Specifies a username and unencrypted password.</li>
+                                <li><p><strong>-usr <em>username </em>-pwx <em>password</em></strong><br>Specifies a username and encrypted password.</p>
+                                    <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                        <p><strong>Note: </strong>Automated password encryption is useful if you regularly change your password or run commands embedded in scripts. The configuration utility (as_config command) lets you automate password encryption. Automated encryption may present security risks. To mitigate these risks, use the security utility (autosys_secure command) to encrypt passwords.</p>
+                                    </div> </li>
+                                <li><p><span><strong>&nbsp;<strong>-saml auth_artifact</strong></strong></span></p><p>Specifies a Security Assertion Markup Language (SAML) artifact.</p></li>
+                            </ul>
+                            <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                                <p><strong>Notes: </strong></p>
+                                <ul>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is STRICT, only utilities that successfully authenticate can access objects that are protected by security policy. The following conditions apply:
+                                        <ul>
+                                            <li>When you do not specify one of the external security command line options, the utility attempts to authenticate with cached credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and no credentials are cached, the utility prompts you to specify credentials.</li>
+                                            <li>When the utility attempts to authenticate with cached credentials and the credentials are expired, the utility does not run and exits with an error.</li>
+                                            <li>When you specify the -usr option and you do not specify the -pw or -pwx option, the utility prompts you to specify a password.</li>
+                                            <li>When you specify the -pw or -pwx option but do not specify the -usr option, the utility does not run and exits with an error.</li>
+                                        </ul></li>
+                                    <li>When CA Workload Automation AE is operating in external security mode and the unauthenticated user mode setting is EXTERNAL, access to objects is governed by security policy but authentication is not handled by the external security server. In this case, the security subsystem assigns security policy identities to all users who validate their identities using the specified external authentication system. If you are not authenticated by the external system, you have no access to objects protected by security policy and may be unable to successfully execute utilities that require access to those objects.</li>
+                                    <li>Utilities ignore command line options that specify external security authentication information and cached credentials when any of the following conditions apply:
+                                        <ul>
+                                            <li>The unauthenticated user mode setting is EXTERNAL.</li>
+                                            <li>CA Workload Automation AE is operating in native security mode.</li>
+                                        </ul></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                </ul>
+                <ul>
+                    <li><p><strong>-x<br></strong>(Optional) Writes the version number to standard output.&nbsp;</p></li>
+                </ul>
+                <div class="bs-callout bs-callout-note conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <strong>Notes:</strong>
+                    <ul>
+                        <li>When you invoke autostatad, CA Workload Automation AE verifies that you have read access to the jobs that you are requesting information for.</li>
+                        <li>The exit code and output of autostatad vary depending on whether the status is requested for a single job or multiple jobs. If the name of an explicit job is given, and either the job does not exist or the read access to the job is denied, autostatad returns an error message and a non-zero exit code value. However, if a job name with a wildcard is specified and no status for jobs can be returned, autostatad returns zero as the exit code value to indicate success.</li>
+                        <li>If the list access for jobs that are reported by autostatad is denied, you can only view the status for jobs in the list to which you are granted read access. There is no visual indication that the status list is incomplete. autostatad does not display a security warning if it cannot obtain read access to one of the jobs that match the input name qualifier. It does not warn that access to view the entire list is denied.</li>
+                    </ul>
+                </div>
+                <p><strong>Example: Report the Status of Similarly Named Adapter Jobs</strong></p>
+                <p>This example returns the job name, status, and timestamp of all Adapter jobs whose names begin with autoMB.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autostatad&nbsp;-J&nbsp;autoMB%&nbsp;-t</p></pre>
+                </div>
+                <p>The output resembles the following:</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>Job:&nbsp;autoMB1&nbsp;Status:completed&nbsp;Time:&nbsp;10/13/05&nbsp;09:09:00</p><p>Job:&nbsp;autoMB2&nbsp;Status:aborted&nbsp;Time:&nbsp;10/13/05&nbsp;09:15:31</p><p>Job:&nbsp;autoMB3&nbsp;Status:failed&nbsp;Time:&nbsp;10/13/04&nbsp;09:09:21</p></pre>
+                </div>
+                <p><strong>Example: Report the Status of an Adapter Job with No Labeling</strong></p>
+                <p>This example returns only the status of the job autoMB1 with no labeling.</p>
+                <div class="code-panel conf-macro output-block" data-hasbody="true" data-macro-name="sp-macrooverride-richtextbody-block">
+                    <pre class="ca-code"><p>autostatad&nbsp;-J&nbsp;autoMB1&nbsp;-s</p></pre>
+                </div>
+                <p>If appropriate, you can redirect the stripped output from this command to a file for use in a script.</p>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+</body>
+</html>
