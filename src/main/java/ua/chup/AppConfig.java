@@ -1,6 +1,5 @@
 package ua.chup;
 
-import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,10 +18,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Properties;
-
 
 @Configuration
 @PropertySource("classpath:config.properties")
@@ -40,15 +36,14 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return new JpaTransactionManager(emf);
     }
 
-
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory
-            ( JpaVendorAdapter jpaVendeorAdapter) throws URISyntaxException {
+            (DataSource dataSource, JpaVendorAdapter jpaVendeorAdapter) {
         Properties jpaProp = new Properties();
         jpaProp.put("hibernate.hbm2ddl.auto", hbm2dllAuto);
 
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactory.setDataSource(dataSource());
+        entityManagerFactory.setDataSource(dataSource);
         entityManagerFactory.setJpaVendorAdapter(jpaVendeorAdapter);
         entityManagerFactory.setPackagesToScan("ua.chup");
         entityManagerFactory.setJpaProperties(jpaProp);
@@ -56,38 +51,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return entityManagerFactory;
     }
 
-    @Bean
-    public BasicDataSource dataSource() throws URISyntaxException {
-        URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
 
-        String username = dbUri.getUserInfo().split(":")[0];
-        String password = dbUri.getUserInfo().split(":")[1];
-        String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
-
-        BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setUrl(dbUrl);
-        basicDataSource.setUsername(username);
-        basicDataSource.setPassword(password);
-
-        return basicDataSource;
-    }
-
-
-    @Bean
-    public BasicDataSource dataSource() throws URISyntaxException {
-        URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
-
-        String username = dbUri.getUserInfo().split(":")[0];
-        String password = dbUri.getUserInfo().split(":")[1];
-        String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
-
-        BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setUrl(dbUrl);
-        basicDataSource.setUsername(username);
-        basicDataSource.setPassword(password);
-
-        return basicDataSource;
-    }
 
 
     @Bean
