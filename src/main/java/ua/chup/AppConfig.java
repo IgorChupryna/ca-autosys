@@ -40,6 +40,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return new JpaTransactionManager(emf);
     }
 
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory
             ( JpaVendorAdapter jpaVendeorAdapter) throws URISyntaxException {
