@@ -23,6 +23,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Properties;
 
+
 @Configuration
 @PropertySource("classpath:config.properties")
 @EnableTransactionManagement
@@ -39,6 +40,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return new JpaTransactionManager(emf);
     }
 
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory
             ( JpaVendorAdapter jpaVendeorAdapter) throws URISyntaxException {
@@ -52,6 +54,22 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         entityManagerFactory.setJpaProperties(jpaProp);
 
         return entityManagerFactory;
+    }
+
+    @Bean
+    public BasicDataSource dataSource() throws URISyntaxException {
+        URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
+
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
+
+        BasicDataSource basicDataSource = new BasicDataSource();
+        basicDataSource.setUrl(dbUrl);
+        basicDataSource.setUsername(username);
+        basicDataSource.setPassword(password);
+
+        return basicDataSource;
     }
 
 
