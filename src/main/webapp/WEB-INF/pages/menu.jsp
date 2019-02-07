@@ -112,11 +112,6 @@
                 </ul>
             </li>
 
-
-
-
-
-
             <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Command<b class="caret"></b></a>
                 <ul class="dropdown-menu">
 
@@ -158,9 +153,6 @@
                         </ul>
                     </li>
 
-
-
-
                     <li class="dropdown-submenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Monitor and Report</a>
                         <ul class="dropdown-menu">
@@ -169,11 +161,6 @@
                             </c:forEach>
                         </ul>
                     </li>
-
-
-
-
-
 
                 </ul>
             </li>

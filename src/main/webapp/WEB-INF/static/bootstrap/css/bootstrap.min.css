@@ -1822,11 +1822,20 @@ pre code {
     overflow-y: scroll
 }
 
+
+
+.animated-gif {
+    width:100%;
+    height:auto;
+}
+.animated-mp4 {
+    width: 100%;
+    height:auto;
+}
 .container {
     padding-right: 15px;
     padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto
+    margin-left: 150px;
 }
 
 @media (min-width: 768px) {
@@ -1843,7 +1852,7 @@ pre code {
 
 @media (min-width: 1200px) {
     .container {
-        width: 1170px
+        width: 1400px
     }
 }
 
@@ -1853,6 +1862,8 @@ pre code {
     margin-right: auto;
     margin-left: auto
 }
+
+
 
 .row {
     margin-right: -15px;
@@ -2112,6 +2123,7 @@ pre code {
     }
 
     .col-sm-4 {
+        height: 33.33333333%;
         width: 33.33333333%
     }
 

@@ -17,26 +17,28 @@
 
 <br><br>
 
-<div class="container">
+<div class="container ">
     <div class="pricing-table  row">
         <div class="col-sm-4 plan plan-name-main" style="background: #b1dfbb" onclick="location.href='/second';">
-            <h2>Administration AE</h2>
+            <h2>Administration</h2>
             <p><strong>ConfigureAE, AEDB, WCC, EEM, Agent, Commands</strong></p>
-            <br>
             <img width="370" height="250" class="animated-gif" src="/static/adm.png">
 
         </div>
-        <div class="col-sm-4 plan plan-name-main" style="background: #ffe8a1">
-            <h2>Demo video WCC</h2>
+        <div class="col-sm-4 plan plan-name-main" style=" background: #ffe8a1">
+            <h2>Demo CA WCC</h2>
             <strong>Administrating CA AutoSys in web interface is easy</strong>
-            <video width="350" height="280" controls>
-                <source src="/static/demo.mp4" type="video/mp4">
-            </video>
+            <br>
+            <br>
+            <iframe class="animated-mp4" src="https://www.youtube.com/embed/DlrNeBTdkCI" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+
         </div>
         <div class="col-sm-4 plan plan-name-main" style="background: #f5c6cb">
             <h2>Manage simply</h2>
             <p><strong>CA WCC is the GUI for CA AutoSys AE</strong></p>
-            <img width="320" height="270" class="animated-gif" src="/static/n1.gif">
+            <img width="320" height="270" class="animated-gif" src="/static/main_fon.jpg">
         </div>
     </div>
 </div>
@@ -67,11 +69,11 @@
         </div>
         <div class="col-sm-4 plan plan-name-main" onclick="location.href='/first';">
             <div class="plan-name-command">
-                <h2>Official manuals</h2>
+                <h2>Documents</h2>
                 <p>Reference / Errors & Warnings / Security</p>
             </div>
             <ul>
-                <li class="plan-feature"> This section includes pdf-files with official manuals for CA WAAE and CA WCC.</li>
+                <li class="plan-feature"> This section includes pdf-files with official manuals</li>
             </ul>
             <br><br>
         </div>
