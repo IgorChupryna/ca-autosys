@@ -15,7 +15,7 @@
 <br><br>
 
 
-<div class="container" >
+<div class="container" align="center">
 
     <div class="pricing-table row">
 

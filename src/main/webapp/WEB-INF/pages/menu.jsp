@@ -74,7 +74,7 @@
 
 
     <h1 style="color: #99dbf1"><a href="/" style="color: #d1ecf1">CA Workload Automation AE(CA AutoSys)</a></h1>
-    <p class="badge badge-pill badge-info">This is the site about experience administering the system CA AutoSys(AE
+    <p style="color: #67f13d" >This is the site about experience administering the system CA AutoSys(AE
         Release 11.3.6 SP5)</p>
 </div>
 
